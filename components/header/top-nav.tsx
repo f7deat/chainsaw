@@ -30,10 +30,13 @@ const TopNav: React.FC = () => {
                     <Item title="THCS"/>
                     <Item title="THPT"/>
                 </div>
-                <div>
-                    <button className="h-12 flex gap-2 items-center text-white" onClick={() => setOpen(true)}>
+                <div className="flex gap-4">
+                    <button className="h-12 flex gap-2 items-center text-gray-200 hover:text-white hover:underline" onClick={() => setOpen(true)}>
                         <Avatar />
                         Đăng nhập
+                    </button>
+                    <button className="h-12 flex gap-2 items-center text-gray-200 hover:text-white hover:underline" onClick={() => setOpen(true)}>
+                        Đăng ký
                     </button>
                 </div>
                 </div>
