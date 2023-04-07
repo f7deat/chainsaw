@@ -1,0 +1,23 @@
+{
+    "succecced": true,
+    "data": {
+        "id": "id khóa học",
+        "name": "Tên khóa học",
+        "description": "Thông tin khóa học",
+        "price": "Giá",
+        "salePrice": "Giá khuyến mại",
+        "saleDate": "Thời gian khuyến mại",
+        "groups": [
+            {
+                "name": "Tên nhóm bài giảng",
+                "items": [
+                    {
+                        "name": "Tên bài giảng",
+                        "free": false,
+                        "learned": false
+                    }
+                ]
+            }
+        ]
+    }
+}

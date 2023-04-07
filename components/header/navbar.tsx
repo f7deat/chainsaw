@@ -1,18 +1,28 @@
-import { BookIcon } from "../icons"
+import Link from "next/link"
+import { navbars } from "@/mock/navbar"
+import { Quicksand } from "next/font/google"
+
+const quicksand = Quicksand({ subsets: ['vietnamese'] })
 
 const Navbar: React.FC = () => {
     return (
-        <nav className="bg-orange-500">
-            <div className="flex container mx-auto">
-                <button className="h-16 flex">
-                    <picture>
-                        <img src="https://xcdn-cf.vuihoc.vn/upload/5c209fe6176b0/2022/02/18/7d72_logo-vuihoc-bitu-normal.png" alt="logo" className="h-12" />
-                    </picture>
-                </button>
-                <div className="h-16 gap-2 text-white font-bold items-center flex">
-                    <BookIcon />
-                    <span>Tự ôn luyện</span>
-                </div>
+        <nav className={`bg-orange-500 ${quicksand.className}`}>
+            <div className="flex container mx-auto gap-4">
+                <Link href="/">
+                    <button className="h-16 flex">
+                        <picture>
+                            <img src="https://xcdn-cf.vuihoc.vn/upload/5c209fe6176b0/2022/02/18/7d72_logo-vuihoc-bitu-normal.png" alt="logo" className="h-12" />
+                        </picture>
+                    </button>
+                </Link>
+                {
+                    navbars.map((navbar, i) => (
+                        <div key={i} className="h-16 gap-2 text-white font-bold items-center flex opacity-75 hover:opacity-100 uppercase">
+                            {navbar.icon}
+                            <span>{navbar.name}</span>
+                        </div>
+                    ))
+                }
             </div>
         </nav>
     )
