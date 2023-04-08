@@ -1,16 +1,16 @@
-import Jumbotron from "@/components/jumbotron";
+import Header from "@/components/header/header";
 import Head from "next/head";
 
-export default function ToanLop1() {
+export default function LuyenTap() {
     return (
         <>
             <Head>
-                <title>Toán lớp một</title>
+                <title>Luyện tập</title>
                 <meta name="description" content="" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Jumbotron name="Toán lớp một" />
+            <Header />
         </>
     )
 }
