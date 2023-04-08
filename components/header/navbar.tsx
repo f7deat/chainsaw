@@ -2,7 +2,7 @@ import Link from "next/link"
 import { navbars } from "@/mock/navbar"
 import { Quicksand } from "next/font/google"
 
-const quicksand = Quicksand({ subsets: ['vietnamese'] })
+const quicksand = Quicksand({ subsets: ['latin'] })
 
 const Navbar: React.FC = () => {
     return (
