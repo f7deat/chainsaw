@@ -1,13 +1,13 @@
 import Link from "next/link"
-import { navbars } from "@/mock/navbar"
 import { Quicksand } from "next/font/google"
+import { navbars } from "@/mock"
 
 const quicksand = Quicksand({ subsets: ['latin'] })
 
 const Navbar: React.FC = () => {
     return (
         <nav className={`bg-orange-500 ${quicksand.className}`}>
-            <div className="flex container mx-auto gap-4">
+            <div className="flex container mx-auto gap-8">
                 <Link href="/">
                     <button className="h-16 flex">
                         <picture>

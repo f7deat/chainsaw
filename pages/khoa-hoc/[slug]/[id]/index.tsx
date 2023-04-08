@@ -1,8 +1,11 @@
+import Footer from "@/components/footer";
 import { Header } from "@/components/header";
+import { CirclePlayIcon, PenToSquareIcon } from "@/components/icons";
 import Jumbotron from "@/components/jumbotron";
 import { course } from "@/mock/course";
 import Head from "next/head";
 import Link from "next/link";
+import { Fragment } from "react";
 
 export default function KhoaHoc() {
     return (
@@ -37,9 +40,29 @@ export default function KhoaHoc() {
                                         {
                                             group.items.map((item, j) => (
                                                 <div key={j}>
-                                                    <Link href={`/luyen-tap/${item.slug}`}>
-                                                        <div className="px-4 py-2 hover:bg-blue-100">{item.name}</div>
-                                                    </Link>
+                                                    <div className="px-4 py-2 hover:bg-blue-100 flex justify-between items-center text-lg">
+                                                        <div>{item.name}</div>
+                                                        <div className="flex gap-2">
+                                                            {
+                                                                item.video ? (
+                                                                    <Link href={`/luyen-tap/video/${item.video.id}`}>
+                                                                        <button className="text-gray-400 hover:text-orange-500">
+                                                                            <CirclePlayIcon className="w-7 h-7" />
+                                                                        </button>
+                                                                    </Link>
+                                                                ) : (<Fragment />)
+                                                            }
+                                                            {
+                                                                item.practice ? (
+                                                                    <Link href={`/luyen-tap/cau-hoi/${item.practice.id}`}>
+                                                                        <button className="text-gray-400 hover:text-orange-500">
+                                                                            <PenToSquareIcon className="w-7 h-7" />
+                                                                        </button>
+                                                                    </Link>
+                                                                ) : (<Fragment />)
+                                                            }
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             ))
                                         }
@@ -50,6 +73,7 @@ export default function KhoaHoc() {
                     </div>
                 </div>
             </main>
+            <Footer />
         </>
     )
 }

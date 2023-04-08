@@ -1,5 +1,7 @@
+import Footer from "@/components/footer";
 import Header from "@/components/header/header";
 import Jumbotron from "@/components/jumbotron";
+import { courses } from "@/mock";
 import { books } from "@/mock/book";
 import Head from "next/head";
 import Link from "next/link";
@@ -24,29 +26,34 @@ export default function KhoaHoc() {
                         ))
                     }
                 </div>
-                <div className="flex">
-                    <div className="w-2/3">
-                        <div className="bg-orange-400 rounded-l-lg py-4 px-10 relative h-full">
-                            <div className="text-2xl mb-4">Khoá Toán nâng cao theo chuyên đề lớp 2</div>
-                            <div className="mb-4">
-                            Giúp con đi sâu vào từng chuyên đề chinh phục các dạng bài khó, đạt giải thưởng cao trong các kỳ thi học sinh giỏi.
+                {
+                    courses.map((course, i) => (
+                        <div className="flex" key={i}>
+                            <div className="w-2/3">
+                                <div className="bg-orange-400 rounded-l-lg py-4 px-10 relative h-full">
+                                    <div className="text-2xl mb-4">{course.name}</div>
+                                    <div className="mb-4">
+                                        {course.description}
+                                    </div>
+                                    <div className="flex gap-4">
+                                        <Link href={course.link}>
+                                            <button className="px-4 py-2 rounded text-white bg-green-500">
+                                                Xem thêm
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="flex gap-4">
-                                <Link href="/">
-                                    <button className="px-4 py-2 rounded text-white bg-green-500">
-                                        Xem thêm
-                                    </button>
-                                </Link>
+                            <div className="w-1/3">
+                                <picture>
+                                    <img src={course.image} alt="IMG" />
+                                </picture>
                             </div>
                         </div>
-                    </div>
-                    <div className="w-1/3">
-                        <picture>
-                            <img src="https://xcdn-cf.vuihoc.vn/upload/5c209fe6176b0/2022/03/19/eff0_khoa-toan-nang-cao-theo-chuyen-de-2.jpg" alt="IMG"/>
-                        </picture>
-                    </div>
-                </div>
+                    ))
+                }
             </main>
+            <Footer />
         </>
     )
 }

@@ -7,11 +7,19 @@ export const course = {
             items: [
                 {
                     name: "Điền số (tiết 4)",
-                    slug: "dien-so-tien-4"
+                    slug: "dien-so-tien-4",
+                    video: {
+                        id: "1"
+                    },
+                    practice: null
                 },
                 {
                     name: "Quy luật số (tiết 3)",
-                    slug: "quy-luat-so-tiet-3"
+                    slug: "quy-luat-so-tiet-3",
+                    video: null,
+                    practice: {
+                        id: "1"
+                    }
                 }
             ]
         }

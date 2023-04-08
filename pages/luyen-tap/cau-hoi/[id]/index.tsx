@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import Header from "@/components/header/header";
 import Head from "next/head";
 
@@ -11,6 +12,7 @@ export default function LuyenTap() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Header />
+            <Footer />
         </>
     )
 }
