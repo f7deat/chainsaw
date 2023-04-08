@@ -150,7 +150,21 @@
   );
   background-clip: content-box;
 }
-
+/*nam add*/
+.notable_courses {
+  padding: 65px 0 0;
+}
+.notable_courses .group {
+  height: 405px;
+  border-radius: 15px;
+  margin-top: 0;
+  background: transparent url(https://static-xx.vuihoc.vn/theme/vuihoc/imgs/home_revision/Banner_Toan_cap_1.png);background-position: center;background-repeat: no-repeat;
+}
+.notable_courses .courses_sec .head_title {
+  margin-bottom: 35px;
+  position: relative;
+}
+/*end nam add*/
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {

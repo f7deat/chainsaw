@@ -4,6 +4,7 @@ import { Divider } from "antd";
 import Search from '@/components/search';
 import Footer from '@/components/footer';
 import HomeCarousel from './home/carousel';
+import KhoatoanCarousel from './home/khoatoanslider';
 import ElementaryFeature from './tieu-hoc/components/feature';
 
 export default function Home() {
@@ -24,7 +25,8 @@ export default function Home() {
         <Divider />
 
         <Search />
-
+        <Divider />
+        <KhoatoanCarousel/>
       </main>
       <Footer />
     </>
