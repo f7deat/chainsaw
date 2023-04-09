@@ -6,6 +6,7 @@ import Footer from '@/components/footer';
 import HomeCarousel from './home/carousel';
 import KhoatoanCarousel from './home/khoatoanslider';
 import ElementaryFeature from './tieu-hoc/components/feature';
+import CourseList from '@/components/course';
 
 export default function Home() {
   return (
@@ -20,7 +21,7 @@ export default function Home() {
       <HomeCarousel />
       <main className="container mx-auto py-10">
 
-        <ElementaryFeature />
+        <CourseList />
 
         <Divider />
 
