@@ -8,7 +8,7 @@ type ItemProps = {
 const Item: React.FC<ItemProps> = (props) => {
     return (
         (
-            <button className="hover:bg-orange-500 h-12 text-white flex items-center justify-center px-4 text-sm">
+            <button className="hover:bg-orange-500 h-12 text-white bg-blue-800 flex items-center justify-center px-4 text-sm">
                 {props.title}
             </button>
         )
@@ -41,7 +41,9 @@ const TopNav: React.FC = () => {
                 </div>
                 </div>
             </div>
-            <Modal open={open} title="Đăng nhập" onCancel={() => setOpen(false)}>
+            <Modal open={open} title="Đăng nhập" onCancel={() => setOpen(false)} okButtonProps={{
+                className: "bg-blue-500"
+            }}>
                 <Form.Item label="Tài khoản">
                     <Input />
                 </Form.Item>

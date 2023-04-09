@@ -22,6 +22,31 @@ export const course = {
                     }
                 }
             ]
+        },
+        {
+            name: "Chuyên đề 1: Các số và phép tính trong phạm vi 100",
+            items: [
+                {
+                    name: "Bài toán que diêm",
+                    slug: "bai-toan-que-diem",
+                    video: {
+                        id: "1"
+                    },
+                    practice: {
+                        id: "2"
+                    }
+                },
+                {
+                    name: "Bài toán xúc xắc",
+                    slug: "bai-toan-xuc-xac",
+                    video: {
+                        id: "1"
+                    },
+                    practice: {
+                        id: "3"
+                    }
+                }
+            ]
         }
     ]
 }

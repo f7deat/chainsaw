@@ -5,9 +5,6 @@ const Homekhoatoanslider: React.FC = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-xs-12 courses_sec tab-pane">
-                        <div className="head_title">
-                            <h2>KHÓA TOÁN TIỂU HỌC <span className="hidden-xs">NỔI BẬT</span></h2>
-                        </div>
                         <div className="row org_row">
                             <div className="col-md-3 hidden-xs">
                                 <div className="group"></div>
