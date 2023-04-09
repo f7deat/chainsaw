@@ -4,9 +4,9 @@ import { Card, Col, Divider, Empty, Row } from "antd";
 import Search from '@/components/search';
 import Footer from '@/components/footer';
 import HomeCarousel from './home/carousel';
-import KhoatoanCarousel from './home/khoatoanslider';
 import CourseList from '@/components/course';
-import { HeadTitle } from '@/components';
+import { HeadTitle, JoinWithUs } from '@/components';
+import ListCourseCarouel from '@/components/course/list-carousel';
 
 export default function Home() {
   return (
@@ -42,8 +42,11 @@ export default function Home() {
               }}>Tư vấn mua khóa học</button>
             </picture>
 
-            <HeadTitle center={false}>KHÓA TOÁN TIỂU HỌC NỔI BẬT</HeadTitle>
-            <KhoatoanCarousel />
+            <ListCourseCarouel title='KHÓA TOÁN TIỂU HỌC NỔI BẬT' />
+            <ListCourseCarouel title='KHÓA TIẾNG VIỆT TIỂU HỌC ' />
+            <ListCourseCarouel title='KHÓA TIẾNG ANH TIỂU HỌC ' />
+
+            <JoinWithUs />
 
           </div>
         </div>

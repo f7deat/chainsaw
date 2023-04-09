@@ -1,3 +1,61 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.four-step {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 33px 0 rgba(176, 192, 237, .33);
+}
+
+.four-step .step {
+    padding: 0;
+}
+
+.four-step .step.one .header {
+    background-color: #ffba00;
+}
+
+.four-step .step .header {
+    position: relative;
+    height: 72px;
+}
+
+.four-step .step .header .title {
+    font-size: 36px;
+    color: #fff;
+    text-align: center;
+    padding-top: 16px;
+    position: relative;
+    left: 15px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+.four-step .step .header span.glyphicon-triangle-bottom {
+    display: none;
+}
+.four-step .step .content {
+    height: 105px;
+    padding-top: 38px;
+    text-align: center;
+    border-right: 1px #d1d1d1 solid;
+    background: #fff;
+}
+.four-step .step .content span {
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 2px;
+    color: #000;
+    text-align: center;
+}
+.four-step .step .header span {
+    position: absolute;
+    left: -23px;
+    top: -2px;
+    font-size: 78px;
+}
+.four-step .step.two .header span {
+    color: #ffba00;
+}
