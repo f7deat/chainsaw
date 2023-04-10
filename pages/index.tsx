@@ -7,6 +7,7 @@ import HomeCarousel from './home/carousel';
 import CourseList from '@/components/course';
 import { HeadTitle, JoinWithUs } from '@/components';
 import ListCourseCarouel from '@/components/course/list-carousel';
+import StatisticsHome from '@/components/statistics';
 
 export default function Home() {
   return (
@@ -35,10 +36,10 @@ export default function Home() {
           <div className='container mx-auto'>
             <HeadTitle center>Khóa học của tôi</HeadTitle>
             <picture className='py-4 block relative md:mb-10 md-4'>
-              <img src='https://static-xx.vuihoc.vn/assets/imgs/banner_my_course.png' alt="img" />
+              <img src='https://static-xx.vuihoc.vn/assets/imgs/banner_my_course.png' alt="img" className='w-full' />
               <button className='bg-orange-500 font-medium text-white absolute px-8 py-4 shadow-lg rounded-full uppercase hover:bg-orange-600' style={{
-                top: 80,
-                right: 200
+                top: '40%',
+                right: '5%'
               }}>Tư vấn mua khóa học</button>
             </picture>
 
@@ -50,6 +51,8 @@ export default function Home() {
 
           </div>
         </div>
+
+        <StatisticsHome />
 
         <div className='bg-white'>
           <div className='container mx-auto md:py-10 py-4'>

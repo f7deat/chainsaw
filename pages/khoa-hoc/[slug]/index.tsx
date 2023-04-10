@@ -26,32 +26,34 @@ export default function KhoaHoc() {
                         ))
                     }
                 </div>
-                {
-                    courses.map((course, i) => (
-                        <div className="flex" key={i}>
-                            <div className="w-2/3">
-                                <div className="bg-amber-500 rounded-l-lg py-4 px-10 relative h-full relative">
-                                    <div className="text-3xl mb-4">{course.name}</div>
-                                    <div className="mb-4">
-                                        {course.description}
-                                    </div>
-                                    <div className="flex gap-4">
-                                        <Link href={course.link}>
-                                            <button className="px-6 rounded-lg shadow py-2 rounded text-white bg-green-500 border-b-4 border-green-700 font-medium text-xl hover:bg-green-600">
-                                                Xem thêm
-                                            </button>
-                                        </Link>
+                <div className="md:grid grid-cols-2 gap-4">
+                    {
+                        courses.map((course, i) => (
+                            <div className="flex" key={i}>
+                                <div className="w-1/2">
+                                    <div className="bg-amber-500 rounded-l-lg py-4 px-10 relative h-full relative">
+                                        <div className="text-2xl mb-4 font-bold">{course.name}</div>
+                                        <div className="mb-4">
+                                            {course.description}
+                                        </div>
+                                        <div className="flex gap-4">
+                                            <Link href={course.link}>
+                                                <button className="px-6 rounded-lg shadow py-2 rounded text-white bg-green-500 border-b-4 border-green-700 font-medium text-xl hover:bg-green-600">
+                                                    Xem thêm
+                                                </button>
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
+                                <div className="w-1/2">
+                                    <picture>
+                                        <img src={course.image} alt="IMG" className="w-full h-full" />
+                                    </picture>
+                                </div>
                             </div>
-                            <div className="w-1/3">
-                                <picture>
-                                    <img src={course.image} alt="IMG" />
-                                </picture>
-                            </div>
-                        </div>
-                    ))
-                }
+                        ))
+                    }
+                </div>
             </main>
             <Footer />
         </>
