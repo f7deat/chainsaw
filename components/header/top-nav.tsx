@@ -1,4 +1,6 @@
-import { Modal, Form, Input, Avatar, Button, ConfigProvider, message } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import { Modal, Form, Input, Avatar, Button, ConfigProvider, message, Dropdown, MenuProps, Space } from "antd";
+import Link from "next/link";
 import { Fragment, useState } from "react";
 
 type ItemProps = {
@@ -26,6 +28,55 @@ const TopNav: React.FC = () => {
         // TODO: Make token
     }
 
+    const items: MenuProps['items'] = [
+        {
+          key: '1',
+          label: (
+            <Link href="/tai-khoan/thong-tin">
+                Thông tin cá nhân
+            </Link>
+          ),
+        },
+        {
+          key: '2',
+          label: (
+            <Link href="/tai-khoan/khoa-hoc">
+                Khóa học của tôi
+            </Link>
+          )
+        },
+        {
+          key: '3',
+          label: (
+            <Link href="/tai-khoan/qua-trinh">
+                Quá trình học tập
+            </Link>
+          ),
+          disabled: true,
+        },
+        {
+          key: '5',
+          label: (
+            <Link href="/tai-khoan/kich-hoat">
+                Kích hoạt khóa học
+            </Link>
+          )
+        },
+        {
+          key: '6',
+          label: (
+            <Link href="/tai-khoan/lich-su">
+                Lịch sử kích hoạt
+            </Link>
+          )
+        },
+        {
+          key: '4',
+          danger: true,
+          label: 'Đăng xuất',
+        },
+      ];
+
     return (
         <div className="bg-blue-900 font-medium text-sm">
             <div className="mx-auto container">
@@ -37,7 +88,7 @@ const TopNav: React.FC = () => {
                         <Item title="THCS" />
                         <Item title="THPT" />
                     </div>
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 items-center">
                         <button className="h-12 flex gap-2 items-center text-gray-200 hover:text-white hover:underline" onClick={() => setOpen(true)}>
                             <Avatar />
                             Đăng nhập
@@ -45,6 +96,14 @@ const TopNav: React.FC = () => {
                         <button className="h-12 flex gap-2 items-center text-gray-200 hover:text-white hover:underline" onClick={() => setOpen(true)}>
                             Đăng ký
                         </button>
+                        <Dropdown menu={{ items }}>
+                            <a onClick={(e) => e.preventDefault()} className="text-gray-200">
+                                <Space>
+                                    Nguyễn Hiểu Minh
+                                    <DownOutlined />
+                                </Space>
+                            </a>
+                        </Dropdown>
                     </div>
                 </div>
             </div>
@@ -70,7 +129,7 @@ const TopNav: React.FC = () => {
                                     <Input size="large" />
                                 </Form.Item>
                                 <Form.Item label="Mật khẩu" required name="password">
-                                    <Input.Password size="large"/>
+                                    <Input.Password size="large" />
                                 </Form.Item>
                                 <Form.Item>
                                     <Button type="primary" htmlType="submit" size="large" className="w-full bg-blue-500">Đăng nhập</Button>
