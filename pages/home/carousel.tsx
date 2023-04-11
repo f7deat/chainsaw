@@ -12,7 +12,7 @@ const HomeCarousel: React.FC = () => {
 
     return (
         <div>
-            <Carousel autoplay>
+            <Carousel autoplay dotPosition="top">
                 <div>
                     <picture>
                         <img src="https://xcdn-cf.vuihoc.vn/upload/5c209fe6176b0/2022/10/06/a357_2.jpg" alt="1" className="w-full" />

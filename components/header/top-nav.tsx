@@ -30,63 +30,68 @@ const TopNav: React.FC = () => {
 
     const items: MenuProps['items'] = [
         {
-          key: '1',
-          label: (
-            <Link href="/tai-khoan/thong-tin">
-                Thông tin cá nhân
-            </Link>
-          ),
+            key: '1',
+            label: (
+                <Link href="/tai-khoan/thong-tin">
+                    Thông tin cá nhân
+                </Link>
+            ),
         },
         {
-          key: '2',
-          label: (
-            <Link href="/tai-khoan/khoa-hoc">
-                Khóa học của tôi
-            </Link>
-          )
+            key: '2',
+            label: (
+                <Link href="/tai-khoan/khoa-hoc">
+                    Khóa học của tôi
+                </Link>
+            )
         },
         {
-          key: '3',
-          label: (
-            <Link href="/tai-khoan/qua-trinh">
-                Quá trình học tập
-            </Link>
-          ),
-          disabled: true,
+            key: '3',
+            label: (
+                <Link href="/tai-khoan/qua-trinh">
+                    Quá trình học tập
+                </Link>
+            ),
+            disabled: true,
         },
         {
-          key: '5',
-          label: (
-            <Link href="/tai-khoan/kich-hoat">
-                Kích hoạt khóa học
-            </Link>
-          )
+            key: '5',
+            label: (
+                <Link href="/tai-khoan/kich-hoat">
+                    Kích hoạt khóa học
+                </Link>
+            )
         },
         {
-          key: '6',
-          label: (
-            <Link href="/tai-khoan/lich-su">
-                Lịch sử kích hoạt
-            </Link>
-          )
+            key: '6',
+            label: (
+                <Link href="/tai-khoan/lich-su">
+                    Lịch sử kích hoạt
+                </Link>
+            )
         },
         {
-          key: '4',
-          danger: true,
-          label: 'Đăng xuất',
+            key: '4',
+            danger: true,
+            label: 'Đăng xuất',
         },
-      ];
+    ];
 
     return (
         <div className="bg-blue-900 font-medium text-sm">
             <div className="mx-auto container">
                 <div className="flex justify-between">
-                    <div className="flex">
+                    <div className="flex items-center">
                         <div className="bg-orange-500 h-12 text-white flex items-center justify-center px-4 text-sm">
                             Tiểu học
                         </div>
                         <Item title="THCS" />
                         <Item title="THPT" />
+                        <Link href="/kich-hoat">
+                            <button className="rounded-full shadow bg-white ml-2 px-4 py-2">
+                                Nhập mã kích hoạt
+                            </button>
+                        </Link>
                     </div>
                     <div className="flex gap-4 items-center">
                         <button className="h-12 flex gap-2 items-center text-gray-200 hover:text-white hover:underline" onClick={() => setOpen(true)}>
@@ -125,16 +130,17 @@ const TopNav: React.FC = () => {
                         </div>
                         <div className="md:w-1/2 p-4">
                             <Form layout="vertical" onFinish={onFinish}>
-                                <Form.Item label="Tài khoản" required name="userName">
+                                <Form.Item label="Số điện thoại" rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]} name="userName">
                                     <Input size="large" />
                                 </Form.Item>
-                                <Form.Item label="Mật khẩu" required name="password">
+                                <Form.Item label="Mật khẩu" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="password">
                                     <Input.Password size="large" />
                                 </Form.Item>
                                 <Form.Item>
                                     <Button type="primary" htmlType="submit" size="large" className="w-full bg-blue-500">Đăng nhập</Button>
                                 </Form.Item>
                             </Form>
+                            <div>Bạn chưa có tài khoản? <Link href="/tai-khoan/dang-ky"><b>Đăng ký</b></Link></div>
                         </div>
                     </div>
                 </Modal>

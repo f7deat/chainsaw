@@ -17,10 +17,12 @@ const Navbar: React.FC = () => {
                 </Link>
                 {
                     navbars.map((navbar, i) => (
-                        <div key={i} className="h-16 gap-2 text-white font-bold items-center flex opacity-75 hover:opacity-100 uppercase">
-                            {navbar.icon}
-                            <span>{navbar.name}</span>
-                        </div>
+                        <Link href={navbar.url} key={i}>
+                            <div className="h-16 gap-2 text-white font-bold items-center flex opacity-75 hover:opacity-100 uppercase">
+                                {navbar.icon}
+                                <span>{navbar.name}</span>
+                            </div>
+                        </Link>
                     ))
                 }
             </div>

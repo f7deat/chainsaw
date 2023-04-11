@@ -3,26 +3,32 @@ import { BookIcon, DuoIcon, EditSquareIcon, LecturerIcon, LiveStreamIcon, QandAI
 export const navbars = [
     {
         name: "Tự ôn luyện",
-        icon: <BookIcon />
+        icon: <BookIcon />,
+        url: "/"
     },
     {
         name: "Học nhóm",
-        icon: <DuoIcon />
+        icon: <DuoIcon />,
+        url: "/"
     },
     {
         name: "Lớp học gia sư",
-        icon: <LecturerIcon />
+        icon: <LecturerIcon />,
+        url: "/"
     },
     {
         name: "Live class",
-        icon: <LiveStreamIcon />
+        icon: <LiveStreamIcon />,
+        url: "/"
     },
     {
         name: "Góc học tập",
-        icon: <EditSquareIcon />
+        icon: <EditSquareIcon />,
+        url: "/"
     },
     {
         name: "Hỏi đáp",
-        icon: <QandAIcon />
+        icon: <QandAIcon />,
+        url: "/hoi-dap"
     }
 ]

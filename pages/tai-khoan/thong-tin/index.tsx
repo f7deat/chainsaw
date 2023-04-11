@@ -1,6 +1,7 @@
 import Footer from "@/components/footer";
 import { Header } from "@/components/header";
-import { Avatar, Card } from "antd";
+import { BarChartOutlined, BookOutlined, UserOutlined } from "@ant-design/icons";
+import { Image, Card, Space } from "antd";
 import Head from "next/head";
 
 export default function Profile() {
@@ -19,9 +20,33 @@ export default function Profile() {
                         <div className="md:w-1/4">
                             <Card>
                                 <div className="mb-4 text-center">
-                                    <Avatar size="large" />
+                                    <Image src="https://placehold.jp/200x200.png" alt="IMG" width={200} height={200} className="rounded-full" />
                                 </div>
-                                <div className="text-xl text-center">Nguyễn Hiểu Minh</div>
+                                <div className="text-xl text-center mb-4">Nguyễn Hiểu Minh</div>
+                                <div className="px-4 py-2 rounded border border-blue-500 mb-1">
+                                    <Space>
+                                        <UserOutlined />
+                                        <div className="text-lg">
+                                            Thông tin cá nhân
+                                        </div>
+                                    </Space>
+                                </div>
+                                <div className="px-4 py-2 rounded border mb-1 hover:border-blue-500">
+                                    <Space>
+                                        <BookOutlined />
+                                        <div className="text-lg">
+                                            Khóa học của tôi
+                                        </div>
+                                    </Space>
+                                </div>
+                                <div className="px-4 py-2 rounded border mb-1 hover:border-blue-500">
+                                    <Space>
+                                        <BarChartOutlined />
+                                        <div className="text-lg">
+                                            Quá trình học tập
+                                        </div>
+                                    </Space>
+                                </div>
                             </Card>
                         </div>
                     </div>
