@@ -1,3 +1,4 @@
+import { API_URL } from "@/constant";
 import { DownOutlined } from "@ant-design/icons";
 import { Modal, Form, Input, Avatar, Button, ConfigProvider, message, Dropdown, MenuProps, Space } from "antd";
 import Link from "next/link";
@@ -21,11 +22,22 @@ const TopNav: React.FC = () => {
 
     const [open, setOpen] = useState<boolean>(false);
     const onFinish = async (values: any) => {
-        if (!values.userName || !values.password) {
-            message.warning('Vui lòng điền tên đăng nhập hoặc mật khẩu!');
-            return;
+        try {
+            const response = await fetch(`${API_URL}}/auth/token`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userName: values.userName,
+                    Password: values.password
+                })
+            });
+            const data = await response.json();
+            if (data.successed) {
+                setOpen(false);
+            }
+        } catch (error) {
+            message.error("Đã có lỗi xảy ra");
         }
-        // TODO: Make token
     }
 
     const items: MenuProps['items'] = [
@@ -130,10 +142,10 @@ const TopNav: React.FC = () => {
                         </div>
                         <div className="md:w-1/2 p-4">
                             <Form layout="vertical" onFinish={onFinish}>
-                                <Form.Item label="Số điện thoại" rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]} name="userName">
+                                <Form.Item label="Số điện thoại" initialValue={"0911717772"} rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]} name="userName">
                                     <Input size="large" />
                                 </Form.Item>
-                                <Form.Item label="Mật khẩu" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="password">
+                                <Form.Item label="Mật khẩu" initialValue="1" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="password">
                                     <Input.Password size="large" />
                                 </Form.Item>
                                 <Form.Item>
