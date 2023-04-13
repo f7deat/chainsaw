@@ -9,7 +9,7 @@ export const navbars = [
     {
         name: "Học nhóm",
         icon: <DuoIcon />,
-        url: "/"
+        url: "/hoc-nhom"
     },
     {
         name: "Lớp học gia sư",
@@ -19,7 +19,7 @@ export const navbars = [
     {
         name: "Live class",
         icon: <LiveStreamIcon />,
-        url: "/"
+        url: "/live-class"
     },
     {
         name: "Góc học tập",

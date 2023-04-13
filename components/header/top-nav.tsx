@@ -2,7 +2,7 @@ import { API_URL } from "@/constant";
 import { DownOutlined } from "@ant-design/icons";
 import { Modal, Form, Input, Avatar, Button, ConfigProvider, message, Dropdown, MenuProps, Space } from "antd";
 import Link from "next/link";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 type ItemProps = {
     title: string;
@@ -21,9 +21,29 @@ const Item: React.FC<ItemProps> = (props) => {
 const TopNav: React.FC = () => {
 
     const [open, setOpen] = useState<boolean>(false);
+    const [user, setUser] = useState<any>();
+
+    useEffect(() => {
+        fetch(`${API_URL}/student`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${localStorage.getItem('access_token')}`
+            },
+        }).then(response => {
+            if (response.status === 200) {
+                response.json().then(data => {
+                    if (data.succeeded) {
+                        setUser(data.data);
+                    }
+                })
+            }
+        })
+    }, []);
+
     const onFinish = async (values: any) => {
         try {
-            const response = await fetch(`${API_URL}}/auth/token`, {
+            const response = await fetch(`${API_URL}/auth/password-sign-in`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -32,8 +52,10 @@ const TopNav: React.FC = () => {
                 })
             });
             const data = await response.json();
-            if (data.successed) {
-                setOpen(false);
+            if (data.succeeded) {
+                localStorage.setItem('access_token', data.token);
+                message.success(data.message);
+                window.location.reload();
             }
         } catch (error) {
             message.error("Đã có lỗi xảy ra");
@@ -86,6 +108,10 @@ const TopNav: React.FC = () => {
             key: '4',
             danger: true,
             label: 'Đăng xuất',
+            onClick: () => {
+                localStorage.removeItem('access_token');
+                window.location.reload();
+            }
         },
     ];
 
@@ -106,21 +132,31 @@ const TopNav: React.FC = () => {
                         </Link>
                     </div>
                     <div className="flex gap-4 items-center">
-                        <button className="h-12 flex gap-2 items-center text-gray-200 hover:text-white hover:underline" onClick={() => setOpen(true)}>
-                            <Avatar />
-                            Đăng nhập
-                        </button>
-                        <button className="h-12 flex gap-2 items-center text-gray-200 hover:text-white hover:underline" onClick={() => setOpen(true)}>
-                            Đăng ký
-                        </button>
-                        <Dropdown menu={{ items }}>
-                            <a onClick={(e) => e.preventDefault()} className="text-gray-200">
-                                <Space>
-                                    Nguyễn Hiểu Minh
-                                    <DownOutlined />
-                                </Space>
-                            </a>
-                        </Dropdown>
+
+                        {
+                            user ? (
+                                <Dropdown menu={{ items }}>
+                                    <Button type="link" className="text-gray-200">
+                                        <Space>
+                                            Nguyễn Hiểu Minh
+                                            <DownOutlined />
+                                        </Space>
+                                    </Button>
+                                </Dropdown>
+                            ) : (
+                                <div className="flex gap-3">
+                                    <button className="h-12 flex gap-2 items-center text-gray-200 hover:text-white hover:underline" onClick={() => setOpen(true)}>
+                                        <Avatar />
+                                        Đăng nhập
+                                    </button>
+                                    <Link href="/tai-khoan/dang-ky">
+                                        <button className="h-12 flex gap-2 items-center text-gray-200 hover:text-white hover:underline">
+                                            Đăng ký
+                                        </button>
+                                    </Link>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
             </div>
