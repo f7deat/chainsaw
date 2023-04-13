@@ -1,15 +1,32 @@
-export const practice = {
-    name: "Bài toán về cấu tạo số - Phân tích số",
-    data: [
-        {
-            text: "Viết số thích hợp vào chỗ chấm: 756 = 700 + 50 + ...",
-            type: 'SINGLE_TEXT_INPUT',
-            answer: 6
-        },
-        {
-            text: "Tìm a, b, c biết: a20 + b3 + c = 379",
-            type: "MULTI_TEXT_INPUT",
-            answer: 4
-        }
-    ]
+export const practice: any = [
+    {
+        name: "Luyện tập - Tìm x (tiết 1)",
+        data: [
+            {
+                text: "Tìm x biết: x + 12 = 20 -7",
+                type: 'SINGLE_TEXT_INPUT',
+                answer: "1",
+                answered: false,
+                correct: false
+            },
+            {
+                text: "Tìm x biết: x + 42 = 91",
+                type: "SINGLE_TEXT_INPUT",
+                answer: "49",
+                answered: false,
+                correct: false
+            }
+        ]
+    }
+]
+
+export type PracticeType = {
+    name: string;
+    data: PracticeContentType;
+}
+
+export type PracticeContentType = {
+    text: string;
+    type: 'SINGLE_TEXT_INPUT' | 'MULTI_TEXT_INPUT',
+    answer: any;
 }

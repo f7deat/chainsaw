@@ -3,10 +3,17 @@ import Header from "@/components/header/header";
 import Jumbotron from "@/components/jumbotron";
 import { courses } from "@/mock";
 import { books } from "@/mock/book";
+import { CourseType } from "@/mock/courses";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function KhoaHoc() {
+
+    const router = useRouter();
+
+    const data = courses[`${router.query.slug}`] || [];
+
     return (
         <>
             <Head>
@@ -28,7 +35,7 @@ export default function KhoaHoc() {
                 </div>
                 <div className="md:grid grid-cols-2 gap-4">
                     {
-                        courses.map((course, i) => (
+                        data.map((course: CourseType, i: number) => (
                             <div className="flex" key={i}>
                                 <div className="w-1/2">
                                     <div className="bg-amber-500 rounded-l-lg py-4 px-10 relative h-full relative">

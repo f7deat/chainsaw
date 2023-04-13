@@ -138,7 +138,7 @@ const TopNav: React.FC = () => {
                                 <Dropdown menu={{ items }}>
                                     <Button type="link" className="text-gray-200">
                                         <Space>
-                                            Nguyễn Hiểu Minh
+                                            {user.hoVaTen}
                                             <DownOutlined />
                                         </Space>
                                     </Button>

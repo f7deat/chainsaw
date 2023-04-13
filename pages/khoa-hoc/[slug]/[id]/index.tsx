@@ -8,7 +8,8 @@ import Link from "next/link";
 import { Fragment } from "react";
 import CourseSummary from "./components/summary";
 
-export default function KhoaHoc() {
+export default function CourseContent() {
+
     return (
         <>
             <Head>
