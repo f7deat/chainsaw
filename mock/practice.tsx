@@ -30,3 +30,12 @@ export type PracticeContentType = {
     type: 'SINGLE_TEXT_INPUT' | 'MULTI_TEXT_INPUT',
     answer: any;
 }
+
+const payload = {
+    id: "id câu hỏi",
+    answer: "câu trả lời"
+}
+
+const response = {
+    correct: "đúng/sai",
+}
