@@ -1,3 +1,7 @@
+import { PhoneOutlined } from "@ant-design/icons"
+import { Button, Space } from "antd"
+import Link from "next/link"
+
 const CourseSummary: React.FC = () => {
     return (
         <div className="bg-white shadow p-2 rounded-lg md:-mt-20">
@@ -9,6 +13,16 @@ const CourseSummary: React.FC = () => {
                     <span className="text-4xl">1.200.000</span>
                 </div>
                 <div className="text-red-400 font-bold text-sm">Chỉ còn nốt 2 ngày</div>
+                <div className="py-3 flex justify-center gap-4">
+                    <Link href="/khoa-hoc/dang-ky">
+                        <Button size="large" type="primary">Đăng ký ngay</Button>
+                    </Link>
+                    <Button size="large" type="primary" danger>
+                        <Space>
+                            <PhoneOutlined />Nhận tư vấn
+                        </Space>
+                    </Button>
+                </div>
             </div>
         </div>
     )

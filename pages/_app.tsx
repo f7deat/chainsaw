@@ -10,9 +10,15 @@ const quickSand = Quicksand({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <main className={quickSand.className}>
-      <ConfigProvider locale={{
-        locale: 'vi-VN'
-      }}>
+      <ConfigProvider
+        theme={{
+          token: {
+            fontFamily: '__Quicksand_6543ae'
+          }
+        }}
+        locale={{
+          locale: 'vi-VN'
+        }}>
         <Component {...pageProps} />
       </ConfigProvider>
     </main>

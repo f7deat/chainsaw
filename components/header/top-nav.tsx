@@ -11,7 +11,7 @@ type ItemProps = {
 const Item: React.FC<ItemProps> = (props) => {
     return (
         (
-            <button className="hover:bg-orange-500 h-12 text-white bg-blue-800 flex items-center justify-center px-4 text-sm">
+            <button className="hover:bg-orange-500 h-12 text-white bg-sky-900 flex items-center justify-center px-4 text-sm">
                 {props.title}
             </button>
         )
@@ -116,12 +116,12 @@ const TopNav: React.FC = () => {
     ];
 
     return (
-        <div className="bg-blue-900 font-medium text-sm">
+        <div className="bg-sky-800 font-medium">
             <div className="mx-auto container">
                 <div className="flex justify-between">
-                    <div className="flex items-center">
-                        <div className="bg-orange-500 h-12 text-white flex items-center justify-center px-4 text-sm">
-                            Tiểu học
+                    <div className="flex items-center font-bold text-sm">
+                        <div className="bg-orange-500 h-12 text-white flex items-center justify-center px-4">
+                            TIỂU HỌC
                         </div>
                         <Item title="THCS" />
                         <Item title="THPT" />

@@ -8,6 +8,8 @@ import CourseList from '@/components/course';
 import { HeadTitle, JoinWithUs } from '@/components';
 import ListCourseCarouel from '@/components/course/list-carousel';
 import StatisticsHome from '@/components/statistics';
+import GocHocTap from '@/components/home/goc-hoc-tap';
+import DoVui from '@/components/home/do-vui';
 
 export default function Home() {
   return (
@@ -57,34 +59,14 @@ export default function Home() {
         <div className='bg-white'>
           <div className='container mx-auto md:py-10 py-4'>
               <HeadTitle>Góc học tập</HeadTitle>
+              <GocHocTap />
           </div>
         </div>
 
         <div className='bg-cyan-50 md:py-10 py-4'>
           <div className='container mx-auto'>
             <HeadTitle center>Đố vui</HeadTitle>
-            <Row gutter={16}>
-              <Col md={6}>
-                <Card>
-                  <Empty />
-                </Card>
-              </Col>
-              <Col md={6}>
-                <Card>
-                  <Empty />
-                </Card>
-              </Col>
-              <Col md={6}>
-                <Card>
-                  <Empty />
-                </Card>
-              </Col>
-              <Col md={6}>
-                <Card>
-                  <Empty />
-                </Card>
-              </Col>
-            </Row>
+            <DoVui />
           </div>
         </div>
 
