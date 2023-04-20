@@ -1,5 +1,5 @@
-import axios from "axios";
+import request from "./request";
 
 export async function listCourse() {
-    return axios.get(`https://apihoconline.getvisa.vn/client/khoahoc/getkhoahocs`);
+    return request.get(`khoahoc/getkhoahocs`);
 }
