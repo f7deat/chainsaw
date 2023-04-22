@@ -1,8 +1,10 @@
 import { API_URL } from "@/constant";
+import { getStudent } from "@/services/user";
 import { DownOutlined } from "@ant-design/icons";
+import { ProFormInstance, ProFormSelect, StepsForm } from "@ant-design/pro-components";
 import { Modal, Form, Input, Avatar, Button, ConfigProvider, message, Dropdown, MenuProps, Space } from "antd";
 import Link from "next/link";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 
 type ItemProps = {
     title: string;
@@ -19,29 +21,19 @@ const Item: React.FC<ItemProps> = (props) => {
 }
 
 const TopNav: React.FC = () => {
-
+    
+    const formRef = useRef<ProFormInstance>();
     const [open, setOpen] = useState<boolean>(false);
     const [user, setUser] = useState<any>();
+    const [options, setOptions] = useState<any>([]);
 
     useEffect(() => {
-        fetch(`${API_URL}/student`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${localStorage.getItem('access_token')}`
-            },
-        }).then(response => {
-            if (response.status === 200) {
-                response.json().then(data => {
-                    if (data.succeeded) {
-                        setUser(data.data);
-                    }
-                })
-            }
+        getStudent().then(response => {
+            setUser(response.data.data)
         })
     }, []);
 
-    const onFinish = async (values: any) => {
+    const onLogin = async (values: any) => {
         try {
             const response = await fetch(`${API_URL}/auth/password-sign-in`, {
                 method: 'POST',
@@ -53,13 +45,23 @@ const TopNav: React.FC = () => {
             });
             const data = await response.json();
             if (data.succeeded) {
-                localStorage.setItem('access_token', data.token);
                 message.success(data.message);
-                window.location.reload();
+                setOptions(data.data.map((u: any) => {
+                    return {
+                        label: u.user.hoVaTen,
+                        value: u.token
+                    }
+                }))
+                return true;
             }
         } catch (error) {
             message.error("Đã có lỗi xảy ra");
         }
+    }
+
+    const onFinish = async (values: any) => {
+        localStorage.setItem('access_token', values.token);
+        window.location.reload();
     }
 
     const items: MenuProps['items'] = [
@@ -168,29 +170,22 @@ const TopNav: React.FC = () => {
                 }}
             >
                 <Modal open={open} title="Đăng nhập" onCancel={() => setOpen(false)} centered width={800} footer={<Fragment />}>
-                    <div className="md:flex">
-                        <div className="hidden md:block md:w-1/2">
-                            <div className="flex items-center justify-center h-full">
-                                <picture>
-                                    <img src="https://www.go.ooo/img/bg-img/Login.jpg" alt="login" />
-                                </picture>
-                            </div>
-                        </div>
-                        <div className="md:w-1/2 p-4">
-                            <Form layout="vertical" onFinish={onFinish}>
+                    <div className="p-4">
+                        <StepsForm formRef={formRef}>
+                            <StepsForm.StepForm name="step1" title="Đăng nhập" onFinish={onLogin}>
                                 <Form.Item label="Số điện thoại" initialValue={"0911717772"} rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]} name="userName">
                                     <Input size="large" />
                                 </Form.Item>
                                 <Form.Item label="Mật khẩu" initialValue="1" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="password">
                                     <Input.Password size="large" />
                                 </Form.Item>
-                                <Form.Item>
-                                    <Button type="primary" htmlType="submit" size="large" className="w-full bg-blue-500">Đăng nhập</Button>
-                                </Form.Item>
-                            </Form>
-                            <div>Bạn chưa có tài khoản? <Link href="/tai-khoan/dang-ky"><b>Đăng ký</b></Link></div>
-                        </div>
+                            </StepsForm.StepForm>
+                            <StepsForm.StepForm name="step2" title="Học viên" onFinish={onFinish}>
+                                <ProFormSelect name="token" label="Chọn học viên" options={options} />
+                            </StepsForm.StepForm>
+                        </StepsForm>
                     </div>
+                    <div className="text-right">Bạn chưa có tài khoản? <Link href="/tai-khoan/dang-ky"><b>Đăng ký</b></Link></div>
                 </Modal>
             </ConfigProvider>
 
