@@ -1,5 +1,5 @@
 import request from "./request";
 
-export async function getStudent() {
+export function getStudent() {
     return request.get(`student`);
 }

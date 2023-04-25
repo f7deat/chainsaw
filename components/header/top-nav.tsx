@@ -28,9 +28,15 @@ const TopNav: React.FC = () => {
     const [options, setOptions] = useState<any>([]);
 
     useEffect(() => {
-        getStudent().then(response => {
-            setUser(response.data.data)
-        })
+        try {
+            getStudent().then(response => {
+                if (response.status === 200) {
+                    setUser(response.data.data)
+                }
+            });
+        } catch (error) {
+            
+        }
     }, []);
 
     const onLogin = async (values: any) => {

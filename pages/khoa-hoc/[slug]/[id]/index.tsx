@@ -5,10 +5,22 @@ import Jumbotron from "@/components/jumbotron";
 import { course } from "@/mock/course";
 import Head from "next/head";
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import CourseSummary from "./components/summary";
+import { getBaiGiang } from "@/services/course";
+import { useRouter } from "next/router";
 
 export default function CourseContent() {
+    const router = useRouter();
+    const [data, setData] = useState<any>();
+
+    useEffect(() => {
+        if (router.query.id) {
+            getBaiGiang(router.query.id).then(response => {
+                setData(response.data)
+            });
+        }
+    }, [router]);
 
     return (
         <>

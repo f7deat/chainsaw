@@ -4,15 +4,26 @@ import Jumbotron from "@/components/jumbotron";
 import { courses } from "@/mock";
 import { books } from "@/mock/book";
 import { CourseType } from "@/mock/courses";
+import { chuongTrinhHoc } from "@/services/course";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export default function KhoaHoc() {
 
     const router = useRouter();
 
     const data = courses[`${router.query.slug}`] || [];
+    const [data2, setData2] = useState<any>();
+
+    useEffect(() => {
+        if (router.query.slug) {
+            chuongTrinhHoc(router.query.slug).then(response => {
+                setData2(response.data)
+            })
+        }
+    }, [router.query.slug]);
 
     return (
         <>
@@ -28,8 +39,12 @@ export default function KhoaHoc() {
                 <div className="mb-3 text-2xl font-medium">Chọn sách giáo khoa</div>
                 <div className="flex gap-4 flex-wrap mb-8">
                     {
-                        books.map((book, i) => (
-                            <button key={i} className="px-6 shadow py-2 rounded bg-gray-200 hover:bg-orange-500 hover:text-white">{book.name}</button>
+                        data2.map((book: any) => (
+                            <button key={book.chuongTrinhHocId} className="px-6 shadow py-2 rounded bg-gray-200 hover:bg-orange-500 hover:text-white">
+                                <Link href={`/khoa-hoc/1/${book.chuongTrinhHocId}`}>
+                                    {book.tenChuongTrinhHoc}
+                                </Link>
+                            </button>
                         ))
                     }
                 </div>
