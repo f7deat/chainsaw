@@ -68,7 +68,7 @@ export default function CourseContent() {
                                     <div key={group.nhomBaiGiangId} className="bg-white mb-4">
                                         <div className="bg-blue-500 font-medium text-white text-xl px-4 py-2 rounded-t">{group.tenNhomBaiGiang}</div>
                                         {
-                                            group.itens.map((item: any) => (
+                                            group.items.map((item: any) => (
                                                 <div key={item.baiGiangId}>
                                                     <div className="px-4 py-2 hover:bg-blue-100 flex justify-between items-center text-lg">
                                                         <div>{item.tenBaiGiang}</div>
