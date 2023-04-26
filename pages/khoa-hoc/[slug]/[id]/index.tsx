@@ -64,18 +64,18 @@ export default function CourseContent() {
                             </div>
                             <div className="text-4xl font-bold mb-4">Chương trình học</div>
                             {
-                                course.groups.map((group, i) => (
-                                    <div key={i} className="bg-white mb-4">
-                                        <div className="bg-blue-500 font-medium text-white text-xl px-4 py-2 rounded-t">{group.name}</div>
+                                data?.map((group: any) => (
+                                    <div key={group.nhomBaiGiangId} className="bg-white mb-4">
+                                        <div className="bg-blue-500 font-medium text-white text-xl px-4 py-2 rounded-t">{group.tenNhomBaiGiang}</div>
                                         {
-                                            group.items.map((item, j) => (
-                                                <div key={j}>
+                                            group.itens.map((item: any) => (
+                                                <div key={item.baiGiangId}>
                                                     <div className="px-4 py-2 hover:bg-blue-100 flex justify-between items-center text-lg">
-                                                        <div>{item.name}</div>
+                                                        <div>{item.tenBaiGiang}</div>
                                                         <div className="flex gap-4 items-center">
                                                             {
-                                                                item.video ? (
-                                                                    <Link href={`/luyen-tap/video/${item.video.id}`}>
+                                                                item?.video ? (
+                                                                    <Link href={`/luyen-tap/video/${item.videoId}`}>
                                                                         <button className="text-gray-400 hover:text-orange-500">
                                                                             <CirclePlayIcon className="w-7 h-7" />
                                                                         </button>
@@ -83,8 +83,8 @@ export default function CourseContent() {
                                                                 ) : (<Fragment />)
                                                             }
                                                             {
-                                                                item.practice ? (
-                                                                    <Link href={`/luyen-tap/cau-hoi/${item.practice.id}`}>
+                                                                item?.practice ? (
+                                                                    <Link href={`/luyen-tap/cau-hoi/${item.practiceId}`}>
                                                                         <button className="text-gray-400 hover:text-orange-500">
                                                                             <PenToSquareIcon className="w-7 h-7" />
                                                                         </button>

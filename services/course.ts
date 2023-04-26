@@ -9,11 +9,5 @@ export async function chuongTrinhHoc(id?: string | string[]) {
 }
 
 export async function getBaiGiang(id?: string | string[]) {
-    return request({
-        method: 'POST',
-        url: `khoahoc/getbaigiangs`,
-        data: {
-            ChuongTrinhHocID: id
-        }
-    })
+    return request.get(`khoahoc/getbaigiangs/${id}`)
 }

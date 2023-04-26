@@ -39,7 +39,7 @@ export default function KhoaHoc() {
                 <div className="mb-3 text-2xl font-medium">Chọn sách giáo khoa</div>
                 <div className="flex gap-4 flex-wrap mb-8">
                     {
-                        data2.map((book: any) => (
+                        data2?.map((book: any) => (
                             <button key={book.chuongTrinhHocId} className="px-6 shadow py-2 rounded bg-gray-200 hover:bg-orange-500 hover:text-white">
                                 <Link href={`/khoa-hoc/1/${book.chuongTrinhHocId}`}>
                                     {book.tenChuongTrinhHoc}

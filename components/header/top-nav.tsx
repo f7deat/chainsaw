@@ -1,8 +1,8 @@
 import { API_URL } from "@/constant";
 import { getStudent } from "@/services/user";
-import { DownOutlined } from "@ant-design/icons";
+import { DownOutlined, FacebookOutlined, GoogleOutlined } from "@ant-design/icons";
 import { ProFormInstance, ProFormSelect, StepsForm } from "@ant-design/pro-components";
-import { Modal, Form, Input, Avatar, Button, ConfigProvider, message, Dropdown, MenuProps, Space } from "antd";
+import { Modal, Form, Input, Avatar, Button, ConfigProvider, message, Dropdown, MenuProps, Space, Row, Col, Typography } from "antd";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
 
@@ -21,7 +21,7 @@ const Item: React.FC<ItemProps> = (props) => {
 }
 
 const TopNav: React.FC = () => {
-    
+
     const formRef = useRef<ProFormInstance>();
     const [open, setOpen] = useState<boolean>(false);
     const [user, setUser] = useState<any>();
@@ -35,7 +35,7 @@ const TopNav: React.FC = () => {
                 }
             });
         } catch (error) {
-            
+
         }
     }, []);
 
@@ -168,32 +168,50 @@ const TopNav: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <ConfigProvider
-                theme={{
-                    token: {
-                        fontFamily: '__Quicksand_1a17df'
-                    },
-                }}
-            >
-                <Modal open={open} title="Đăng nhập" onCancel={() => setOpen(false)} centered width={800} footer={<Fragment />}>
-                    <div className="p-4">
+            <Modal open={open} onCancel={() => setOpen(false)} centered width={950} footer={<Fragment />}>
+                <Row>
+                    <Col span={12}>
+                        <Typography.Title level={3}>Xin chào!</Typography.Title>
+                        <div className="p-10">
+                            <picture>
+                                <img src="https://finder.createx.studio/img/signin-modal/signin.svg" alt="" />
+                            </picture>
+                        </div>
+                        <div className="p-4">
+                            <Space>
+                                <span>Bạn chưa có tài khoản?</span>
+                                <Link href="/tai-khoan/dang-ky">
+                                    <Button size="small" type="link"><b>Đăng ký</b></Button>
+                                </Link>
+                            </Space>
+                        </div>
+                    </Col>
+                    <Col span={12}>
+                        <div className="py-4 flex justify-center gap-2 flex-col items-center">
+                            <div className="mb-4 w-64">
+                                <Button size="large" icon={<GoogleOutlined />} className="w-full">Đăng nhập với Google</Button>
+                            </div>
+                            <div className="mb-4 w-64">
+                                <Button size="large" icon={<FacebookOutlined />} className="w-full">Đăng nhập với Facebook</Button>
+                            </div>
+                        </div>
                         <StepsForm formRef={formRef}>
                             <StepsForm.StepForm name="step1" title="Đăng nhập" onFinish={onLogin}>
-                                <Form.Item label="Số điện thoại" initialValue={"0911717772"} rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]} name="userName">
+                                <Form.Item label="Số điện thoại" className="w-80" initialValue={"0911717772"} rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]} name="userName">
                                     <Input size="large" />
                                 </Form.Item>
-                                <Form.Item label="Mật khẩu" initialValue="1" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="password">
+                                <Form.Item label="Mật khẩu" className="w-80" initialValue="1" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="password">
                                     <Input.Password size="large" />
                                 </Form.Item>
                             </StepsForm.StepForm>
                             <StepsForm.StepForm name="step2" title="Học viên" onFinish={onFinish}>
-                                <ProFormSelect name="token" label="Chọn học viên" options={options} />
+                                <div className="w-64">
+                                    <ProFormSelect name="token" label="Chọn học viên" options={options} />
+                                </div>
                             </StepsForm.StepForm>
-                        </StepsForm>
-                    </div>
-                    <div className="text-right">Bạn chưa có tài khoản? <Link href="/tai-khoan/dang-ky"><b>Đăng ký</b></Link></div>
-                </Modal>
-            </ConfigProvider>
+                        </StepsForm></Col>
+                </Row>
+            </Modal>
 
         </div>
     )
