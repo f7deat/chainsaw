@@ -7,18 +7,21 @@ import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import CourseSummary from "./components/summary";
-import { getBaiGiang } from "@/services/course";
+import { getBaiGiang, isBought } from "@/services/course";
 import { useRouter } from "next/router";
 
 export default function CourseContent() {
     const router = useRouter();
     const [data, setData] = useState<any>();
+    const [hasAccess, setHasAccess] = useState<boolean>(false);
 
     useEffect(() => {
         if (router.query.id) {
             getBaiGiang(router.query.id).then(response => {
                 setData(response.data)
             });
+
+            isBought(router.query.id).then(response => setHasAccess(response.data?.trangThai))
         }
     }, [router]);
 
@@ -93,7 +96,7 @@ export default function CourseContent() {
                             }
                         </div>
                         <div className="md:w-1/3">
-                            <CourseSummary />
+                            <CourseSummary isBought={hasAccess} />
                         </div>
                     </div>
                 </div>

@@ -17,6 +17,19 @@ export default function LuyenTap() {
         if (router?.query?.id) {
             listQuestion(router.query.id).then(response => {
                 setData(response.data);
+                
+                if (response.data) {
+                    let point = 10 / response.data.length;
+                    let temp = 0;
+                    for (let index = 0; index < response.data.length; index++) {
+                        const element = response.data[index];
+                        if (element.ketQuaThucHien) {
+                            temp += point;
+                        }
+                    }
+                    setScore(temp);
+                }
+
             })
         }
     }, [router])

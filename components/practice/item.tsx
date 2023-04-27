@@ -1,6 +1,6 @@
 import { checkAnswer } from "@/services/course";
-import { Button, Form, Input, message } from "antd"
-import { useState } from "react";
+import { Alert, Button, Form, Input, message } from "antd"
+import { Fragment, useState } from "react";
 
 type PracticeContentProps = {
     item: any;
@@ -49,9 +49,18 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
                         <Input size="large" readOnly={answered} />
                     </Form.Item>
                     <Form.Item>
-                        <Button disabled={answered} size="large" htmlType="submit" className="w-full bg-blue-500 font-bold" type="primary">Gửi câu trả lời</Button>
+                        <Button disabled={item.trangThaiHoanThanh === 1} size="large" htmlType="submit" className="w-full bg-blue-500 font-bold" type="primary">Gửi câu trả lời</Button>
                     </Form.Item>
                 </Form>
+
+                {
+                    item.ketQuaThucHien ? (
+                        <Alert message="Bạn đã hoàn thành chính xác câu hỏi này" type="success" showIcon />
+                    ) : (
+                        <Alert message="Bạn đã hoàn thành sai câu hỏi này" type="error" showIcon />
+                    )
+                }
+
             </div>
         </div>
     )

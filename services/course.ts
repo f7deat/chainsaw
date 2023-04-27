@@ -37,3 +37,13 @@ export async function checkAnswer(questionId: string, answerId: string, answerTe
         }
     })
 }
+
+export async function isBought(id?: string | string[]) {
+    return request({
+        url: `khoahoc/checkmuakhoahoc`,
+        method: 'POST',
+        data: {
+            ChuongTrinhHocID: id
+        }
+    })
+}
