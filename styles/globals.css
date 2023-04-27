@@ -63,3 +63,6 @@
 .four-step .step.two .header span {
     color: #ffba00;
 }
+.object-fit-cover {
+    object-fit: cover;
+}

@@ -11,3 +11,7 @@ export async function chuongTrinhHoc(id?: string | string[]) {
 export async function getBaiGiang(id?: string | string[]) {
     return request.get(`khoahoc/getbaigiangs/${id}`)
 }
+
+export async function listHighLight(slug: string) {
+    return request.get(`khoahoc/high-light/${slug}`)
+}

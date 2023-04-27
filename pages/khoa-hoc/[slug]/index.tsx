@@ -37,14 +37,14 @@ export default function KhoaHoc() {
                 <Row gutter={16}>
                     {
                         data?.map((book: any) => (
-                            <Col md={6} key={book.chuongTrinhHocId}>
+                            <Col md={8} key={book.chuongTrinhHocId}>
                                 <Link href={`/khoa-hoc/1/${book.chuongTrinhHocId}`}>
                                     <Card
                                         className="shadow-lg"
                                         bordered={false}
                                         cover={
                                             <picture>
-                                                <img src={book.hinhAnh || 'https://placehold.jp/1x1.png'} className="w-full h-40" alt="IMG" />
+                                                <img src={book.hinhAnh || 'https://placehold.jp/1x1.png'} className="w-full h-64 object-fit-cover" alt="IMG" />
                                             </picture>
                                         }
                                     >

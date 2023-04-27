@@ -79,9 +79,7 @@ export default function Home() {
               }}>Tư vấn mua khóa học</button>
             </picture>
 
-            <ListCourseCarouel title='KHÓA TOÁN TIỂU HỌC NỔI BẬT' />
-            <ListCourseCarouel title='KHÓA TIẾNG VIỆT TIỂU HỌC ' />
-            <ListCourseCarouel title='KHÓA TIẾNG ANH TIỂU HỌC ' />
+            <ListCourseCarouel slug='toan-tieu-hoc' />
 
             <JoinWithUs />
 

@@ -28,7 +28,7 @@ request.interceptors.response.use(
   },
   function (error) {
     // if the server throws an error (404, 500 etc.)
-    return Promise.reject(error);
+    return error;
   }
 );
 
