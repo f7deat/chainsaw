@@ -2,27 +2,37 @@ import Footer from "@/components/footer";
 import Header from "@/components/header/header";
 import PracticeContent from "@/components/practice/item";
 import { PracticeType, practice } from "@/mock/practice";
+import { listQuestion } from "@/services/course";
 import { Button, Form, Input, Tabs, message } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function LuyenTap() {
     const router = useRouter();
 
+    const [data, setData] = useState<any>([]);
+
+    useEffect(() => {
+        if (router?.query?.id) {
+            listQuestion(router.query.id).then(response => {
+                setData(response.data);
+            })
+        }
+    }, [router])
+
     const [score, setScore] = useState<number>(0);
-    const data: any = practice[`${router.query.id}`]
 
     const renderTab = (item: any, index: number) => (
         <div>
-            <PracticeContent item={item} score={score} setScore={setScore} total={data?.data.length || 0} index={index} />
+            <PracticeContent item={item} score={score} setScore={setScore} total={data?.length || 0} index={index} />
         </div>
     )
 
     return (
         <>
             <Head>
-                <title>{data?.name}</title>
+                <title>Luyện tập</title>
                 <meta name="description" content="" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
@@ -43,7 +53,7 @@ export default function LuyenTap() {
                         </div>
                         <Tabs
                             tabPosition="left"
-                            items={data?.data.map((item: PracticeType, i: number) => {
+                            items={data?.map((item: any, i: number) => {
                                 const id = String(i + 1);
                                 return {
                                     label: id,

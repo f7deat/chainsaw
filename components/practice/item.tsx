@@ -1,9 +1,9 @@
-import { PracticeContentType } from "@/mock/practice";
+import { checkAnswer } from "@/services/course";
 import { Button, Form, Input, message } from "antd"
 import { useState } from "react";
 
 type PracticeContentProps = {
-    item: PracticeContentType;
+    item: any;
     setScore: any;
     score: number;
     total: number;
@@ -16,18 +16,22 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
     const { item, setScore, score, total, index } = props;
     const [answered, setAnswered] = useState<boolean>(false);
 
-    const onFinish = (values: any) => {
+    const onFinish = async (values: any) => {
         if (!values.answer) {
             message.warning('Vui lòng điền đáp án');
             return;
         }
+
         const point = 10 / total;
-        if (values.answer === item.answer) {
+
+        const response = await checkAnswer(item.cauHoiId, "0", values.answer);
+        if (response.data.correct) {
             setScore(score + point);
             message.success('Đúng rồi!!!');
         } else {
             message.error('Sai rồi!!!');
         }
+
         setAnswered(true);
     }
 
@@ -37,7 +41,7 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
                 <div className="mb-10">
                     <button className="bg-orange-500 text-white text-2xl px-6 py-2 shadow rounded-lg uppercase font-medium">Câu {index + 1}</button>
                 </div>
-                <div className="text-3xl mb-10">{item.text}</div>
+                <div className="text-3xl mb-10">{item.noidung}</div>
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Form onFinish={onFinish}>
                     <Form.Item initialValue={item.type} name="type" hidden />
