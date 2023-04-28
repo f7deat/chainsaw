@@ -51,3 +51,11 @@ export async function isBought(id?: string | string[]) {
 export async function getMyCourse() {
     return request.get(`khoahoc/my-course`);
 }
+
+export async function listClassroom() {
+    return request.get(`classroom/list`);
+}
+
+export async function listSubject() {
+    return request.get(`subject/list`)
+}

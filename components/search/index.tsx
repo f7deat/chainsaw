@@ -1,7 +1,33 @@
 import { ConfigProvider, Form, Select } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
+import { useEffect, useState } from "react"
+import { listClassroom, listSubject } from "@/services/course";
 
 const Search: React.FC = () => {
+
+    const [classroom, setClassroom] = useState<any>([]);
+    const [subject, setSubject] = useState<any>([]);
+
+    useEffect(() => {
+        listClassroom().then(response => {
+            const map = response.data.map((x: any) => {
+                return {
+                    value: x.lopHocId,
+                    label: x.tenLopHoc
+                }
+            })
+            setClassroom(map)
+        })
+        listSubject().then(response => {
+            const map = response.data.map((x: any) => {
+                return {
+                    value: x.monhocid,
+                    label: x.tenmon
+                }
+            })
+            setSubject(map)
+        })
+    }, [])
 
     const onFinish = async (values: any) => {
         console.log(values)
@@ -21,28 +47,16 @@ const Search: React.FC = () => {
                             colorText: '#04689a',
                         }
                     }}>
-                        <Form.Item name="class" className="mb-0" initialValue="all">
+                        <Form.Item name="class" className="mb-0 w-40">
                             <Select
                                 size="large"
-                                options={[
-                                    { value: 'all', label: 'Chọn lớp' },
-                                    { value: 'lop-0', label: 'Tiền lớp 1' },
-                                    { value: 'lop-1', label: 'Lớp 1' },
-                                    { value: 'lop-2', label: 'Lớp 2' },
-                                    { value: 'lop-3', label: 'Lớp 3' },
-                                    { value: 'lop-4', label: 'Lớp 4' },
-                                    { value: 'lop-5', label: 'Lớp 5' },
-                                ]}
+                                options={classroom}
                             />
                         </Form.Item>
-                        <Form.Item name="subject" className="mb-0" initialValue={"all"}>
+                        <Form.Item name="subject" className="mb-0 w-40">
                             <Select
                                 size="large"
-                                options={[
-                                    { value: 'all', label: 'Chọn môn' },
-                                    { value: 'toan', label: 'Toán học' },
-                                    { value: 'tieng-anh', label: 'Tiếng Anh' },
-                                ]}
+                                options={subject}
                             />
                         </Form.Item>
                     </ConfigProvider>

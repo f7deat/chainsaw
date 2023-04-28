@@ -2,8 +2,9 @@ import { useEffect, useState } from "react"
 import HeadTitle from "../title"
 import { getMyCourse } from "@/services/course";
 import { ProCard } from "@ant-design/pro-components";
-import { Button, Card } from "antd";
+import { Card, Space } from "antd";
 import Link from "next/link";
+import { LoginOutlined } from "@ant-design/icons";
 
 const MyCourse: React.FC = () => {
 
@@ -23,9 +24,12 @@ const MyCourse: React.FC = () => {
                     data?.map((value: any) => (
                         <ProCard key={value.id} title={value.name} actions={
                             [
-                                <Button key={1}>
-                                    <Link href={`/khoa-hoc/${value.id}`}>Vào học</Link>
-                                </Button>
+                                <Link href={`/khoa-hoc/${value.id}`} key={value.id}>
+                                    <Space>
+                                        <LoginOutlined />
+                                        Vào học
+                                    </Space>
+                                </Link>
                             ]
                         }>
                             <Card.Meta title={value.description} />
