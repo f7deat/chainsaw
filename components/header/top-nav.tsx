@@ -2,7 +2,7 @@ import { API_URL } from "@/constant";
 import { getStudent } from "@/services/user";
 import { DownOutlined, FacebookOutlined, GoogleOutlined } from "@ant-design/icons";
 import { ProFormInstance, ProFormSelect, StepsForm } from "@ant-design/pro-components";
-import { Modal, Form, Input, Avatar, Button, ConfigProvider, message, Dropdown, MenuProps, Space, Row, Col, Typography } from "antd";
+import { Modal, Form, Input, Avatar, Button, message, Dropdown, MenuProps, Space, Row, Col, Typography } from "antd";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
 
@@ -133,11 +133,6 @@ const TopNav: React.FC = () => {
                         </div>
                         <Item title="THCS" />
                         <Item title="THPT" />
-                        <Link href="/kich-hoat">
-                            <button className="rounded-full shadow bg-white ml-2 px-4 py-2">
-                                Nhập mã kích hoạt
-                            </button>
-                        </Link>
                     </div>
                     <div className="flex gap-4 items-center">
 

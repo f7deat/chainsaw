@@ -47,3 +47,7 @@ export async function isBought(id?: string | string[]) {
         }
     })
 }
+
+export async function getMyCourse() {
+    return request.get(`khoahoc/my-course`);
+}

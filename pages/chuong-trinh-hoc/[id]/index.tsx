@@ -15,12 +15,12 @@ export default function KhoaHoc() {
     const [data, setData] = useState<any>();
 
     useEffect(() => {
-        if (router.query.slug) {
-            chuongTrinhHoc(router.query.slug).then(response => {
+        if (router.query.id) {
+            chuongTrinhHoc(router.query.id).then(response => {
                 setData(response.data)
             })
         }
-    }, [router.query.slug]);
+    }, [router]);
 
     return (
         <>

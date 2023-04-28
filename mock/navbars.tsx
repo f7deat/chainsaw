@@ -1,34 +1,39 @@
-import { BookIcon, DuoIcon, EditSquareIcon, LecturerIcon, LiveStreamIcon, QandAIcon } from "@/components/icons";
+import { BookOutlined, EditOutlined, FireOutlined, HomeOutlined, MessageOutlined, RocketOutlined, VideoCameraOutlined } from "@ant-design/icons";
 
 export const navbars = [
     {
+        name: 'Trang chủ',
+        icon: <HomeOutlined />,
+        url: '/'
+    },
+    {
         name: "Tự ôn luyện",
-        icon: <BookIcon />,
+        icon: <BookOutlined />,
         url: "/"
     },
     {
         name: "Học nhóm",
-        icon: <DuoIcon />,
+        icon: <FireOutlined />,
         url: "/hoc-nhom"
     },
     {
         name: "Lớp học gia sư",
-        icon: <LecturerIcon />,
+        icon: <RocketOutlined />,
         url: "/"
     },
     {
         name: "Live class",
-        icon: <LiveStreamIcon />,
+        icon: <VideoCameraOutlined />,
         url: "/live-class"
     },
     {
         name: "Góc học tập",
-        icon: <EditSquareIcon />,
+        icon: <EditOutlined />,
         url: "/"
     },
     {
         name: "Hỏi đáp",
-        icon: <QandAIcon />,
+        icon: <MessageOutlined />,
         url: "/hoi-dap"
     }
 ]

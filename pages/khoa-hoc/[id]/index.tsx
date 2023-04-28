@@ -6,9 +6,9 @@ import { course } from "@/mock/course";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import CourseSummary from "./components/summary";
 import { getBaiGiang, isBought } from "@/services/course";
 import { useRouter } from "next/router";
+import CourseSummary from "./components/summary";
 
 export default function CourseContent() {
     const router = useRouter();
