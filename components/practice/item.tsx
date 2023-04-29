@@ -35,6 +35,17 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
         setAnswered(true);
     }
 
+    const ShowMessage = (item: any) => {
+        console.log(item)
+        if (item.trangThaiHoanThanh === 1 && item.ketQuaThucHien) {
+            return <Alert message="Bạn đã hoàn thành chính xác câu hỏi này" type="success" showIcon />
+        }
+        if (item.trangThaiHoanThanh === 1 && !item.ketQuaThucHien) {
+            return <Alert message="Bạn đã trả lời sai câu hỏi này" type="error" showIcon />
+        }
+        return <Fragment />
+    }
+
     return (
         <div>
             <div className="flex flex-col items-center justify-center p-4">
@@ -46,20 +57,14 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
                 <Form onFinish={onFinish}>
                     <Form.Item initialValue={item.type} name="type" hidden />
                     <Form.Item name="answer">
-                        <Input size="large" readOnly={answered} />
+                        <Input size="large" disabled={answered || item.trangThaiHoanThanh === 1} />
                     </Form.Item>
                     <Form.Item>
                         <Button disabled={item.trangThaiHoanThanh === 1} size="large" htmlType="submit" className="w-full bg-blue-500 font-bold" type="primary">Gửi câu trả lời</Button>
                     </Form.Item>
                 </Form>
 
-                {
-                    item.ketQuaThucHien ? (
-                        <Alert message="Bạn đã hoàn thành chính xác câu hỏi này" type="success" showIcon />
-                    ) : (
-                        <Alert message="Bạn đã hoàn thành sai câu hỏi này" type="error" showIcon />
-                    )
-                }
+                {ShowMessage(item)}
 
             </div>
         </div>

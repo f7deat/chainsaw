@@ -13,8 +13,8 @@ const Footer: React.FC = () => {
                             <div className="md:flex gap-4">
                                 <div className="md:w-1/2">
                                     <div className="mb-2 font-bold">Trung tâm trợ giúp</div>
-                                    <div className="text-gray-500 mb-2">Email: <span className="text-gray-800">hotro@defzone.net</span></div>
-                                    <div className="text-gray-500">Đường dây nóng: <span className="text-gray-800">0762 55 9696</span></div>
+                                    <div className="mb-2">Email: <span className="text-gray-800">hotro@getvisa.vn</span></div>
+                                    <div className="mb-2">Đường dây nóng: <span className="text-gray-800">0762 55 9696</span></div>
                                 </div>
                                 <div className="md:w-1/2">
                                     <div className="mb-2">Hình thức thanh toán</div>
@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
                 <div className="border-b border-slate-600"></div>
                 <div className="py-8 flex items-center justify-between container mx-auto">
                     <div className="">
-                        © All rights reserved. Made by <a href="https://github.com/def-zone" className="font-bold">Waffle Studio</a>
+                        © All rights reserved. Made by <a href="#" className="font-bold">GETVISA</a>
                     </div>
                     <div className="flex gap-6 items-center justify-end">
                         <a href="/gioi-thieu">Giới thiệu</a>

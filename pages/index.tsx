@@ -44,6 +44,8 @@ export default function Home() {
             <MyCourse />
             <ListCourseCarouel slug='toan-tieu-hoc' />
 
+            <Divider />
+
             <JoinWithUs />
 
           </div>
