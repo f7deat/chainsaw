@@ -1,12 +1,35 @@
-import { CheckOutlined, PhoneOutlined } from "@ant-design/icons"
+import { getParent } from "@/services/user";
+import { CheckOutlined, LoginOutlined, PhoneOutlined } from "@ant-design/icons"
+import { ModalForm, ProFormInstance, ProFormText } from "@ant-design/pro-components";
 import { Button, Space } from "antd"
-import Link from "next/link"
+import { useEffect, useRef, useState } from "react";
 
 type CourseSummaryProps = {
     isBought: boolean;
 }
 
 const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
+
+    const [open, setOpen] = useState<boolean>(false);
+    const [user, setUser] = useState<any>();
+    const formRef = useRef<ProFormInstance>();
+
+    useEffect(() => {
+        getParent().then(response => {
+            formRef.current?.setFields([
+                {
+                    name: 'parentName',
+                    value: response.data.tenPhuHuynh
+                },
+                {
+                    name: 'phoneNumber',
+                    value: response.data.soDienThoai
+                }
+            ])
+            setUser(response);
+        });
+    }, []);
+
     return (
         <div className="bg-white shadow p-2 rounded-lg md:-mt-20">
             <div className="h-52 bg-gray-500 rounded-lg mb-4">
@@ -27,16 +50,23 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                 </div>
                 <div className="text-red-400 font-bold text-sm">Chỉ còn nốt 2 ngày</div>
                 <div className="py-3 flex justify-center gap-4">
-                    <Link href="/khoa-hoc/dang-ky">
-                        <Button size="large" type="primary">Đăng ký ngay</Button>
-                    </Link>
-                    <Button size="large" type="primary" danger>
+                    <Button size="large" type="primary" onClick={() => setOpen(true)}>
+                        <Space><LoginOutlined />Đăng ký ngay</Space>
+                    </Button>
+                    <a href="tel:+84911717772" className="px-4 py-2 rounded-lg bg-red-500 text-white">
                         <Space>
                             <PhoneOutlined />Nhận tư vấn
                         </Space>
-                    </Button>
+                    </a>
                 </div>
             </div>
+
+            <ModalForm open={open} onOpenChange={setOpen} title="Đăng ký khóa học" submitter={false}
+                formRef={formRef}
+            >
+                <ProFormText disabled name="parentName" label="Họ và tên phụ huynh" />
+                <ProFormText disabled name="phoneNumber" label="Số điện thoại" />
+            </ModalForm>
         </div>
     )
 }

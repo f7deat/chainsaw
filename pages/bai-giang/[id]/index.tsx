@@ -67,8 +67,8 @@ export default function CourseContent() {
                             </div>
                             <div className="text-4xl font-bold mb-4">Chương trình học</div>
                             {
-                                data?.map((group: any) => (
-                                    <div key={group.nhomBaiGiangId} className="bg-white mb-4">
+                                data?.map((group: any, index: number) => (
+                                    <div key={index} className="bg-white mb-4">
                                         <div className="bg-blue-500 font-medium text-white text-xl px-4 py-2 rounded-t">{group.name}</div>
                                         {
                                             group.items.map((item: any) => (

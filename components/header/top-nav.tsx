@@ -190,7 +190,42 @@ const TopNav: React.FC = () => {
                                 <Button size="large" icon={<FacebookOutlined />} className="w-full">Đăng nhập với Facebook</Button>
                             </div>
                         </div>
-                        <StepsForm formRef={formRef}>
+                        <StepsForm formRef={formRef}
+                        submitter={{
+                            render: ({ form, onSubmit, step, onPre }) => {
+                                return [
+                                    <Button
+                                        key="rest"
+                                        onClick={() => {
+                                            form?.resetFields();
+                                        }}
+                                    >
+                                        Làm lại
+                                    </Button>,
+                                    step > 0 && (
+                                        <Button
+                                            key="pre"
+                                            onClick={() => {
+                                                onPre?.();
+                                            }}
+                                        >
+                                            Quay lại
+                                        </Button>
+                                    ),
+                                    <Button
+                                        key="next"
+                                        type="primary"
+                                        onClick={() => {
+                                            onSubmit?.();
+                                        }}
+                                    >
+                                        {
+                                            step > 0 ? (<span>Đăng nhập</span>) : (<span>Bước sau</span>)
+                                        }
+                                    </Button>,
+                                ];
+                            },
+                        }}>
                             <StepsForm.StepForm name="step1" title="Đăng nhập" onFinish={onLogin}>
                                 <Form.Item label="Số điện thoại" className="w-80" initialValue={"0911717772"} rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]} name="userName">
                                     <Input size="large" />
@@ -201,7 +236,14 @@ const TopNav: React.FC = () => {
                             </StepsForm.StepForm>
                             <StepsForm.StepForm name="step2" title="Học viên" onFinish={onFinish}>
                                 <div className="w-64">
-                                    <ProFormSelect name="token" label="Chọn học viên" options={options} />
+                                    <ProFormSelect name="token" label="Chọn học viên" options={options} 
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui Lòng chọn học viên'
+                                        }
+                                    ]}
+                                    />
                                 </div>
                             </StepsForm.StepForm>
                         </StepsForm></Col>
