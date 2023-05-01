@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <ConfigProvider
         theme={{
           token: {
-            fontFamily: '__Quicksand_6543ae',
+            fontFamily: '__Quicksand_9eb44b',
             colorPrimary: '#fd5631'
           }
         }}

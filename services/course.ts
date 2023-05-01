@@ -4,8 +4,12 @@ export async function listCourse() {
     return request.get(`khoahoc/getkhoahocs`);
 }
 
+export async function queryKhoaHoc(id: string | string[]) {
+    return request.get(`khoahoc/${id}`);
+}
+
 export async function chuongTrinhHoc(id?: string | string[]) {
-    return request.get(`khoahoc/getchuongtrinhhocs/?khoahocid=${id}`)
+    return request.get(`khoahoc/danh-sach-chuong-trinh-hoc/${id}`)
 }
 
 export async function getBaiGiang(id?: string | string[]) {

@@ -39,12 +39,12 @@ const ListCourseCarouel: React.FC<ListCourseCarouelProps> = (props) => {
                                             </picture>
                                         </div>
                                         <div className="px-4 py-2">
-                                            <Link href={`/khoa-hoc/${item.id}`}>
+                                            <Link href={`/bai-giang/${item.id}`}>
                                                 <div className="text-2xl font-medium mb-2">{item.name}</div>
                                             </Link>
                                             <div className="text-gray-500 mb-2 relative">
                                                 {item.description}
-                                                <Link href={`/khoa-hoc/${item.id}`}>
+                                                <Link href={`/bai-giang/${item.id}`}>
                                                     <span className="px-6 py-2 rounded text-white bg-orange-500 absolute flex right-0 hover:bg-orange-700">Xem thêm</span>
                                                 </Link>
                                             </div>

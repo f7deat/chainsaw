@@ -9,10 +9,12 @@ import { LoginOutlined } from "@ant-design/icons";
 const MyCourse: React.FC = () => {
 
     const [data, setData] = useState<any>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         getMyCourse().then(response => {
             setData(response.data)
+            setLoading(false)
         })
     }, []);
 
@@ -22,9 +24,9 @@ const MyCourse: React.FC = () => {
             <div className="grid md:grid-cols-4 gap-4">
                 {
                     data?.map((value: any) => (
-                        <ProCard key={value.id} title={value.name} actions={
+                        <ProCard key={value.id} title={value.name} loading={loading} actions={
                             [
-                                <Link href={`/khoa-hoc/${value.id}`} key={value.id}>
+                                <Link href={`/bai-giang/${value.id}`} key={value.id}>
                                     <Space>
                                         <LoginOutlined />
                                         Vào học

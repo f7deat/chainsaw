@@ -6,11 +6,11 @@ export const elementary = [
         courses: [
             {
                 name: "Toán học",
-                url: "/chuong-trinh-hoc/toan-hoc-lop-0"
+                url: "/khoa-hoc/toan-hoc-tien-lop-1"
             },
             {
                 name: "Tiếng anh",
-                url: "/chuong-trinh-hoc/tieng-anh-lop-0"
+                url: "/khoa-hoc/tieng-anh-tien-lop-1"
             }
         ]
     },
@@ -21,11 +21,11 @@ export const elementary = [
         courses: [
             {
                 name: "Toán học",
-                url: "/chuong-trinh-hoc/toan-hoc-lop-1"
+                url: "/khoa-hoc/toan-hoc-lop-1"
             },
             {
                 name: "Tiếng anh",
-                url: "/chuong-trinh-hoc/tieng-anh-lop-1"
+                url: "/khoa-hoc/tieng-anh-lop-1"
             }
         ]
     },
@@ -36,11 +36,11 @@ export const elementary = [
         courses: [
             {
                 name: "Toán học",
-                url: "/chuong-trinh-hoc/toan-hoc-lop-2"
+                url: "/khoa-hoc/toan-hoc-lop-2"
             },
             {
                 name: "Tiếng anh",
-                url: "/chuong-trinh-hoc/tieng-anh-lop-2"
+                url: "/khoa-hoc/tieng-anh-lop-2"
             }
         ]
     },
@@ -51,11 +51,11 @@ export const elementary = [
         courses: [
             {
                 name: "Toán học",
-                url: "/chuong-trinh-hoc/toan-hoc-lop-3"
+                url: "/khoa-hoc/toan-hoc-lop-3"
             },
             {
                 name: "Tiếng anh",
-                url: "/chuong-trinh-hoc/tieng-anh-lop-3"
+                url: "/khoa-hoc/tieng-anh-lop-3"
             }
         ]
     },
@@ -66,11 +66,11 @@ export const elementary = [
         courses: [
             {
                 name: "Toán học",
-                url: "/chuong-trinh-hoc/toan-hoc-lop-4"
+                url: "/khoa-hoc/toan-hoc-lop-4"
             },
             {
                 name: "Tiếng anh",
-                url: "/chuong-trinh-hoc/tieng-anh-lop-4"
+                url: "/khoa-hoc/tieng-anh-lop-4"
             }
         ]
     },
@@ -81,11 +81,11 @@ export const elementary = [
         courses: [
             {
                 name: "Toán học",
-                url: "/chuong-trinh-hoc/toan-hoc-lop-5"
+                url: "/khoa-hoc/toan-hoc-lop-5"
             },
             {
                 name: "Tiếng anh",
-                url: "/chuong-trinh-hoc/tieng-anh-lop-5"
+                url: "/khoa-hoc/tieng-anh-lop-5"
             }
         ]
     }
