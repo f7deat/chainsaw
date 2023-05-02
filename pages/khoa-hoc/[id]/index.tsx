@@ -1,8 +1,9 @@
+import { HeadTitle } from "@/components";
 import Footer from "@/components/footer";
 import Header from "@/components/header/header";
 import Jumbotron from "@/components/jumbotron";
 import { chuongTrinhHoc, queryKhoaHoc } from "@/services/course";
-import { Card, Col, Divider, Row } from "antd";
+import { Card, Col, Divider, Row, Typography } from "antd";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -39,7 +40,7 @@ export default function KhoaHoc() {
             <Header />
             <Jumbotron name="Toán học lớp một" />
             <main className="container mx-auto mt-6">
-                <div className="mb-3 text-2xl font-medium">Chọn chương trình học</div>
+                <HeadTitle center>Chọn chương trình học</HeadTitle>
                 <Row gutter={16}>
                     {
                         data?.map((book: any) => (
@@ -54,7 +55,8 @@ export default function KhoaHoc() {
                                             </picture>
                                         }
                                     >
-                                        <Card.Meta title={book.tenChuongTrinhHoc} description={book.moTaChuongTrinh} />
+                                        <Typography.Title level={3}>{book.tenChuongTrinhHoc}</Typography.Title>
+                                        <div dangerouslySetInnerHTML={{ __html: book.moTaChuongTrinh }}></div>
                                     </Card>
                                 </Link>
                             </Col>

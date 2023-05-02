@@ -27,6 +27,10 @@ request.interceptors.response.use(
     return Promise.reject(response);
   },
   function (error) {
+    console.log(error)
+    if (error.response.status === 401) {
+      localStorage.removeItem('access_token');
+    }
     // if the server throws an error (404, 500 etc.)
     return error;
   }

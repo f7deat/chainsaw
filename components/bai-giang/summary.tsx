@@ -1,7 +1,8 @@
 import { getParent } from "@/services/user";
+import { waitTime } from "@/utils/wait";
 import { CheckOutlined, LoginOutlined, PhoneOutlined } from "@ant-design/icons"
 import { ModalForm, ProFormInstance, ProFormText } from "@ant-design/pro-components";
-import { Button, Space } from "antd"
+import { Button, Input, Modal, Space } from "antd"
 import { useEffect, useRef, useState } from "react";
 
 type CourseSummaryProps = {
@@ -14,21 +15,22 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
     const [user, setUser] = useState<any>();
     const formRef = useRef<ProFormInstance>();
 
-    useEffect(() => {
-        getParent().then(response => {
-            formRef.current?.setFields([
-                {
-                    name: 'parentName',
-                    value: response.data.tenPhuHuynh
-                },
-                {
-                    name: 'phoneNumber',
-                    value: response.data.soDienThoai
-                }
-            ])
-            setUser(response);
-        });
-    }, []);
+    const onRegister = async () => {
+        const response = await getParent();
+        console.log(response.data)
+        formRef.current?.setFields([
+            {
+                name: 'parentName',
+                value: response.data.tenPhuHuynh
+            },
+            {
+                name: 'phoneNumber',
+                value: response.data.soDienThoai
+            }
+        ])
+        setUser(response.data);
+        setOpen(true);
+    }
 
     return (
         <div className="bg-white shadow p-2 rounded-lg md:-mt-20">
@@ -50,7 +52,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                 </div>
                 <div className="text-red-400 font-bold text-sm">Chỉ còn nốt 2 ngày</div>
                 <div className="py-3 flex justify-center gap-4">
-                    <Button size="large" type="primary" onClick={() => setOpen(true)}>
+                    <Button size="large" type="primary" onClick={onRegister}>
                         <Space><LoginOutlined />Đăng ký ngay</Space>
                     </Button>
                     <a href="tel:+84911717772" className="px-4 py-2 rounded-lg bg-red-500 text-white">
@@ -61,12 +63,11 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                 </div>
             </div>
 
-            <ModalForm open={open} onOpenChange={setOpen} title="Đăng ký khóa học" submitter={false}
-                formRef={formRef}
-            >
-                <ProFormText disabled name="parentName" label="Họ và tên phụ huynh" />
-                <ProFormText disabled name="phoneNumber" label="Số điện thoại" />
-            </ModalForm>
+            <Modal open={open} onCancel={() => setOpen(false)} title="Đăng ký khóa học" footer={false} centered>
+                <label className="font-bold">Họ và tên</label>
+                <Input name="parentName" disabled value={user?.tenPhuHuynh} />
+                <ProFormText readonly name="phoneNumber" label="Số điện thoại" />
+            </Modal>
         </div>
     )
 }

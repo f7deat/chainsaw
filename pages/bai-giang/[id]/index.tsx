@@ -1,6 +1,5 @@
 import Footer from "@/components/footer";
 import { Header } from "@/components/header";
-import { CirclePlayIcon, PenToSquareIcon, SearchIcon } from "@/components/icons";
 import Jumbotron from "@/components/jumbotron";
 import { course } from "@/mock/course";
 import Head from "next/head";
@@ -9,6 +8,8 @@ import { useEffect, useState } from "react";
 import { getBaiGiang, isBought } from "@/services/course";
 import { useRouter } from "next/router";
 import CourseSummary from "@/components/bai-giang/summary";
+import { Button, message } from "antd";
+import { EditOutlined, PlayCircleOutlined, SearchOutlined } from "@ant-design/icons";
 
 export default function CourseContent() {
     const router = useRouter();
@@ -24,6 +25,20 @@ export default function CourseContent() {
             isBought(router.query.id).then(response => setHasAccess(response.data?.trangThai))
         }
     }, [router]);
+
+    const onPractice = (item: any) => {
+        console.log(item)
+        const token = localStorage.getItem('access_token');
+        if (!token) {
+            message.info('Vui lòng đăng nhập để tham gia khóa học!');
+            return;
+        }
+        if (!hasAccess && !item.free) {
+            message.info('Bạn chưa đăng ký mua khóa học này!');
+            return;
+        }
+        router.push(`/luyen-tap/cau-hoi/${item.id}`);
+    }
 
     return (
         <>
@@ -55,7 +70,7 @@ export default function CourseContent() {
                                     </button>
                                 </div>
                                 <div className="flex items-center justify-center py-2 w-14">
-                                    <SearchIcon className="w-6 h-6" />
+                                    <SearchOutlined className="w-6 h-6" />
                                 </div>
                             </div>
 
@@ -77,15 +92,9 @@ export default function CourseContent() {
                                                         <div>{item.name}</div>
                                                         <div className="flex gap-4 items-center">
                                                             <Link href={`${item.videoUrl}`}>
-                                                                <button className="text-gray-400 hover:text-orange-500">
-                                                                    <CirclePlayIcon className="w-7 h-7" />
-                                                                </button>
+                                                                <Button type="link" icon={<PlayCircleOutlined />} className="text-lg flex items-center" />
                                                             </Link>
-                                                            <Link href={`/luyen-tap/cau-hoi/${item.id}`}>
-                                                                <button className="text-gray-400 hover:text-orange-500">
-                                                                    <PenToSquareIcon className="w-7 h-7" />
-                                                                </button>
-                                                            </Link>
+                                                            <Button type="link" onClick={() => onPractice(item)} icon={<EditOutlined />} className="text-lg flex items-center" />
                                                         </div>
                                                     </div>
                                                 </div>
