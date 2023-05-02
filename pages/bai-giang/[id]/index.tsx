@@ -27,7 +27,6 @@ export default function CourseContent() {
     }, [router]);
 
     const onPractice = (item: any) => {
-        console.log(item)
         const token = localStorage.getItem('access_token');
         if (!token) {
             message.info('Vui lòng đăng nhập để tham gia khóa học!');

@@ -1,9 +1,8 @@
 import { getParent } from "@/services/user";
-import { waitTime } from "@/utils/wait";
 import { CheckOutlined, LoginOutlined, PhoneOutlined } from "@ant-design/icons"
-import { ModalForm, ProFormInstance, ProFormText } from "@ant-design/pro-components";
-import { Button, Input, Modal, Space } from "antd"
-import { useEffect, useRef, useState } from "react";
+import { Button, Input, Modal, Space, message } from "antd"
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 type CourseSummaryProps = {
     isBought: boolean;
@@ -13,23 +12,17 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
 
     const [open, setOpen] = useState<boolean>(false);
     const [user, setUser] = useState<any>();
-    const formRef = useRef<ProFormInstance>();
+    const router = useRouter();
 
     const onRegister = async () => {
         const response = await getParent();
-        console.log(response.data)
-        formRef.current?.setFields([
-            {
-                name: 'parentName',
-                value: response.data.tenPhuHuynh
-            },
-            {
-                name: 'phoneNumber',
-                value: response.data.soDienThoai
-            }
-        ])
         setUser(response.data);
         setOpen(true);
+    }
+
+    const onCopy = () => {
+        navigator.clipboard.writeText(`KH${router?.query?.id} ${user?.soDienThoai}`);
+        message.success('Đã sao chép vào bộ nhớ tạm!');
     }
 
     return (
@@ -64,9 +57,37 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
             </div>
 
             <Modal open={open} onCancel={() => setOpen(false)} title="Đăng ký khóa học" footer={false} centered>
-                <label className="font-bold">Họ và tên</label>
-                <Input name="parentName" disabled value={user?.tenPhuHuynh} />
-                <ProFormText readonly name="phoneNumber" label="Số điện thoại" />
+                <div className="mb-4">
+                    <label className="font-bold block mb-2">Họ và tên</label>
+                    <Input disabled value={user?.tenPhuHuynh} />
+                </div>
+                <div className="mb-4">
+                    <label className="font-bold block mb-2">Số điện thoại</label>
+                    <Input disabled value={user?.soDienThoai} />
+                </div>
+                <div className="mb-2">Để đăng ký khóa học, bạn vui lòng chuyển khoản tới:</div>
+                <div className="font-bold mb-2">Ngân hàng TMCP Đông Nam Á (SeABank)</div>
+                <div className="flex mb-2">
+                    <div className="flex-1">
+                        <ul>
+                            <li>Chủ Tài Khoản: <b>Nguyễn Văn Nam</b></li>
+                            <li>Số Tài Khoản: <b>000005100680</b></li>
+                        </ul>
+                    </div>
+                    <picture>
+                        <img src="https://www.seabank.com.vn/assets/images/brands/logo-seabank4.png" alt="l" className="w-32" />
+                    </picture>
+                </div>
+                <div className="mb-2">
+                    <div className="mb-2">Nội dung chuyển khoản:</div>
+                    <div className="font-bold">
+                        KH{router?.query?.id} {user?.soDienThoai}
+                        <Button type="link" onClick={onCopy}>Sao chép</Button>
+                    </div>
+                </div>
+                <div className="text-gray-500 text-sm text-right">
+                    <CheckOutlined /> Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất!
+                </div>
             </Modal>
         </div>
     )
