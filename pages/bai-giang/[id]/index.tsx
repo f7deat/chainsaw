@@ -5,7 +5,7 @@ import { course } from "@/mock/course";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getBaiGiang, isBought } from "@/services/course";
+import { getBaiGiang, getChuongTrinhHoc, isBought } from "@/services/course";
 import { useRouter } from "next/router";
 import CourseSummary from "@/components/bai-giang/summary";
 import { Button, message } from "antd";
@@ -15,13 +15,16 @@ export default function CourseContent() {
     const router = useRouter();
     const [data, setData] = useState<any>();
     const [hasAccess, setHasAccess] = useState<boolean>(false);
+    const [chuongTrinhHoc, setChuongTrinhHoc] = useState<any>();
 
     useEffect(() => {
         if (router.query.id) {
             getBaiGiang(router.query.id).then(response => {
                 setData(response.data)
             });
-
+            getChuongTrinhHoc(router.query.id).then(response => {
+                setChuongTrinhHoc(response.data)
+            })
             isBought(router.query.id).then(response => setHasAccess(response.data?.trangThai))
         }
     }, [router]);
@@ -42,7 +45,7 @@ export default function CourseContent() {
     return (
         <>
             <Head>
-                <title>Khóa học</title>
+                <title>{chuongTrinhHoc?.tenChuongTrinhHoc}</title>
                 <meta name="description" content="" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
@@ -74,10 +77,9 @@ export default function CourseContent() {
                             </div>
 
                             <div className="mb-2 text-2xl">Thông tin khóa học</div>
-                            <div className="bg-white p-4 rounded-lg mb-4 shadow">
-                                {
-                                    course.description
-                                }
+                            <div className="bg-white p-4 rounded-lg mb-4 shadow" dangerouslySetInnerHTML={{
+                                __html: chuongTrinhHoc?.moTaChiTiet
+                            }}>
                             </div>
                             <div className="text-4xl font-bold mb-4">Chương trình học</div>
                             {
@@ -104,7 +106,7 @@ export default function CourseContent() {
                             }
                         </div>
                         <div className="md:w-1/3">
-                            <CourseSummary isBought={hasAccess} />
+                            <CourseSummary isBought={hasAccess} data={chuongTrinhHoc} />
                         </div>
                     </div>
                 </div>

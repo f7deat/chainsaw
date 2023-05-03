@@ -6,6 +6,7 @@ import { useState } from "react";
 
 type CourseSummaryProps = {
     isBought: boolean;
+    data?: API.ChuongTrinhHoc;
 }
 
 const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
@@ -15,22 +16,30 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
     const router = useRouter();
 
     const onRegister = async () => {
+        const token = localStorage.getItem('access_token');
+        if (!token) {
+            router.push('/tai-khoan/dang-ky');
+            return;
+        }
         const response = await getParent();
         setUser(response.data);
         setOpen(true);
     }
 
     const onCopy = () => {
-        navigator.clipboard.writeText(`KH${router?.query?.id} ${user?.soDienThoai}`);
+        navigator.clipboard.writeText(`KH${props.data?.khoaHocId} ${user?.soDienThoai}`);
         message.success('Đã sao chép vào bộ nhớ tạm!');
     }
 
     return (
         <div className="bg-white shadow p-2 rounded-lg md:-mt-20">
-            <div className="h-52 bg-gray-500 rounded-lg mb-4">
+            <div className="h-52 bg-gray-500 rounded-lg mb-2">
                 <picture>
                     <img src="https://cdn.getvisa.vn/images/cogiao.jpg" className="w-full h-52 object-fit-cover" alt="cover" />
                 </picture>
+            </div>
+            <div className="mb-4 text-gray-500">
+                {props.data?.moTaChuongTrinh}
             </div>
             <div className="py-4 text-center" hidden={!props.isBought}>
                 <button className="px-10 py-2 rounded bg-green-500 text-white">
@@ -38,10 +47,10 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                 </button>
             </div>
             <div className="text-right" hidden={props.isBought}>
-                <div className="text-xl text-gray-500 mb-2"><s>1.500.000 đ</s></div>
+                <div className="text-xl text-gray-500 mb-2"><s>{props.data?.giaCu.toLocaleString()} đ</s></div>
                 <div className="flex gap-2 justify-end font-bold mb-1">
                     <b>Chỉ còn</b>
-                    <span className="text-4xl">1.200.000</span>
+                    <span className="text-4xl">{props.data?.gia?.toLocaleString()}</span>
                 </div>
                 <div className="text-red-400 font-bold text-sm">Chỉ còn nốt 2 ngày</div>
                 <div className="py-3 flex justify-center gap-4">
@@ -81,7 +90,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                 <div className="mb-2">
                     <div className="mb-2">Nội dung chuyển khoản:</div>
                     <div className="font-bold">
-                        KH{router?.query?.id} {user?.soDienThoai}
+                        KH{props.data?.khoaHocId} {user?.soDienThoai}
                         <Button type="link" onClick={onCopy}>Sao chép</Button>
                     </div>
                 </div>

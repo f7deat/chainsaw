@@ -59,9 +59,13 @@ const TopNav: React.FC = () => {
                     }
                 }))
                 return true;
+            } else {
+                message.error(data.message);
+                return false;
             }
         } catch (error) {
             message.error("Đã có lỗi xảy ra");
+            return false;
         }
     }
 

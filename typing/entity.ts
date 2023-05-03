@@ -14,4 +14,14 @@ declare namespace API {
         ngaySinh: Date;
         gioiTinh?: boolean | number;
     }
+
+    export type ChuongTrinhHoc = {
+        chuongTrinhHocId: number;
+        tenChuongTrinhHoc: string;
+        khoaHocId: number;
+        moTaChuongTrinh: string;
+        moTaChiTiet: string;
+        gia: number;
+        giaCu: number;
+    }
 }
