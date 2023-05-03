@@ -1,16 +1,51 @@
 import { HeadTitle } from "@/components";
 import Footer from "@/components/footer";
 import { Header } from "@/components/header";
-import { ProCard } from "@ant-design/pro-components";
-import { Button, Checkbox, Divider, Form, Input, message } from "antd";
+import { createParent, createStudent } from "@/services/user";
+import { ProFormDatePicker, ProFormSelect, ProFormText, StepsForm } from "@ant-design/pro-components";
+import { Alert, Button, Divider, message } from "antd";
 import Head from "next/head";
+import { useState } from "react";
 
 export default function Register() {
 
-    const onFinish = (values: any) => {
-        if (!values.acceptTerm) {
-            message.warning('Bạn cần đồng ý với điều khoản sử dụng trước khi đăng ký!')
-            return;
+    const [success, setSuccess] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [phoneNumber, setPhoneNumber] = useState<string>();
+
+    const onParentCreate = async (values: API.PhuHuynh & {
+        confirmPassword: string;
+    }) => {
+        if (values.matKhau !== values.confirmPassword) {
+            message.error('Mật khẩu không khớp!');
+            return false;
+        }
+        values.gioiTinh = values.gioiTinh === 1;
+        setLoading(true);
+        const response = await createParent(values);
+        if (response.data.succeeded) {
+            message.success('Đăng ký thành công!');
+            setPhoneNumber(values.soDienThoai);
+            setLoading(false);
+            return true;
+        } else {
+            message.error(response.data.errors[0].description);
+            return false;
+        }
+    }
+
+    const onStudentCreate = async (values: API.HocVien) => {
+        values.soDienThoai = phoneNumber;
+        setLoading(true);
+        const response = await createStudent(values);
+        if (response.data.succeeded) {
+            message.success('Đăng ký thành công');
+            setSuccess(true);
+            setLoading(false);
+            return true;
+        } else {
+            message.error(response.data.errors[0].description);
+            return false;
         }
     }
 
@@ -25,36 +60,91 @@ export default function Register() {
             <Header />
             <main className="container mx-auto px-4 py-4 md:py-10">
                 <HeadTitle center>Đăng ký</HeadTitle>
-                <div className="md:flex gap-4">
-                    <div className="md:w-1/2">
-                        <ProCard title="Đăng ký">
-                            <Form layout="vertical" onFinish={onFinish}>
-                                <Form.Item label="Họ và tên" rules={[{ required: true, message: 'Vui lòng nhập họ và tên' }]} name="name">
-                                    <Input size="large" />
-                                </Form.Item>
-                                <Form.Item label="Số điện thoại" rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]} name="phoneNumber">
-                                    <Input size="large" />
-                                </Form.Item>
-                                <Form.Item label="Mật khẩu" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="password">
-                                    <Input.Password size="large" />
-                                </Form.Item>
-                                <Form.Item label="Nhập lại mật khẩu" rules={[{ required: true, message: 'Vui lòng xác nhận mật khẩu' }]} name="confirmPassword">
-                                    <Input.Password size="large" />
-                                </Form.Item>
-                                <Form.Item name="acceptTerm" valuePropName="checked">
-                                    <Checkbox>Tôi đã đọc và đồng ý với điều khoản sử dụng</Checkbox>
-                                </Form.Item>
-                                <Button size="large" type="primary" className="bg-blue-500" htmlType="submit">Đăng ký</Button>
-                            </Form>
-                        </ProCard>
-                    </div>
-                    <div className="md:w-1/2">
-                        <picture>
-                            <img src="https://www.go.ooo/img/bg-img/Login.jpg" alt="login" />
-                        </picture>
-                    </div>
+                <div className="flex justify-center">
+                    <StepsForm
+                        submitter={{
+                            render: ({ form, onSubmit, step, onPre }) => {
+                                return [
+                                    <Button
+                                        key="rest"
+                                        onClick={() => {
+                                            form?.resetFields();
+                                        }}
+                                    >
+                                        Làm lại
+                                    </Button>,
+                                    step > 0 && (
+                                        <Button
+                                            key="pre"
+                                            onClick={() => {
+                                                onPre?.();
+                                            }}
+                                        >
+                                            Quay lại
+                                        </Button>
+                                    ),
+                                    <Button
+                                        key="next"
+                                        loading={loading}
+                                        type="primary"
+                                        onClick={() => {
+                                            onSubmit?.();
+                                        }}
+                                    >
+                                        {
+                                            step > 1 ? 'Hoàn thành' : 'Bước sau'
+                                        }
+                                    </Button>,
+                                ];
+                            },
+                        }}
+                        formProps={{
+                            validateMessages: {
+                                required: 'Vui lòng điền đầy đủ các thông tin bắt buộc',
+                            },
+                        }}
+                    >
+                        <StepsForm.StepForm
+                            name="step1"
+                            title="Phụ Huynh"
+                            onFinish={onParentCreate}
+                        >
+                            <Divider />
+                            <ProFormText label="Tên phụ huynh" rules={[{ required: true, message: 'Vui lòng nhập họ và tên' }]} name="tenPhuHuynh" />
+                            <ProFormText
+                                label="Số điện thoại"
+                                rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]}
+                                name="soDienThoai"
+                            />
+                            <ProFormSelect label="Giới tính" options={[
+                                {
+                                    label: 'Nam',
+                                    value: 1
+                                },
+                                {
+                                    label: 'Nữ',
+                                    value: 0
+                                }
+                            ]} initialValue={1} name="gioiTinh" />
+                            <ProFormText label="Địa chỉ" name="diaChi" />
+                            <ProFormText.Password label="Mật khẩu" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="matKhau" />
+                            <ProFormText.Password label="Nhập lại mật khẩu" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="confirmPassword" />
+                        </StepsForm.StepForm>
+                        <StepsForm.StepForm name="step2" title="Học sinh" onFinish={onStudentCreate}>
+                            <Divider />
+                            <ProFormText label="Tên học viên" name="hoVaTen" rules={[
+                                {
+                                    required: true
+                                }
+                            ]} />
+                            <ProFormDatePicker label="Ngày sinh" name="ngaySinh" />
+                        </StepsForm.StepForm>
+                    </StepsForm>
                 </div>
                 <Divider />
+                <div hidden={!success}>
+                    <Alert message="Đăng ký thành công!" type="success" showIcon closable />
+                </div>
             </main>
             <Footer />
         </>
