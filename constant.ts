@@ -1,1 +1,1 @@
-export const API_URL = "https://apihoconline.getvisa.vn/client";
+export const API_URL = "http://apihoconline.getvisa.vn/client";

@@ -47,7 +47,7 @@ export default function KhoaHoc() {
                             <Col md={8} key={book.chuongTrinhHocId}>
                                 <Link href={`/bai-giang/${book.chuongTrinhHocId}`}>
                                     <Card
-                                        className="shadow-lg"
+                                        className="shadow-lg mb-4"
                                         bordered={false}
                                         cover={
                                             <picture>

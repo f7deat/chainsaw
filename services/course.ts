@@ -21,18 +21,12 @@ export async function listHighLight(slug: string) {
 }
 
 export async function listQuestion(id?: string | string[]) {
-    return request({
-        url: `cauhoi/getdanhsach`,
-        method: 'POST',
-        data: {
-            BaiGiangID: id
-        }
-    })
+    return request.get(`cau-hoi/danh-sach/${id}`)
 }
 
 export async function checkAnswer(questionId: string, answerId: string, answerText: string) {
     return request({
-        url: 'cauhoi/checkanswer',
+        url: 'cau-hoi/kiem-tra',
         method: 'POST',
         data: {
             CauHoiID: questionId,

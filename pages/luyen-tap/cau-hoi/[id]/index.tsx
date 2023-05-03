@@ -3,33 +3,36 @@ import Header from "@/components/header/header";
 import PracticeContent from "@/components/practice/item";
 import { PracticeType, practice } from "@/mock/practice";
 import { listQuestion } from "@/services/course";
-import { Button, Form, Input, Tabs, message } from "antd";
+import { Alert, Button, Form, Input, Tabs, message } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 export default function LuyenTap() {
     const router = useRouter();
 
     const [data, setData] = useState<any>([]);
+    const [error, setError] = useState<string>();
 
     useEffect(() => {
         if (router?.query?.id) {
             listQuestion(router.query.id).then(response => {
-                setData(response.data);
-                
-                if (response.data) {
-                    let point = 10 / response.data.length;
-                    let temp = 0;
-                    for (let index = 0; index < response.data.length; index++) {
-                        const element = response.data[index];
-                        if (element.ketQuaThucHien) {
-                            temp += point;
+                if (response.data.succeeded) {
+                    setData(response.data.data);
+                    if (response.data.data) {
+                        let point = 10 / response.data.length;
+                        let temp = 0;
+                        for (let index = 0; index < response.data.length; index++) {
+                            const element = response.data[index];
+                            if (element.ketQuaThucHien) {
+                                temp += point;
+                            }
                         }
+                        setScore(temp);
                     }
-                    setScore(temp);
+                } else {
+                    setError(response.data.errors[0].description);
                 }
-
             })
         }
     }, [router])
@@ -52,6 +55,11 @@ export default function LuyenTap() {
             </Head>
             <Header />
             <main className="bg-cyan-900 px-4 py-4 md:py-20 text-white">
+                <div className="container mx-auto">
+                    {
+                        error ? <Alert type="error" message={error} /> : (<Fragment />)
+                    }
+                </div>
                 <div className="text-5xl font-medium text-center mb-10">{data?.name}</div>
                 <div className="container mx-auto">
                     <div className="md:border-[16px] border-4 rounded-lg border-cyan-700 bg-white p-4 relative">
@@ -64,6 +72,7 @@ export default function LuyenTap() {
                                 </div>
                             </div>
                         </div>
+
                         <Tabs
                             tabPosition="left"
                             items={data?.map((item: any, i: number) => {
