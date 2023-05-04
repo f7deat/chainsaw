@@ -24,7 +24,7 @@ export async function listQuestion(id?: string | string[]) {
     return request.get(`cau-hoi/danh-sach/${id}`)
 }
 
-export async function checkAnswer(questionId: string, answerId: string, answerText: string) {
+export async function checkAnswer(questionId: number, answerId: string | number, answerText: string) {
     return request({
         url: 'cau-hoi/kiem-tra',
         method: 'POST',

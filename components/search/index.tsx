@@ -10,7 +10,7 @@ const Search: React.FC = () => {
 
     useEffect(() => {
         listClassroom().then(response => {
-            const map = response.data.map((x: any) => {
+            const map = response.data?.map((x: any) => {
                 return {
                     value: x.lopHocId,
                     label: x.tenLopHoc
@@ -19,7 +19,7 @@ const Search: React.FC = () => {
             setClassroom(map)
         })
         listSubject().then(response => {
-            const map = response.data.map((x: any) => {
+            const map = response.data?.map((x: any) => {
                 return {
                     value: x.monhocid,
                     label: x.tenmon

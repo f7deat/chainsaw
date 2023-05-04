@@ -240,7 +240,7 @@ const TopNav: React.FC = () => {
                             </StepsForm.StepForm>
                             <StepsForm.StepForm name="step2" title="Học viên" onFinish={onFinish}>
                                 <div className="w-64">
-                                    <ProFormSelect name="token" label="Chọn học viên" options={options} 
+                                    <ProFormSelect name="token" label="Chọn học viên" options={options}
                                     rules={[
                                         {
                                             required: true,

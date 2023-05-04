@@ -30,6 +30,7 @@ export default function Register() {
             return true;
         } else {
             message.error(response.data.errors[0].description);
+            setLoading(false);
             return false;
         }
     }

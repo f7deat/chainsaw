@@ -1,9 +1,9 @@
 import { checkAnswer } from "@/services/course";
-import { Alert, Button, Form, Input, message } from "antd"
+import { Alert, Button, Divider, Form, Input, message } from "antd"
 import { Fragment, useState } from "react";
 
 type PracticeContentProps = {
-    item: any;
+    item: API.QuestionListItem;
     setScore: any;
     score: number;
     total: number;
@@ -24,7 +24,7 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
 
         const point = 10 / total;
 
-        const response = await checkAnswer(item.cauHoiId, "0", values.answer);
+        const response = await checkAnswer(item.id, 0, values.answer);
         if (response.data.correct) {
             setScore(score + point);
             message.success('Đúng rồi!!!');
@@ -35,13 +35,13 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
         setAnswered(true);
     }
 
-    const ShowMessage = (item: any) => {
+    const ShowMessage = (item: API.QuestionListItem) => {
         console.log(item)
-        if (item.trangThaiHoanThanh === 1 && item.ketQuaThucHien) {
-            return <Alert message="Bạn đã hoàn thành chính xác câu hỏi này" type="success" showIcon />
+        if (item.isCompleted && item.result) {
+            return <Alert message="Bạn đã hoàn thành chính xác câu hỏi này" type="success" showIcon className="text-lg" />
         }
-        if (item.trangThaiHoanThanh === 1 && !item.ketQuaThucHien) {
-            return <Alert message="Bạn đã trả lời sai câu hỏi này" type="error" showIcon />
+        if (item.isCompleted && !item.result) {
+            return <Alert message="Bạn đã trả lời sai câu hỏi này" type="error" showIcon className="text-lg" />
         }
         return <Fragment />
     }
@@ -52,17 +52,18 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
                 <div className="mb-10">
                     <button className="bg-orange-500 text-white text-2xl px-6 py-2 shadow rounded-lg uppercase font-medium">Câu {index + 1}</button>
                 </div>
-                <div className="text-3xl mb-10">{item.noidung}</div>
+                <div className="text-3xl mb-5">{item.title}</div>
+                <div className="text-3xl mb-5">{item.content}</div>
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Form onFinish={onFinish}>
                     <Form.Item initialValue={item.type} name="type" hidden />
                     <Form.Item name="answer">
-                        <Input size="large" disabled={answered || item.trangThaiHoanThanh === 1} />
+                        <Input size="large" disabled={answered || item.isCompleted} />
                     </Form.Item>
-                    <Form.Item>
-                        <Button disabled={item.trangThaiHoanThanh === 1} size="large" htmlType="submit" className="w-full bg-blue-500 font-bold" type="primary">Gửi câu trả lời</Button>
-                    </Form.Item>
+                    <Button disabled={item.isCompleted || answered} size="large" htmlType="submit" className="w-full bg-blue-500 font-bold" type="primary">Gửi câu trả lời</Button>
                 </Form>
+
+                <Divider />
 
                 {ShowMessage(item)}
 

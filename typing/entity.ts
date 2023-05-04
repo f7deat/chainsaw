@@ -24,4 +24,20 @@ declare namespace API {
         gia: number;
         giaCu: number;
     }
+    export type QuestionListItem = {
+        id: number;
+        answerNumber: number;
+        title: string;
+        content: string;
+        type: 'tuluan' | 'donluachon',
+        suggestion: string;
+        isCompleted: boolean;
+        result: boolean;
+        answers: AnswerListItem[]
+    }
+    export type AnswerListItem = {
+        id: number;
+        text: string;
+        questionId: number;
+    }
 }
