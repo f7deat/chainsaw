@@ -1,12 +1,11 @@
 import { HeadTitle } from "@/components";
+import MyCourse from "@/components/course/my-course";
 import Footer from "@/components/footer";
 import { Header } from "@/components/header";
 import AccountLeftBar from "@/components/tai-khoan/left-bar";
-import { Card, Col, Row } from "antd";
 import Head from "next/head";
 
-export default function MyCourse() {
-    const { Meta } = Card;
+export default function Index() {
 
     return (
         <>
@@ -22,33 +21,7 @@ export default function MyCourse() {
                     <div className="md:flex gap-4">
                         <AccountLeftBar tab={1} />
                         <div className="flex-1">
-                            <HeadTitle center>Khóa học của tôi</HeadTitle>
-                            <Row gutter={16}>
-                                <Col span={8}>
-                                    <Card
-                                        hoverable
-                                        cover={<picture><img alt="example" src="https://placehold.jp/350x200.png" /></picture>}
-                                    >
-                                        <Meta title="Europe Street beat" description="www.instagram.com" />
-                                    </Card>
-                                </Col>
-                                <Col span={8}>
-                                    <Card
-                                        hoverable
-                                        cover={<picture><img alt="example" src="https://placehold.jp/350x200.png" /></picture>}
-                                    >
-                                        <Meta title="Europe Street beat" description="www.instagram.com" />
-                                    </Card>
-                                </Col>
-                                <Col span={8}>
-                                    <Card
-                                        hoverable
-                                        cover={<picture><img alt="example" src="https://placehold.jp/350x200.png" /></picture>}
-                                    >
-                                        <Meta title="Europe Street beat" description="www.instagram.com" />
-                                    </Card>
-                                </Col>
-                            </Row>
+                            <MyCourse itemPerRow={3} />
                         </div>
                     </div>
                 </div>

@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react"
 import HeadTitle from "../title"
 import { getMyCourse } from "@/services/course";
-import { ProCard } from "@ant-design/pro-components";
 import { Card, Space } from "antd";
 import Link from "next/link";
 import { LoginOutlined } from "@ant-design/icons";
 
-const MyCourse: React.FC = () => {
+type MyCourseProps = {
+    itemPerRow?: number;
+}
 
-    const [data, setData] = useState<any>([]);
+const MyCourse: React.FC<MyCourseProps> = (props) => {
+
+    const [data, setData] = useState<API.MyCourse[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
@@ -19,12 +22,12 @@ const MyCourse: React.FC = () => {
     }, []);
 
     return (
-        <div className="md:mb-20 mb-4">
+        <div className="md:mb-20 mb-4" hidden={data?.length === 0}>
             <HeadTitle center>Khóa học của tôi</HeadTitle>
             <div className="grid md:grid-cols-4 gap-4">
                 {
-                    data?.map((value: any) => (
-                        <ProCard key={value.id} title={value.name} loading={loading} actions={
+                    data?.map((value: API.MyCourse) => (
+                        <Card key={value.id} loading={loading} actions={
                             [
                                 <Link href={`/bai-giang/${value.id}`} key={value.id}>
                                     <Space>
@@ -33,9 +36,13 @@ const MyCourse: React.FC = () => {
                                     </Space>
                                 </Link>
                             ]
-                        }>
-                            <Card.Meta title={value.description} />
-                        </ProCard>
+                        }
+                            cover={<picture>
+                                <img src={value.thumbnail} alt={value.name} />
+                            </picture>}
+                        >
+                            <Card.Meta title={value.name} description={value.description} />
+                        </Card>
                     ))
                 }
             </div>

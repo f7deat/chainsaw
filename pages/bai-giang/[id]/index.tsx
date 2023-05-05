@@ -51,16 +51,11 @@ export default function CourseContent() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Header />
-            <Jumbotron name="Khóa Toán nâng cao theo chuyên đề lớp 2" />
+            <Jumbotron name={chuongTrinhHoc?.tenChuongTrinhHoc} />
             <main className="bg-gray-100 py-4">
                 <div className="container mx-auto">
                     <div className="md:flex gap-4">
                         <div className="md:w-2/3">
-                            <div className="mb-4">
-                                <picture>
-                                    <img src="https://xcdn-cf.vuihoc.vn/upload/5c209fe6176b0/2020/04/09/70/6b/bai-thi-dau-vao-04.jpg" alt="IMG" className="w-full" />
-                                </picture>
-                            </div>
 
                             <div className="flex bg-white shadow rounded-lg md:mb-10 mb-4">
                                 <div className="flex-grow grid grid-cols-2 font-medium text-2xl text-center">

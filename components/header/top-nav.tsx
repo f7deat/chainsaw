@@ -101,22 +101,6 @@ const TopNav: React.FC = () => {
             disabled: true,
         },
         {
-            key: '5',
-            label: (
-                <Link href="/tai-khoan/kich-hoat">
-                    Kích hoạt khóa học
-                </Link>
-            )
-        },
-        {
-            key: '6',
-            label: (
-                <Link href="/tai-khoan/lich-su">
-                    Lịch sử kích hoạt
-                </Link>
-            )
-        },
-        {
             key: '4',
             danger: true,
             label: 'Đăng xuất',

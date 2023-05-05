@@ -41,7 +41,7 @@ export default function Home() {
 
         <div className='bg-gray-100 md:py-10 py-4'>
           <div className='container mx-auto'>
-            <MyCourse />
+            <MyCourse itemPerRow={4} />
             <ListCourseCarouel slug='toan-tieu-hoc' />
 
             <Divider />

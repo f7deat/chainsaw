@@ -1,4 +1,3 @@
-import { Carousel } from "antd";
 import { HeadTitle } from ".."
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -19,7 +18,7 @@ const ListCourseCarouel: React.FC<ListCourseCarouelProps> = (props) => {
     }, [props.slug]);
 
     return (
-        <div className="mb-10">
+        <div className="mb-10" hidden={!data}>
             <HeadTitle>{data?.name}</HeadTitle>
             <div className="md:flex gap-6">
                 <div className="w-92 hidden md:block">
