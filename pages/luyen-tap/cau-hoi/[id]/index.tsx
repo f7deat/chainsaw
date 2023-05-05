@@ -3,9 +3,9 @@ import Footer from "@/components/footer";
 import Header from "@/components/header/header";
 import PracticeContent from "@/components/practice/item";
 import SingleChoice from "@/components/practice/single-choice";
-import { listComment } from "@/services/comment";
-import { listQuestion } from "@/services/course";
-import { Alert, Tabs } from "antd";
+import { getBaiGiang, listQuestion } from "@/services/course";
+import { CheckCircleOutlined, StopOutlined } from "@ant-design/icons";
+import { Alert, Space, Tabs } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
@@ -15,6 +15,7 @@ export default function LuyenTap() {
 
     const [data, setData] = useState<API.QuestionListItem[]>([]);
     const [error, setError] = useState<string>();
+    const [baiGiang, setBaiGiang] = useState<any>();
 
     useEffect(() => {
         if (router?.query?.id) {
@@ -22,19 +23,21 @@ export default function LuyenTap() {
                 if (response.succeeded) {
                     setData(response.data);
                     if (response.data) {
-                        let point = 10 / response.data.length;
-                        let temp = 0;
+                        let point = 0;
                         for (let index = 0; index < response.data.length; index++) {
                             const element = response.data[index];
                             if (element.result) {
-                                temp += point;
+                                point++;
                             }
                         }
-                        setScore(temp);
+                        setScore(point);
                     }
                 } else {
                     setError(response.errors[0].description);
                 }
+            });
+            getBaiGiang(router.query.id).then(response => {
+                setBaiGiang(response);
             })
         }
     }, [router])
@@ -42,11 +45,28 @@ export default function LuyenTap() {
     const [score, setScore] = useState<number>(0);
 
     const renderTab = (item: API.QuestionListItem, index: number) => {
-        if (item.type === 'donluachon') {
-            return <SingleChoice data={item} total={data?.length || 0} index={index} score={score} setScore={setScore} />
+        if (item.type === 'tuluan') {
+            return <PracticeContent item={item} score={score} setScore={setScore} index={index} />
         } else {
-            return <PracticeContent item={item} score={score} setScore={setScore} total={data?.length || 0} index={index} />
+            return <SingleChoice data={item} index={index} score={score} setScore={setScore} />
         }
+    }
+
+    const labelRender = (item: API.QuestionListItem, index: string) => {
+        if (item.isCompleted) {
+            if (item.result) {
+                return <Space>
+                    <span className="text-lg text-green-500 font-bold">{index}</span>
+                    <CheckCircleOutlined className="text-green-500" />
+                </Space>
+            } else {
+                return <Space>
+                    <span className="text-lg text-red-500 font-bold">{index}</span>
+                    <StopOutlined className="text-red-500" />
+                </Space>
+            }
+        }
+        return <span className="text-lg font-bold">{index}</span>
     }
 
     return (
@@ -65,13 +85,17 @@ export default function LuyenTap() {
                     }
                 </div>
                 <div className="container mx-auto">
-                    <div className="md:border-[16px] border-4 rounded-lg border-cyan-700 bg-white p-4 relative">
+                    <div className="text-4xl text-white font-medium text-center mb-10">
+                        {baiGiang?.tenBaiGiang}
+                    </div>
+
+                    <div className="md:border-[16px] border-4 rounded-lg border-cyan-700 bg-white p-4">
                         <div className="flex justify-end absolute right-4">
-                            <div className="border">
+                            <div className="shadow-lg">
                                 <div className="bg-red-500 py-2 px-4 font-bold text-xl rounded-t">Điểm</div>
-                                <div className="p-2 text-blue-500 text-4xl text-center">
+                                <div className="p-2 text-blue-500 text-4xl text-center bg-white font-medium">
                                     <span>{score}</span>
-                                    <span>/{10}</span>
+                                    <span>/{data?.length}</span>
                                 </div>
                             </div>
                         </div>
@@ -81,14 +105,14 @@ export default function LuyenTap() {
                             items={data?.map((item: API.QuestionListItem, i: number) => {
                                 const id = String(i + 1);
                                 return {
-                                    label: id,
+                                    label: labelRender(item, id),
                                     key: id,
                                     children: renderTab(item, i),
                                 };
                             })}
                         />
                     </div>
-                    
+
                     <CommentComponent />
                 </div>
             </main>

@@ -19,10 +19,10 @@ export default function KhoaHoc() {
     useEffect(() => {
         if (router.query.id) {
             queryKhoaHoc(router.query.id).then(khoaHoc => {
-                if (khoaHoc.data) {
-                    setDetail(khoaHoc.data)
-                    chuongTrinhHoc(khoaHoc.data.khoaHocId).then(response => {
-                        setData(response.data)
+                if (khoaHoc) {
+                    setDetail(khoaHoc)
+                    chuongTrinhHoc(khoaHoc.khoaHocId).then(response => {
+                        setData(response)
                     })
                 }
             })
@@ -38,7 +38,7 @@ export default function KhoaHoc() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Header />
-            <Jumbotron name="Toán học lớp một" />
+            <Jumbotron name={detail?.tenKhoaHoc} />
             <main className="container mx-auto mt-6">
                 <HeadTitle center>Chọn chương trình học</HeadTitle>
                 <Row gutter={16}>

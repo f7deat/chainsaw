@@ -12,8 +12,12 @@ export async function chuongTrinhHoc(id?: string | string[]) {
     return request.get(`khoahoc/danh-sach-chuong-trinh-hoc/${id}`)
 }
 
-export async function getBaiGiang(id?: string | string[]) {
+export async function listBaiGiang(id?: string | string[]) {
     return request.get(`khoahoc/getbaigiangs/${id}`)
+}
+
+export async function getBaiGiang(id?: string | string[]) {
+    return request.get(`bai-giang/${id}`)
 }
 
 export async function listHighLight(slug: string) {

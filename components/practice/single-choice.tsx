@@ -4,7 +4,6 @@ import { Fragment, useState } from "react";
 
 type SingleChoiceProps = {
     data: API.QuestionListItem;
-    total: number;
     index: number;
     setScore: any;
     score: number;
@@ -12,13 +11,13 @@ type SingleChoiceProps = {
 
 const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
 
-    const { data, total, index, setScore, score } = props;
+    const { data, index, setScore, score } = props;
 
     const [answered, setAnswered] = useState<boolean>(false);
 
     const ShowMessage = (item: API.QuestionListItem) => {
         if (item.isCompleted && item.result) {
-            return <Alert message="Bạn đã hoàn thành chính xác câu hỏi này" type="success" showIcon />
+            return <Alert message="Bạn đã hoàn thành chính xác câu hỏi này" type="success" showIcon className="text-lg" />
         }
         if (item.isCompleted && !item.result) {
             return <Alert message="Bạn đã trả lời sai câu hỏi này" type="error" showIcon className="text-lg" />
@@ -32,8 +31,7 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
         }
         const response = await checkAnswer(values.questionId, values.id, '');
         if (response.correct) {
-            const point = 10 / total;
-            setScore(score + point);
+            setScore(score + 1);
             message.success('Đúng rồi, con giỏi lắm')
         } else {
             message.error('Sai rồi!')
@@ -45,10 +43,14 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
         <div>
             <div className="flex flex-col items-center justify-center p-4">
                 <div className="mb-10">
-                    <button className="bg-orange-500 text-white text-2xl px-6 py-2 shadow rounded-lg uppercase font-medium">Câu {index + 1}</button>
+                    <button className="bg-blue-500 text-white text-2xl px-6 py-2 shadow rounded-lg uppercase font-medium">Câu {index + 1}</button>
                 </div>
                 <div className="text-3xl mb-5">{data.title}</div>
-                <div className="text-3xl mb-5">{data.content}</div>
+                <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
+                    __html: data.content
+                }}>
+                    
+                </div>
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Divider />
                 <Row gutter={16}>
@@ -56,9 +58,11 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
                         data.answers.map(answer => (
                             <div key={answer.id}>
                                 <Col>
-                                    <button type="button" className="bg-slate-100 h-32 px-8 flex justify-center items-center hover:bg-yellow-400 rounded" onClick={() => onAnswer(answer)}>
+                                    <button type="button" className="bg-slate-100 py-4 px-8 flex justify-center items-center hover:bg-yellow-400 rounded" onClick={() => onAnswer(answer)}>
                                         <Typography.Title level={2}>
-                                            {answer.text}
+                                            <div dangerouslySetInnerHTML={{
+                                                __html: answer.text
+                                            }}/>
                                         </Typography.Title>
                                     </button>
                                 </Col>

@@ -1,7 +1,6 @@
 import request from "./request";
 
 export async function listComment(params: any, baiGiangId: any) {
-    console.log(baiGiangId)
     return request(`comment/list`, {
         method: 'GET',
         params: {

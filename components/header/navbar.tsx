@@ -1,13 +1,9 @@
 import Link from "next/link"
-import { Quicksand } from "next/font/google"
 import { navbars } from "@/mock"
-import { HomeOutlined } from "@ant-design/icons"
-
-const quicksand = Quicksand({ subsets: ['latin'] })
 
 const Navbar: React.FC = () => {
     return (
-        <nav className={`bg-orange-500 ${quicksand.className}`}>
+        <nav className={`bg-orange-500`}>
             <div className="flex container mx-auto gap-8">
                 {
                     navbars.map((navbar, i) => (

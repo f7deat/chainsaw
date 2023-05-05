@@ -1,11 +1,10 @@
 import Footer from "@/components/footer";
 import { Header } from "@/components/header";
 import Jumbotron from "@/components/jumbotron";
-import { course } from "@/mock/course";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getBaiGiang, getChuongTrinhHoc, isBought } from "@/services/course";
+import { listBaiGiang, getChuongTrinhHoc, isBought } from "@/services/course";
 import { useRouter } from "next/router";
 import CourseSummary from "@/components/bai-giang/summary";
 import { Button, message } from "antd";
@@ -19,13 +18,13 @@ export default function CourseContent() {
 
     useEffect(() => {
         if (router.query.id) {
-            getBaiGiang(router.query.id).then(response => {
-                setData(response.data)
+            listBaiGiang(router.query.id).then(response => {
+                setData(response)
             });
             getChuongTrinhHoc(router.query.id).then(response => {
-                setChuongTrinhHoc(response.data)
+                setChuongTrinhHoc(response)
             })
-            isBought(router.query.id).then(response => setHasAccess(response.data?.trangThai))
+            isBought(router.query.id).then(response => setHasAccess(response?.trangThai))
         }
     }, [router]);
 

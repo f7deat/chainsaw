@@ -6,14 +6,13 @@ type PracticeContentProps = {
     item: API.QuestionListItem;
     setScore: any;
     score: number;
-    total: number;
     index: number;
 }
 
 
 const PracticeContent: React.FC<PracticeContentProps> = (props) => {
 
-    const { item, setScore, score, total, index } = props;
+    const { item, setScore, score, index } = props;
     const [answered, setAnswered] = useState<boolean>(false);
 
     const onFinish = async (values: any) => {
@@ -22,11 +21,9 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
             return;
         }
 
-        const point = 10 / total;
-
         const response = await checkAnswer(item.id, 0, values.answer);
         if (response.correct) {
-            setScore(score + point);
+            setScore(score + 1);
             message.success('Đúng rồi!!!');
         } else {
             message.error('Sai rồi!!!');
@@ -52,7 +49,9 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
                     <button className="bg-orange-500 text-white text-2xl px-6 py-2 shadow rounded-lg uppercase font-medium">Câu {index + 1}</button>
                 </div>
                 <div className="text-3xl mb-5">{item.title}</div>
-                <div className="text-3xl mb-5">{item.content}</div>
+                <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
+                    __html: item.content
+                }}></div>
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Form onFinish={onFinish}>
                     <Form.Item initialValue={item.type} name="type" hidden />

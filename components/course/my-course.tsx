@@ -16,7 +16,7 @@ const MyCourse: React.FC<MyCourseProps> = (props) => {
 
     useEffect(() => {
         getMyCourse().then(response => {
-            setData(response.data)
+            setData(response)
             setLoading(false)
         })
     }, []);
