@@ -1,5 +1,3 @@
-import Footer from "@/components/footer";
-import { Header } from "@/components/header";
 import Jumbotron from "@/components/jumbotron";
 import Head from "next/head";
 import Link from "next/link";
@@ -9,6 +7,7 @@ import { useRouter } from "next/router";
 import CourseSummary from "@/components/bai-giang/summary";
 import { Button, message } from "antd";
 import { EditOutlined, PlayCircleOutlined, SearchOutlined } from "@ant-design/icons";
+import { PageContainer } from "@ant-design/pro-components";
 
 export default function CourseContent() {
     const router = useRouter();
@@ -49,9 +48,7 @@ export default function CourseContent() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header />
-            <Jumbotron name={chuongTrinhHoc?.tenChuongTrinhHoc} />
-            <main className="bg-gray-100 py-4">
+            <PageContainer title={chuongTrinhHoc?.tenChuongTrinhHoc}>
                 <div className="container mx-auto">
                     <div className="md:flex gap-4">
                         <div className="md:w-2/3">
@@ -104,8 +101,7 @@ export default function CourseContent() {
                         </div>
                     </div>
                 </div>
-            </main>
-            <Footer />
+            </PageContainer>
         </>
     )
 }

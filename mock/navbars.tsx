@@ -2,11 +2,6 @@ import { BookOutlined, EditOutlined, FireOutlined, HomeOutlined, MessageOutlined
 
 export const navbars = [
     {
-        name: 'Trang chủ',
-        icon: <HomeOutlined />,
-        url: '/'
-    },
-    {
         name: "Tự ôn luyện",
         icon: <BookOutlined />,
         url: "/"
@@ -15,11 +10,6 @@ export const navbars = [
         name: "Học nhóm",
         icon: <FireOutlined />,
         url: "/hoc-nhom"
-    },
-    {
-        name: "Lớp học gia sư",
-        icon: <RocketOutlined />,
-        url: "/"
     },
     {
         name: "Live class",

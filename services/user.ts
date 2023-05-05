@@ -23,3 +23,11 @@ export async function createStudent(data: API.HocVien) {
         data
     })
 }
+
+export async function login(data: any) {
+    return request({
+        url: `auth/password-sign-in`,
+        method: 'POST',
+        data
+    })
+}

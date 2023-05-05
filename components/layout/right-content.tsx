@@ -1,31 +1,20 @@
-import { API_URL } from "@/constant";
-import { getStudent } from "@/services/user";
-import { DownOutlined, FacebookOutlined, GoogleOutlined } from "@ant-design/icons";
-import { ProFormInstance, ProFormSelect, StepsForm } from "@ant-design/pro-components";
-import { Modal, Form, Input, Avatar, Button, message, Dropdown, MenuProps, Space, Row, Col, Typography } from "antd";
-import Link from "next/link";
+import { BookOutlined, FacebookOutlined, GoogleOutlined, LogoutOutlined, PlusOutlined, SettingOutlined, UserOutlined } from "@ant-design/icons"
+import { Button, Col, Form, Input, Modal, Row, Space, Typography, message } from "antd"
+import HeaderDropdown from "./header-dropdown"
+import { useRouter } from "next/router";
+import type { MenuInfo } from 'rc-menu/lib/interface';
 import { Fragment, useEffect, useRef, useState } from "react";
+import { getStudent, login } from "@/services/user";
+import Link from "next/link";
+import { StepsForm, ProFormSelect, ProFormInstance } from "@ant-design/pro-components";
 
-type ItemProps = {
-    title: string;
-}
+const RightContent: React.FC = () => {
 
-const Item: React.FC<ItemProps> = (props) => {
-    return (
-        (
-            <button className="hover:bg-orange-500 h-12 text-white bg-sky-900 flex items-center justify-center px-4 text-sm">
-                {props.title}
-            </button>
-        )
-    )
-}
-
-const TopNav: React.FC = () => {
-
+    const router = useRouter();
+    const [options, setOptions] = useState<any>([]);
+    const [user, setUser] = useState<any>();
     const formRef = useRef<ProFormInstance>();
     const [open, setOpen] = useState<boolean>(false);
-    const [user, setUser] = useState<any>();
-    const [options, setOptions] = useState<any>([]);
 
     useEffect(() => {
         try {
@@ -37,17 +26,54 @@ const TopNav: React.FC = () => {
         }
     }, []);
 
+    const loginOut = async () => {
+        localStorage.removeItem('access_token');
+        const urlParams = new URL(window.location.href).searchParams;
+        const redirect = urlParams.get('redirect');
+        if (window.location.pathname !== '/accounts/login' && !redirect) {
+            window.location.href = "/";
+        }
+    };
+
+    const onMenuClick = (event: MenuInfo) => {
+        const { key } = event;
+        if (key === 'logout') {
+            loginOut();
+            return;
+        } else if (key === 'profile') {
+            router.push(`/tai-khoan/thong-tin`);
+            return;
+        } else if (key === 'settings') {
+            router.push(`/tai-khoan/khoa-hoc`);
+            return;
+        }
+        router.push(`/accounts/${key}`);
+    }
+
+    const menuItems = [
+        {
+            key: 'profile',
+            icon: <UserOutlined />,
+            label: 'Thông tin cá nhân',
+        },
+        {
+            key: 'settings',
+            icon: <BookOutlined />,
+            label: 'Khóa học của tôi',
+        },
+        {
+            type: 'divider' as const,
+        },
+        {
+            key: 'logout',
+            icon: <LogoutOutlined />,
+            label: 'Đăng xuất',
+        },
+    ];
+
     const onLogin = async (values: any) => {
         try {
-            const response = await fetch(`${API_URL}/auth/password-sign-in`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    userName: values.userName,
-                    Password: values.password
-                })
-            });
-            const data = await response.json();
+            const data = await login(values);
             if (data.succeeded) {
                 message.success(data.message);
                 setOptions(data.data.map((u: any) => {
@@ -72,83 +98,37 @@ const TopNav: React.FC = () => {
         window.location.reload();
     }
 
-    const items: MenuProps['items'] = [
-        {
-            key: '1',
-            label: (
-                <Link href="/tai-khoan/thong-tin">
-                    Thông tin cá nhân
+    return user ? (
+        <HeaderDropdown
+            menu={{
+                selectedKeys: [],
+                onClick: onMenuClick,
+                items: menuItems,
+            }}
+        >
+            <Button type="link">
+                <Space>
+                    <UserOutlined />
+                    {user?.hoVaTen}
+                </Space>
+            </Button>
+        </HeaderDropdown>
+    ) : (
+        <Space className="mr-4">
+            <Button type="link">
+                <Link href='/tai-khoan/dang-ky'>
+                    <Space>
+                        <PlusOutlined />
+                        Đăng ký
+                    </Space>
                 </Link>
-            ),
-        },
-        {
-            key: '2',
-            label: (
-                <Link href="/tai-khoan/khoa-hoc">
-                    Khóa học của tôi
-                </Link>
-            )
-        },
-        {
-            key: '3',
-            label: (
-                <Link href="/tai-khoan/qua-trinh">
-                    Quá trình học tập
-                </Link>
-            ),
-            disabled: true,
-        },
-        {
-            key: '4',
-            danger: true,
-            label: 'Đăng xuất',
-            onClick: () => {
-                localStorage.removeItem('access_token');
-                window.location.reload();
-            }
-        },
-    ];
-
-    return (
-        <div className="bg-sky-800 font-medium">
-            <div className="mx-auto container">
-                <div className="flex justify-between">
-                    <div className="flex items-center font-bold text-sm">
-                        <div className="bg-orange-500 h-12 text-white flex items-center justify-center px-4">
-                            TIỂU HỌC
-                        </div>
-                        <Item title="THCS" />
-                        <Item title="THPT" />
-                    </div>
-                    <div className="flex gap-4 items-center">
-
-                        {
-                            user ? (
-                                <Dropdown menu={{ items }}>
-                                    <Button type="link" className="text-gray-200">
-                                        <Space>
-                                            {user.hoVaTen}
-                                            <DownOutlined />
-                                        </Space>
-                                    </Button>
-                                </Dropdown>
-                            ) : (
-                                <div className="flex gap-3">
-                                    <button className="h-12 flex gap-2 items-center text-gray-200 hover:text-white hover:underline" onClick={() => setOpen(true)}>
-                                        <Avatar />
-                                        Đăng nhập
-                                    </button>
-                                    <Link href="/tai-khoan/dang-ky">
-                                        <button className="h-12 flex gap-2 items-center text-gray-200 hover:text-white hover:underline">
-                                            Đăng ký
-                                        </button>
-                                    </Link>
-                                </div>
-                            )
-                        }
-                    </div>
-                </div>
-            </div>
+            </Button>
+            <Button type="primary" onClick={() => setOpen(true)}>
+                <Space>
+                    <UserOutlined />
+                    Đăng nhập
+                </Space>
+            </Button>
             <Modal open={open} onCancel={() => setOpen(false)} centered width={950} footer={<Fragment />}>
                 <Row>
                     <Col span={12}>
@@ -235,9 +215,8 @@ const TopNav: React.FC = () => {
                         </StepsForm></Col>
                 </Row>
             </Modal>
-
-        </div>
+        </Space>
     )
 }
 
-export default TopNav
+export default RightContent

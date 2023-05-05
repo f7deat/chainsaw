@@ -57,7 +57,6 @@ export default function KhoaHoc() {
                 </Row>
                 <Divider />
             </main>
-            <Footer />
         </>
     )
 }

@@ -1,6 +1,4 @@
 import { HeadTitle } from "@/components";
-import Footer from "@/components/footer";
-import { Header } from "@/components/header";
 import { Alert, Button, Form, Input } from "antd";
 import Head from "next/head";
 import { useState } from "react";
@@ -22,7 +20,6 @@ export default function Active() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header />
             <main className="py-4 px-4 md:py-10">
                 <HeadTitle center>Kích hoạt khóa học</HeadTitle>
                 <div className="container mx-auto">
@@ -47,7 +44,6 @@ export default function Active() {
                     </div>
                 </div>
             </main>
-            <Footer />
         </>
     )
 }

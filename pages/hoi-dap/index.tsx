@@ -1,5 +1,4 @@
-import Footer from "@/components/footer";
-import { Header } from "@/components/header";
+import { PageContainer, ProCard } from "@ant-design/pro-components";
 import { Alert, Button, Card, Form, Input, message } from "antd";
 import Head from "next/head";
 import { useEffect, useState } from "react";
@@ -26,9 +25,8 @@ export default function QuestionAndAnswer() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header />
-            <main className="container px-4 mx-auto md:py-10 py-4">
-                <Card title="Gửi câu hỏi">
+            <PageContainer title="Gửi câu hỏi">
+                <ProCard>
                     <div hidden={allowed} className="mb-6">
                         <Alert type="info" showIcon message="Vui lòng đăng nhập để gửi câu hỏi" />
                     </div>
@@ -39,14 +37,13 @@ export default function QuestionAndAnswer() {
                         <Form.Item label="Nội dung" rules={[{ required: true, message: 'Vui lòng nhập nội dung' }]} name="content">
                             <Input.TextArea disabled={!allowed} />
                         </Form.Item>
-                            <div className="flex justify-center gap-4">
-                                <Button htmlType="submit" type="primary" disabled={!allowed}>Gửi câu hỏi</Button>
-                                <Button htmlType="reset" disabled={!allowed}>Làm lại</Button>
-                            </div>
+                        <div className="flex justify-center gap-4">
+                            <Button htmlType="submit" type="primary" disabled={!allowed}>Gửi câu hỏi</Button>
+                            <Button htmlType="reset" disabled={!allowed}>Làm lại</Button>
+                        </div>
                     </Form>
-                </Card>
-            </main>
-            <Footer />
+                </ProCard>
+            </PageContainer>
         </>
     )
 }

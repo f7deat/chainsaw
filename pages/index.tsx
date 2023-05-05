@@ -2,7 +2,6 @@ import Head from 'next/head'
 import { Header } from '@/components/header';
 import { Divider } from "antd";
 import Search from '@/components/search';
-import Footer from '@/components/footer';
 import HomeCarousel from './home/carousel';
 import CourseList from '@/components/course';
 import { HeadTitle, JoinWithUs } from '@/components';
@@ -11,6 +10,7 @@ import StatisticsHome from '@/components/statistics';
 import GocHocTap from '@/components/home/goc-hoc-tap';
 import DoVui from '@/components/home/do-vui';
 import MyCourse from '@/components/course/my-course';
+import { PageContainer } from '@ant-design/pro-components';
 
 export default function Home() {
 
@@ -22,22 +22,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
-      <HomeCarousel />
-      <main className="py-10">
+      <PageContainer title="Khóa học">
+        <CourseList />
 
-        <div className='bg-white md:mb-10 mb-4'>
-          <div className='container mx-auto'>
-            <CourseList />
+        <Divider />
 
-            <Divider />
+        <Search />
 
-            <Search />
-
-            <Divider />
-
-          </div>
-        </div>
+        <Divider />
 
         <div className='bg-gray-100 md:py-10 py-4'>
           <div className='container mx-auto'>
@@ -66,9 +58,7 @@ export default function Home() {
             <DoVui />
           </div>
         </div>
-
-      </main>
-      <Footer />
+      </PageContainer>
     </>
   )
 }

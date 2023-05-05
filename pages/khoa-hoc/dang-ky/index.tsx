@@ -1,6 +1,4 @@
 import { HeadTitle } from "@/components";
-import Footer from "@/components/footer";
-import { Header } from "@/components/header";
 import { StepsForm, ProFormText, ProFormDatePicker, ProFormDateRangePicker, ProFormTextArea, ProFormCheckbox, ProForm, ProFormDependency, ProFormSelect } from "@ant-design/pro-components";
 import { Alert, Button, Card, message } from "antd";
 import Head from "next/head";
@@ -25,7 +23,6 @@ export default function Index() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header />
             <div className="container mx-auto md:py-10 py-4 px-4">
                 <HeadTitle center>Đăng ký khóa học</HeadTitle>
                 <Card hidden={!success}>
@@ -136,7 +133,6 @@ export default function Index() {
                     </StepsForm>
                 </Card>
             </div>
-            <Footer />
         </>
     )
 }

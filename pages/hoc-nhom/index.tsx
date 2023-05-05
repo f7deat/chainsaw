@@ -1,5 +1,3 @@
-import Footer from "@/components/footer";
-import { Header } from "@/components/header";
 import { Card, Empty } from "antd";
 import Head from "next/head";
 
@@ -12,7 +10,6 @@ export default function Duo() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header />
             <main className="py-10 px-4">
                 <div className="container mx-auto">
                     <div className="md:flex gap-4">
@@ -37,7 +34,6 @@ export default function Duo() {
                     </div>
                 </div>
             </main>
-            <Footer />
         </>
     )
 }

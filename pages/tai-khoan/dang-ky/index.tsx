@@ -1,8 +1,6 @@
 import { HeadTitle } from "@/components";
-import Footer from "@/components/footer";
-import { Header } from "@/components/header";
 import { createParent, createStudent } from "@/services/user";
-import { ProFormDatePicker, ProFormSelect, ProFormText, StepsForm } from "@ant-design/pro-components";
+import { PageContainer, ProFormDatePicker, ProFormSelect, ProFormText, StepsForm } from "@ant-design/pro-components";
 import { Alert, Button, Divider, message } from "antd";
 import Head from "next/head";
 import { useState } from "react";
@@ -58,9 +56,7 @@ export default function Register() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header />
-            <main className="container mx-auto px-4 py-4 md:py-10">
-                <HeadTitle center>Đăng ký</HeadTitle>
+            <PageContainer title="Đăng ký">
                 <div className="flex justify-center">
                     <StepsForm
                         submitter={{
@@ -146,8 +142,7 @@ export default function Register() {
                 <div hidden={!success}>
                     <Alert message="Đăng ký thành công!" type="success" showIcon closable />
                 </div>
-            </main>
-            <Footer />
+            </PageContainer>
         </>
     )
 }

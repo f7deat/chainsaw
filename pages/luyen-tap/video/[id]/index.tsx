@@ -37,7 +37,6 @@ export default function Video() {
                     </div>
                 </div>
             </main>
-            <Footer />
         </>
     )
 }

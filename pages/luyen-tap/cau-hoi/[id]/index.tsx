@@ -1,10 +1,9 @@
 import CommentComponent from "@/components/comment";
-import Footer from "@/components/footer";
-import Header from "@/components/header/header";
 import PracticeContent from "@/components/practice/item";
 import SingleChoice from "@/components/practice/single-choice";
 import { getBaiGiang, listQuestion } from "@/services/course";
 import { CheckCircleOutlined, StopOutlined } from "@ant-design/icons";
+import { PageContainer, ProCard } from "@ant-design/pro-components";
 import { Alert, Space, Tabs } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -77,19 +76,12 @@ export default function LuyenTap() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header />
-            <main className="bg-cyan-900 px-4 py-4 md:py-20 text-white">
-                <div className="container mx-auto">
+            <PageContainer title={baiGiang?.tenBaiGiang}>
                     {
                         error ? <Alert type="error" message={error} /> : (<Fragment />)
                     }
-                </div>
-                <div className="container mx-auto">
-                    <div className="text-4xl text-white font-medium text-center mb-10">
-                        {baiGiang?.tenBaiGiang}
-                    </div>
 
-                    <div className="md:border-[16px] border-4 rounded-lg border-cyan-700 bg-white p-4">
+                    <ProCard>
                         <div className="flex justify-end absolute right-4">
                             <div className="shadow-lg">
                                 <div className="bg-red-500 py-2 px-4 font-bold text-xl rounded-t">Điểm</div>
@@ -111,12 +103,10 @@ export default function LuyenTap() {
                                 };
                             })}
                         />
-                    </div>
+                    </ProCard>
 
                     <CommentComponent />
-                </div>
-            </main>
-            <Footer />
+            </PageContainer>
         </>
     )
 }
