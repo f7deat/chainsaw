@@ -1,7 +1,9 @@
+import CommentComponent from "@/components/comment";
 import Footer from "@/components/footer";
 import Header from "@/components/header/header";
 import PracticeContent from "@/components/practice/item";
 import SingleChoice from "@/components/practice/single-choice";
+import { listComment } from "@/services/comment";
 import { listQuestion } from "@/services/course";
 import { Alert, Tabs } from "antd";
 import Head from "next/head";
@@ -17,13 +19,13 @@ export default function LuyenTap() {
     useEffect(() => {
         if (router?.query?.id) {
             listQuestion(router.query.id).then(response => {
-                if (response.data.succeeded) {
-                    setData(response.data.data);
-                    if (response.data.data) {
-                        let point = 10 / response.data.data.length;
+                if (response.succeeded) {
+                    setData(response.data);
+                    if (response.data) {
+                        let point = 10 / response.data.length;
                         let temp = 0;
-                        for (let index = 0; index < response.data.data.length; index++) {
-                            const element = response.data.data[index];
+                        for (let index = 0; index < response.data.length; index++) {
+                            const element = response.data[index];
                             if (element.result) {
                                 temp += point;
                             }
@@ -31,7 +33,7 @@ export default function LuyenTap() {
                         setScore(temp);
                     }
                 } else {
-                    setError(response.data.errors[0].description);
+                    setError(response.errors[0].description);
                 }
             })
         }
@@ -86,6 +88,8 @@ export default function LuyenTap() {
                             })}
                         />
                     </div>
+                    
+                    <CommentComponent />
                 </div>
             </main>
             <Footer />

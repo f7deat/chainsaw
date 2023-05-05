@@ -25,7 +25,7 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
         const point = 10 / total;
 
         const response = await checkAnswer(item.id, 0, values.answer);
-        if (response.data.correct) {
+        if (response.correct) {
             setScore(score + point);
             message.success('Đúng rồi!!!');
         } else {
@@ -36,7 +36,6 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
     }
 
     const ShowMessage = (item: API.QuestionListItem) => {
-        console.log(item)
         if (item.isCompleted && item.result) {
             return <Alert message="Bạn đã hoàn thành chính xác câu hỏi này" type="success" showIcon className="text-lg" />
         }

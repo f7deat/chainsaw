@@ -30,9 +30,7 @@ const TopNav: React.FC = () => {
     useEffect(() => {
         try {
             getStudent().then(response => {
-                if (response.status === 200) {
-                    setUser(response.data.data)
-                }
+                setUser(response.data)
             });
         } catch (error) {
 

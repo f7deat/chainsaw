@@ -23,13 +23,13 @@ export default function Register() {
         values.gioiTinh = values.gioiTinh === 1;
         setLoading(true);
         const response = await createParent(values);
-        if (response.data.succeeded) {
+        if (response.succeeded) {
             message.success('Đăng ký thành công!');
             setPhoneNumber(values.soDienThoai);
             setLoading(false);
             return true;
         } else {
-            message.error(response.data.errors[0].description);
+            message.error(response.errors[0].description);
             setLoading(false);
             return false;
         }
@@ -39,13 +39,13 @@ export default function Register() {
         values.soDienThoai = phoneNumber;
         setLoading(true);
         const response = await createStudent(values);
-        if (response.data.succeeded) {
+        if (response.succeeded) {
             message.success('Đăng ký thành công');
             setSuccess(true);
             setLoading(false);
             return true;
         } else {
-            message.error(response.data.errors[0].description);
+            message.error(response.errors[0].description);
             return false;
         }
     }

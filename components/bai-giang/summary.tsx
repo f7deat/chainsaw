@@ -47,7 +47,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                 </button>
             </div>
             <div className="text-right" hidden={props.isBought}>
-                <div className="text-xl text-gray-500 mb-2"><s>{props.data?.giaCu.toLocaleString()} đ</s></div>
+                <div className="text-xl text-gray-500 mb-2"><s>{props.data?.giaCu?.toLocaleString()} đ</s></div>
                 <div className="flex gap-2 justify-end font-bold mb-1">
                     <b>Chỉ còn</b>
                     <span className="text-4xl">{props.data?.gia?.toLocaleString()}</span>

@@ -31,7 +31,7 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
             return;
         }
         const response = await checkAnswer(values.questionId, values.id, '');
-        if (response.data.correct) {
+        if (response.correct) {
             const point = 10 / total;
             setScore(score + point);
             message.success('Đúng rồi, con giỏi lắm')
