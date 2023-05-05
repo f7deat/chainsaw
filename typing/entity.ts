@@ -29,7 +29,7 @@ declare namespace API {
         answerNumber: number;
         title: string;
         content: string;
-        type: 'tuluan' | 'donluachon' | 'dungsai',
+        type: 'tuluan' | 'donluachon' | 'dungsai' | 'daluachon',
         suggestion: string;
         isCompleted: boolean;
         result: boolean;

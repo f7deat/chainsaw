@@ -1,3 +1,4 @@
+import { QuestionType } from "@/utils/constants";
 import request from "./request";
 
 export async function listCourse() {
@@ -28,14 +29,16 @@ export async function listQuestion(id?: string | string[]) {
     return request.get(`cau-hoi/danh-sach/${id}`)
 }
 
-export async function checkAnswer(questionId: number, answerId: string | number, answerText: string) {
+export async function checkAnswer(questionId: number, answerId: string | number, answerText: string, dapAnIds: number[] = [], type: string = QuestionType.SINGLE_CHOICE) {
     return request({
         url: 'cau-hoi/kiem-tra',
         method: 'POST',
         data: {
             CauHoiID: questionId,
             DapAnID: answerId,
-            CauTraLoi: answerText
+            CauTraLoi: answerText,
+            dapAnIds: dapAnIds,
+            type: type
         }
     })
 }

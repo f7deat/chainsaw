@@ -1,10 +1,11 @@
 import CommentComponent from "@/components/comment";
 import PracticeContent from "@/components/practice/item";
+import MultipleChoice from "@/components/practice/multiple-choice";
 import SingleChoice from "@/components/practice/single-choice";
 import { getBaiGiang, listQuestion } from "@/services/course";
 import { CheckCircleOutlined, StopOutlined } from "@ant-design/icons";
 import { PageContainer, ProCard } from "@ant-design/pro-components";
-import { Alert, Space, Tabs } from "antd";
+import { Alert, Divider, Space, Tabs } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
@@ -46,6 +47,8 @@ export default function LuyenTap() {
     const renderTab = (item: API.QuestionListItem, index: number) => {
         if (item.type === 'tuluan') {
             return <PracticeContent item={item} score={score} setScore={setScore} index={index} />
+        } else if (item.type === 'daluachon') {
+            return <MultipleChoice data={item} index={index} score={score} setScore={setScore} />
         } else {
             return <SingleChoice data={item} index={index} score={score} setScore={setScore} />
         }
@@ -83,8 +86,8 @@ export default function LuyenTap() {
 
                     <ProCard>
                         <div className="flex justify-end absolute right-4">
-                            <div className="shadow-lg">
-                                <div className="bg-red-500 py-2 px-4 font-bold text-xl rounded-t">Điểm</div>
+                            <div className="shadow border">
+                                <div className="bg-red-500 text-white py-2 px-4 font-bold text-xl rounded-t">Điểm</div>
                                 <div className="p-2 text-blue-500 text-4xl text-center bg-white font-medium">
                                     <span>{score}</span>
                                     <span>/{data?.length}</span>
@@ -106,6 +109,7 @@ export default function LuyenTap() {
                     </ProCard>
 
                     <CommentComponent />
+                    <Divider />
             </PageContainer>
         </>
     )

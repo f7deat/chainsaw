@@ -34,29 +34,32 @@ const CommentComponent: React.FC = () => {
                 </ProForm>
             </ProCard>
             <Divider />
-            
+
             {
                 id ? (
                     <ProList<API.CommentListItem>
-                actionRef={actionRef}
-                request={(params) => listComment(params, id)}
-                rowKey="id"
-                headerTitle="Danh sách"
-                metas={{
-                    title: {
-                        dataIndex: 'name',
-                        title: 'Name'
-                    },
-                    description: {
-                        render: (dom, entity) => {
-                            return entity.content;
-                        },
-                    },
-                    avatar: {
-                        render: () => <Avatar icon={<UserOutlined />} />
-                    }
-                }}
-            />
+                        pagination={{
+                            pageSize: 5
+                        }}
+                        actionRef={actionRef}
+                        request={(params) => listComment(params, id)}
+                        rowKey="id"
+                        headerTitle="Danh sách"
+                        metas={{
+                            title: {
+                                dataIndex: 'name',
+                                title: 'Name'
+                            },
+                            description: {
+                                render: (dom, entity) => {
+                                    return entity.content;
+                                },
+                            },
+                            avatar: {
+                                render: () => <Avatar icon={<UserOutlined />} />
+                            }
+                        }}
+                    />
                 ) : (<Fragment />)
             }
         </div>
