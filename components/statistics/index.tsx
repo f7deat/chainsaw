@@ -8,28 +8,28 @@ const StatisticsHome: React.FC = () => {
           statistic={{
             title: 'Học viên',
             value: 2176,
-            icon: <UserOutlined />,
+            prefix: <UserOutlined />,
           }}
         />
         <StatisticCard
           statistic={{
             title: 'Bài giảng',
             value: 475,
-            icon: <BookOutlined />,
+            prefix: <BookOutlined />,
           }}
         />
         <StatisticCard
           statistic={{
             title: 'Bài ôn tập',
             value: 87,
-            icon: <QuestionOutlined />,
+            prefix: <QuestionOutlined />,
           }}
         />
         <StatisticCard
           statistic={{
             title: 'Đề luyện thi',
             value: 1754,
-            icon: <InfoCircleOutlined />,
+            prefix: <InfoCircleOutlined />,
           }}
         />
       </StatisticCard.Group>

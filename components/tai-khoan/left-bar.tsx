@@ -8,7 +8,7 @@ type AccountLeftBarProps = {
 
 const AccountLeftBar: React.FC<AccountLeftBarProps> = (props) => {
     return (
-        <div className="md:w-1/4">
+        <div>
             <Card>
                 <div className="mb-4 text-center">
                     <Image src="https://placehold.jp/200x200.png" alt="IMG" width={200} height={200} className="rounded-full" />

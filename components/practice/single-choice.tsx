@@ -32,9 +32,13 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
         const response = await checkAnswer(values.questionId, values.id, '');
         if (response.correct) {
             setScore(score + 1);
-            message.success('Đúng rồi, con giỏi lắm')
+            const audio = new Audio("https://cdn.getvisa.vn/music/true.mp3");
+            audio.play();
+            message.success('Đúng rồi, con giỏi lắm!');
         } else {
-            message.error('Sai rồi!')
+            const audio = new Audio("https://cdn.getvisa.vn/music/false.mp3");
+            audio.play();
+            message.error('Sai rồi!');
         }
         setAnswered(true);
     }
@@ -49,7 +53,7 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
                 <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
                     __html: data.content
                 }}>
-                    
+
                 </div>
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Divider />
@@ -62,7 +66,7 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
                                         <Typography.Title level={2}>
                                             <div dangerouslySetInnerHTML={{
                                                 __html: answer.text
-                                            }}/>
+                                            }} />
                                         </Typography.Title>
                                     </button>
                                 </Col>

@@ -1,3 +1,4 @@
+import { ProCard } from "@ant-design/pro-components";
 import Link from "next/link";
 
 type CourseItemProps = {
@@ -6,7 +7,8 @@ type CourseItemProps = {
 
 const CourseItem: React.FC<CourseItemProps> = (props) => {
     return (
-        <div className="flex flex-col mb-2 shadow-lg">
+        <ProCard>
+            <div className="flex flex-col mb-2">
             <div className={`${props.course.bg} rounded-t-lg flex flex-col items-center justify-center text-white`}>
                 <div className="text-4xl font-medium pt-6">
                     {props.course.suffix}
@@ -32,6 +34,7 @@ const CourseItem: React.FC<CourseItemProps> = (props) => {
                 ))
             }
         </div>
+        </ProCard>
     )
 }
 

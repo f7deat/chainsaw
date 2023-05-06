@@ -1,14 +1,12 @@
-import { HeadTitle } from "@/components";
 import { createParent, createStudent } from "@/services/user";
-import { PageContainer, ProFormDatePicker, ProFormSelect, ProFormText, StepsForm } from "@ant-design/pro-components";
-import { Alert, Button, Divider, message } from "antd";
+import { PageContainer, ProCard, ProFormDatePicker, ProFormSelect, ProFormText, StepsForm } from "@ant-design/pro-components";
+import { Alert, Button, message } from "antd";
 import Head from "next/head";
 import { useState } from "react";
 
 export default function Register() {
 
     const [success, setSuccess] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(false);
     const [phoneNumber, setPhoneNumber] = useState<string>();
 
     const onParentCreate = async (values: API.PhuHuynh & {
@@ -19,28 +17,23 @@ export default function Register() {
             return false;
         }
         values.gioiTinh = values.gioiTinh === 1;
-        setLoading(true);
         const response = await createParent(values);
         if (response.succeeded) {
             message.success('Đăng ký thành công!');
             setPhoneNumber(values.soDienThoai);
-            setLoading(false);
             return true;
         } else {
             message.error(response.errors[0].description);
-            setLoading(false);
             return false;
         }
     }
 
     const onStudentCreate = async (values: API.HocVien) => {
         values.soDienThoai = phoneNumber;
-        setLoading(true);
         const response = await createStudent(values);
         if (response.succeeded) {
             message.success('Đăng ký thành công');
             setSuccess(true);
-            setLoading(false);
             return true;
         } else {
             message.error(response.errors[0].description);
@@ -57,7 +50,7 @@ export default function Register() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <PageContainer title="Đăng ký">
-                <div className="flex justify-center">
+                <ProCard>
                     <StepsForm
                         submitter={{
                             render: ({ form, onSubmit, step, onPre }) => {
@@ -82,7 +75,6 @@ export default function Register() {
                                     ),
                                     <Button
                                         key="next"
-                                        loading={loading}
                                         type="primary"
                                         onClick={() => {
                                             onSubmit?.();
@@ -106,7 +98,6 @@ export default function Register() {
                             title="Phụ Huynh"
                             onFinish={onParentCreate}
                         >
-                            <Divider />
                             <ProFormText label="Tên phụ huynh" rules={[{ required: true, message: 'Vui lòng nhập họ và tên' }]} name="tenPhuHuynh" />
                             <ProFormText
                                 label="Số điện thoại"
@@ -128,7 +119,6 @@ export default function Register() {
                             <ProFormText.Password label="Nhập lại mật khẩu" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="confirmPassword" />
                         </StepsForm.StepForm>
                         <StepsForm.StepForm name="step2" title="Học sinh" onFinish={onStudentCreate}>
-                            <Divider />
                             <ProFormText label="Tên học viên" name="hoVaTen" rules={[
                                 {
                                     required: true
@@ -137,11 +127,10 @@ export default function Register() {
                             <ProFormDatePicker label="Ngày sinh" name="ngaySinh" />
                         </StepsForm.StepForm>
                     </StepsForm>
-                </div>
-                <Divider />
-                <div hidden={!success}>
-                    <Alert message="Đăng ký thành công!" type="success" showIcon closable />
-                </div>
+                    <div hidden={!success}>
+                        <Alert message="Đăng ký thành công!" type="success" showIcon closable />
+                    </div>
+                </ProCard>
             </PageContainer>
         </>
     )

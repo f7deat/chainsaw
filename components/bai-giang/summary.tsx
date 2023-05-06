@@ -22,7 +22,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
             return;
         }
         const response = await getParent();
-        setUser(response.data);
+        setUser(response);
         setOpen(true);
     }
 
@@ -68,33 +68,35 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
             <Modal open={open} onCancel={() => setOpen(false)} title="Đăng ký khóa học" footer={false} centered>
                 <div className="mb-4">
                     <label className="font-bold block mb-2">Họ và tên</label>
-                    <Input disabled value={user?.tenPhuHuynh} />
+                    <div className="px-2 bg-slate-100 py-1 rounded border">{user?.tenPhuHuynh}</div>
                 </div>
                 <div className="mb-4">
                     <label className="font-bold block mb-2">Số điện thoại</label>
-                    <Input disabled value={user?.soDienThoai} />
+                    <div className="px-2 bg-slate-100 py-1 rounded border">{user?.soDienThoai}</div>
                 </div>
                 <div className="mb-2">Để đăng ký khóa học, bạn vui lòng chuyển khoản tới:</div>
                 <div className="font-bold mb-2">Ngân hàng TMCP Đông Nam Á (SeABank)</div>
-                <div className="flex mb-2">
-                    <div className="flex-1">
-                        <ul>
-                            <li>Chủ Tài Khoản: <b>Nguyễn Văn Nam</b></li>
-                            <li>Số Tài Khoản: <b>000005100680</b></li>
-                        </ul>
+                <div className="py-1 px-2 bg-slate-100">
+                    <div className="flex mb-2">
+                        <div className="flex-1">
+                            <ul>
+                                <li>Chủ Tài Khoản: <b>Nguyễn Văn Nam</b></li>
+                                <li>Số Tài Khoản: <b>000005100680</b></li>
+                            </ul>
+                        </div>
+                        <picture>
+                            <img src="https://www.seabank.com.vn/assets/images/brands/logo-seabank4.png" alt="l" className="w-32 mt-2" />
+                        </picture>
                     </div>
-                    <picture>
-                        <img src="https://www.seabank.com.vn/assets/images/brands/logo-seabank4.png" alt="l" className="w-32" />
-                    </picture>
-                </div>
-                <div className="mb-2">
-                    <div className="mb-2">Nội dung chuyển khoản:</div>
-                    <div className="font-bold">
-                        KH{props.data?.khoaHocId} {user?.soDienThoai}
-                        <Button type="link" onClick={onCopy}>Sao chép</Button>
+                    <div className="mb-2">
+                        <div className="mb-2 text-orange-700">Nội dung chuyển khoản:</div>
+                        <div className="font-bold">
+                            KH{props.data?.khoaHocId} {user?.soDienThoai}
+                            <Button type="link" onClick={onCopy}>Sao chép</Button>
+                        </div>
                     </div>
                 </div>
-                <div className="text-gray-500 text-sm text-right">
+                <div className="text-gray-500 text-xs text-right">
                     <CheckOutlined /> Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất!
                 </div>
             </Modal>

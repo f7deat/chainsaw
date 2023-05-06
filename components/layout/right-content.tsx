@@ -1,4 +1,4 @@
-import { BookOutlined, FacebookOutlined, GoogleOutlined, LogoutOutlined, PlusOutlined, SettingOutlined, UserOutlined } from "@ant-design/icons"
+import { BookOutlined, FacebookFilled, GoogleOutlined, LogoutOutlined, PlusOutlined, UserOutlined } from "@ant-design/icons"
 import { Button, Col, Form, Input, Modal, Row, Space, Typography, message } from "antd"
 import HeaderDropdown from "./header-dropdown"
 import { useRouter } from "next/router";
@@ -98,6 +98,11 @@ const RightContent: React.FC = () => {
         window.location.reload();
     }
 
+    const onForgotPassword = () => {
+        setOpen(false);
+        router.push('/tai-khoan/quen-mat-khau');
+    }
+
     return user ? (
         <HeaderDropdown
             menu={{
@@ -130,7 +135,7 @@ const RightContent: React.FC = () => {
                 </Space>
             </Button>
             <Modal open={open} onCancel={() => setOpen(false)} centered width={950} footer={<Fragment />}>
-                <Row>
+                <Row gutter={16}>
                     <Col span={12}>
                         <Typography.Title level={3}>Xin chào!</Typography.Title>
                         <div className="p-10">
@@ -140,9 +145,11 @@ const RightContent: React.FC = () => {
                         </div>
                         <div className="p-4">
                             <Space>
-                                <span>Bạn chưa có tài khoản?</span>
+                                <span className="text-lg">Bạn chưa có tài khoản?</span>
                                 <Link href="/tai-khoan/dang-ky">
-                                    <Button size="small" type="link"><b>Đăng ký</b></Button>
+                                    <div className="font-medium underline text-lg">
+                                        Đăng ký tại đây
+                                    </div>
                                 </Link>
                             </Space>
                         </div>
@@ -150,48 +157,61 @@ const RightContent: React.FC = () => {
                     <Col span={12}>
                         <div className="py-4 flex justify-center gap-2 flex-col items-center">
                             <div className="mb-4 w-64">
-                                <Button size="large" icon={<GoogleOutlined />} className="w-full">Đăng nhập với Google</Button>
+                                <Button size="large" className="w-full">
+                                    <Space>
+                                        <GoogleOutlined />
+                                        Đăng nhập với Google
+                                    </Space>
+                                </Button>
                             </div>
                             <div className="mb-4 w-64">
-                                <Button size="large" icon={<FacebookOutlined />} className="w-full">Đăng nhập với Facebook</Button>
+                                <Button size="large" className="w-full">
+                                    <Space>
+                                        <FacebookFilled />
+                                        Đăng nhập với Facebook
+                                    </Space>
+                                </Button>
                             </div>
                         </div>
                         <StepsForm formRef={formRef}
-                        submitter={{
-                            render: ({ form, onSubmit, step, onPre }) => {
-                                return [
-                                    <Button
-                                        key="rest"
-                                        onClick={() => {
-                                            form?.resetFields();
-                                        }}
-                                    >
-                                        Làm lại
-                                    </Button>,
-                                    step > 0 && (
+                            submitter={{
+                                render: ({ form, onSubmit, step, onPre }) => {
+                                    return [
                                         <Button
-                                            key="pre"
+                                            key="rest"
                                             onClick={() => {
-                                                onPre?.();
+                                                form?.resetFields();
+                                            }}
+                                            size="large"
+                                        >
+                                            Làm lại
+                                        </Button>,
+                                        step > 0 && (
+                                            <Button
+                                                key="pre"
+                                                size="large"
+                                                onClick={() => {
+                                                    onPre?.();
+                                                }}
+                                            >
+                                                Quay lại
+                                            </Button>
+                                        ),
+                                        <Button
+                                            key="next"
+                                            size="large"
+                                            type="primary"
+                                            onClick={() => {
+                                                onSubmit?.();
                                             }}
                                         >
-                                            Quay lại
-                                        </Button>
-                                    ),
-                                    <Button
-                                        key="next"
-                                        type="primary"
-                                        onClick={() => {
-                                            onSubmit?.();
-                                        }}
-                                    >
-                                        {
-                                            step > 0 ? (<span>Đăng nhập</span>) : (<span>Bước sau</span>)
-                                        }
-                                    </Button>,
-                                ];
-                            },
-                        }}>
+                                            {
+                                                step > 0 ? (<span>Đăng nhập</span>) : (<span>Bước sau</span>)
+                                            }
+                                        </Button>,
+                                    ];
+                                },
+                            }}>
                             <StepsForm.StepForm name="step1" title="Đăng nhập" onFinish={onLogin}>
                                 <Form.Item label="Số điện thoại" className="w-80" initialValue={"0911717772"} rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]} name="userName">
                                     <Input size="large" />
@@ -203,16 +223,22 @@ const RightContent: React.FC = () => {
                             <StepsForm.StepForm name="step2" title="Học viên" onFinish={onFinish}>
                                 <div className="w-64">
                                     <ProFormSelect name="token" label="Chọn học viên" options={options}
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui Lòng chọn học viên'
-                                        }
-                                    ]}
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Vui Lòng chọn học viên'
+                                            }
+                                        ]}
                                     />
                                 </div>
                             </StepsForm.StepForm>
-                        </StepsForm></Col>
+                        </StepsForm>
+                        <div className="mt-2 text-right">
+                            <button className="text-blue-500" onClick={onForgotPassword}>
+                                Quên mật khẩu?
+                            </button>
+                        </div>
+                    </Col>
                 </Row>
             </Modal>
         </Space>

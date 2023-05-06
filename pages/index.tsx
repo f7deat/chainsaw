@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Divider } from "antd";
+import { Carousel, Divider } from "antd";
 import Search from '@/components/search';
 import CourseList from '@/components/course';
 import { HeadTitle, JoinWithUs } from '@/components';
@@ -9,8 +9,14 @@ import GocHocTap from '@/components/home/goc-hoc-tap';
 import DoVui from '@/components/home/do-vui';
 import MyCourse from '@/components/course/my-course';
 import { PageContainer } from '@ant-design/pro-components';
+import { Fragment } from 'react';
 
 export default function Home() {
+
+  const items = [
+    'https://cdn.getvisa.vn/images/banners/04.png',
+    'https://cdn.getvisa.vn/images/banners/03.png',
+  ]
 
   return (
     <>
@@ -20,19 +26,30 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <PageContainer title="Khóa học">
+      <PageContainer title={<Fragment />}>
+        
+        <Carousel autoplay dots={true} arrows={true}>
+        {
+          items.map((x, i) => <picture key={i}>
+            <img src={x} alt='1' className='h-96 object-fit-cover w-full' />
+          </picture>)
+        }
+        </Carousel>
+
+        <Divider />
+
         <CourseList />
 
         {/* <Divider /> */}
 
         {/* <Search /> */}
 
-        {/* <Divider /> */}
+        <Divider />
 
         <MyCourse />
         {/* <ListCourseCarouel slug='toan-tieu-hoc' /> */}
 
-        {/* <Divider /> */}
+        <Divider />
 
         {/* <JoinWithUs /> */}
 

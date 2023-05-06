@@ -1,7 +1,6 @@
-import { HeadTitle } from "@/components";
 import { chuongTrinhHoc, queryKhoaHoc } from "@/services/course";
 import { PageContainer, ProList } from "@ant-design/pro-components";
-import { Card, Col, Divider, Row, Typography } from "antd";
+import { Divider } from "antd";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -70,7 +69,7 @@ export default function KhoaHoc() {
                         />
                     )
                 }
-                
+
                 <Divider />
             </PageContainer>
         </>
