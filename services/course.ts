@@ -9,8 +9,11 @@ export async function queryKhoaHoc(id: string | string[]) {
     return request.get(`khoahoc/${id}`);
 }
 
-export async function chuongTrinhHoc(id?: string | string[]) {
-    return request.get(`khoahoc/danh-sach-chuong-trinh-hoc/${id}`)
+export async function chuongTrinhHoc(params: any, id?: string | string[]) {
+    return request({
+        url: `khoahoc/danh-sach-chuong-trinh-hoc/${id}`,
+        params
+    })
 }
 
 export async function listBaiGiang(id?: string | string[]) {

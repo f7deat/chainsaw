@@ -5,25 +5,20 @@ import { Card, Space } from "antd";
 import Link from "next/link";
 import { LoginOutlined } from "@ant-design/icons";
 
-type MyCourseProps = {
-    itemPerRow?: number;
-}
-
-const MyCourse: React.FC<MyCourseProps> = (props) => {
+const MyCourse: React.FC = () => {
 
     const [data, setData] = useState<API.MyCourse[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         getMyCourse().then(response => {
-            setData(response)
+            setData(response.data)
             setLoading(false)
         })
     }, []);
 
     return (
         <div className="md:mb-20 mb-4" hidden={data?.length === 0}>
-            <HeadTitle center>Khóa học của tôi</HeadTitle>
             <div className="grid md:grid-cols-4 gap-4">
                 {
                     data?.map((value: API.MyCourse) => (

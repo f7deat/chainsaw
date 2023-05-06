@@ -1,8 +1,6 @@
 import Head from 'next/head'
-import { Header } from '@/components/header';
 import { Divider } from "antd";
 import Search from '@/components/search';
-import HomeCarousel from './home/carousel';
 import CourseList from '@/components/course';
 import { HeadTitle, JoinWithUs } from '@/components';
 import ListCourseCarouel from '@/components/course/list-carousel';
@@ -25,39 +23,35 @@ export default function Home() {
       <PageContainer title="Khóa học">
         <CourseList />
 
-        <Divider />
+        {/* <Divider /> */}
 
-        <Search />
+        {/* <Search /> */}
 
-        <Divider />
+        {/* <Divider /> */}
 
-        <div className='bg-gray-100 md:py-10 py-4'>
-          <div className='container mx-auto'>
-            <MyCourse itemPerRow={4} />
-            <ListCourseCarouel slug='toan-tieu-hoc' />
+        <MyCourse />
+        {/* <ListCourseCarouel slug='toan-tieu-hoc' /> */}
 
-            <Divider />
+        {/* <Divider /> */}
 
-            <JoinWithUs />
+        {/* <JoinWithUs /> */}
 
-          </div>
-        </div>
 
         <StatisticsHome />
 
-        <div className='bg-white'>
+        {/* <div className='bg-white'>
           <div className='container mx-auto md:py-10 py-4'>
             <HeadTitle>Góc học tập</HeadTitle>
             <GocHocTap />
           </div>
-        </div>
+        </div> */}
 
-        <div className='bg-cyan-50 md:py-10 py-4'>
+        {/* <div className='bg-cyan-50 md:py-10 py-4'>
           <div className='container mx-auto'>
             <HeadTitle center>Đố vui</HeadTitle>
             <DoVui />
           </div>
-        </div>
+        </div> */}
       </PageContainer>
     </>
   )

@@ -14,7 +14,6 @@ declare namespace API {
         ngaySinh: Date;
         gioiTinh?: boolean | number;
     }
-
     export type ChuongTrinhHoc = {
         chuongTrinhHocId: number;
         tenChuongTrinhHoc: string;

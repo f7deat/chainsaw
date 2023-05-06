@@ -10,4 +10,11 @@ namespace API {
         thumbnail: string;
         slug: string;
     }
+
+    export type ChuongTrinhHocListItem = {
+        id: number;
+        name: string;
+        description: string;
+        thumbnail: string;
+    }
 }
