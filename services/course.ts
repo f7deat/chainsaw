@@ -74,3 +74,10 @@ export async function listSubject() {
 export async function getChuongTrinhHoc(id?: string | string[]) {
     return request.get(`chuong-trinh-hoc/${id}`);
 }
+
+export async function listChuongTrinhHocBySubjectId( params: any, id?: string | string[] | number) {
+    return request({
+        url: `subject/chuong-trinh-hoc/${id}`,
+        params
+    })
+}

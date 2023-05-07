@@ -1,40 +1,27 @@
-import { getMyCourse } from "@/services/course";
-import Link from "next/link";
-import { ProList } from "@ant-design/pro-components";
-import { ArrowRightOutlined } from "@ant-design/icons";
-import { Fragment } from "react";
+import { listChuongTrinhHocBySubjectId } from "@/services/course"
+import { ProList } from "@ant-design/pro-components"
+import Link from "next/link"
 
-const MyCourse: React.FC = () => {
+type ChuongTrinhHocBySubjectProps = {
+    id: number;
+    headerTitle: string;
+}
 
-    const access_token = localStorage.getItem('access_token');
+const ChuongTrinhHocBySubject: React.FC<ChuongTrinhHocBySubjectProps> = (props) => {
 
-    return access_token ? (
+    return (
         <ProList<API.ChuongTrinhHocListItem>
-            toolBarRender={() => {
-                return [
-                    <Link key="viewMore" href="/tai-khoan/khoa-hoc">
-                        <span className="flex items-center gap-2 text-blue-500 font-medium">
-                            Xem tất cả
-                            <ArrowRightOutlined />
-                        </span>
-                    </Link>,
-                ];
-            }}
-            ghost
-            headerTitle="Khóa học của tôi"
-            request={getMyCourse}
+            headerTitle={props.headerTitle}
+            request={(params) => listChuongTrinhHocBySubjectId(params, props.id)}
             pagination={{
                 defaultPageSize: 4
             }}
-            grid={{
-                gutter: 16,
-                column: 4,
-                md: 4,
-                xs: 1,
-            }}
+            grid={{ gutter: 16, column: 4 }}
             showActions="always"
+            ghost={true}
             metas={{
                 content: {
+                    dataIndex: 'description',
                     render: (dom, entity) => (
                         <div className="-m-6">
                             <picture>
@@ -54,10 +41,10 @@ const MyCourse: React.FC = () => {
                             Xem thêm
                         </Link>
                     ]
-                },
+                }
             }}
         />
-    ) : (<Fragment />)
+    )
 }
 
-export default MyCourse
+export default ChuongTrinhHocBySubject

@@ -5,6 +5,7 @@ import MyCourse from '@/components/course/my-course';
 import { PageContainer } from '@ant-design/pro-components';
 import { Fragment } from 'react';
 import Partner from '@/components/home/partner';
+import ChuongTrinhHocBySubject from '@/components/subject/chuong-trinh-hoc';
 
 export default function Home() {
 
@@ -20,6 +21,10 @@ export default function Home() {
         <CourseList />
 
         <Divider />
+
+        <ChuongTrinhHocBySubject id={1} headerTitle='Khóa Toán tiêu biểu' />
+
+        <ChuongTrinhHocBySubject id={2} headerTitle='Khóa Tiếng Anh tiêu biểu' />
 
         <MyCourse />
 

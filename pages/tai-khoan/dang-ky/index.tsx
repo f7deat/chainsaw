@@ -1,45 +1,45 @@
-import { createParent, createStudent } from "@/services/user";
+import { register } from "@/services/user";
 import { CheckCircleTwoTone } from "@ant-design/icons";
 import { PageContainer, ProCard, ProFormDatePicker, ProFormSelect, ProFormText, StepsForm } from "@ant-design/pro-components";
-import { Alert, Button, Col, Row, Typography, message } from "antd";
+import { Button, Col, Row, Typography, message } from "antd";
 import Head from "next/head";
 import Link from "next/link";
 import { Fragment, useState } from "react";
 
 export default function Register() {
 
-    const [success, setSuccess] = useState<boolean>(false);
-    const [phoneNumber, setPhoneNumber] = useState<string>();
-
     const onParentCreate = async (values: API.PhuHuynh & {
         confirmPassword: string;
+        password: string;
     }) => {
-        if (values.matKhau !== values.confirmPassword) {
+        if (values.password !== values.confirmPassword) {
             message.error('Mật khẩu không khớp!');
             return false;
         }
-        values.gioiTinh = values.gioiTinh === 1;
-        const response = await createParent(values);
-        if (response.succeeded) {
-            message.success('Đăng ký thành công!');
-            setPhoneNumber(values.soDienThoai);
-            return true;
-        } else {
-            message.error(response.errors[0].description);
-            return false;
-        }
+        return true;
     }
 
-    const onStudentCreate = async (values: API.HocVien) => {
-        values.soDienThoai = phoneNumber;
-        const response = await createStudent(values);
+    const onFinish = async (values: any) => {
+        const body = {
+            parent: {
+                tenPhuHuynh: values.parentName,
+                soDienThoai: values.phoneNumber,
+                diaChi: values.address,
+                matKhau: values.password,
+                gioiTinh: values.parentGender === 1
+            },
+            student: {
+                hoVaTen: values.studentName,
+                ngaySinh: values.dateOfBirth,
+                soDienThoai: values.phoneNumber,
+                gioiTinh: values.studentGender === 1
+            }
+        }
+        const response = await register(body);
         if (response.succeeded) {
-            message.success('Đăng ký thành công');
-            setSuccess(true);
-            return true;
+            message.success('Đăng ký thành công!');
         } else {
             message.error(response.errors[0].description);
-            return false;
         }
     }
 
@@ -56,6 +56,7 @@ export default function Register() {
                     <Row gutter={20}>
                         <Col md={12}>
                             <StepsForm
+                                onFinish={onFinish}
                                 submitter={{
                                     render: ({ form, onSubmit, step, onPre }) => {
                                         return [
@@ -88,7 +89,7 @@ export default function Register() {
                                                 }}
                                             >
                                                 {
-                                                    step > 1 ? 'Hoàn thành' : 'Bước sau'
+                                                    step > 0 ? 'Hoàn thành' : 'Bước sau'
                                                 }
                                             </Button>,
                                         ];
@@ -106,14 +107,37 @@ export default function Register() {
                                     onFinish={onParentCreate}
                                     grid
                                 >
-                                    <ProFormText label="Tên phụ huynh" rules={[{ required: true, message: 'Vui lòng nhập họ và tên' }]} name="tenPhuHuynh" />
+                                    <ProFormText label="Tên phụ huynh" rules={[{ required: true, message: 'Vui lòng nhập họ và tên' }]} name="parentName" colProps={{
+                                        md: 12
+                                    }} />
+                                    
+                                    <ProFormSelect label="Giới tính" name="parentGender" colProps={{
+                                        md: 12
+                                    }} 
+                                    options={[
+                                        {
+                                            value: 1,
+                                            label: 'Nam'
+                                        },
+                                        {
+                                            value: 0,
+                                            label: 'Nữ'
+                                        }
+                                    ]}
+                                    />
+
                                     <ProFormText
                                         label="Số điện thoại"
-                                        rules={[{ 
+                                        rules={[{
                                             required: true,
-                                            max: 10
+                                            message: 'Vui lòng nhập số điện thoại'
+                                        },
+                                        {
+                                            max: 10,
+                                            min: 9,
+                                            message: 'Số điện thoại không hợp lệ'
                                         }]}
-                                        name="soDienThoai"
+                                        name="phoneNumber"
                                         colProps={{
                                             md: 12
                                         }}
@@ -125,64 +149,69 @@ export default function Register() {
                                             md: 12
                                         }}
                                     />
-                                    <ProFormSelect label="Giới tính" options={[
-                                        {
-                                            label: 'Nam',
-                                            value: 1
-                                        },
-                                        {
-                                            label: 'Nữ',
-                                            value: 0
-                                        }
-                                    ]} initialValue={1} name="gioiTinh" />
-                                    <ProFormText label="Địa chỉ" name="diaChi" />
-                                    <ProFormText.Password label="Mật khẩu" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="matKhau" />
+                                    <ProFormText label="Địa chỉ" name="address" />
+                                    <ProFormText.Password label="Mật khẩu" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="password" />
                                     <ProFormText.Password label="Nhập lại mật khẩu" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="confirmPassword" />
                                 </StepsForm.StepForm>
-                                <StepsForm.StepForm name="step2" title="Học sinh" onFinish={onStudentCreate}>
-                                    <ProFormText label="Tên học viên" name="hoVaTen" rules={[
+                                <StepsForm.StepForm name="step2" title="Học sinh" grid>
+                                    <ProFormText label="Tên học viên" name="studentName" rules={[
                                         {
                                             required: true
                                         }
                                     ]} />
-                                    <ProFormDatePicker label="Ngày sinh" name="ngaySinh" />
+                                    <ProFormDatePicker label="Ngày sinh" name="dateOfBirth" colProps={{
+                                        md: 8
+                                    }} />
+                                    <ProFormSelect label="Giới tính" name="studentGender" colProps={{
+                                        md: 16
+                                    }} 
+                                    options={[
+                                        {
+                                            value: 1,
+                                            label: 'Nam'
+                                        },
+                                        {
+                                            value: 0,
+                                            label: 'Nữ'
+                                        }
+                                    ]}
+                                    />
                                 </StepsForm.StepForm>
                             </StepsForm>
                             <div className="text-right text-sm py-4">
-                                Bằng việc đăng ký, bạn đã đồng ý với <a href="#">Điều khoản sử dụng</a> và <a href="#">Chính sách bảo mật</a> của chúng tôi
-                            </div>
-                            <div hidden={!success}>
-                                <Alert message="Đăng ký thành công!" type="success" showIcon closable />
+                                Bằng việc đăng ký, bạn đã đồng ý với <a href="#" className="text-blue-500 font-medium">Điều khoản sử dụng</a> và <a href="#" className="text-blue-500 font-medium">Chính sách bảo mật</a> của chúng tôi
                             </div>
                         </Col>
                         <Col md={12}>
-                            <Typography.Title level={3}>
-                                <div className="mb-2">Tham gia E-Learning</div>
-                                <div>Để nhận những lợi ích hấp dẫn</div>
-                            </Typography.Title>
-                            <ul>
-                                <li className="flex gap-2 mb-2">
-                                    <CheckCircleTwoTone color="blue" />
-                                    <span>Học bất cứ lúc nào</span>
-                                </li>
-                                <li className="flex gap-2 mb-2">
-                                    <CheckCircleTwoTone color="blue" />
-                                    <span>Nhận giải đáp 24/7</span>
-                                </li>
-                                <li className="flex gap-2 mb-2">
-                                    <CheckCircleTwoTone color="blue" />
-                                    <span>Thống kê kết quả học tập</span>
-                                </li>
-                            </ul>
-                            <div className="flex justify-center">
-                                <picture>
-                                    <img src="https://finder.createx.studio/img/signin-modal/signup-dark.svg" alt="1" />
-                                </picture>
-                            </div>
-                            <div className="text-right py-4 text-lg">
-                                <Link href="/tai-khoan/quen-mat-khau">
-                                    Quên mật khẩu?
-                                </Link>
+                            <div className="px-4">
+                                <Typography.Title level={3}>
+                                    <div className="mb-2">Tham gia E-Learning</div>
+                                    <div>Để nhận những lợi ích hấp dẫn</div>
+                                </Typography.Title>
+                                <ul>
+                                    <li className="flex gap-2 mb-2">
+                                        <CheckCircleTwoTone color="blue" />
+                                        <span>Học bất cứ lúc nào</span>
+                                    </li>
+                                    <li className="flex gap-2 mb-2">
+                                        <CheckCircleTwoTone color="blue" />
+                                        <span>Nhận giải đáp 24/7</span>
+                                    </li>
+                                    <li className="flex gap-2 mb-2">
+                                        <CheckCircleTwoTone color="blue" />
+                                        <span>Thống kê kết quả học tập</span>
+                                    </li>
+                                </ul>
+                                <div className="flex justify-center">
+                                    <picture>
+                                        <img src="https://finder.createx.studio/img/signin-modal/signup-dark.svg" alt="1" />
+                                    </picture>
+                                </div>
+                                <div className="text-right py-4 text-lg">
+                                    <Link href="/tai-khoan/quen-mat-khau">
+                                        Quên mật khẩu?
+                                    </Link>
+                                </div>
                             </div>
                         </Col>
                     </Row>

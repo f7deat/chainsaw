@@ -8,7 +8,7 @@ export async function getParent() {
     return request.get(`parent`);
 }
 
-export async function createParent(data: API.PhuHuynh) {
+export async function register(data: any) {
     return request({
         url: `parent/register`,
         data,

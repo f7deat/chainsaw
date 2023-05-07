@@ -81,7 +81,7 @@ const RightContent: React.FC = () => {
                         label: u.user.hoVaTen,
                         value: u.token
                     }
-                }))
+                }));
                 return true;
             } else {
                 message.error(data.message);
