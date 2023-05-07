@@ -1,6 +1,5 @@
 import { chuongTrinhHoc, queryKhoaHoc } from "@/services/course";
 import { PageContainer, ProList } from "@ant-design/pro-components";
-import { Divider } from "antd";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -40,20 +39,20 @@ export default function KhoaHoc() {
                             pagination={{
                                 defaultPageSize: 8
                             }}
-                            grid={{ gutter: 16, column: 3 }}
+                            grid={{ gutter: 16, column: 4 }}
                             showActions="always"
                             metas={{
-                                title: {
-                                    dataIndex: 'name'
-                                },
                                 content: {
                                     dataIndex: 'description',
                                     render: (dom, entity) => (
-                                        <div>
-                                            <picture hidden={!entity.thumbnail}>
-                                                <img src={entity.thumbnail} alt="IMG" className="mb-2" />
+                                        <div className="-m-6">
+                                            <picture>
+                                                <img src={entity.thumbnail || 'https://cdn.getvisa.vn/images/cogiao.jpg'} alt="IMG" className="mb-2" />
                                             </picture>
-                                            <div>{entity.description}</div>
+                                            <div className="px-2 pb-1">
+                                                <div className="line-clamp-2 font-medium text-blue-500 mb-1">{entity.name}</div>
+                                                <div className="line-clamp-3 text-gray-500">{entity.description}</div>
+                                            </div>
                                         </div>
                                     )
                                 },
@@ -69,8 +68,6 @@ export default function KhoaHoc() {
                         />
                     )
                 }
-
-                <Divider />
             </PageContainer>
         </>
     )

@@ -1,8 +1,9 @@
+import ChangePasswordComponent from "@/components/tai-khoan/change-password";
 import AccountLeftBar from "@/components/tai-khoan/left-bar";
 import ParentInfo from "@/components/tai-khoan/parent";
 import StudentInfo from "@/components/tai-khoan/student";
 import { PageContainer, ProCard } from "@ant-design/pro-components";
-import { Col, Empty, Row } from "antd";
+import { Col, Row } from "antd";
 import Head from "next/head";
 import { useState } from "react";
 
@@ -31,14 +32,14 @@ export default function Profile() {
                 tabPosition: 'top',
                 items: [
                   {
-                    label: 'Content',
+                    label: 'Thông tin cá nhân',
                     key: 'student',
                     children: <StudentInfo />,
                   },
                   {
                     label: 'Đổi mật khẩu',
                     key: 'setting',
-                    children: <Empty />,
+                    children: <ChangePasswordComponent />,
                   },
                   {
                     label: 'Thông tin phụ huynh',

@@ -1,5 +1,6 @@
 import { Divider, Typography } from "antd";
 import SubjectMenu from "../subject";
+import ClassroomList from "./leftbar/classroom-list";
 
 const Leftbar: React.FC = () => {
     return (
@@ -8,6 +9,7 @@ const Leftbar: React.FC = () => {
             <SubjectMenu />
             <Divider />
             <Typography.Title level={5}>Lớp học</Typography.Title>
+            <ClassroomList />
         </div>
     )
 }

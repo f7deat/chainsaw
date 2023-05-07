@@ -60,8 +60,11 @@ export async function getMyCourse() {
     return request.get(`khoahoc/my-course`);
 }
 
-export async function listClassroom() {
-    return request.get(`classroom/list`);
+export async function listClassroom(params: any) {
+    return request({
+        url: `classroom/list`,
+        params
+    });
 }
 
 export async function listSubject() {

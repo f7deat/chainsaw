@@ -1,4 +1,3 @@
-import { HeadTitle } from "@/components";
 import { StepsForm, ProFormText, ProFormDatePicker, ProFormDateRangePicker, ProFormTextArea, ProFormCheckbox, ProForm, ProFormDependency, ProFormSelect } from "@ant-design/pro-components";
 import { Alert, Button, Card, message } from "antd";
 import Head from "next/head";
@@ -24,7 +23,6 @@ export default function Index() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="container mx-auto md:py-10 py-4 px-4">
-                <HeadTitle center>Đăng ký khóa học</HeadTitle>
                 <Card hidden={!success}>
                     <Alert message="Đăng ký thành công!" />
                 </Card>

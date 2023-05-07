@@ -15,17 +15,20 @@ const ChangePasswordComponent: React.FC = () => {
         <ProForm onFinish={onFinish}>
             <ProFormText.Password name="oldPassword" label="Mật khẩu cũ" rules={[
                 {
-                    required: true
+                    required: true,
+                    message: 'Vui lòng nhập'
                 }
             ]} />
             <ProFormText.Password name="newPassword" label="Mật khẩu mới" rules={[
                 {
-                    required: true
+                    required: true,
+                    message: 'Vui lòng nhập'
                 }
             ]} />
             <ProFormText.Password name="confirmPassword" label="Nhập lại mật khẩu" rules={[
                 {
-                    required: true
+                    required: true,
+                    message: 'Vui lòng nhập'
                 }
             ]} />
         </ProForm>

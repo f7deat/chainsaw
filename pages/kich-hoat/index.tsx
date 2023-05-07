@@ -1,4 +1,3 @@
-import { HeadTitle } from "@/components";
 import { Alert, Button, Form, Input } from "antd";
 import Head from "next/head";
 import { useState } from "react";
@@ -21,7 +20,6 @@ export default function Active() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className="py-4 px-4 md:py-10">
-                <HeadTitle center>Kích hoạt khóa học</HeadTitle>
                 <div className="container mx-auto">
                     <div className="flex justify-center flex-col items-center">
 

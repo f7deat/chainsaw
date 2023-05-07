@@ -1,7 +1,6 @@
 import { getMyCourse } from "@/services/course";
 import Link from "next/link";
 import { ProList } from "@ant-design/pro-components";
-import { Button } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
 
 const MyCourse: React.FC = () => {

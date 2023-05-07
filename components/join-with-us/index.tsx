@@ -1,9 +1,7 @@
-import HeadTitle from "../title";
 
 const JoinWithUs: React.FC = () => {
     return (
         <div>
-            <HeadTitle center>Tham gia dễ dàng chỉ với 4 bước</HeadTitle>
             <div className="four-step flex mb-20">
                 <div className="w-1/4 step one">
                     <div className="header">
