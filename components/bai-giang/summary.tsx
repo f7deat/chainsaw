@@ -35,7 +35,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
         <div className="bg-white shadow p-2 rounded-lg">
             <div className="h-52 bg-gray-500 rounded-lg mb-2">
                 <picture>
-                    <img src="https://cdn.getvisa.vn/images/cogiao.jpg" className="w-full h-52 object-fit-cover" alt="cover" />
+                    <img src="https://cdn.getvisa.vn/images/cogiao.jpg" className="w-full h-52 object-cover" alt="cover" />
                 </picture>
             </div>
             <div className="mb-4 text-gray-500">

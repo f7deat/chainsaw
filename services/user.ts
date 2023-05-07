@@ -39,3 +39,7 @@ export async function changePassword(data: any) {
         data
     })
 }
+
+export async function listNewStudent() {
+    return request.get(`student/list-new`);
+}

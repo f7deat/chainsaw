@@ -120,7 +120,7 @@ const RightContent: React.FC = () => {
         </HeaderDropdown>
     ) : (
         <Space className="mr-4">
-            <Button type="link">
+            <Button type="link" size="large">
                 <Link href='/tai-khoan/dang-ky'>
                     <Space>
                         <PlusOutlined />
@@ -128,7 +128,7 @@ const RightContent: React.FC = () => {
                     </Space>
                 </Link>
             </Button>
-            <Button type="primary" onClick={() => setOpen(true)}>
+            <Button type="primary" size="large" onClick={() => setOpen(true)}>
                 <Space>
                     <UserOutlined />
                     Đăng nhập
@@ -156,11 +156,13 @@ const RightContent: React.FC = () => {
                     </Col>
                     <Col span={12}>
                         <div className="py-4 flex justify-center gap-2 flex-col items-center">
-                            <div className="mb-4 w-64">
+                            <div className="mb-2 w-64">
                                 <Button size="large" className="w-full">
                                     <Space>
                                         <GoogleOutlined />
-                                        Đăng nhập với Google
+                                        <div className="font-medium">
+                                            Đăng nhập với Google
+                                        </div>
                                     </Space>
                                 </Button>
                             </div>
@@ -168,7 +170,9 @@ const RightContent: React.FC = () => {
                                 <Button size="large" className="w-full">
                                     <Space>
                                         <FacebookFilled />
-                                        Đăng nhập với Facebook
+                                        <div className="font-medium">
+                                            Đăng nhập với Facebook
+                                        </div>
                                     </Space>
                                 </Button>
                             </div>

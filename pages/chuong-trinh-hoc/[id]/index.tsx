@@ -44,7 +44,7 @@ export default function KhoaHoc() {
                                         bordered={false}
                                         cover={
                                             <picture>
-                                                <img src={book.hinhAnh || 'https://placehold.jp/1x1.png'} className="w-full h-64 object-fit-cover" alt="IMG" />
+                                                <img src={book.hinhAnh || 'https://placehold.jp/1x1.png'} className="w-full h-64 object-cover" alt="IMG" />
                                             </picture>
                                         }
                                     >

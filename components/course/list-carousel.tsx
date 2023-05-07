@@ -34,7 +34,7 @@ const ListCourseCarouel: React.FC<ListCourseCarouelProps> = (props) => {
                                     <div className="bg-white h-full">
                                         <div>
                                             <picture>
-                                                <img src={item.thumbnail} alt="IMG" className="w-full object-fit-cover h-64" />
+                                                <img src={item.thumbnail} alt="IMG" className="w-full object-cover h-64" />
                                             </picture>
                                         </div>
                                         <div className="px-4 py-2">

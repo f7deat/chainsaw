@@ -10,6 +10,7 @@ import DoVui from '@/components/home/do-vui';
 import MyCourse from '@/components/course/my-course';
 import { PageContainer } from '@ant-design/pro-components';
 import { Fragment } from 'react';
+import Partner from '@/components/home/partner';
 
 export default function Home() {
 
@@ -31,7 +32,7 @@ export default function Home() {
         <Carousel autoplay dots={true} arrows={true}>
         {
           items.map((x, i) => <picture key={i}>
-            <img src={x} alt='1' className='h-96 object-fit-cover w-full' />
+            <img src={x} alt='1' className='h-96 object-cover w-full' />
           </picture>)
         }
         </Carousel>
@@ -51,10 +52,12 @@ export default function Home() {
 
         <Divider />
 
+        <Partner />
+
         {/* <JoinWithUs /> */}
 
 
-        <StatisticsHome />
+        {/* <StatisticsHome /> */}
 
         {/* <div className='bg-white'>
           <div className='container mx-auto md:py-10 py-4'>
