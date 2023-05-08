@@ -161,7 +161,11 @@ export default function Register() {
                                     ]} />
                                     <ProFormDatePicker label="Ngày sinh" name="dateOfBirth" colProps={{
                                         md: 8
-                                    }} />
+                                    }} 
+                                    fieldProps={{
+                                        disabledDate: (current) => current.valueOf() > Date.now()
+                                    }}
+                                    />
                                     <ProFormSelect label="Giới tính" name="studentGender" colProps={{
                                         md: 16
                                     }} 

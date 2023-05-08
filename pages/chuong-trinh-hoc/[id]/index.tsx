@@ -1,7 +1,6 @@
-import Footer from "@/components/footer";
 import Header from "@/components/header/header";
-import Jumbotron from "@/components/jumbotron";
 import { chuongTrinhHoc } from "@/services/course";
+import { StarFilled } from "@ant-design/icons";
 import { Card, Col, Divider, Row } from "antd";
 import Head from "next/head";
 import Link from "next/link";
@@ -31,7 +30,6 @@ export default function KhoaHoc() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Header />
-            <Jumbotron name="Toán học lớp một" />
             <main className="container mx-auto mt-6">
                 <div className="mb-3 text-2xl font-medium">Chọn chương trình học</div>
                 <Row gutter={16}>
@@ -48,6 +46,14 @@ export default function KhoaHoc() {
                                             </picture>
                                         }
                                     >
+                                        
+                                <div className="text-xs text-red-500 text-right">
+                                    <StarFilled />
+                                    <StarFilled />
+                                    <StarFilled />
+                                    <StarFilled />
+                                    <StarFilled />
+                                </div>
                                         <Card.Meta title={book.tenChuongTrinhHoc} description={book.moTaChuongTrinh} />
                                     </Card>
                                 </Link>

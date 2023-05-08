@@ -1,4 +1,5 @@
 import { chuongTrinhHoc, queryKhoaHoc } from "@/services/course";
+import { StarFilled } from "@ant-design/icons";
 import { PageContainer, ProList } from "@ant-design/pro-components";
 import Head from "next/head";
 import Link from "next/link";
@@ -51,7 +52,14 @@ export default function KhoaHoc() {
                                             </picture>
                                             <div className="px-2 pb-1">
                                                 <div className="line-clamp-2 font-medium text-blue-500 mb-1">{entity.name}</div>
-                                                <div className="line-clamp-3 text-gray-500">{entity.description}</div>
+                                                <div className="text-xs text-red-500 text-right">
+                                                    <StarFilled />
+                                                    <StarFilled />
+                                                    <StarFilled />
+                                                    <StarFilled />
+                                                    <StarFilled />
+                                                </div>
+                                                <div className="line-clamp-3 text-gray-500 text-sm">{entity.description}</div>
                                             </div>
                                         </div>
                                     )

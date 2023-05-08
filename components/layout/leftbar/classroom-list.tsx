@@ -10,7 +10,6 @@ const ClassroomList: React.FC = () => {
             name: string;
         }>
             rowKey="id"
-            ghost
             request={() => listClassroom({
                 pageSize: 5
             })}

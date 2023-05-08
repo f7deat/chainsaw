@@ -4,9 +4,19 @@ import { Header } from '@/components/header';
 import Leftbar from '@/components/layout/leftbar';
 import Footer from '@/components/footer';
 import RightBar from '@/components/layout/rightbar';
-import '@/styles/globals.css'
+import '@/styles/globals.css';
+import AOS from "aos";
+
+import "aos/dist/aos.css";
+import { useEffect } from 'react';
 
 export default function App({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    AOS.init({
+      duration: 2500
+  });
+  }, []);
+  
   return (
     <ConfigProvider
       locale={{
@@ -15,6 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
       theme={{
         token: {
           fontSize: 16,
+          colorText: '#0e1c71'
         },
         components: {
           Button: {
@@ -24,18 +35,18 @@ export default function App({ Component, pageProps }: AppProps) {
         }
       }}>
       <Header />
-      <aside className='hidden md:block h-screen z-10 fixed left-0 top-16 w-52'>
-        <Leftbar />
-      </aside>
-      <main className='mx-auto bg-slate-100 container p-4'>
-        <div className='md:px-40 md:py-20'>
+      <div className='md:flex gap-10 pt-20'>
+        {/* <aside className='hidden md:block h-screen z-10  left-0 top-16 w-[320px]'>
+          <Leftbar />
+        </aside> */}
+        <main className='mx-auto container flex-1 p-4'>
           <Component {...pageProps} />
-        </div>
-      </main>
-      <aside className='hidden md:block h-screen z-10 fixed right-0 top-16 w-52'>
+        </main>
+        {/* <aside className='hidden md:block h-screen z-10  right-0 top-16  w-[320px]'>
           <RightBar />
-      </aside>
-        <Footer />
+        </aside> */}
+      </div>
+      <Footer />
     </ConfigProvider>
   )
 }

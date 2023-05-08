@@ -37,7 +37,11 @@ const StudentInfo: React.FC = () => {
 
     return (
         <ProForm grid formRef={formRef} onFinish={onFinish}>
-            <ProFormText label="Họ và tên" name="hoVaTen" />
+            <ProFormText label="Họ và tên" name="hoVaTen" rules={[
+                {
+                    required: true
+                }
+            ]} />
             <ProFormDatePicker label="Ngày sinh" name="ngaySinh" colProps={{
                 md: 6
             }} />

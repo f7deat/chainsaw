@@ -47,14 +47,16 @@ const AccountLeftBar: React.FC<AccountLeftBarProps> = (props) => {
                         </Space>
                     </div>
                 </Link>
-                <div className={`px-4 py-2 rounded border ${props.tab === 2 ? 'border-blue-500' : ''} mb-1 hover:border-blue-500`}>
-                    <Space>
-                        <BarChartOutlined />
-                        <div className="text-lg">
-                            Quá trình học tập
-                        </div>
-                    </Space>
-                </div>
+                <Link href="/tai-khoan/hoc-tap">
+                    <div className={`px-4 py-2 rounded border ${props.tab === 3 ? 'border-blue-500' : ''} mb-1 hover:border-blue-500`}>
+                        <Space>
+                            <BarChartOutlined />
+                            <div className="text-lg">
+                                Quá trình học tập
+                            </div>
+                        </Space>
+                    </div>
+                </Link>
             </Card>
         </div>
     )

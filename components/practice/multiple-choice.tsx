@@ -55,7 +55,8 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = (props) => {
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Divider />
                 <ProForm onFinish={onFinish}>
-                    <ProFormCheckbox.Group name="dapAnIds"
+                    <ProFormCheckbox.Group 
+                    name="dapAnIds"
                         options={data.answers.map(o => {
                             return {
                                 label: <span className="font-medium">{o.text}</span>,

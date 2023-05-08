@@ -4,6 +4,10 @@ import { message } from "antd";
 
 const ChangePasswordComponent: React.FC = () => {
     const onFinish = async (values: any) => {
+        if (values.newPassword !== values.confirmPassword) {
+            message.error('Mật khẩu không khớp!');
+            return;
+        }
         const response = await changePassword(values);
         if (response.succeeded) {
             message.success('Đổi mật khẩu thành công!');

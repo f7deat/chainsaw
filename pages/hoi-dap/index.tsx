@@ -18,6 +18,8 @@ export default function QuestionAndAnswer() {
         const response = await getHelp(values);
         if (response.succeeded) {
             message.success('Gửi câu hỏi thành công!')
+        } else {
+            message.error(response.errors[0].description);
         }
     }
 

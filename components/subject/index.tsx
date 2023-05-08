@@ -10,7 +10,6 @@ const SubjectMenu: React.FC = () => {
             name: string;
         }>
             rowKey="id"
-            ghost
             request={listSubject}
             metas={{
                 title: {

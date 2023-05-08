@@ -1,5 +1,5 @@
-import { BookOutlined, FacebookFilled, GoogleOutlined, LogoutOutlined, PlusOutlined, UserOutlined } from "@ant-design/icons"
-import { Button, Col, Form, Input, Modal, Row, Space, Typography, message } from "antd"
+import { BarChartOutlined, BellFilled, BookOutlined, FacebookFilled, GoogleOutlined, LogoutOutlined, PlusOutlined, UserOutlined } from "@ant-design/icons"
+import { Avatar, Button, Col, Form, Input, Modal, Row, Space, Typography, message } from "antd"
 import HeaderDropdown from "./header-dropdown"
 import { useRouter } from "next/router";
 import type { MenuInfo } from 'rc-menu/lib/interface';
@@ -46,6 +46,9 @@ const RightContent: React.FC = () => {
         } else if (key === 'settings') {
             router.push(`/tai-khoan/khoa-hoc`);
             return;
+        } else if (key === 'history') {
+            router.push(`/tai-khoan/hoc-tap`);
+            return;
         }
         router.push(`/accounts/${key}`);
     }
@@ -60,6 +63,11 @@ const RightContent: React.FC = () => {
             key: 'settings',
             icon: <BookOutlined />,
             label: 'Khóa học của tôi',
+        },
+        {
+            key: 'history',
+            icon: <BarChartOutlined />,
+            label: 'Quá trình học tập',
         },
         {
             type: 'divider' as const,
@@ -111,23 +119,28 @@ const RightContent: React.FC = () => {
                 items: menuItems,
             }}
         >
-            <Button type="link">
-                <Space>
+            <Button type="link" className="flex items-center gap-2">
+                <Avatar src={user?.avatar ? <picture>
+                    <img src={user?.avatar} alt="avatar" />
+                </picture> : <div className="bg-gray-500">
                     <UserOutlined />
-                    {user?.hoVaTen}
-                </Space>
+                </div>} />
+                <div className="text-left">
+                    <div className="text-xs">Xin chào,</div>
+                    <div className="font-medium text-sm">{user?.hoVaTen}</div>
+                </div>
             </Button>
         </HeaderDropdown>
     ) : (
         <Space className="mr-4">
-            <Button type="link" size="large">
+            {/* <Button type="link" size="large">
                 <Link href='/tai-khoan/dang-ky'>
                     <Space>
                         <PlusOutlined />
                         Đăng ký
                     </Space>
                 </Link>
-            </Button>
+            </Button> */}
             <Button type="primary" size="large" onClick={() => setOpen(true)}>
                 <Space>
                     <UserOutlined />

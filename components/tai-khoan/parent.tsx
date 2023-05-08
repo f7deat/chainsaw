@@ -39,9 +39,12 @@ const ParentInfo: React.FC = () => {
 
     return (
         <ProForm formRef={formRef} onFinish={onFinish}>
-            <ProFormText name="tenPhuHuynh" label="Họ và tên" />
+            <ProFormText name="tenPhuHuynh" label="Họ và tên" rules={[
+                {
+                    required: true
+                }
+            ]} />
             <ProFormText name="soDienThoai" disabled label="Số điện thoại" />
-            <ProFormText name="email" label="Email" />
             <ProFormText name="diaChi" label="Địa chỉ" />
         </ProForm>
     )

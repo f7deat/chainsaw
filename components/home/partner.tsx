@@ -31,8 +31,8 @@ const Partner: React.FC = () => {
 
     return (
         <div>
-            <Typography.Title level={4}>Đồng hành cùng chúng tôi</Typography.Title>
-            <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+            <Typography.Title level={4} data-aos="fade-up">Đồng hành cùng chúng tôi</Typography.Title>
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-4" data-aos="fade-up">
                 {
                     data.map(x => (
                         <picture key={x.id}>

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    background: url(https://cdn.getvisa.vn/images/background.jpg) fixed 50%;
+}
+
 .ant-btn-primary {
     background-color: #1677ff;
 }

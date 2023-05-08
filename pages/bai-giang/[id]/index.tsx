@@ -1,4 +1,3 @@
-import Jumbotron from "@/components/jumbotron";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -67,12 +66,12 @@ export default function CourseContent() {
                                 </div>
                             </div>
 
-                            <div className="mb-2 text-2xl">Thông tin khóa học</div>
-                            <div className="bg-white p-4 rounded-lg mb-4 shadow" dangerouslySetInnerHTML={{
+                            <div className="mb-2 text-2xl font-medium">Thông tin khóa học</div>
+                            <div className="bg-white p-4 rounded-lg mb-4 text-gray-600" dangerouslySetInnerHTML={{
                                 __html: chuongTrinhHoc?.moTaChiTiet
                             }}>
                             </div>
-                            <div className="text-4xl font-bold mb-4">Chương trình học</div>
+                            <div className="text-4xl font-medium mb-4">Chương trình học</div>
                             {
                                 data?.map((group: any, index: number) => (
                                     <div key={index} className="bg-white mb-4">
@@ -83,9 +82,7 @@ export default function CourseContent() {
                                                     <div className="px-4 py-2 hover:bg-blue-100 flex justify-between items-center text-lg">
                                                         <div>{item.name}</div>
                                                         <div className="flex gap-4 items-center">
-                                                            <Link href={`${item.videoUrl}`}>
-                                                                <Button type="link" icon={<PlayCircleOutlined />} className="text-lg flex items-center" />
-                                                            </Link>
+                                                            <Button type="link" icon={<PlayCircleOutlined />} disabled className="text-lg flex items-center" />
                                                             <Button type="link" onClick={() => onPractice(item)} icon={<EditOutlined />} className="text-lg flex items-center" />
                                                         </div>
                                                     </div>
