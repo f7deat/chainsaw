@@ -1,19 +1,32 @@
+import { getStudent } from "@/services/user";
 import { BarChartOutlined, BookOutlined, UserOutlined } from "@ant-design/icons"
 import { Card, Image, Space } from "antd"
 import Link from "next/link"
+import { useEffect, useState } from "react";
 
 type AccountLeftBarProps = {
     tab: number;
 }
 
 const AccountLeftBar: React.FC<AccountLeftBarProps> = (props) => {
+
+    const [student, setStudent] = useState<any>();
+
+    useEffect(() => {
+        getStudent().then(response => {
+            if (response.succeeded) {
+                setStudent(response.data);
+            }
+        })
+    }, []);
+
     return (
         <div>
             <Card>
                 <div className="mb-4 text-center">
-                    <Image src="https://placehold.jp/200x200.png" alt="IMG" width={200} height={200} className="rounded-full" />
+                    <Image src={student?.avatar ? student.avatar : 'https://placehold.jp/200x200.png'} alt="IMG" width={200} height={200} className="rounded-full" />
                 </div>
-                <div className="text-xl text-center mb-4">Nguyễn Hiểu Minh</div>
+                <div className="text-xl text-center mb-4">{student?.hoVaTen}</div>
                 <Link href="/tai-khoan/thong-tin">
                     <div className={`px-4 py-2 rounded border ${props.tab === 0 ? 'border-blue-500' : ''} mb-1 hover:border-blue-500`}>
                         <Space>

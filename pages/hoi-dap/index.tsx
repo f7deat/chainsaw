@@ -1,3 +1,4 @@
+import { getHelp } from "@/services/user";
 import { PageContainer, ProCard } from "@ant-design/pro-components";
 import { Alert, Button, Card, Form, Input, message } from "antd";
 import Head from "next/head";
@@ -13,8 +14,11 @@ export default function QuestionAndAnswer() {
         }
     }, []);
 
-    const onFinish = (values: any) => {
-        message.success('Gửi câu hỏi thành công!')
+    const onFinish = async (values: any) => {
+        const response = await getHelp(values);
+        if (response.succeeded) {
+            message.success('Gửi câu hỏi thành công!')
+        }
     }
 
     return (
@@ -34,7 +38,7 @@ export default function QuestionAndAnswer() {
                         <Form.Item label="Tiêu đề" rules={[{ required: true, message: 'Vui lòng nhập số tiêu đề' }]} name="title">
                             <Input disabled={!allowed} />
                         </Form.Item>
-                        <Form.Item label="Nội dung" rules={[{ required: true, message: 'Vui lòng nhập nội dung' }]} name="content">
+                        <Form.Item label="Nội dung" rules={[{ required: true, message: 'Vui lòng nhập nội dung' }]} name="description">
                             <Input.TextArea disabled={!allowed} />
                         </Form.Item>
                         <div className="flex justify-center gap-4">

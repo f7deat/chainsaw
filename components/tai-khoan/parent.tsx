@@ -1,15 +1,49 @@
-import { ProForm, ProFormText } from "@ant-design/pro-components"
+import { getParent, updateParent } from "@/services/user";
+import { ProForm, ProFormInstance, ProFormText } from "@ant-design/pro-components"
+import { message } from "antd";
+import { useEffect, useRef } from "react"
 
 const ParentInfo: React.FC = () => {
+
+    const formRef = useRef<ProFormInstance>();
+
+    useEffect(() => {
+        getParent().then(response => {
+            formRef?.current?.setFields([
+                {
+                    name: 'tenPhuHuynh',
+                    value: response.tenPhuHuynh
+                }, 
+                {
+                    name: 'soDienThoai',
+                    value: response.soDienThoai
+                }, 
+                {
+                    name: 'email',
+                    value: response.email
+                }, 
+                {
+                    name: 'diaChi',
+                    value: response.diaChi
+                }
+            ])
+        })
+    }, []);
+
+    const onFinish = async (values: any) => {
+        const response = await updateParent(values);
+        if (response.succeeded) {
+            message.success('Lưu thành công!');
+        }
+    }
+
     return (
-        <div>
-            <ProForm>
-                <ProFormText label="Họ và tên" />
-                <ProFormText label="Số điện thoại" />
-                <ProFormText label="Email" />
-                <ProFormText label="Địa chỉ" />
-            </ProForm>
-        </div>
+        <ProForm formRef={formRef} onFinish={onFinish}>
+            <ProFormText name="tenPhuHuynh" label="Họ và tên" />
+            <ProFormText name="soDienThoai" disabled label="Số điện thoại" />
+            <ProFormText name="email" label="Email" />
+            <ProFormText name="diaChi" label="Địa chỉ" />
+        </ProForm>
     )
 }
 

@@ -5,6 +5,13 @@ export async function listCourse() {
     return request.get(`khoahoc/getkhoahocs`);
 }
 
+export async function listKhoaHoc(data: any) {
+    return request({
+        url: `khoahoc/list`,
+        data
+    });
+}
+
 export async function queryKhoaHoc(id: string | string[]) {
     return request.get(`khoahoc/${id}`);
 }

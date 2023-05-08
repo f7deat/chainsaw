@@ -1,3 +1,4 @@
+import AddMember from "@/components/tai-khoan/add-member";
 import ChangePasswordComponent from "@/components/tai-khoan/change-password";
 import AccountLeftBar from "@/components/tai-khoan/left-bar";
 import ParentInfo from "@/components/tai-khoan/parent";
@@ -45,6 +46,11 @@ export default function Profile() {
                     label: 'Thông tin phụ huynh',
                     key: 'parent',
                     children: <ParentInfo />,
+                  },
+                  {
+                    label: 'Thêm thành viên',
+                    key: 'add',
+                    children: <AddMember />,
                   },
                 ],
                 onChange: (key) => {

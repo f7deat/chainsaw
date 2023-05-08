@@ -1,7 +1,11 @@
-import { Card, Empty } from "antd";
+import { listKhoaHoc } from "@/services/course";
+import { UserOutlined } from "@ant-design/icons";
+import { ProList } from "@ant-design/pro-components";
+import { Avatar, Calendar, Card } from "antd";
 import Head from "next/head";
 
 export default function Duo() {
+
     return (
         <>
             <Head>
@@ -14,21 +18,28 @@ export default function Duo() {
                 <div className="container mx-auto">
                     <div className="md:flex gap-4">
                         <div className="md:w-2/3 mb-4">
-                        <div className="md:grid grid-cols-3 gap-4">
-                            <Card>
-                                Lớp toán 1
-                            </Card>
-                            <Card>
-                                Lớp tiếng việt 1
-                            </Card>
-                            <Card>
-                                Lớp tiếng anh 1
-                            </Card>
-                        </div>
+                            <ProList<{
+                                id: number;
+                                name: string;
+                            }>
+                                rowKey="id"
+                                request={listKhoaHoc}
+                                grid={{
+                                    md: 3,
+                                    column: 3
+                                }}
+                                headerTitle="Khóa học"
+                                metas={{
+                                    title: {
+                                        render: (dom, entity) => (
+                                            <div className="line-clamp-2">{entity.name}</div>
+                                        )
+                                    }
+                                }} />
                         </div>
                         <div className="md:w-1/3">
                             <Card title="Lịch lớp học nhóm theo tháng">
-                                <Empty />
+                                <Calendar fullscreen={false} />
                             </Card>
                         </div>
                     </div>

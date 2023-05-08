@@ -2,13 +2,17 @@ import { getMyCourse } from "@/services/course";
 import Link from "next/link";
 import { ProList } from "@ant-design/pro-components";
 import { ArrowRightOutlined } from "@ant-design/icons";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 const MyCourse: React.FC = () => {
 
-    const access_token = localStorage.getItem('access_token');
+    const [token, setToken] = useState<string>();
+    useEffect(() => {
+        const access_token = localStorage.getItem('access_token') || '';
+        setToken(access_token)
+    }, []);
 
-    return access_token ? (
+    return token ? (
         <ProList<API.ChuongTrinhHocListItem>
             toolBarRender={() => {
                 return [
