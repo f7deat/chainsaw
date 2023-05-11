@@ -22,11 +22,9 @@ export default function Profile() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageContainer title="Thông tin cá nhân">
-        <Row gutter={16}>
-          <Col md={8}>
-            <AccountLeftBar tab={0} />
-          </Col>
-          <Col md={16}>
+        <div className="md:flex gap-4">
+          <AccountLeftBar tab={0} />
+          <div className="flex-1">
             <ProCard
               tabs={{
                 activeKey: tab,
@@ -57,8 +55,8 @@ export default function Profile() {
                   setTab(key);
                 },
               }} />
-          </Col>
-        </Row>
+          </div>
+        </div>
       </PageContainer>
     </>
   )

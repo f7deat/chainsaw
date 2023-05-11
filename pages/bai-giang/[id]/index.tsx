@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { listBaiGiang, getChuongTrinhHoc, isBought, listNhomBaiGiang } from "@/services/course";
 import { useRouter } from "next/router";
 import CourseSummary from "@/components/bai-giang/summary";
-import { Button, Divider, Typography, message } from "antd";
+import { Button, Divider, Tooltip, Typography, message } from "antd";
 import { CheckCircleFilled, ClockCircleFilled, EditOutlined, PlayCircleOutlined, QuestionCircleFilled, SearchOutlined } from "@ant-design/icons";
-import { PageContainer, ProList } from "@ant-design/pro-components";
+import { ProList } from "@ant-design/pro-components";
 
 export default function CourseContent() {
     const router = useRouter();
@@ -111,13 +111,21 @@ export default function CourseContent() {
                                                 </div>
                                             }
                                             if (entity.status) {
-                                                return <div className="text-xl ml-2">
-                                                    <CheckCircleFilled className="text-green-500" />
-                                                </div>
+                                                return (
+                                                    <Tooltip title="Đã hoàn thành bài giảng">
+                                                        <div className="text-xl ml-2">
+                                                            <CheckCircleFilled className="text-green-500" />
+                                                        </div>
+                                                    </Tooltip>
+                                                )
                                             }
-                                            return <div className="text-xl ml-2">
-                                                <ClockCircleFilled className="text-red-500" />
-                                            </div>
+                                            return (
+                                                <Tooltip title="Bài giảng đang học">
+                                                    <div className="text-xl ml-2">
+                                                        <ClockCircleFilled className="text-red-500" />
+                                                    </div>
+                                                </Tooltip>
+                                            )
                                         }
                                     }
                                 }}

@@ -74,3 +74,15 @@ export async function listUserSelect(params: any) {
         params
     })
 }
+
+export async function learningHistory(params: any) {
+    return request({
+        url: `user/learning-history`,
+        params
+    })
+}
+export async function learningResult() {
+    return request({
+        url: `user/learning-result`
+    })
+}
