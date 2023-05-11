@@ -7,6 +7,7 @@ import { Fragment } from 'react';
 import Partner from '@/components/home/partner';
 import ChuongTrinhHocBySubject from '@/components/subject/chuong-trinh-hoc';
 import Link from 'next/link';
+import StatisticsHome from '@/components/statistics';
 
 export default function Home() {
 
@@ -51,6 +52,9 @@ export default function Home() {
       <div data-aos="fade-up">
         <ChuongTrinhHocBySubject id={1} headerTitle='Khóa Toán tiêu biểu' />
       </div>
+
+      <StatisticsHome />
+
       <div data-aos="fade-up">
         <ChuongTrinhHocBySubject id={2} headerTitle='Khóa Tiếng Anh tiêu biểu' />
       </div>

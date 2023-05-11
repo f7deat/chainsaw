@@ -23,3 +23,33 @@ body {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+.counts .count-box {
+    align-items: center;
+    padding: 30px;
+    width: 100%;
+    background: #fff;
+}
+
+.counts .count-box i {
+    font-size: 42px;
+    line-height: 0;
+    margin-right: 20px;
+}
+
+.counts .count-box span {
+    font-size: 36px;
+    display: block;
+    font-weight: 700;
+}
+
+.counts .count-box p {
+    padding: 0;
+    margin: 0;
+    font-family: "Nunito", sans-serif;
+    font-size: 14px;
+}
+
+.shadow {
+    box-shadow: 0 0 30px rgba(1, 41, 111, .0784313725490196);
+}

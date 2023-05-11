@@ -67,3 +67,10 @@ export async function getHelp(data: any) {
         data
     })
 }
+
+export async function listUserSelect(params: any) {
+    return request({
+        url: `user/list-select`,
+        params
+    })
+}
