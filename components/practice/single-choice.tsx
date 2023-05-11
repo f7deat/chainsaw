@@ -12,7 +12,8 @@ type SingleChoiceProps = {
 
 const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
 
-    const { data, index, setScore, score } = props;
+    const { index, setScore, score } = props;
+    const [data, setData] = useState<API.QuestionListItem>(props.data)
     const router = useRouter();
 
     const [answered, setAnswered] = useState<boolean>(false);
@@ -32,17 +33,32 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
             return;
         }
         const response = await checkAnswer(values.questionId, values.id, '', undefined, data.type, router.query.id);
+        let newData = {...data};
         if (response.correct) {
             setScore(score + 1);
             const audio = new Audio("https://cdn.getvisa.vn/music/true.mp3");
             audio.play();
             message.success('Đúng rồi, con giỏi lắm!');
+            newData.result = true;
         } else {
             const audio = new Audio("https://cdn.getvisa.vn/music/false.mp3");
             audio.play();
             message.error('Sai rồi!');
+            newData.result = false;
         }
+        newData.isCompleted = true;
+        setData(newData);
         setAnswered(true);
+    }
+
+    const getBorder = (item: API.AnswerListItem) => {
+        if (item.yourAnswer) {
+            if (data.result) {
+                return 'border-green-500';
+            }
+            return 'border-red-500';
+        }
+        return '';
     }
 
     return (
@@ -64,7 +80,9 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
                         data.answers.map(answer => (
                             <div key={answer.id}>
                                 <Col>
-                                    <button type="button" className="bg-slate-100 py-4 px-8 flex justify-center items-center hover:bg-yellow-400 rounded" onClick={() => onAnswer(answer)}>
+                                    <button type="button" 
+                                    className={`py-4 px-8 flex justify-center items-center hover:bg-slate-200 rounded border ${getBorder(answer)}`} 
+                                    onClick={() => onAnswer(answer)}>
                                         <Typography.Title level={2}>
                                             <div dangerouslySetInnerHTML={{
                                                 __html: answer.text

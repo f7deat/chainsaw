@@ -19,66 +19,62 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-        <div className='md:flex gap-4 items-center md:mb-20 mb-4 md:flex-row flex-col'>
-          <div className='md:w-1/2' data-aos="fade-up">
-            <div className='text-blue-500 font-medium md:text-lg text-sm'>Sẵn sàng để học</div>
-            <div className='md:text-7xl text-2xl font-bold mb-3'>
-              Khám phá thế giới E-Learning
-            </div>
-            <div className='text-gray-500 mb-6 md:text-lg text-sm'>
-              E-Learning là một trải nghiệm học tập tuyệt vời, cung cấp những khoá học online chất lượng cao cho học sinh tiểu học, THCS và THPT
-            </div>
-            <Link href='/tai-khoan/dang-ky' className='block'>
-              <span className='md:px-12 px-4 md:py-3 py-2 hover:bg-blue-600 rounded-full text-lg bg-blue-500 text-white font-medium'>
-                Bắt đầu
-              </span>
-            </Link>
-
+      <div className='md:flex gap-4 items-center md:mb-20 mb-4 md:flex-row flex-col'>
+        <div className='md:w-1/2' data-aos="fade-up">
+          <div className='text-blue-500 font-medium md:text-lg text-sm'>Sẵn sàng để học</div>
+          <div className='md:text-7xl text-2xl font-bold mb-3'>
+            Khám phá thế giới E-Learning
           </div>
-          <div className='md:w-1/2 flex justify-end'>
-            <picture>
-              <img src='https://cdn.getvisa.vn/images/banners/Elearning.png' alt='' width={500} data-aos="zoom-out" />
-            </picture>
+          <div className='text-gray-500 mb-6 md:text-lg text-sm'>
+            E-Learning là một trải nghiệm học tập tuyệt vời, cung cấp những khoá học online chất lượng cao cho học sinh tiểu học, THCS và THPT
           </div>
-        </div>
+          <Link href='/tai-khoan/dang-ky' className='block'>
+            <span className='md:px-12 px-4 md:py-3 py-2 hover:bg-blue-600 rounded-full text-lg bg-blue-500 text-white font-medium'>
+              Bắt đầu
+            </span>
+          </Link>
 
-        <div data-aos='fade-up'>
-          <CourseList />
         </div>
-
-        <Divider />
-
-        <div data-aos="fade-up">
-          <ChuongTrinhHocBySubject id={1} headerTitle='Khóa Toán tiêu biểu' />
-        </div>
-        <div data-aos="fade-up">
-          <ChuongTrinhHocBySubject id={2} headerTitle='Khóa Tiếng Anh tiêu biểu' />
-        </div>
-        <div data-aos="fade-up">
-          <MyCourse defaultPageSize={4} />
-        </div>
-        <Divider />
-
-
-        <div className='bg-blue-200 items-center h-64 rounded-lg flex px-4 pt-4 md:mb-20 mb-4 gap-4' data-aos="fade-up">
+        <div className='md:w-1/2 flex justify-end'>
           <picture>
-            <img src='https://kitpro.site/tutturu/wp-content/uploads/sites/69/2022/02/Elearning100720010-Converted0-800x653.png' alt='' className='h-52' />
+            <img src='https://cdn.getvisa.vn/images/banners/Elearning.png' alt='' width={500} data-aos="zoom-out" />
           </picture>
-          <div>
-            <div className='text-yellow-500 text-2xl font-medium mb-2'>Đăng ký</div>
-            <div className='text-lg mb-2 font-bold'>Nhận thông tin mới nhất từ chúng tôi</div>
-            <ProForm layout='vertical' submitter={false}>
-              <Space.Compact style={{ width: '100%' }}>
-                <Input size='large' defaultValue="Nhập địa chỉ email" />
-                <Link href="/tai-khoan/dang-ky">
-                  <div className='bg-blue-500'>Đăng ký</div>
-                </Link>
-              </Space.Compact>
-            </ProForm>
-          </div>
         </div>
+      </div>
 
-        <Partner />
+      <div data-aos='fade-up'>
+        <CourseList />
+      </div>
+
+      <Divider />
+
+      <div data-aos="fade-up">
+        <ChuongTrinhHocBySubject id={1} headerTitle='Khóa Toán tiêu biểu' />
+      </div>
+      <div data-aos="fade-up">
+        <ChuongTrinhHocBySubject id={2} headerTitle='Khóa Tiếng Anh tiêu biểu' />
+      </div>
+      <div data-aos="fade-up" className='mb-4'>
+        <MyCourse defaultPageSize={4} />
+      </div>
+
+      <div className='bg-blue-200 items-center h-64 rounded-lg flex px-4 pt-4 md:mb-20 mb-4 gap-4' data-aos="fade-up">
+        <picture>
+          <img src='https://kitpro.site/tutturu/wp-content/uploads/sites/69/2022/02/Elearning100720010-Converted0-800x653.png' alt='' className='h-52' />
+        </picture>
+        <div>
+          <div className='text-yellow-500 text-2xl font-medium mb-2'>Đăng ký</div>
+          <div className='text-lg mb-2 text-gray-600'>Nhận thông tin mới nhất từ chúng tôi</div>
+          <ProForm layout='vertical' submitter={false}>
+            <div className='flex gap-4'>
+              <input type='text' placeholder='Nhập địa chỉ email' className='rounded-full px-4 py-2' />
+              <button type='button' className='bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600'>Đăng ký</button>
+            </div>
+          </ProForm>
+        </div>
+      </div>
+
+      <Partner />
 
     </>
   )

@@ -1,10 +1,10 @@
 import CommentComponent from "@/components/comment";
 import { BaiGiang, FreeInput, MultipleChoice, SingleChoice } from "@/components/practice";
-import { getBaiGiang, listQuestion } from "@/services/course";
+import { getBaiGiang, listQuestion, resetResult } from "@/services/course";
 import { QuestionType } from "@/utils/constants";
-import { CheckCircleOutlined, StopOutlined } from "@ant-design/icons";
-import { PageContainer, ProCard } from "@ant-design/pro-components";
-import { Alert, Divider, Empty, Space, Tabs } from "antd";
+import { CheckCircleOutlined, RedoOutlined, StopOutlined } from "@ant-design/icons";
+import { ProCard } from "@ant-design/pro-components";
+import { Alert, Button, Divider, Empty, Popconfirm, Space, Tabs, message } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
@@ -24,7 +24,6 @@ export default function LuyenTap() {
                     if (response.data) {
                         let point = 0;
                         const length = response.data.filter((x: API.QuestionListItem) => x.type !== 'baigiang').length;
-                        console.log(response.data)
                         for (let index = 0; index < length; index++) {
                             const element = response.data[index];
                             if (element.result) {
@@ -74,6 +73,16 @@ export default function LuyenTap() {
         return <span className="text-lg font-bold">{index}</span>
     }
 
+    const onConfirm = async () => {
+        const response = await resetResult(router.query.id);
+        if (response.succeeded) {
+            message.success('Thực hiện thành công!');
+            window.location.reload();
+        } else {
+            message.error('Có lỗi xảy ra!');
+        }
+    }
+
     return (
         <>
             <Head>
@@ -82,42 +91,53 @@ export default function LuyenTap() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <PageContainer title={baiGiang?.tenBaiGiang}>
+
+            <ProCard
+                title={
+                    <div className="text-blue-500 text-2xl">{baiGiang?.tenBaiGiang}</div>
+                }
+                extra={<Popconfirm title="Bạn có chắc chắn muốn làm lại không?" onConfirm={onConfirm}>
+                    <Button size="large" type="primary">
+                        <Space>
+                            <RedoOutlined />
+                            Làm lại
+                        </Space>
+                    </Button>
+                </Popconfirm>}
+            >
                 {
                     error ? <Alert type="error" message={error} /> : (<Fragment />)
                 }
-
-                <ProCard>
-                    <div className="flex justify-end absolute right-4">
-                        <div className="shadow border">
-                            <div className="bg-red-500 text-white py-2 px-4 font-bold text-xl rounded-t">Điểm</div>
-                            <div className="p-2 text-blue-500 text-4xl text-center bg-white font-medium">
-                                <span>{score}</span>
-                                <span>/{data?.filter((x: API.QuestionListItem) => x.type !== 'baigiang').length}</span>
-                            </div>
+                <div className="flex justify-end absolute right-4 top-32">
+                    <div className="shadow border">
+                        <div className="bg-red-500 text-white py-2 px-4 font-bold text-xl rounded-t">Điểm</div>
+                        <div className="p-2 text-blue-500 text-4xl text-center bg-white font-medium">
+                            <span>{score}</span>
+                            <span>/{data?.filter((x: API.QuestionListItem) => x.type !== 'baigiang').length}</span>
                         </div>
                     </div>
-                    {
-                        data?.length > 0 ? (
-                            <Tabs
-                                tabPosition="left"
-                                items={data?.map((item: API.QuestionListItem, i: number) => {
-                                    const id = String(i + 1);
-                                    return {
-                                        label: labelRender(item, id),
-                                        key: id,
-                                        children: renderTab(item, i),
-                                    };
-                                })}
-                            />
-                        ) : <Empty />
-                    }
+                </div>
+                <Divider dashed />
+                {
+                    data?.length > 0 ? (
+                        <Tabs
+                            tabPosition="left"
+                            items={data?.map((item: API.QuestionListItem, i: number) => {
+                                const id = String(i + 1);
+                                return {
+                                    label: labelRender(item, id),
+                                    key: id,
+                                    children: renderTab(item, i),
+                                };
+                            })}
+                        />
+                    ) : <Empty />
+                }
 
-                </ProCard>
+            </ProCard>
 
-                <CommentComponent />
-                <Divider />
-            </PageContainer>
+            <CommentComponent />
+            <Divider />
         </>
     )
 }

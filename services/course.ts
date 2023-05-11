@@ -96,3 +96,10 @@ export async function listChuongTrinhHocBySubjectId( params: any, id?: string | 
         params
     })
 }
+
+export async function resetResult(id?: string | string[]) {
+    return request({
+        url: `bai-giang/reset/${id}`,
+        method: 'POST'
+    })
+}

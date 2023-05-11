@@ -38,5 +38,6 @@ declare namespace API {
         id: number;
         text: string;
         questionId: number;
+        yourAnswer: boolean;
     }
 }
