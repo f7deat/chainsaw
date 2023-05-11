@@ -1,12 +1,11 @@
 import Head from "next/head";
-import Link from "next/link";
 import { useEffect, useState } from "react";
-import { listBaiGiang, getChuongTrinhHoc, isBought } from "@/services/course";
+import { listBaiGiang, getChuongTrinhHoc, isBought, listNhomBaiGiang } from "@/services/course";
 import { useRouter } from "next/router";
 import CourseSummary from "@/components/bai-giang/summary";
 import { Button, message } from "antd";
-import { EditOutlined, PlayCircleOutlined, SearchOutlined } from "@ant-design/icons";
-import { PageContainer } from "@ant-design/pro-components";
+import { CheckCircleFilled, ClockCircleFilled, EditOutlined, PlayCircleOutlined, QuestionCircleFilled, SearchOutlined } from "@ant-design/icons";
+import { PageContainer, ProList } from "@ant-design/pro-components";
 
 export default function CourseContent() {
     const router = useRouter();
@@ -16,9 +15,9 @@ export default function CourseContent() {
 
     useEffect(() => {
         if (router.query.id) {
-            listBaiGiang(router.query.id).then(response => {
+            listNhomBaiGiang(router.query.id).then(response => {
                 setData(response)
-            });
+            })
             getChuongTrinhHoc(router.query.id).then(response => {
                 setChuongTrinhHoc(response)
             })
@@ -74,22 +73,56 @@ export default function CourseContent() {
                             <div className="text-4xl font-medium mb-4">Chương trình học</div>
                             {
                                 data?.map((group: any, index: number) => (
-                                    <div key={index} className="bg-white mb-4">
-                                        <div className="bg-blue-500 font-medium text-white text-xl px-4 py-2 rounded-t">{group.name}</div>
-                                        {
-                                            group.items.map((item: any) => (
-                                                <div key={item.baiGiangId}>
-                                                    <div className="px-4 py-2 hover:bg-blue-100 flex justify-between items-center text-lg">
-                                                        <div>{item.name}</div>
-                                                        <div className="flex gap-4 items-center">
-                                                            <Button type="link" icon={<PlayCircleOutlined />} disabled className="text-lg flex items-center" />
-                                                            <Button type="link" onClick={() => onPractice(item)} icon={<EditOutlined />} className="text-lg flex items-center" />
-                                                        </div>
+
+                                    <ProList<{
+                                        id: number,
+                                        name: string,
+                                        free: boolean,
+                                        status?: boolean
+                                    }>
+                                        className="mb-4"
+                                        key={group.id}
+                                        headerTitle={<div className=" font-medium text-2xl rounded-t text-blue-600">{group.name}</div>}
+                                        request={(params) => listBaiGiang({
+                                            nhomBaiGiangId: group.id,
+                                            ...params
+                                        })}
+                                        // ghost={true}
+                                        showActions="always"
+                                        metas={{
+                                            title: {
+                                                render: (dom, entity) => (
+                                                    <div className="text-lg font-medium">
+                                                        <div>{entity.name}</div>
                                                     </div>
-                                                </div>
-                                            ))
-                                        }
-                                    </div>
+                                                )
+                                            },
+                                            actions: {
+                                                render: (dom, entity) => [
+                                                    <Button key={entity.id} type="link" icon={<PlayCircleOutlined />} disabled className="text-lg flex items-center" />,
+                                                    <Button key={entity.id} type="link" onClick={() => onPractice(entity)} icon={<EditOutlined />} className="text-lg flex items-center" />
+                                                ]
+                                            },
+                                            avatar: {
+                                                render: (dom, entity) => {
+                                                    if (entity.status == null) {
+                                                        return <div className="text-xl ml-2">
+                                                            <QuestionCircleFilled className="text-gray-500" />
+                                                        </div>
+                                                    }
+                                                    if (entity.status) {
+                                                        return <div className="text-xl ml-2">
+                                                            <CheckCircleFilled className="text-green-500" />
+                                                        </div>
+                                                    }
+                                                    return <div className="text-xl ml-2">
+                                                        <ClockCircleFilled className="text-red-500" />
+                                                    </div>
+                                                }
+                                            }
+                                        }}
+                                        rowClassName="bg-white"
+                                    />
                                 ))
                             }
                         </div>

@@ -1,8 +1,7 @@
 import CommentComponent from "@/components/comment";
-import PracticeContent from "@/components/practice/item";
-import MultipleChoice from "@/components/practice/multiple-choice";
-import SingleChoice from "@/components/practice/single-choice";
+import { BaiGiang, FreeInput, MultipleChoice, SingleChoice } from "@/components/practice";
 import { getBaiGiang, listQuestion } from "@/services/course";
+import { QuestionType } from "@/utils/constants";
 import { CheckCircleOutlined, StopOutlined } from "@ant-design/icons";
 import { PageContainer, ProCard } from "@ant-design/pro-components";
 import { Alert, Divider, Empty, Space, Tabs } from "antd";
@@ -24,7 +23,9 @@ export default function LuyenTap() {
                     setData(response.data);
                     if (response.data) {
                         let point = 0;
-                        for (let index = 0; index < response.data.length; index++) {
+                        const length = response.data.filter((x: API.QuestionListItem) => x.type !== 'baigiang').length;
+                        console.log(response.data)
+                        for (let index = 0; index < length; index++) {
                             const element = response.data[index];
                             if (element.result) {
                                 point++;
@@ -45,10 +46,12 @@ export default function LuyenTap() {
     const [score, setScore] = useState<number>(0);
 
     const renderTab = (item: API.QuestionListItem, index: number) => {
-        if (item.type === 'tuluan') {
-            return <PracticeContent item={item} score={score} setScore={setScore} index={index} />
-        } else if (item.type === 'daluachon') {
+        if (item.type === QuestionType.FREE_INPUT) {
+            return <FreeInput item={item} score={score} setScore={setScore} index={index} />
+        } else if (item.type === QuestionType.MULTIPLE_CHOICE) {
             return <MultipleChoice data={item} index={index} score={score} setScore={setScore} />
+        } else if (item.type === QuestionType.BAI_GIANG) {
+            return <BaiGiang data={item} index={index} />
         } else {
             return <SingleChoice data={item} index={index} score={score} setScore={setScore} />
         }
@@ -90,7 +93,7 @@ export default function LuyenTap() {
                             <div className="bg-red-500 text-white py-2 px-4 font-bold text-xl rounded-t">Điểm</div>
                             <div className="p-2 text-blue-500 text-4xl text-center bg-white font-medium">
                                 <span>{score}</span>
-                                <span>/{data?.length}</span>
+                                <span>/{data?.filter((x: API.QuestionListItem) => x.type !== 'baigiang').length}</span>
                             </div>
                         </div>
                     </div>

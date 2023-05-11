@@ -19,7 +19,7 @@ const Header: React.FC = () => {
     }, []);
 
     return (
-        <header className={`${offset < 150 ? '' : 'bg-white shadow'} fixed top-0 left-0 right-0 z-50`}>
+        <header className={`${offset < 100 ? '' : 'bg-white shadow'} fixed top-0 left-0 right-0 z-50`}>
             <div className="container mx-auto">
             <div className="flex gap-4 py-4">
                 <div className="flex-1 md:flex gap-4 items-center justify-between">

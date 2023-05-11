@@ -23,8 +23,15 @@ export async function chuongTrinhHoc(params: any, id?: string | string[]) {
     })
 }
 
-export async function listBaiGiang(id?: string | string[]) {
-    return request.get(`khoahoc/getbaigiangs/${id}`)
+export async function listNhomBaiGiang(id?: string | string[]) {
+    return request.get(`bai-giang/nhom-bai-giang/${id}`);
+}
+
+export async function listBaiGiang(params: any) {
+    return request({
+        url: `bai-giang/list`,
+        params
+    });
 }
 
 export async function getBaiGiang(id?: string | string[]) {
@@ -39,7 +46,7 @@ export async function listQuestion(id?: string | string[]) {
     return request.get(`cau-hoi/danh-sach/${id}`)
 }
 
-export async function checkAnswer(questionId: number, answerId: string | number, answerText: string, dapAnIds: number[] = [], type: string = QuestionType.SINGLE_CHOICE) {
+export async function checkAnswer(questionId: number, answerId: string | number, answerText: string, dapAnIds: number[] = [], type: string = QuestionType.SINGLE_CHOICE, baiGiangId?: string | string[]) {
     return request({
         url: 'cau-hoi/kiem-tra',
         method: 'POST',
@@ -48,7 +55,8 @@ export async function checkAnswer(questionId: number, answerId: string | number,
             DapAnID: answerId,
             CauTraLoi: answerText,
             dapAnIds: dapAnIds,
-            type: type
+            type: type,
+            baiGiangId
         }
     })
 }

@@ -57,7 +57,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                     <Button size="large" type="primary" onClick={onRegister}>
                         <Space><LoginOutlined />Đăng ký ngay</Space>
                     </Button>
-                    <a href="tel:+84911717772" className="px-4 py-2 rounded-lg bg-red-500 text-white">
+                    <a href="tel:+84911717772" className="px-4 py-2 rounded-full bg-red-500 text-white">
                         <Space>
                             <PhoneOutlined />Nhận tư vấn
                         </Space>

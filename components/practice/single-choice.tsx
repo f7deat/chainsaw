@@ -1,5 +1,6 @@
 import { checkAnswer } from "@/services/course";
 import { Alert, Col, Divider, Row, Typography, message } from "antd";
+import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 
 type SingleChoiceProps = {
@@ -12,6 +13,7 @@ type SingleChoiceProps = {
 const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
 
     const { data, index, setScore, score } = props;
+    const router = useRouter();
 
     const [answered, setAnswered] = useState<boolean>(false);
 
@@ -29,7 +31,7 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
         if (answered || data.isCompleted) {
             return;
         }
-        const response = await checkAnswer(values.questionId, values.id, '');
+        const response = await checkAnswer(values.questionId, values.id, '', undefined, data.type, router.query.id);
         if (response.correct) {
             setScore(score + 1);
             const audio = new Audio("https://cdn.getvisa.vn/music/true.mp3");

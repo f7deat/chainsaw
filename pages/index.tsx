@@ -18,25 +18,24 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <PageContainer title={<Fragment />}>
 
-        <div className='flex gap-4 items-center md:mb-20 mb-4'>
-          <div className='w-1/2' data-aos="fade-up">
-            <div className='text-blue-500 font-medium text-lg'>Sẵn sàng để học</div>
-            <div className='text-7xl font-bold mb-3'>
+        <div className='md:flex gap-4 items-center md:mb-20 mb-4 md:flex-row flex-col'>
+          <div className='md:w-1/2' data-aos="fade-up">
+            <div className='text-blue-500 font-medium md:text-lg text-sm'>Sẵn sàng để học</div>
+            <div className='md:text-7xl text-2xl font-bold mb-3'>
               Khám phá thế giới E-Learning
             </div>
-            <div className='text-gray-500 mb-6 text-lg'>
+            <div className='text-gray-500 mb-6 md:text-lg text-sm'>
               E-Learning là một trải nghiệm học tập tuyệt vời, cung cấp những khoá học online chất lượng cao cho học sinh tiểu học, THCS và THPT
             </div>
             <Link href='/tai-khoan/dang-ky' className='block'>
-              <span className='px-10 py-2 hover:bg-blue-600 rounded-full text-lg bg-blue-500 text-white font-medium'>
+              <span className='md:px-12 px-4 md:py-3 py-2 hover:bg-blue-600 rounded-full text-lg bg-blue-500 text-white font-medium'>
                 Bắt đầu
               </span>
             </Link>
 
           </div>
-          <div className='w-1/2 flex justify-end'>
+          <div className='md:w-1/2 flex justify-end'>
             <picture>
               <img src='https://cdn.getvisa.vn/images/banners/Elearning.png' alt='' width={500} data-aos="zoom-out" />
             </picture>
@@ -71,7 +70,9 @@ export default function Home() {
             <ProForm layout='vertical' submitter={false}>
               <Space.Compact style={{ width: '100%' }}>
                 <Input size='large' defaultValue="Nhập địa chỉ email" />
-                <Button type="primary" size='large'>Đăng ký</Button>
+                <Link href="/tai-khoan/dang-ky">
+                  <div className='bg-blue-500'>Đăng ký</div>
+                </Link>
               </Space.Compact>
             </ProForm>
           </div>
@@ -79,7 +80,6 @@ export default function Home() {
 
         <Partner />
 
-      </PageContainer>
     </>
   )
 }

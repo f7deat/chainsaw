@@ -17,7 +17,7 @@ const ChuongTrinhHocBySubject: React.FC<ChuongTrinhHocBySubjectProps> = (props) 
             pagination={{
                 defaultPageSize: 4
             }}
-            grid={{ gutter: 16, column: 4 }}
+            grid={{ gutter: 16, column: 4, md: 4, xs: 1 }}
             showActions="always"
             ghost={true}
             metas={{
@@ -29,7 +29,9 @@ const ChuongTrinhHocBySubject: React.FC<ChuongTrinhHocBySubjectProps> = (props) 
                                 <img src={entity.thumbnail || 'https://cdn.getvisa.vn/images/cogiao.jpg'} alt="IMG" className="mb-2" />
                             </picture>
                             <div className="px-2 pb-1">
-                                <div className="line-clamp-2 font-medium text-blue-500 mb-1">{entity.name}</div>
+                                <Link href={`/bai-giang/${entity.id}`}>
+                                    <div className="line-clamp-2 font-medium text-blue-500 mb-1">{entity.name}</div>
+                                </Link>
                                 <div className="text-xs text-red-500 text-right">
                                     <StarFilled />
                                     <StarFilled />

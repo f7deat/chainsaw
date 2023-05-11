@@ -2,6 +2,7 @@ import { checkAnswer } from "@/services/course";
 import { QuestionType } from "@/utils/constants";
 import { ProForm, ProFormCheckbox } from "@ant-design/pro-components";
 import { Alert, message, Divider, Row, Col, Typography } from "antd";
+import { useRouter } from "next/router";
 import { useState, Fragment } from "react";
 
 type MultipleChoiceProps = {
@@ -13,6 +14,7 @@ type MultipleChoiceProps = {
 
 const MultipleChoice: React.FC<MultipleChoiceProps> = (props) => {
     const { data, index, setScore, score } = props;
+    const router = useRouter();
 
     const [answered, setAnswered] = useState<boolean>(false);
 
@@ -30,7 +32,7 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = (props) => {
         if (answered || data.isCompleted) {
             return;
         }
-        const response = await checkAnswer(data.id, 0, '', values.dapAnIds, QuestionType.MULTIPLE_CHOICE);
+        const response = await checkAnswer(data.id, 0, '', values.dapAnIds, QuestionType.MULTIPLE_CHOICE, router.query.id);
         if (response.correct) {
             setScore(score + 1);
             message.success('Đúng rồi, con giỏi lắm')

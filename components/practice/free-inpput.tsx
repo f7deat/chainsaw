@@ -1,5 +1,6 @@
 import { checkAnswer } from "@/services/course";
 import { Alert, Button, Divider, Form, Input, message } from "antd"
+import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 
 type PracticeContentProps = {
@@ -14,6 +15,7 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
 
     const { item, setScore, score, index } = props;
     const [answered, setAnswered] = useState<boolean>(false);
+    const router = useRouter();
 
     const onFinish = async (values: any) => {
         if (!values.answer) {
@@ -21,7 +23,7 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
             return;
         }
 
-        const response = await checkAnswer(item.id, 0, values.answer);
+        const response = await checkAnswer(item.id, 0, values.answer, undefined, item.type, router.query.id);
         if (response.correct) {
             setScore(score + 1);
             message.success('Đúng rồi!!!');
