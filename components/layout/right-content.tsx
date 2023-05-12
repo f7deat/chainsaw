@@ -1,24 +1,25 @@
-import { BarChartOutlined, BellFilled, BookOutlined, FacebookFilled, GoogleOutlined, LogoutOutlined, PlusOutlined, UserOutlined } from "@ant-design/icons"
+import { BarChartOutlined, BookOutlined, FacebookFilled, GoogleOutlined, LogoutOutlined, MoneyCollectOutlined, PlusOutlined, UserOutlined } from "@ant-design/icons"
 import { Avatar, Button, Col, Form, Input, Modal, Row, Space, Typography, message } from "antd"
 import HeaderDropdown from "./header-dropdown"
 import { useRouter } from "next/router";
 import type { MenuInfo } from 'rc-menu/lib/interface';
 import { Fragment, useEffect, useRef, useState } from "react";
-import { getStudent, login } from "@/services/user";
+import { getUser, login } from "@/services/user";
 import Link from "next/link";
 import { StepsForm, ProFormSelect, ProFormInstance } from "@ant-design/pro-components";
+import { Role } from "@/utils/constants";
 
 const RightContent: React.FC = () => {
 
     const router = useRouter();
     const [options, setOptions] = useState<any>([]);
-    const [user, setUser] = useState<any>();
+    const [user, setUser] = useState<API.User>();
     const formRef = useRef<ProFormInstance>();
     const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
         try {
-            getStudent().then(response => {
+            getUser().then(response => {
                 setUser(response.data)
             });
         } catch (error) {
@@ -49,11 +50,20 @@ const RightContent: React.FC = () => {
         } else if (key === 'history') {
             router.push(`/tai-khoan/hoc-tap`);
             return;
+        } else if (key === 'refer') {
+            router.push(`/tai-khoan/thu-nhap`);
+            return;
         }
         router.push(`/accounts/${key}`);
     }
 
     const menuItems = [
+        ...(user?.roles?.find(x => x === Role.Referal) ?
+            [{
+                key: 'refer',
+                icon: <MoneyCollectOutlined />,
+                label: 'Thu nhập của tôi',
+            }] : []),
         {
             key: 'profile',
             icon: <UserOutlined />,
@@ -76,7 +86,7 @@ const RightContent: React.FC = () => {
             key: 'logout',
             icon: <LogoutOutlined />,
             label: 'Đăng xuất',
-        },
+        }
     ];
 
     const onLogin = async (values: any) => {
@@ -133,14 +143,6 @@ const RightContent: React.FC = () => {
         </HeaderDropdown>
     ) : (
         <Space className="mr-4">
-            {/* <Button type="link" size="large">
-                <Link href='/tai-khoan/dang-ky'>
-                    <Space>
-                        <PlusOutlined />
-                        Đăng ký
-                    </Space>
-                </Link>
-            </Button> */}
             <Button type="primary" size="large" onClick={() => setOpen(true)}>
                 <Space>
                     <UserOutlined />

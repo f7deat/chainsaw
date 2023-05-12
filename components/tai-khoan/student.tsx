@@ -1,4 +1,4 @@
-import { getStudent, listUserSelect, updateStudent } from "@/services/user";
+import { getUser, listUserSelect, updateStudent } from "@/services/user";
 import { ProForm, ProFormDatePicker, ProFormInstance, ProFormSelect, ProFormText } from "@ant-design/pro-components"
 import { message } from "antd";
 import { useEffect, useRef } from "react"
@@ -8,7 +8,7 @@ const StudentInfo: React.FC = () => {
     const formRef = useRef<ProFormInstance>();
 
     useEffect(() => {
-        getStudent().then(response => {
+        getUser().then(response => {
             if (response.succeeded) {
                 formRef.current?.setFields([
                     {

@@ -1,7 +1,7 @@
 import request from "./request";
 
-export async function getStudent() {
-    return request.get(`student`);
+export async function getUser() {
+    return request.get(`user`);
 }
 
 export async function getParent() {
@@ -84,5 +84,13 @@ export async function learningHistory(params: any) {
 export async function learningResult() {
     return request({
         url: `user/learning-result`
+    })
+}
+
+export async function userLogin(data: any) {
+    return request({
+        url: `login`,
+        method: 'POST',
+        data
     })
 }

@@ -6,3 +6,7 @@ export enum QuestionType {
     BAI_GIANG = "baigiang",
     SAPXEP = "sapxep"
 }
+
+export enum Role {
+    Referal = 'Referal'
+}

@@ -1,4 +1,4 @@
-import { getStudent } from "@/services/user";
+import { getUser } from "@/services/user";
 import { BarChartOutlined, BookOutlined, UserOutlined } from "@ant-design/icons"
 import { Card, Image, Space } from "antd"
 import Link from "next/link"
@@ -13,7 +13,7 @@ const AccountLeftBar: React.FC<AccountLeftBarProps> = (props) => {
     const [student, setStudent] = useState<any>();
 
     useEffect(() => {
-        getStudent().then(response => {
+        getUser().then(response => {
             if (response.succeeded) {
                 setStudent(response.data);
             }

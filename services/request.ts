@@ -27,7 +27,7 @@ request.interceptors.response.use(
   function (error: any) {
     if (error && error.response) {
       if (error.response.status === 401) {
-        localStorage.removeItem("access_token");
+        // TODO: tandc on handle
       }
     }
     // if the server throws an error (404, 500 etc.)
