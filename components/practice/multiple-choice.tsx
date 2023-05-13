@@ -1,7 +1,8 @@
 import { checkAnswer } from "@/services/course";
+import { playFalseSound, playTrueSound } from "@/utils/audio";
 import { QuestionType } from "@/utils/constants";
 import { ProForm, ProFormCheckbox } from "@ant-design/pro-components";
-import { Alert, message, Divider, Row, Col, Typography } from "antd";
+import { Alert, message, Divider } from "antd";
 import { useRouter } from "next/router";
 import { useState, Fragment } from "react";
 
@@ -35,8 +36,10 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = (props) => {
         const response = await checkAnswer(data.id, 0, '', values.dapAnIds, QuestionType.MULTIPLE_CHOICE, router.query.id);
         if (response.correct) {
             setScore(score + 1);
-            message.success('Đúng rồi, con giỏi lắm')
+            playTrueSound();
+            message.success('Đúng rồi, con giỏi lắm');
         } else {
+            playFalseSound();
             message.error('Sai rồi!')
         }
         setAnswered(true);

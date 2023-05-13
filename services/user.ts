@@ -94,3 +94,10 @@ export async function userLogin(data: any) {
         data
     })
 }
+
+export async function listRefer(params: any) {
+    return request({
+        url: `user/list-refer`,
+        params
+    })
+}

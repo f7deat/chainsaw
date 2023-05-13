@@ -1,18 +1,22 @@
 import { checkAnswer } from "@/services/course";
-import { playFalseSound, playTrueSound } from "@/utils/audio";
-import { Alert, Col, Divider, Row, Typography, message } from "antd";
+import { playTrueSound, playFalseSound } from "@/utils/audio";
+import { DndContext, useDroppable } from "@dnd-kit/core";
+import { Alert, message, Divider, Row, Col, Typography } from "antd";
 import { useRouter } from "next/router";
-import { Fragment, useState } from "react";
+import { useState, Fragment } from "react";
+import Draggable from "./order/draggable";
+import Droppable from "./order/droppable";
+import SortableItem from "./order/item";
+import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 
-type SingleChoiceProps = {
+type OrderChoiceProps = {
     data: API.QuestionListItem;
     index: number;
     setScore: any;
     score: number;
 }
 
-const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
-
+const OrderChoice: React.FC<OrderChoiceProps> = (props) => {
     const { index, setScore, score } = props;
     const [data, setData] = useState<API.QuestionListItem>(props.data)
     const router = useRouter();
@@ -34,7 +38,7 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
             return;
         }
         const response = await checkAnswer(values.questionId, values.id, '', undefined, data.type, router.query.id);
-        let newData = {...data};
+        let newData = { ...data };
         if (response.correct) {
             setScore(score + 1);
             playTrueSound();
@@ -60,6 +64,23 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
         return '';
     }
 
+    const [orderItems, setOrderItems] = useState<API.AnswerListItem[]>(data.answers)
+
+    function handleDragEnd(event: {
+        active: any; over: any;
+    }) {
+        const newI = { ...orderItems };
+        console.log(orderItems)
+        console.log(event)
+        if (event.over && event.active.id !== event.over?.id) {
+            const activeIndex = orderItems.findIndex(({ id }) => id === event.active.id);
+            const overIndex = orderItems.findIndex(({ id }) => id === event.over.id);
+
+            setOrderItems(arrayMove(orderItems, activeIndex, overIndex));
+        }
+        // setOrderItems();
+    }
+
     return (
         <div>
             <div className="flex flex-col items-center justify-center p-4">
@@ -74,25 +95,27 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
                 </div>
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Divider />
-                <Row gutter={16}>
-                    {
-                        data.answers.map(answer => (
-                            <div key={answer.id}>
-                                <Col>
-                                    <button type="button" 
-                                    className={`py-4 px-8 flex justify-center items-center hover:bg-slate-200 rounded border ${getBorder(answer)}`} 
-                                    onClick={() => onAnswer(answer)}>
-                                        <Typography.Title level={2}>
-                                            <div dangerouslySetInnerHTML={{
-                                                __html: answer.text
-                                            }} />
-                                        </Typography.Title>
-                                    </button>
-                                </Col>
-                            </div>
-                        ))
-                    }
-                </Row>
+                <DndContext onDragEnd={handleDragEnd}>
+                    <div className="flex gap-4">
+                        <SortableContext items={orderItems}>
+                            {
+                                orderItems.map(answer => (
+                                    <SortableItem id={answer.id} key={answer.id}>
+                                        <button type="button"
+                                            className={`py-4 px-8 flex justify-center items-center hover:bg-slate-200 rounded border ${getBorder(answer)}`}>
+                                            <Typography.Title level={2}>
+                                                <div dangerouslySetInnerHTML={{
+                                                    __html: answer.text
+                                                }} />
+                                            </Typography.Title>
+                                        </button>
+                                    </SortableItem>
+                                ))
+                            }
+                        </SortableContext>
+                    </div>
+
+                </DndContext>
 
                 <Divider />
 
@@ -103,4 +126,4 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
     )
 }
 
-export default SingleChoice
+export default OrderChoice;

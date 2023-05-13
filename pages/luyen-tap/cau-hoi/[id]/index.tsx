@@ -1,5 +1,5 @@
 import CommentComponent from "@/components/comment";
-import { BaiGiang, FreeInput, MultipleChoice, SingleChoice } from "@/components/practice";
+import { BaiGiang, FreeInput, MultipleChoice, OrderChoice, SingleChoice } from "@/components/practice";
 import { getBaiGiang, listQuestion, resetResult } from "@/services/course";
 import { QuestionType } from "@/utils/constants";
 import { CheckCircleOutlined, RedoOutlined, StopOutlined } from "@ant-design/icons";
@@ -51,6 +51,9 @@ export default function LuyenTap() {
             return <MultipleChoice data={item} index={index} score={score} setScore={setScore} />
         } else if (item.type === QuestionType.BAI_GIANG) {
             return <BaiGiang data={item} index={index} />
+        }
+        else if (item.type === QuestionType.SAPXEP) {
+            return <OrderChoice data={item} index={index} score={score} setScore={setScore} />
         } else {
             return <SingleChoice data={item} index={index} score={score} setScore={setScore} />
         }
