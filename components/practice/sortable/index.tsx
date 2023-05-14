@@ -1,13 +1,12 @@
 import { checkAnswer } from "@/services/course";
 import { playTrueSound, playFalseSound } from "@/utils/audio";
-import { DndContext, useDroppable } from "@dnd-kit/core";
-import { Alert, message, Divider, Row, Col, Typography } from "antd";
+import { DndContext } from "@dnd-kit/core";
+import { Alert, message, Divider, Typography, Button } from "antd";
 import { useRouter } from "next/router";
 import { useState, Fragment } from "react";
-import Draggable from "./order/draggable";
-import Droppable from "./order/droppable";
-import SortableItem from "./order/item";
+import SortableItem from "./item";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
+import { MenuOutlined } from "@ant-design/icons";
 
 type OrderChoiceProps = {
     data: API.QuestionListItem;
@@ -22,6 +21,7 @@ const OrderChoice: React.FC<OrderChoiceProps> = (props) => {
     const router = useRouter();
 
     const [answered, setAnswered] = useState<boolean>(false);
+    const [orderItems, setOrderItems] = useState<API.AnswerListItem[]>(data.answers)
 
     const ShowMessage = (item: API.QuestionListItem) => {
         if (item.isCompleted && item.result) {
@@ -33,11 +33,12 @@ const OrderChoice: React.FC<OrderChoiceProps> = (props) => {
         return <Fragment />
     }
 
-    const onAnswer = async (values: API.AnswerListItem) => {
+    const onAnswer = async () => {
         if (answered || data.isCompleted) {
             return;
         }
-        const response = await checkAnswer(values.questionId, values.id, '', undefined, data.type, router.query.id);
+        const text = orderItems.map(x => x.text).join(' ');
+        const response = await checkAnswer(data.id, 0, text, undefined, data.type, router.query.id);
         let newData = { ...data };
         if (response.correct) {
             setScore(score + 1);
@@ -54,31 +55,14 @@ const OrderChoice: React.FC<OrderChoiceProps> = (props) => {
         setAnswered(true);
     }
 
-    const getBorder = (item: API.AnswerListItem) => {
-        if (item.yourAnswer) {
-            if (data.result) {
-                return 'border-green-500';
-            }
-            return 'border-red-500';
-        }
-        return '';
-    }
-
-    const [orderItems, setOrderItems] = useState<API.AnswerListItem[]>(data.answers)
-
     function handleDragEnd(event: {
         active: any; over: any;
     }) {
-        const newI = { ...orderItems };
-        console.log(orderItems)
-        console.log(event)
         if (event.over && event.active.id !== event.over?.id) {
             const activeIndex = orderItems.findIndex(({ id }) => id === event.active.id);
             const overIndex = orderItems.findIndex(({ id }) => id === event.over.id);
-
             setOrderItems(arrayMove(orderItems, activeIndex, overIndex));
         }
-        // setOrderItems();
     }
 
     return (
@@ -94,6 +78,7 @@ const OrderChoice: React.FC<OrderChoiceProps> = (props) => {
 
                 </div>
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
+                <Alert message="Kéo thả để sắp xếp các từ dưới đây thành câu đúng và nhấn đồng ý" type="info" showIcon closable />
                 <Divider />
                 <DndContext onDragEnd={handleDragEnd}>
                     <div className="flex gap-4">
@@ -102,7 +87,10 @@ const OrderChoice: React.FC<OrderChoiceProps> = (props) => {
                                 orderItems.map(answer => (
                                     <SortableItem id={answer.id} key={answer.id}>
                                         <button type="button"
-                                            className={`py-4 px-8 flex justify-center items-center hover:bg-slate-200 rounded border ${getBorder(answer)}`}>
+                                            className={`py-4 px-8 flex justify-center items-center hover:bg-slate-200 rounded border relative cursor-move`}>
+                                                <span className="text-gray-400 absolute top-0 left-0">
+                                                    <MenuOutlined />
+                                                </span>
                                             <Typography.Title level={2}>
                                                 <div dangerouslySetInnerHTML={{
                                                     __html: answer.text
@@ -114,10 +102,13 @@ const OrderChoice: React.FC<OrderChoiceProps> = (props) => {
                             }
                         </SortableContext>
                     </div>
-
                 </DndContext>
 
-                <Divider />
+                <Divider dashed />
+
+                <Button type="primary" size="large" onClick={() => onAnswer()}>Đồng ý</Button>
+
+                <Divider dashed />
 
                 {ShowMessage(data)}
 
