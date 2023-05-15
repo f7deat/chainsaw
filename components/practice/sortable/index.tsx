@@ -25,10 +25,24 @@ const OrderChoice: React.FC<OrderChoiceProps> = (props) => {
 
     const ShowMessage = (item: API.QuestionListItem) => {
         if (item.isCompleted && item.result) {
-            return <Alert message="Bạn đã hoàn thành chính xác câu hỏi này" type="success" showIcon className="text-lg" />
+            return <Alert message={
+                (
+                    <div>
+                        <div className="text-sm">Bạn đã hoàn thành chính xác câu hỏi này</div>
+                        <div>Đáp án đúng: <b>{item.suggestion}</b></div>
+                    </div>
+                )
+            } type="success" showIcon className="text-lg" closable />
         }
         if (item.isCompleted && !item.result) {
-            return <Alert message="Bạn đã trả lời sai câu hỏi này" type="error" showIcon className="text-lg" />
+            return <Alert message={
+                (
+                    <div>
+                        <div className="text-sm">Bạn đã trả lời sai câu hỏi này</div>
+                        <div>Đáp án đúng: <b>{item.suggestion}</b></div>
+                    </div>
+                )
+            } type="error" showIcon className="text-lg" closable />
         }
         return <Fragment />
     }

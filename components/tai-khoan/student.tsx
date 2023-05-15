@@ -1,11 +1,12 @@
 import { getUser, listUserSelect, updateStudent } from "@/services/user";
 import { ProForm, ProFormDatePicker, ProFormInstance, ProFormSelect, ProFormText } from "@ant-design/pro-components"
 import { message } from "antd";
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const StudentInfo: React.FC = () => {
 
     const formRef = useRef<ProFormInstance>();
+    const [disable, setDisable] = useState<boolean>(false);
 
     useEffect(() => {
         getUser().then(response => {
@@ -29,9 +30,12 @@ const StudentInfo: React.FC = () => {
                     },
                     {
                         name: 'maGioiThieu',
-                        value: response.data.maGioiThieu
+                        value: response.data.maGioiThieu,
                     }
-                ])
+                ]);
+                if (response.data.maGioiThieu) {
+                    setDisable(true);
+                }
             }
         })
     }, []);
@@ -74,7 +78,7 @@ const StudentInfo: React.FC = () => {
             <ProFormText label="Ảnh đại diện" name="avatar" colProps={{
                 md: 18
             }} />
-            <ProFormSelect request={listUserSelect} label="Người giới thiệu" name="maGioiThieu" showSearch/>
+            <ProFormSelect request={listUserSelect} label="Người giới thiệu" name="maGioiThieu" showSearch disabled={disable}/>
         </ProForm>
     )
 }

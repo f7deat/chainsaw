@@ -1,7 +1,7 @@
 import request from "./request";
 
-export async function getUser() {
-    return request.get(`user`);
+export async function getUser(id: string | string[] = '0') {
+    return request.get(`user/${id}`);
 }
 
 export async function getParent() {
@@ -75,15 +75,15 @@ export async function listUserSelect(params: any) {
     })
 }
 
-export async function learningHistory(params: any) {
+export async function learningHistory(params: any, id?: string | string[]) {
     return request({
-        url: `user/learning-history`,
+        url: `user/learning-history/${id}`,
         params
     })
 }
-export async function learningResult() {
+export async function learningResult(id?: string | string[]) {
     return request({
-        url: `user/learning-result`
+        url: `user/learning-result/${id}`
     })
 }
 

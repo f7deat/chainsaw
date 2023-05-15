@@ -1,18 +1,17 @@
-import { BarChartOutlined, BookOutlined, FacebookFilled, GoogleOutlined, LogoutOutlined, MoneyCollectOutlined, PlusOutlined, UserOutlined } from "@ant-design/icons"
-import { Avatar, Button, Col, Form, Input, Modal, Row, Space, Typography, message } from "antd"
+import { BarChartOutlined, BookOutlined, FacebookFilled, GoogleOutlined, LogoutOutlined, MoneyCollectOutlined, UserOutlined } from "@ant-design/icons"
+import { Avatar, Button, Col, Form, Input, Modal, Row, SelectProps, Space, Typography, message } from "antd"
 import HeaderDropdown from "./header-dropdown"
 import { useRouter } from "next/router";
 import type { MenuInfo } from 'rc-menu/lib/interface';
 import { Fragment, useEffect, useRef, useState } from "react";
 import { getUser, login } from "@/services/user";
-import Link from "next/link";
 import { StepsForm, ProFormSelect, ProFormInstance } from "@ant-design/pro-components";
 import { Role } from "@/utils/constants";
 
 const RightContent: React.FC = () => {
 
     const router = useRouter();
-    const [options, setOptions] = useState<any>([]);
+    const [options, setOptions] = useState<SelectProps<any>['options']>([]);
     const [user, setUser] = useState<API.User>();
     const formRef = useRef<ProFormInstance>();
     const [open, setOpen] = useState<boolean>(false);
@@ -121,6 +120,11 @@ const RightContent: React.FC = () => {
         router.push('/tai-khoan/quen-mat-khau');
     }
 
+    const onRegister = () => {
+        setOpen(false);
+        router.push('/tai-khoan/dang-ky');
+    }
+
     return user ? (
         <HeaderDropdown
             menu={{
@@ -161,11 +165,9 @@ const RightContent: React.FC = () => {
                         <div className="p-4">
                             <Space>
                                 <span className="text-lg">Bạn chưa có tài khoản?</span>
-                                <Link href="/tai-khoan/dang-ky">
-                                    <div className="font-medium underline text-lg">
-                                        Đăng ký tại đây
-                                    </div>
-                                </Link>
+                                <button className="font-medium underline text-lg" type="button" onClick={onRegister}>
+                                    Đăng ký tại đây
+                                </button>
                             </Space>
                         </div>
                     </Col>

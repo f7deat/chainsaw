@@ -4,7 +4,6 @@ import AccountLeftBar from "@/components/tai-khoan/left-bar";
 import ParentInfo from "@/components/tai-khoan/parent";
 import StudentInfo from "@/components/tai-khoan/student";
 import { PageContainer, ProCard } from "@ant-design/pro-components";
-import { Col, Row } from "antd";
 import Head from "next/head";
 import { useState } from "react";
 

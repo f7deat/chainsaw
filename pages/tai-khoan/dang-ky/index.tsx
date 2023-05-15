@@ -110,20 +110,20 @@ export default function Register() {
                                     <ProFormText label="Tên phụ huynh" rules={[{ required: true, message: 'Vui lòng nhập họ và tên' }]} name="parentName" colProps={{
                                         md: 12
                                     }} />
-                                    
+
                                     <ProFormSelect label="Giới tính" name="parentGender" colProps={{
                                         md: 12
-                                    }} 
-                                    options={[
-                                        {
-                                            value: 1,
-                                            label: 'Nam'
-                                        },
-                                        {
-                                            value: 0,
-                                            label: 'Nữ'
-                                        }
-                                    ]}
+                                    }}
+                                        options={[
+                                            {
+                                                value: 1,
+                                                label: 'Nam'
+                                            },
+                                            {
+                                                value: 0,
+                                                label: 'Nữ'
+                                            }
+                                        ]}
                                     />
 
                                     <ProFormText
@@ -161,29 +161,29 @@ export default function Register() {
                                     ]} />
                                     <ProFormDatePicker label="Ngày sinh" name="dateOfBirth" colProps={{
                                         md: 8
-                                    }} 
-                                    fieldProps={{
-                                        disabledDate: (current) => current.valueOf() > Date.now()
                                     }}
+                                        fieldProps={{
+                                            disabledDate: (current) => current.valueOf() > Date.now()
+                                        }}
                                     />
                                     <ProFormSelect label="Giới tính" name="studentGender" colProps={{
                                         md: 16
-                                    }} 
-                                    options={[
-                                        {
-                                            value: 1,
-                                            label: 'Nam'
-                                        },
-                                        {
-                                            value: 0,
-                                            label: 'Nữ'
-                                        }
-                                    ]}
+                                    }}
+                                        options={[
+                                            {
+                                                value: 1,
+                                                label: 'Nam'
+                                            },
+                                            {
+                                                value: 0,
+                                                label: 'Nữ'
+                                            }
+                                        ]}
                                     />
                                 </StepsForm.StepForm>
                             </StepsForm>
                             <div className="text-right text-sm py-4">
-                                Bằng việc đăng ký, bạn đã đồng ý với <a href="#" className="text-blue-500 font-medium">Điều khoản sử dụng</a> và <a href="#" className="text-blue-500 font-medium">Chính sách bảo mật</a> của chúng tôi
+                                Bằng việc đăng ký, bạn đã đồng ý với <Link href="/faq/dieu-khoan" className="text-blue-500 font-medium">Điều khoản sử dụng</Link> và <a href="#" className="text-blue-500 font-medium">Chính sách bảo mật</a> của chúng tôi
                             </div>
                         </Col>
                         <Col md={12}>
