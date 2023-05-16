@@ -1,6 +1,7 @@
 import { userLogin } from "@/services/user";
 import { PageContainer, ProCard, ProForm, ProFormCheckbox, ProFormText } from "@ant-design/pro-components";
 import { message } from "antd";
+import Head from "next/head";
 
 export default function Index() {
 
@@ -16,7 +17,10 @@ export default function Index() {
     }
 
     return (
-        <PageContainer title="Đăng nhập">
+        <>
+            <Head>
+                <title>Đăng nhập quản trị</title>
+            </Head>
             <div className="md:flex gap-4">
                 <div className="md:w-1/2">
                     <ProCard title="Thông tin đăng nhập" className="h-full">
@@ -42,7 +46,6 @@ export default function Index() {
                         <img src="https://static.vecteezy.com/system/resources/thumbnails/005/879/539/small_2x/cloud-computing-modern-flat-concept-for-web-banner-design-man-enters-password-and-login-to-access-cloud-storage-for-uploading-and-processing-files-illustration-with-isolated-people-scene-free-vector.jpg" alt="" />
                     </picture>
                 </div>
-            </div>
-        </PageContainer>
+            </div></>
     )
 }

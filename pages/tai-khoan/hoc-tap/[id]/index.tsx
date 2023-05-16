@@ -31,8 +31,8 @@ export default function Index() {
                 <div className="md:flex gap-4">
                     <AccountLeftBar tab={3} />
                     <div className="flex-1">
-                        <Row gutter={16}>
-                            <Col span={16}>
+                        <div className="md:flex gap-4">
+                            <div className="md:w-2/3">
                                 <ProCard 
                                 tabs={{
                                     activeKey: tab,
@@ -49,11 +49,15 @@ export default function Index() {
                                                 headerTitle="Bài giảng gần đây"
                                                 request={(params) => learningHistory(params, router?.query?.id)}
                                                 pagination={{
-                                                    defaultPageSize: 10
+                                                    pageSize: 5
                                                 }}
                                                 metas={{
                                                     title: {
                                                         dataIndex: 'name'
+                                                    },
+                                                    description: {
+                                                        dataIndex: 'modifiedDate',
+                                                        valueType: 'fromNow'
                                                     },
                                                     avatar: {
                                                         render: (dom, entity) => {
@@ -78,7 +82,8 @@ export default function Index() {
                                                     actions: {
                                                         render: (dom, entity) => [
                                                             <Tooltip title="Thông tin chi tiết" key="info">
-                                                                <Button className="text-lg text-gray-500 flex items-center" type="link" icon={<InfoCircleOutlined />} onClick={() => router.push(`/tai-khoan/hoc-tap/chi-tiet/${entity.id}`)} />
+                                                                <Button className="text-lg text-gray-500 flex items-center" type="link" icon={<InfoCircleOutlined />} 
+                                                                onClick={() => router.push(`/tai-khoan/hoc-tap/chi-tiet/${entity.id}?userId=${router.query?.id}`)} />
                                                             </Tooltip>,
                                                             <Button key={1} type="link" onClick={() => router.push(`/luyen-tap/cau-hoi/${entity.id}`)} icon={<EditOutlined />} className="text-lg flex items-center" />
                                                         ]
@@ -98,8 +103,8 @@ export default function Index() {
                                     },
                                 }} />
 
-                            </Col>
-                            <Col span={8}>
+                            </div>
+                            <div className="md:w-1/3">
                                 <PieChart
                                     data={result}
                                     appendPadding={10}
@@ -108,8 +113,8 @@ export default function Index() {
                                     radius={1}
                                     innerRadius={0.6}
                                 />
-                            </Col>
-                        </Row>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </PageContainer>

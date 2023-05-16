@@ -1,6 +1,8 @@
 import { getBaiGiang } from "@/services/course";
-import { PageContainer } from "@ant-design/pro-components";
-import { Empty } from "antd";
+import { listQuestionHistory } from "@/services/user";
+import { InfoCircleOutlined } from "@ant-design/icons";
+import { PageContainer, ProColumns, ProTable } from "@ant-design/pro-components";
+import { Popover } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -17,6 +19,54 @@ export default function Index() {
         }
     }, [router]);
 
+    const columns: ProColumns<{
+        id: string;
+        name: string;
+        modifiedDate: Date;
+        content: string;
+    }>[] = [
+            {
+                title: '#',
+                valueType: 'indexBorder',
+            },
+            {
+                title: 'Câu hỏi',
+                dataIndex: 'name',
+                render: (dom, entity) => (
+                    <Popover content={(
+                        <div>
+                            <div>{dom}</div>
+                            <div dangerouslySetInnerHTML={{
+                                __html: entity.content
+                            }}></div>
+                        </div>
+                    )}>
+                        {dom} <InfoCircleOutlined />
+                    </Popover>
+                )
+            },
+            {
+                title: 'Kết quả thực hiện',
+                dataIndex: 'result',
+                valueEnum: {
+                    false: {
+                        text: 'Sai',
+                        status: 'Error',
+                    },
+                    true: {
+                        text: 'Đúng',
+                        status: 'Processing',
+                    },
+                },
+            },
+            {
+                title: 'Ngày làm',
+                dataIndex: 'modifiedDate',
+                valueType: 'fromNow',
+                search: false
+            }
+        ]
+
     return (
         <>
             <Head>
@@ -25,7 +75,21 @@ export default function Index() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <PageContainer title={data?.tenBaiGiang}>
-                <Empty />
+                {
+                    router?.query?.id && (
+                        <ProTable
+                        search={{
+                            layout: 'vertical'
+                        }}
+                            request={(params) => listQuestionHistory({
+                                hocVienId: router.query?.userId,
+                                baiGiangId: router.query?.id,
+                                ...params
+                            })}
+                            columns={columns}
+                        />
+                    )
+                }
             </PageContainer>
         </>
     )

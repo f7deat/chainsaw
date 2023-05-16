@@ -101,3 +101,10 @@ export async function listRefer(params: any) {
         params
     })
 }
+
+export async function listQuestionHistory(params: any) {
+    return request({
+        url: `user/question-history-detail`,
+        params
+    })
+}
