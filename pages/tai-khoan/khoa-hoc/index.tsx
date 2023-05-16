@@ -1,7 +1,9 @@
-import MyCourse from "@/components/course/my-course";
 import AccountLeftBar from "@/components/tai-khoan/left-bar";
-import { PageContainer } from "@ant-design/pro-components";
+import { getMyCourse } from "@/services/course";
+import { BookOutlined, QuestionCircleOutlined, StarFilled } from "@ant-design/icons";
+import { PageContainer, ProList } from "@ant-design/pro-components";
 import Head from "next/head";
+import Link from "next/link";
 
 export default function Index() {
 
@@ -17,7 +19,68 @@ export default function Index() {
                 <div className="md:flex gap-4">
                     <AccountLeftBar tab={1} />
                     <div className="flex-1">
-                        <MyCourse defaultPageSize={8} />
+                        <div className="mb-4">
+                            <div className="grid gap-4 md:grid-cols-4 grid-cols-2">
+                                <div className="px-8 py-4 rounded shadow bg-white flex gap-4">
+                                    <BookOutlined className="text-3xl text-red-500" />
+                                    <div>
+                                        <div className="text-sm text-gray-400">Khóa học</div>
+                                        <div className="text-2xl font-bold">-</div>
+                                    </div>
+                                </div>
+                                <div className="px-8 py-4 rounded shadow bg-white flex gap-4">
+                                    <QuestionCircleOutlined className="text-3xl text-orange-500" />
+                                    <div>
+                                        <div className="text-sm text-gray-400">Câu hỏi</div>
+                                        <div className="text-2xl font-bold">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ProList<API.ChuongTrinhHocListItem>
+                            ghost
+                            headerTitle="Khóa học của tôi"
+                            request={getMyCourse}
+                            grid={{
+                                gutter: 16,
+                                column: 3,
+                                md: 3,
+                                xs: 1,
+                            }}
+                            showActions="always"
+                            metas={{
+                                content: {
+                                    render: (dom, entity) => (
+                                        <div className="-m-6 shadow">
+                                            <picture>
+                                                <img src={entity.thumbnail || 'https://cdn.getvisa.vn/images/cogiao.jpg'} alt="IMG" className="mb-2" />
+                                            </picture>
+                                            <div className="px-2 pb-1">
+                                                <Link href={`/bai-giang/${entity.id}`}>
+                                                    <div className="line-clamp-2 font-medium text-blue-500 mb-1 min-h-[45px]">{entity.name}</div>
+                                                </Link>
+                                                <div className="text-xs text-red-500 text-right">
+                                                    <StarFilled />
+                                                    <StarFilled />
+                                                    <StarFilled />
+                                                    <StarFilled />
+                                                    <StarFilled />
+                                                </div>
+                                                <div className="line-clamp-3 text-gray-500 min-h-[72px]">{entity.description}</div>
+                                            </div>
+                                        </div>
+                                    )
+                                },
+                                actions: {
+                                    cardActionProps: 'actions',
+                                    render: (dom, entity) => [
+                                        <Link key={1} href={`/bai-giang/${entity.id}`}>
+                                            Xem thêm
+                                        </Link>
+                                    ]
+                                },
+                            }}
+                        />
                     </div>
                 </div>
             </PageContainer>

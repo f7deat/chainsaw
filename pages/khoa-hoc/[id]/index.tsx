@@ -51,7 +51,7 @@ export default function KhoaHoc() {
                                                 <img src={entity.thumbnail || 'https://cdn.getvisa.vn/images/cogiao.jpg'} alt="IMG" className="mb-2" />
                                             </picture>
                                             <div className="px-2 pb-1">
-                                                <div className="line-clamp-2 font-medium text-blue-500 mb-1">{entity.name}</div>
+                                                <div className="line-clamp-2 font-medium text-blue-500 mb-1 min-h-[50px]">{entity.name}</div>
                                                 <div className="text-xs text-red-500 text-right">
                                                     <StarFilled />
                                                     <StarFilled />

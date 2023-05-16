@@ -1,6 +1,6 @@
 import { getUser } from "@/services/user";
-import { BarChartOutlined, BookOutlined, UserOutlined } from "@ant-design/icons"
-import { Card, Image, Space } from "antd"
+import { BarChartOutlined, CalendarOutlined, MessageOutlined, UserAddOutlined } from "@ant-design/icons"
+import { Card, DatePicker, Image, Space } from "antd"
 import Link from "next/link"
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -27,21 +27,19 @@ const AccountLeftBar: React.FC<AccountLeftBarProps> = (props) => {
 
     return (
         <div>
-            <Card>
+            <Card actions={[
+                <UserAddOutlined key={1} />,
+                <MessageOutlined key={2} />
+            ]}>
                 <div className="mb-4 text-center">
                     <Image src={student?.avatar ? student.avatar : 'https://placehold.jp/200x200.png'} alt="IMG" width={200} height={200} className="rounded-full" />
                 </div>
-                <div className="text-xl text-center mb-4">{student?.hoVaTen}</div>
-                <Link href="/tai-khoan/khoa-hoc">
-                    <div className={`px-4 py-2 rounded border ${props.tab === 1 ? 'border-blue-500' : ''} mb-1 hover:border-blue-500`}>
-                        <Space>
-                            <BookOutlined />
-                            <div className="text-lg">
-                                Khóa học của tôi
-                            </div>
-                        </Space>
-                    </div>
-                </Link>
+                <div className="text-xl text-center mb-1">{student?.hoVaTen}</div>
+                <ul className="mb-4 text-center text-gray-500">
+                    <li>
+                        <CalendarOutlined /> {student?.ngaySinh?.substring(0, 10)}
+                    </li>
+                </ul>
                 <Link href={`/tai-khoan/hoc-tap/${student?.id}`}>
                     <div className={`px-4 py-2 rounded border ${props.tab === 3 ? 'border-blue-500' : ''} mb-1 hover:border-blue-500`}>
                         <Space>

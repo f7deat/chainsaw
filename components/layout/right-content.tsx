@@ -47,7 +47,7 @@ const RightContent: React.FC = () => {
             router.push(`/tai-khoan/khoa-hoc`);
             return;
         } else if (key === 'history') {
-            router.push(`/tai-khoan/hoc-tap`);
+            router.push(`/tai-khoan/hoc-tap/${user?.id}`);
             return;
         } else if (key === 'refer') {
             router.push(`/tai-khoan/thu-nhap`);
@@ -62,21 +62,22 @@ const RightContent: React.FC = () => {
                 key: 'refer',
                 icon: <MoneyCollectOutlined />,
                 label: 'Thu nhập của tôi',
-            }] : []),
+            }] : [
+                {
+                    key: 'settings',
+                    icon: <BookOutlined />,
+                    label: 'Khóa học của tôi',
+                },
+                {
+                    key: 'history',
+                    icon: <BarChartOutlined />,
+                    label: 'Quá trình học tập',
+                }
+            ]),
         {
             key: 'profile',
             icon: <UserOutlined />,
             label: 'Thông tin cá nhân',
-        },
-        {
-            key: 'settings',
-            icon: <BookOutlined />,
-            label: 'Khóa học của tôi',
-        },
-        {
-            key: 'history',
-            icon: <BarChartOutlined />,
-            label: 'Quá trình học tập',
         },
         {
             type: 'divider' as const,

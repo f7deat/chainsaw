@@ -30,7 +30,7 @@ const ChuongTrinhHocBySubject: React.FC<ChuongTrinhHocBySubjectProps> = (props) 
                             </picture>
                             <div className="px-2 pb-1">
                                 <Link href={`/bai-giang/${entity.id}`}>
-                                    <div className="line-clamp-2 font-medium text-blue-500 mb-1">{entity.name}</div>
+                                    <div className="line-clamp-2 font-medium text-blue-500 mb-1 min-h-[45px]">{entity.name}</div>
                                 </Link>
                                 <div className="text-xs text-red-500 text-right">
                                     <StarFilled />
@@ -39,7 +39,7 @@ const ChuongTrinhHocBySubject: React.FC<ChuongTrinhHocBySubjectProps> = (props) 
                                     <StarFilled />
                                     <StarFilled />
                                 </div>
-                                <div className="line-clamp-3 text-gray-500">{entity.description}</div>
+                                <div className="line-clamp-3 text-gray-500 min-h-[70px]">{entity.description}</div>
                             </div>
                         </div>
                     )
