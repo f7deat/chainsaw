@@ -26,11 +26,13 @@ const AccountLeftBar: React.FC<AccountLeftBarProps> = (props) => {
     }, [router]);
 
     return (
-        <div>
-            <Card actions={[
-                <UserAddOutlined key={1} />,
-                <MessageOutlined key={2} />
-            ]}>
+        <div className="md:w-72">
+            <Card
+                title="Thông tin cá nhân"
+                actions={[
+                    <UserAddOutlined key={1} />,
+                    <MessageOutlined key={2} />
+                ]}>
                 <div className="mb-4 text-center">
                     <Image src={student?.avatar ? student.avatar : 'https://placehold.jp/200x200.png'} alt="IMG" width={200} height={200} className="rounded-full" />
                 </div>

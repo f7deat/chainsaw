@@ -1,7 +1,7 @@
 import { getClassroom, getStudentInClassroom } from "@/services/classroom";
 import { EyeOutlined, UserOutlined } from "@ant-design/icons";
-import { ProColumns, ProTable } from "@ant-design/pro-components";
-import { Button } from "antd";
+import { ProCard, ProColumns, ProTable } from "@ant-design/pro-components";
+import { Button, Empty } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -62,8 +62,8 @@ export default function Index() {
             </Head>
             <div className="text-3xl font-medium mb-4">{classroom?.tenLopHoc}</div>
             <div className="md:flex gap-4">
-                <div className="md:w-1/5">
-                    <div className="px-8 py-4 rounded bg-white shadow flex gap-4 items-center">
+                <div className="md:w-1/4">
+                    <div className="px-8 py-4 rounded bg-white shadow flex gap-4 items-center mb-4">
                         <div className="text-3xl text-red-500">
                             <UserOutlined />
                         </div>
@@ -72,8 +72,11 @@ export default function Index() {
                             <div className="text-2xl">-</div>
                         </div>
                     </div>
+                    <ProCard className="shadow" title="Bảng thi đua" headerBordered>
+                        <Empty />
+                    </ProCard>
                 </div>
-                <div className="md:w-4/5">
+                <div className="md:w-3/4">
                     {
                         router?.query?.id && (
                             <ProTable 

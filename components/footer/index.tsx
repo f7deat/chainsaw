@@ -1,4 +1,5 @@
 import { FacebookOutlined, GithubOutlined, GoogleOutlined, TwitterOutlined } from "@ant-design/icons"
+import Link from "next/link"
 
 const Footer: React.FC = () => {
     return (
@@ -26,7 +27,11 @@ const Footer: React.FC = () => {
                                 <div className="mb-4 text-xl uppercase font-medium">Giới thiệu</div>
                                 <div className="mb-2">Giới thiêu chương trình</div>
                                 <div className="mb-2">Liên hệ với chúng tôi</div>
-                                <div className="mb-2">Sơ đồ trang web</div>
+                                <div className="mb-2">
+                                    <Link href="/admin/login">
+                                        Chương trình Affiliate
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>

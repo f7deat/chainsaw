@@ -1,9 +1,9 @@
 import { getClassroomBySchool } from "@/services/classroom";
 import { getSchoolByUser } from "@/services/school";
 import { getUser, listRefer } from "@/services/user";
-import { ArrowRightOutlined, EyeOutlined, GlobalOutlined, HeatMapOutlined, HomeOutlined, InfoCircleOutlined, UserAddOutlined, UserOutlined } from "@ant-design/icons";
+import { ArrowRightOutlined, BarChartOutlined, EyeOutlined, GlobalOutlined, HeatMapOutlined, HomeOutlined, InfoCircleOutlined, MoneyCollectOutlined, UserAddOutlined, UserOutlined } from "@ant-design/icons";
 import { ProCard, ProColumns, ProList, ProTable } from "@ant-design/pro-components";
-import { Button, Space } from "antd";
+import { Button, Divider, Space } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -68,7 +68,7 @@ export default function Index() {
                 <div className="md:w-1/4">
                     <ProCard 
                     title="Thông tin" 
-                    headerBordered className="mb-4 shadow"
+                    headerBordered className="mb-4"
                     actions={[
                         <HeatMapOutlined key={1} />,
                         <EyeOutlined key={2} />
@@ -125,6 +125,39 @@ export default function Index() {
                     }
                 </div>
                 <div className="md:w-3/4">
+
+                    <div className="mb-4 grid md:grid-cols-3 grid-cols-2 gap-4">
+                        <div className="shadow px-8 py-4 rounded flex items-center bg-white gap-4">
+                            <div className="text-4xl text-green-500">
+                                <MoneyCollectOutlined />
+                            </div>
+                            <div className="flex-1">
+                                <div className="text-gray-400">Tháng này</div>
+                                <div className="text-3xl">-</div>
+                            </div>
+                        </div>
+                        <div className="shadow px-8 py-4 rounded flex items-center bg-white gap-4">
+                            <div className="text-4xl text-red-500">
+                                <BarChartOutlined />
+                            </div>
+                            <div className="flex-1">
+                                <div className="text-gray-400">Tổng thu nhập</div>
+                                <div className="text-3xl">-</div>
+                            </div>
+                        </div>
+                        <div className="shadow px-8 py-4 rounded flex items-center bg-white gap-4">
+                            <div className="text-4xl text-sky-500">
+                                <UserAddOutlined />
+                            </div>
+                            <div className="flex-1">
+                                <div className="text-gray-400">Học viên</div>
+                                <div className="text-3xl">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <Divider dashed />
+
                     <ProTable<API.ReferListItem>
                         search={{
                             layout: 'vertical'
