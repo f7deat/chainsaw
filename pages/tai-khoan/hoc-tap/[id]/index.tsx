@@ -105,14 +105,14 @@ export default function Index() {
 
                             </div>
                             <div className="md:w-1/3">
-                                <PieChart
+                                {/* <PieChart
                                     data={result}
                                     appendPadding={10}
                                     angleField="value"
                                     colorField="label"
                                     radius={1}
                                     innerRadius={0.6}
-                                />
+                                /> */}
                             </div>
                         </div>
                     </div>
