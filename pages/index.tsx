@@ -43,20 +43,22 @@ export default function Home() {
         </div>
       </div>
 
-      <div data-aos='fade-up'>
+      <div data-aos='fade-up' className='py-4'>
         <CourseList />
       </div>
 
-      <Divider />
-
-      <div data-aos="fade-up">
-        <ChuongTrinhHocBySubject id={1} headerTitle='Khóa Toán tiêu biểu' />
+      <div data-aos="fade-up" className='py-4'>
+        <ChuongTrinhHocBySubject id={1} headerTitle={
+          <div className='text-2xl'>Khóa Toán tiêu biểu</div>
+        } />
       </div>
 
       <StatisticsHome />
 
       <div data-aos="fade-up">
-        <ChuongTrinhHocBySubject id={2} headerTitle='Khóa Tiếng Anh tiêu biểu' />
+        <ChuongTrinhHocBySubject id={2} headerTitle={
+          <div className='text-2xl'>Khóa Tiếng Anh tiêu biểu</div>
+        } />
       </div>
       <div data-aos="fade-up" className='mb-4'>
         <MyCourse defaultPageSize={4} />

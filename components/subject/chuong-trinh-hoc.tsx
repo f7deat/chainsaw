@@ -2,10 +2,11 @@ import { listChuongTrinhHocBySubjectId } from "@/services/course"
 import { StarFilled } from "@ant-design/icons";
 import { ProList } from "@ant-design/pro-components"
 import Link from "next/link"
+import { ReactNode } from "react";
 
 type ChuongTrinhHocBySubjectProps = {
     id: number;
-    headerTitle: string;
+    headerTitle: ReactNode;
 }
 
 const ChuongTrinhHocBySubject: React.FC<ChuongTrinhHocBySubjectProps> = (props) => {

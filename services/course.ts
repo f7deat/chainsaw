@@ -82,10 +82,6 @@ export async function listClassroom(params: any) {
     });
 }
 
-export async function listSubject() {
-    return request.get(`subject/list`)
-}
-
 export async function getChuongTrinhHoc(id?: string | string[]) {
     return request.get(`chuong-trinh-hoc/${id}`);
 }

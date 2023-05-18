@@ -2,9 +2,9 @@ import { BookOutlined, EditOutlined, FireOutlined, HomeOutlined, MessageOutlined
 
 export const navbars = [
     {
-        name: "Tự ôn luyện",
+        name: "Môn học",
         icon: <BookOutlined />,
-        url: "/"
+        url: "/mon-hoc"
     },
     {
         name: "Học nhóm",

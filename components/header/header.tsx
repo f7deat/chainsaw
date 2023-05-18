@@ -1,5 +1,5 @@
 import { navbars } from "@/mock"
-import { FireOutlined, FireTwoTone } from "@ant-design/icons";
+import { FireTwoTone } from "@ant-design/icons";
 import { Space } from "antd";
 import Link from "next/link";
 import RightContent from "../layout/right-content";

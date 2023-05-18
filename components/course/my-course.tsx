@@ -29,7 +29,9 @@ const MyCourse: React.FC<MyCourseProps> = (props) => {
                 ];
             }}
             ghost
-            headerTitle="Khóa học của tôi"
+            headerTitle={
+                <div className='text-2xl'>Khóa học của tôi</div>
+            }
             request={getMyCourse}
             pagination={{
                 defaultPageSize: props.defaultPageSize

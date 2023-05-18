@@ -1,5 +1,5 @@
 import { BarChartOutlined, BookOutlined, FacebookFilled, GoogleOutlined, LogoutOutlined, MoneyCollectOutlined, UserOutlined } from "@ant-design/icons"
-import { Avatar, Button, Col, Form, Input, Modal, Row, SelectProps, Space, Typography, message } from "antd"
+import { Avatar, Button, Col, Form, Input, Modal, Row, SelectProps, Space, Spin, Typography, message } from "antd"
 import HeaderDropdown from "./header-dropdown"
 import { useRouter } from "next/router";
 import type { MenuInfo } from 'rc-menu/lib/interface';
@@ -15,14 +15,16 @@ const RightContent: React.FC = () => {
     const [user, setUser] = useState<API.User>();
     const formRef = useRef<ProFormInstance>();
     const [open, setOpen] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         try {
             getUser().then(response => {
                 setUser(response.data)
+                setLoading(false);
             });
         } catch (error) {
-
+            setLoading(false);
         }
     }, []);
 
@@ -126,7 +128,7 @@ const RightContent: React.FC = () => {
         router.push('/tai-khoan/dang-ky');
     }
 
-    return user ? (
+    return loading ? <Spin /> : user ? (
         <HeaderDropdown
             menu={{
                 selectedKeys: [],
