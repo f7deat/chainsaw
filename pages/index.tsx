@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import { Button, Divider, Input, Space, Typography } from "antd";
 import CourseList from '@/components/course';
 import MyCourse from '@/components/course/my-course';
 import { PageContainer, ProForm, ProFormText } from '@ant-design/pro-components';

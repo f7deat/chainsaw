@@ -1,4 +1,4 @@
-import { listSubject } from "@/services/course";
+import { listSubject } from "@/services/subject";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { ProList } from "@ant-design/pro-components";
 

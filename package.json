@@ -2,10 +2,11 @@
   "name": "chainsaw",
   "version": "0.1.0",
   "private": true,
+  "host": "http://apihoconline.getvisa.vn/client/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "start": "node server.js",
     "lint": "next lint"
   },
   "dependencies": {
