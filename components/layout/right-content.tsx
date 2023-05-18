@@ -3,30 +3,19 @@ import { Avatar, Button, Col, Form, Input, Modal, Row, SelectProps, Space, Spin,
 import HeaderDropdown from "./header-dropdown"
 import { useRouter } from "next/router";
 import type { MenuInfo } from 'rc-menu/lib/interface';
-import { Fragment, useEffect, useRef, useState } from "react";
-import { getUser, login } from "@/services/user";
+import { Fragment, useContext, useRef, useState } from "react";
+import { login } from "@/services/user";
 import { StepsForm, ProFormSelect, ProFormInstance } from "@ant-design/pro-components";
 import { Role } from "@/utils/constants";
+import { UserContext } from "@/models/user";
 
 const RightContent: React.FC = () => {
 
     const router = useRouter();
     const [options, setOptions] = useState<SelectProps<any>['options']>([]);
-    const [user, setUser] = useState<API.User>();
     const formRef = useRef<ProFormInstance>();
     const [open, setOpen] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-        try {
-            getUser().then(response => {
-                setUser(response.data)
-                setLoading(false);
-            });
-        } catch (error) {
-            setLoading(false);
-        }
-    }, []);
+    const { user } = useContext(UserContext);
 
     const loginOut = async () => {
         localStorage.removeItem('access_token');
@@ -59,7 +48,7 @@ const RightContent: React.FC = () => {
     }
 
     const menuItems = [
-        ...(user?.roles?.find(x => x === Role.Referal) ?
+        ...(user?.roles?.find((x: any) => x === Role.Referal) ?
             [{
                 key: 'refer',
                 icon: <MoneyCollectOutlined />,
@@ -128,7 +117,7 @@ const RightContent: React.FC = () => {
         router.push('/tai-khoan/dang-ky');
     }
 
-    return loading ? <Spin /> : user ? (
+    return user ? (
         <HeaderDropdown
             menu={{
                 selectedKeys: [],
