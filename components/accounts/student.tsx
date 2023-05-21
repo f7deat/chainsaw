@@ -14,11 +14,11 @@ const StudentInfo: React.FC = () => {
                 formRef.current?.setFields([
                     {
                         name: 'hoVaTen',
-                        value: response.data.hoVaTen
+                        value: response.data.name
                     },
                     {
                         name: 'ngaySinh',
-                        value: response.data.ngaySinh
+                        value: response.data.dateOfBirth
                     },
                     {
                         name: 'avatar',
@@ -26,14 +26,14 @@ const StudentInfo: React.FC = () => {
                     },
                     {
                         name: 'gender',
-                        value: response.data.gioiTinh ? 0 : 1
+                        value: response.data.gender ? 0 : 1
                     },
                     {
                         name: 'maGioiThieu',
-                        value: response.data.maGioiThieu,
+                        value: response.data.referalCode,
                     }
                 ]);
-                if (response.data.maGioiThieu) {
+                if (response.data.referalCode) {
                     setDisable(true);
                 }
             }
@@ -41,7 +41,7 @@ const StudentInfo: React.FC = () => {
     }, []);
 
     const onFinish = async (values: any) => {
-        values.gioiTinh = values.gender === 1;
+        values.gender = values.gender === 1;
         const response = await updateStudent(values);
         if (response.succeeded) {
             message.success('Lưu thành công!');
@@ -50,7 +50,7 @@ const StudentInfo: React.FC = () => {
 
     return (
         <ProForm grid formRef={formRef} onFinish={onFinish}>
-            <ProFormText label="Họ và tên" name="hoVaTen" rules={[
+            <ProFormText label="Họ và tên" name="name" rules={[
                 {
                     required: true
                 }
@@ -72,13 +72,13 @@ const StudentInfo: React.FC = () => {
                     label: 'Nữ'
                 }
             ]} />
-            <ProFormDatePicker label="Ngày sinh" name="ngaySinh" colProps={{
+            <ProFormDatePicker label="Ngày sinh" name="dateOfBirth" colProps={{
                 md: 6
             }} />
             <ProFormText label="Ảnh đại diện" name="avatar" colProps={{
                 md: 18
             }} />
-            <ProFormSelect request={listUserSelect} label="Người giới thiệu" name="maGioiThieu" showSearch disabled={disable}/>
+            <ProFormSelect request={listUserSelect} label="Người giới thiệu" name="referalCode" showSearch disabled={disable}/>
         </ProForm>
     )
 }

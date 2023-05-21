@@ -89,15 +89,15 @@ export default function LuyenTap() {
     return (
         <>
             <Head>
-                <title>Luyện tập</title>
-                <meta name="description" content="" />
+                <title>{baiGiang?.tenBaiGiang}</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <ProCard
+            className="shadow mb-4"
+            headerBordered
                 title={
-                    <div className="text-blue-500 text-2xl">{baiGiang?.tenBaiGiang}</div>
+                    <div className="text-blue-700 text-3xl">{baiGiang?.tenBaiGiang}</div>
                 }
                 extra={<Popconfirm title="Bạn có chắc chắn muốn làm lại không?" onConfirm={onConfirm}>
                     <Button size="large" type="primary">
@@ -120,7 +120,6 @@ export default function LuyenTap() {
                         </div>
                     </div>
                 </div>
-                <Divider dashed />
                 {
                     data?.length > 0 ? (
                         <Tabs
@@ -140,7 +139,6 @@ export default function LuyenTap() {
             </ProCard>
 
             <CommentComponent />
-            <Divider />
         </>
     )
 }

@@ -11,20 +11,20 @@ const ParentInfo: React.FC = () => {
         getParent().then(response => {
             formRef?.current?.setFields([
                 {
-                    name: 'tenPhuHuynh',
-                    value: response.tenPhuHuynh
+                    name: 'name',
+                    value: response.data.name
                 }, 
                 {
-                    name: 'soDienThoai',
-                    value: response.soDienThoai
+                    name: 'phoneNumber',
+                    value: response.data.phoneNumber
                 }, 
                 {
                     name: 'email',
-                    value: response.email
+                    value: response.data.email
                 }, 
                 {
-                    name: 'diaChi',
-                    value: response.diaChi
+                    name: 'address',
+                    value: response.data.address
                 }
             ])
         })
@@ -38,14 +38,19 @@ const ParentInfo: React.FC = () => {
     }
 
     return (
-        <ProForm formRef={formRef} onFinish={onFinish}>
-            <ProFormText name="tenPhuHuynh" label="Họ và tên" rules={[
+        <ProForm formRef={formRef} onFinish={onFinish} grid>
+            <ProFormText name="name" label="Họ và tên" rules={[
                 {
                     required: true
                 }
             ]} />
-            <ProFormText name="soDienThoai" disabled label="Số điện thoại" />
-            <ProFormText name="diaChi" label="Địa chỉ" />
+            <ProFormText name="phoneNumber" disabled label="Số điện thoại" colProps={{
+                md: 12
+            }} />
+            <ProFormText name="email" disabled label="Email" colProps={{
+                md: 12
+            }} />
+            <ProFormText name="address" label="Địa chỉ" />
         </ProForm>
     )
 }

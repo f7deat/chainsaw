@@ -5,7 +5,7 @@ import { message } from "antd";
 const AddMember: React.FC = () => {
 
     const onFinish = async (values: any) => {
-        values.gioiTinh = values.gioiTinh === 1;
+        values.gender = values.gioiTinh === 1;
         const response = await addStudent(values);
         if (response.succeeded) {
             message.success('Thêm thành công!');
@@ -14,15 +14,15 @@ const AddMember: React.FC = () => {
 
     return (
         <ProForm onFinish={onFinish} grid>
-            <ProFormText name="hoVaTen" label="Họ và Tên" rules={[
+            <ProFormText name="name" label="Họ và Tên" rules={[
                 {
                     required: true
                 }
             ]} />
-            <ProFormDatePicker name="ngaySinh" colProps={{
+            <ProFormDatePicker name="dateOfBirth" colProps={{
                 md: 8
             }} label="Ngày sinh" />
-            <ProFormSelect name="gioiTinh" colProps={{
+            <ProFormSelect name="gender" colProps={{
                 md: 16
             }} label="Giới tính"
                 options={[

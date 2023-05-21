@@ -1,4 +1,4 @@
-import AccountLeftBar from "@/components/tai-khoan/left-bar";
+import AccountLeftBar from "@/components/accounts/left-bar";
 import { getMyCourse } from "@/services/course";
 import { BookOutlined, QuestionCircleOutlined, StarFilled } from "@ant-design/icons";
 import { PageContainer, ProList } from "@ant-design/pro-components";

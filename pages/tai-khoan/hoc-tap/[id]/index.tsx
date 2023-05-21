@@ -1,4 +1,4 @@
-import AccountLeftBar from "@/components/tai-khoan/left-bar";
+import AccountLeftBar from "@/components/accounts/left-bar";
 import { learningHistory, learningResult } from "@/services/user";
 import { BarChartOutlined, CheckCircleFilled, ClockCircleFilled, DotChartOutlined, EditOutlined, InfoCircleOutlined, PieChartOutlined } from "@ant-design/icons";
 import { ProCard, ProList } from "@ant-design/pro-components";

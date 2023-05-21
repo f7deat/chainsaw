@@ -36,10 +36,10 @@ const AccountLeftBar: React.FC<AccountLeftBarProps> = (props) => {
                 <div className="mb-4 text-center">
                     <Image src={student?.avatar ? student.avatar : 'https://placehold.jp/200x200.png'} alt="IMG" width={200} height={200} className="rounded-full" />
                 </div>
-                <div className="text-xl text-center mb-1">{student?.hoVaTen}</div>
+                <div className="text-xl text-center mb-1">{student?.name}</div>
                 <ul className="mb-4 text-center text-gray-500">
                     <li>
-                        <CalendarOutlined /> {student?.ngaySinh?.substring(0, 10)}
+                        <CalendarOutlined /> {student?.dateOfBirth?.substring(0, 10)}
                     </li>
                 </ul>
                 <Link href={`/tai-khoan/hoc-tap/${student?.id}`}>

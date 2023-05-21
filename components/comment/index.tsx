@@ -23,8 +23,7 @@ const CommentComponent: React.FC = () => {
 
     return (
         <div>
-            <Divider />
-            <ProCard title="Bình luận">
+            <ProCard title="Bình luận" className="shadow mb-4">
                 <ProForm onFinish={onFinish} formRef={formRef}>
                     <ProFormTextArea name="noiDung" label="Nội dung" rules={[
                         {
@@ -33,11 +32,11 @@ const CommentComponent: React.FC = () => {
                     ]} />
                 </ProForm>
             </ProCard>
-            <Divider />
 
             {
                 id ? (
                     <ProList<API.CommentListItem>
+                        className="shadow"
                         pagination={{
                             pageSize: 5
                         }}

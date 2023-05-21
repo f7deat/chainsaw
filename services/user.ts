@@ -10,7 +10,7 @@ export async function getParent() {
 
 export async function register(data: any) {
     return request({
-        url: `parent/register`,
+        url: `user/register`,
         data,
         method: 'POST'
     });
@@ -38,10 +38,6 @@ export async function changePassword(data: any) {
         method: 'POST',
         data
     })
-}
-
-export async function listNewStudent() {
-    return request.get(`student/list-new`);
 }
 
 export async function updateStudent(data: any) {

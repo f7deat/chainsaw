@@ -15,7 +15,7 @@ const BaiGiang: React.FC<BaiGiangProps> = (props) => {
         if (data?.suggestion) {
             playAudio(data.suggestion);
         }
-    }, [data.suggestion])
+    }, [data?.suggestion])
 
     const onListen = () => {
         playAudio(data.suggestion);

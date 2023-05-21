@@ -82,7 +82,7 @@ export default function Index() {
                             layout: 'vertical'
                         }}
                             request={(params) => listQuestionHistory({
-                                hocVienId: router.query?.userId,
+                                userId: router.query?.userId,
                                 baiGiangId: router.query?.id,
                                 ...params
                             })}

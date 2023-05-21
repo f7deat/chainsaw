@@ -2,7 +2,6 @@
   "name": "chainsaw",
   "version": "0.1.0",
   "private": true,
-  "host": "http://apihoconline.getvisa.vn/client/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

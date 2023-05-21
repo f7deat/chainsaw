@@ -53,7 +53,7 @@ export default function App({ Component, pageProps }: AppProps) {
       }}>
       <UserContext.Provider value={contextValue}>
         <Header />
-        <div className='md:flex gap-10 pt-20'>
+        <div className='md:flex gap-10 pt-32'>
           <main className='mx-auto container flex-1 p-4'>
             <Component {...pageProps} />
           </main>

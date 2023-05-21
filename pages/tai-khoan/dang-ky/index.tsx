@@ -21,18 +21,18 @@ export default function Register() {
 
     const onFinish = async (values: any) => {
         const body = {
+            phoneNumber: values.phoneNumber,
+            password: values.password,
+            email: values.email,
             parent: {
-                tenPhuHuynh: values.parentName,
-                soDienThoai: values.phoneNumber,
-                diaChi: values.address,
-                matKhau: values.password,
-                gioiTinh: values.parentGender === 1
+                name: values.parentName,
+                address: values.address,
+                gender: values.parentGender === 1
             },
             student: {
-                hoVaTen: values.studentName,
-                ngaySinh: values.dateOfBirth,
-                soDienThoai: values.phoneNumber,
-                gioiTinh: values.studentGender === 1
+                name: values.studentName,
+                dateOfBirth: values.dateOfBirth,
+                gender: values.studentGender === 1
             }
         }
         const response = await register(body);
@@ -148,6 +148,12 @@ export default function Register() {
                                         colProps={{
                                             md: 12
                                         }}
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Vui lòng nhập email'
+                                            }
+                                        ]}
                                     />
                                     <ProFormText label="Địa chỉ" name="address" />
                                     <ProFormText.Password label="Mật khẩu" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="password" />
