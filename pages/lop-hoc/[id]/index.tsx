@@ -1,5 +1,6 @@
+import { AddStudentForm } from "@/components";
 import { getClassroom, getStudentInClassroom } from "@/services/classroom";
-import { EyeOutlined, UserOutlined } from "@ant-design/icons";
+import { EyeOutlined, UserAddOutlined, UserOutlined } from "@ant-design/icons";
 import { ProCard, ProColumns, ProTable } from "@ant-design/pro-components";
 import { Button, Empty } from "antd";
 import Head from "next/head";
@@ -10,6 +11,7 @@ export default function Index() {
 
     const router = useRouter();
     const [classroom, setClassroom] = useState<any>();
+    const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
         if (router?.query?.id) {
@@ -77,19 +79,25 @@ export default function Index() {
                     </ProCard>
                 </div>
                 <div className="md:w-3/4">
+                    <div className="mb-4 text-right">
+                        <Button type="primary" onClick={() => setOpen(true)}>
+                            <UserAddOutlined /> Thêm học sinh
+                        </Button>
+                    </div>
                     {
                         router?.query?.id && (
-                            <ProTable 
-                            rowKey="id"
-                            search={{
-                                layout: 'vertical'
-                            }}
-                            columns={columns}
-                            request={(params) => getStudentInClassroom(params, router.query.id)} />
+                            <ProTable
+                                rowKey="id"
+                                search={{
+                                    layout: 'vertical'
+                                }}
+                                columns={columns}
+                                request={(params) => getStudentInClassroom(params, router.query.id)} />
                         )
                     }
                 </div>
             </div>
+            <AddStudentForm open={open} setOpen={setOpen} />
         </>
     )
 }

@@ -12,7 +12,7 @@ import { UserContext } from '@/models/user';
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     AOS.init({
-      duration: 2500
+      duration: 1500
     });
   }, []);
 

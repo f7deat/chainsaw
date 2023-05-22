@@ -13,11 +13,11 @@ const StudentInfo: React.FC = () => {
             if (response.succeeded) {
                 formRef.current?.setFields([
                     {
-                        name: 'hoVaTen',
+                        name: 'name',
                         value: response.data.name
                     },
                     {
-                        name: 'ngaySinh',
+                        name: 'dateOfBirth',
                         value: response.data.dateOfBirth
                     },
                     {
@@ -29,7 +29,7 @@ const StudentInfo: React.FC = () => {
                         value: response.data.gender ? 0 : 1
                     },
                     {
-                        name: 'maGioiThieu',
+                        name: 'referalCode',
                         value: response.data.referalCode,
                     }
                 ]);
@@ -45,6 +45,8 @@ const StudentInfo: React.FC = () => {
         const response = await updateStudent(values);
         if (response.succeeded) {
             message.success('Lưu thành công!');
+        } else {
+            message.error(response.errors[0].description);
         }
     }
 
