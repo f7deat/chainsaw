@@ -5,7 +5,8 @@ namespace API {
   type User = BaseEntity & {
     roles: string[];
     avatar: string;
-    hoVaTen: string;
+    name: string;
+    phoneNumber: string;
   };
   type ReferListItem = BaseEntity & {
     name: string;

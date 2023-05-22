@@ -12,7 +12,7 @@ type CourseSummaryProps = {
 const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
 
     const [open, setOpen] = useState<boolean>(false);
-    const [user, setUser] = useState<any>();
+    const [user, setUser] = useState<API.User>();
     const router = useRouter();
 
     const onRegister = async () => {
@@ -22,12 +22,12 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
             return;
         }
         const response = await getParent();
-        setUser(response);
+        setUser(response.data);
         setOpen(true);
     }
 
     const onCopy = () => {
-        navigator.clipboard.writeText(`KH${props.data?.khoaHocId} ${user?.soDienThoai}`);
+        navigator.clipboard.writeText(`KH${props.data?.khoaHocId} ${user?.phoneNumber}`);
         message.success('Đã sao chép vào bộ nhớ tạm!');
     }
 
@@ -68,11 +68,11 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
             <Modal open={open} onCancel={() => setOpen(false)} title="Đăng ký khóa học" footer={false} centered>
                 <div className="mb-4">
                     <label className="font-bold block mb-2">Họ và tên</label>
-                    <div className="px-2 bg-slate-100 py-1 rounded border">{user?.tenPhuHuynh}</div>
+                    <div className="px-2 bg-slate-100 py-1 rounded border">{user?.name}</div>
                 </div>
                 <div className="mb-4">
                     <label className="font-bold block mb-2">Số điện thoại</label>
-                    <div className="px-2 bg-slate-100 py-1 rounded border">{user?.soDienThoai}</div>
+                    <div className="px-2 bg-slate-100 py-1 rounded border">{user?.phoneNumber}</div>
                 </div>
                 <div className="mb-2">Để đăng ký khóa học, bạn vui lòng chuyển khoản tới:</div>
                 <div className="font-bold mb-2">Ngân hàng TMCP Đông Nam Á (SeABank)</div>
@@ -91,7 +91,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                     <div className="mb-2">
                         <div className="mb-2 text-orange-700">Nội dung chuyển khoản:</div>
                         <div className="font-bold">
-                            KH{props.data?.khoaHocId} {user?.soDienThoai}
+                            KH{props.data?.khoaHocId} {user?.phoneNumber}
                             <Button type="link" onClick={onCopy}>Sao chép</Button>
                         </div>
                     </div>

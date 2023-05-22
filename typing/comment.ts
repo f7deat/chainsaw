@@ -4,5 +4,6 @@ namespace API {
         name: string;
         content: string;
         createdDate: Date;
+        role: string;
     }
 }

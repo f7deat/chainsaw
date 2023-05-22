@@ -1,5 +1,5 @@
 declare namespace API {
-    export type PhuHuynh = {
+    type PhuHuynh = {
         soDienThoai: string;
         tenPhuHuynh: string;
         diaChi: string;
@@ -7,14 +7,14 @@ declare namespace API {
         gioiTinh?: boolean | number;
         matKhau: string;
     }
-    export type HocVien = {
+    type HocVien = {
         hocVienId: number;
         soDienThoai?: string;
         hoVaTen: string;
         ngaySinh: Date;
         gioiTinh?: boolean | number;
     }
-    export type ChuongTrinhHoc = {
+    type ChuongTrinhHoc = {
         chuongTrinhHocId: number;
         tenChuongTrinhHoc: string;
         khoaHocId: number;
@@ -23,7 +23,7 @@ declare namespace API {
         gia: number;
         giaCu: number;
     }
-    export type QuestionListItem = {
+    type QuestionListItem = {
         id: number;
         answerNumber: number;
         title: string;
@@ -34,10 +34,11 @@ declare namespace API {
         result: boolean;
         answers: AnswerListItem[]
     }
-    export type AnswerListItem = {
+    type AnswerListItem = {
         id: number;
         text: string;
         questionId: number;
         yourAnswer: boolean;
+        mp3Link: string;
     }
 }

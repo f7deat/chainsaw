@@ -1,7 +1,6 @@
 import { playAudio } from "@/utils/audio";
 import { SoundOutlined } from "@ant-design/icons";
 import { Button, Divider, Space } from "antd";
-import { useEffect } from "react";
 
 type BaiGiangProps = {
     data: any;
@@ -11,11 +10,6 @@ type BaiGiangProps = {
 const BaiGiang: React.FC<BaiGiangProps> = (props) => {
 
     const { data, index } = props;
-    useEffect(() => {
-        if (data?.suggestion) {
-            playAudio(data.suggestion);
-        }
-    }, [data?.suggestion])
 
     const onListen = () => {
         playAudio(data.suggestion);

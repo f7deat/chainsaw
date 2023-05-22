@@ -1,7 +1,7 @@
 import { addComment, listComment } from "@/services/comment";
-import { UserOutlined } from "@ant-design/icons";
+import { CalendarOutlined, UserOutlined } from "@ant-design/icons";
 import { ActionType, ProCard, ProForm, ProFormInstance, ProFormTextArea, ProList } from "@ant-design/pro-components";
-import { Avatar, Divider, message } from "antd";
+import { Avatar, Divider, Tag, message } from "antd";
 import { useRouter } from "next/router";
 import { Fragment, useRef } from "react";
 
@@ -19,6 +19,13 @@ const CommentComponent: React.FC = () => {
             actionRef.current?.reload();
             formRef.current?.resetFields()
         }
+    }
+
+    const roleName = (normalizedName: string) => {
+        if (normalizedName === 'Student') {
+            return 'Học sinh';
+        }
+        return 'Giáo viên';
     }
 
     return (
@@ -47,11 +54,22 @@ const CommentComponent: React.FC = () => {
                         metas={{
                             title: {
                                 dataIndex: 'name',
-                                title: 'Name'
+                                render: (dom, entity) => (
+                                    <div className="flex justify-between items-center">
+                                        <Tag color="blue">{roleName(entity.role)}</Tag><div className="font-medium">{entity.name}</div>
+                                    </div>
+                                )
                             },
                             description: {
                                 render: (dom, entity) => {
-                                    return entity.content;
+                                    return (
+                                        <div>
+                                            <div className="mb-2">{entity.content}</div>
+                                            <div className="text-gray-500 text-sm text-right">
+                                                <CalendarOutlined /> {entity.createdDate.toLocaleString()}
+                                            </div>
+                                        </div>
+                                    )
                                 },
                             },
                             avatar: {

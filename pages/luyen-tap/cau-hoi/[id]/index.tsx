@@ -1,10 +1,11 @@
 import CommentComponent from "@/components/comment";
 import { BaiGiang, FreeInput, MultipleChoice, OrderChoice, SingleChoice } from "@/components/practice";
 import { getBaiGiang, listQuestion, resetResult } from "@/services/course";
+import { playAudio } from "@/utils/audio";
 import { QuestionType } from "@/utils/constants";
 import { CheckCircleOutlined, RedoOutlined, StopOutlined } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
-import { Alert, Button, Divider, Empty, Popconfirm, Space, Tabs, message } from "antd";
+import { Alert, Button, Empty, Popconfirm, Space, Tabs, message } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
@@ -128,10 +129,16 @@ export default function LuyenTap() {
                                 const id = String(i + 1);
                                 return {
                                     label: labelRender(item, id),
-                                    key: id,
+                                    key: item.id.toString(),
                                     children: renderTab(item, i),
                                 };
                             })}
+                            onTabClick={(activeKey) => {
+                                const question = data?.find(x => x.id.toString() === activeKey)
+                                if (question && question.type === QuestionType.BAI_GIANG) {
+                                    playAudio(question?.suggestion);
+                                }
+                            }}
                         />
                     ) : <Empty />
                 }

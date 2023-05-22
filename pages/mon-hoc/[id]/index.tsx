@@ -31,7 +31,7 @@ export default function Index() {
             title: '',
             valueType: 'option',
             render: (dom, entity) => [
-                <Button key="view" icon={<EyeOutlined />} className="flex items-center justify-center" type="primary" onClick={() => router.push(`/mon-hoc/${entity.id}`)} />
+                <Button key="view" icon={<EyeOutlined />} className="flex items-center justify-center" type="primary" onClick={() => router.push(`/bai-giang/${entity.id}`)} />
             ]
         }
     ]

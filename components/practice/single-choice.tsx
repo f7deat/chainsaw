@@ -1,7 +1,7 @@
 import { checkAnswer } from "@/services/course";
-import { playFalseSound, playTrueSound } from "@/utils/audio";
-import { QuestionCircleOutlined } from "@ant-design/icons";
-import { Alert, Col, Divider, Row, Typography, message } from "antd";
+import { playAudio, playFalseSound, playTrueSound } from "@/utils/audio";
+import { QuestionCircleOutlined, SoundOutlined } from "@ant-design/icons";
+import { Alert, Button, Col, Divider, Row, Typography, message } from "antd";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 
@@ -91,6 +91,13 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
                                         }} />
                                     </Typography.Title>
                                 </button>
+                                {
+                                    answer.mp3Link && (
+                                        <div>
+                                            <Button icon={<SoundOutlined />} onClick={() => playAudio(answer.mp3Link)} type="link" />
+                                        </div>
+                                    )
+                                }
                             </div>
                         ))
                     }

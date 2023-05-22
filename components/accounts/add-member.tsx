@@ -5,7 +5,7 @@ import { message } from "antd";
 const AddMember: React.FC = () => {
 
     const onFinish = async (values: any) => {
-        values.gender = values.gioiTinh === 1;
+        values.gender = values.gender === 1;
         const response = await addStudent(values);
         if (response.succeeded) {
             message.success('Thêm thành công!');
