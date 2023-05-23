@@ -2,7 +2,7 @@ import { AddStudentForm } from "@/components";
 import { getClassroom, getStudentInClassroom } from "@/services/classroom";
 import { EyeOutlined, UserAddOutlined, UserOutlined } from "@ant-design/icons";
 import { ProCard, ProColumns, ProTable } from "@ant-design/pro-components";
-import { Button, Empty } from "antd";
+import { Button, Empty, Space } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -81,7 +81,9 @@ export default function Index() {
                 <div className="md:w-3/4">
                     <div className="mb-4 text-right">
                         <Button type="primary" onClick={() => setOpen(true)}>
-                            <UserAddOutlined /> Thêm học sinh
+                            <Space>
+                                <UserAddOutlined /> Thêm học sinh
+                            </Space>
                         </Button>
                     </div>
                     {

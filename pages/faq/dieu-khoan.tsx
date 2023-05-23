@@ -9,7 +9,7 @@ export default function Term() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-
+            <h1 className="font-medium text-3xl text-blue-700">Điều khoản sử dụng</h1>
         </>
     )
 }

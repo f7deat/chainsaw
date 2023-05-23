@@ -53,75 +53,79 @@ export default function Index() {
                                 }
                             </div>
                         </div>
-                        <ProCard
-                            tabs={{
-                                activeKey: tab,
-                                tabPosition: 'top',
-                                items: [
-                                    {
-                                        label: 'Kết quả học tập',
-                                        key: 'learning-history',
-                                        children: <ProList<{
-                                            id: number,
-                                            status: boolean
-                                        }>
-                                            ghost
-                                            headerTitle="Bài giảng gần đây"
-                                            request={(params) => learningHistory(params, router?.query?.id)}
-                                            pagination={{
-                                                pageSize: 5
-                                            }}
-                                            metas={{
-                                                title: {
-                                                    dataIndex: 'name'
-                                                },
-                                                description: {
-                                                    dataIndex: 'modifiedDate',
-                                                    valueType: 'fromNow'
-                                                },
-                                                avatar: {
-                                                    render: (dom, entity) => {
-                                                        if (entity.status) {
-                                                            return (
-                                                                <Tooltip title="Đã hoàn thành bài giảng">
-                                                                    <div className="text-xl ml-2">
-                                                                        <CheckCircleFilled className="text-green-500" />
-                                                                    </div>
-                                                                </Tooltip>
-                                                            )
-                                                        }
-                                                        return (
-                                                            <Tooltip title="Bài giảng đang học">
-                                                                <div className="text-xl ml-2">
-                                                                    <ClockCircleFilled className="text-red-500" />
-                                                                </div>
-                                                            </Tooltip>
-                                                        )
-                                                    }
-                                                },
-                                                actions: {
-                                                    render: (dom, entity) => [
-                                                        <Tooltip title="Thông tin chi tiết" key="info">
-                                                            <Button className="text-lg text-gray-500 flex items-center" type="link" icon={<InfoCircleOutlined />}
-                                                                onClick={() => router.push(`/tai-khoan/hoc-tap/chi-tiet/${entity.id}?userId=${router.query?.id}`)} />
-                                                        </Tooltip>,
-                                                        <Button key={1} type="link" onClick={() => router.push(`/luyen-tap/cau-hoi/${entity.id}`)} icon={<EditOutlined />} className="text-lg flex items-center" />
-                                                    ]
-                                                },
-                                            }}
+                        {
+                            router?.query?.id && (
+                                <ProCard
+                                    tabs={{
+                                        activeKey: tab,
+                                        tabPosition: 'top',
+                                        items: [
+                                            {
+                                                label: 'Kết quả học tập',
+                                                key: 'learning-history',
+                                                children: <ProList<{
+                                                    id: number,
+                                                    status: boolean
+                                                }>
+                                                    ghost
+                                                    headerTitle="Bài giảng gần đây"
+                                                    request={(params) => learningHistory(params, router.query.id)}
+                                                    pagination={{
+                                                        pageSize: 5
+                                                    }}
+                                                    metas={{
+                                                        title: {
+                                                            dataIndex: 'name'
+                                                        },
+                                                        description: {
+                                                            dataIndex: 'modifiedDate',
+                                                            valueType: 'fromNow'
+                                                        },
+                                                        avatar: {
+                                                            render: (dom, entity) => {
+                                                                if (entity.status) {
+                                                                    return (
+                                                                        <Tooltip title="Đã hoàn thành bài giảng">
+                                                                            <div className="text-xl ml-2">
+                                                                                <CheckCircleFilled className="text-green-500" />
+                                                                            </div>
+                                                                        </Tooltip>
+                                                                    )
+                                                                }
+                                                                return (
+                                                                    <Tooltip title="Bài giảng đang học">
+                                                                        <div className="text-xl ml-2">
+                                                                            <ClockCircleFilled className="text-red-500" />
+                                                                        </div>
+                                                                    </Tooltip>
+                                                                )
+                                                            }
+                                                        },
+                                                        actions: {
+                                                            render: (dom, entity) => [
+                                                                <Tooltip title="Thông tin chi tiết" key="info">
+                                                                    <Button className="text-lg text-gray-500 flex items-center" type="link" icon={<InfoCircleOutlined />}
+                                                                        onClick={() => router.push(`/tai-khoan/hoc-tap/chi-tiet/${entity.id}?userId=${router.query?.id}`)} />
+                                                                </Tooltip>,
+                                                                <Button key={1} type="link" onClick={() => router.push(`/luyen-tap/cau-hoi/${entity.id}`)} icon={<EditOutlined />} className="text-lg flex items-center" />
+                                                            ]
+                                                        },
+                                                    }}
 
-                                        />,
-                                    },
-                                    {
-                                        label: 'Thành tích',
-                                        key: 'achivement',
-                                        children: <Empty />,
-                                    },
-                                ],
-                                onChange: (key) => {
-                                    setTab(key);
-                                },
-                            }} />
+                                                />,
+                                            },
+                                            {
+                                                label: 'Thành tích',
+                                                key: 'achivement',
+                                                children: <Empty />,
+                                            },
+                                        ],
+                                        onChange: (key) => {
+                                            setTab(key);
+                                        },
+                                    }} />
+                            )
+                        }
 
                     </div>
                 </div>

@@ -95,8 +95,8 @@ export default function LuyenTap() {
             </Head>
 
             <ProCard
-            className="shadow mb-4"
-            headerBordered
+                className="shadow mb-4"
+                headerBordered
                 title={
                     <div className="text-blue-700 text-3xl">{baiGiang?.tenBaiGiang}</div>
                 }
@@ -125,6 +125,7 @@ export default function LuyenTap() {
                     data?.length > 0 ? (
                         <Tabs
                             tabPosition="left"
+                            style={{ height: 1000 }}
                             items={data?.map((item: API.QuestionListItem, i: number) => {
                                 const id = String(i + 1);
                                 return {
@@ -144,7 +145,7 @@ export default function LuyenTap() {
                 }
 
             </ProCard>
-
+                <div className="md:grid-cols-2"></div>
             <CommentComponent />
         </>
     )

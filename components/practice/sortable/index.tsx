@@ -39,7 +39,9 @@ const OrderChoice: React.FC<OrderChoiceProps> = (props) => {
                 (
                     <div>
                         <div className="text-sm">Bạn đã trả lời sai câu hỏi này</div>
-                        <div>Đáp án đúng: <b>{item.suggestion}</b></div>
+                        <div>Đáp án đúng: <b dangerouslySetInnerHTML={{
+                            __html: item.suggestion
+                        }}></b></div>
                     </div>
                 )
             } type="error" showIcon className="text-lg" closable />
