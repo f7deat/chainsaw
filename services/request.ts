@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 
 const request = axios.create({
-  baseURL: "http://apihoconline.getvisa.vn/client/",
+  baseURL: process.env.API_HOST,
 }) as any;
 
 request.interceptors.request.use(function (config: InternalAxiosRequestConfig<any>) {
