@@ -3,7 +3,7 @@ import { BaiGiang, FreeInput, MultipleChoice, OrderChoice, SingleChoice } from "
 import { getBaiGiang, listQuestion, resetResult } from "@/services/course";
 import { playAudio } from "@/utils/audio";
 import { QuestionType } from "@/utils/constants";
-import { CheckCircleOutlined, RedoOutlined, StopOutlined } from "@ant-design/icons";
+import { CheckCircleOutlined, GifOutlined, GiftOutlined, RedoOutlined, StopOutlined } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
 import { Alert, Button, Empty, Popconfirm, Space, Tabs, message } from "antd";
 import Head from "next/head";
@@ -93,15 +93,19 @@ export default function LuyenTap() {
                 <title>{baiGiang?.tenBaiGiang}</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
-
+            <div className="text-blue-700 md:text-4xl font-medium mb-8 -mt-4 text-center">{baiGiang?.tenBaiGiang}</div>
             <ProCard
+                title={(
+                    <div className="p-2 text-blue-500 text-2xl text-center bg-white font-medium flex gap-2">
+                        <GiftOutlined />
+                        <span>Điểm: </span>
+                        <span>{score}/{data?.filter((x: API.QuestionListItem) => x.type !== 'baigiang').length}</span>
+                    </div>
+                )}
                 className="shadow mb-4"
                 headerBordered
-                title={
-                    <div className="text-blue-700 text-3xl">{baiGiang?.tenBaiGiang}</div>
-                }
                 extra={<Popconfirm title="Bạn có chắc chắn muốn làm lại không?" onConfirm={onConfirm}>
-                    <Button size="large" type="primary">
+                    <Button type="primary">
                         <Space>
                             <RedoOutlined />
                             Làm lại
@@ -112,19 +116,11 @@ export default function LuyenTap() {
                 {
                     error ? <Alert type="error" message={error} /> : (<Fragment />)
                 }
-                <div className="flex justify-end absolute right-4 top-32">
-                    <div className="shadow border">
-                        <div className="bg-red-500 text-white py-2 px-4 font-bold text-xl rounded-t">Điểm</div>
-                        <div className="p-2 text-blue-500 text-4xl text-center bg-white font-medium">
-                            <span>{score}</span>
-                            <span>/{data?.filter((x: API.QuestionListItem) => x.type !== 'baigiang').length}</span>
-                        </div>
-                    </div>
-                </div>
+
                 {
                     data?.length > 0 ? (
                         <Tabs
-                            tabPosition="left"
+                            tabPosition="top"
                             style={{ height: 1000 }}
                             items={data?.map((item: API.QuestionListItem, i: number) => {
                                 const id = String(i + 1);
@@ -145,7 +141,7 @@ export default function LuyenTap() {
                 }
 
             </ProCard>
-                <div className="md:grid-cols-2"></div>
+            <div className="md:grid-cols-2"></div>
             <CommentComponent />
         </>
     )
