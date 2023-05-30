@@ -31,7 +31,7 @@ export default function QuestionAndAnswer() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <PageContainer title="Gửi câu hỏi">
+            <div className="text-blue-700 md:text-4xl text-2xl font-medium mb-8 -mt-4">Gửi câu hỏi</div>
                 <div className="md:flex gap-4">
                     <div className="md:w-2/3">
                         <ProCard className="h-full" title="Mẫu">
@@ -53,12 +53,11 @@ export default function QuestionAndAnswer() {
                         </ProCard>
                     </div>
                     <div className="md:w-1/3">
-                        <picture>
+                        <picture className="hidden md:block">
                             <img src="https://www.weboundmarketing.com/wp-content/uploads/2019/10/faq-image.svg" alt="1" />
                         </picture>
                     </div>
                 </div>
-            </PageContainer>
         </>
     )
 }

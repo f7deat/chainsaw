@@ -1,7 +1,7 @@
 import { checkAnswer } from "@/services/course";
 import { playAudio, playFalseSound, playTrueSound } from "@/utils/audio";
 import { QuestionCircleOutlined, SoundOutlined } from "@ant-design/icons";
-import { Alert, Button, Col, Divider, Row, Typography, message } from "antd";
+import { Alert, Button, Col, Divider, Row, Space, Typography, message } from "antd";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 
@@ -78,7 +78,7 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
                 </div>
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Divider />
-                <div className={`grid md:grid-cols-${data.answers.length} gap-4`}>
+                <div className={`grid md:grid-cols-${data.answers.length} gap-4 mb-4`}>
                     {
                         data.answers.map(answer => (
                             <div key={answer.id} className="flex justify-center">
@@ -102,6 +102,17 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
                         ))
                     }
                 </div>
+
+                {
+                    data?.suggestion.endsWith('.mp3') && (
+                        <Button onClick={() => playAudio(data.suggestion)} size="large" type="primary">
+                            <Space>
+                                <SoundOutlined />
+                                <span className="font-medium">Nghe lại</span>
+                            </Space>
+                        </Button>
+                    )
+                }
 
                 <Divider />
 

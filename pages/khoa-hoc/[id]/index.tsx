@@ -26,58 +26,56 @@ export default function KhoaHoc() {
         <>
             <Head>
                 <title>{detail?.tenKhoaHoc}</title>
-                <meta name="description" content="" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
-            <PageContainer title={detail?.tenKhoaHoc}>
-                {
-                    detail && (
-                        <ProList<API.ChuongTrinhHocListItem>
-                            loading={loading}
-                            headerTitle="Chọn chương trình học"
-                            request={(params) => chuongTrinhHoc(params, detail.khoaHocId)}
-                            pagination={{
-                                defaultPageSize: 8
-                            }}
-                            grid={{ gutter: 16, column: 4 }}
-                            showActions="always"
-                            metas={{
-                                content: {
-                                    dataIndex: 'description',
-                                    render: (dom, entity) => (
-                                        <div className="-m-6">
-                                            <picture>
-                                                <img src={entity.thumbnail || 'https://cdn.getvisa.vn/images/cogiao.jpg'} alt="IMG" className="mb-2" />
-                                            </picture>
-                                            <div className="px-2 pb-1">
-                                                <Link key={1} href={`/bai-giang/${entity.id}`}>
-                                                    <div className="line-clamp-2 font-medium text-blue-500 mb-1 min-h-[50px]">{entity.name}</div>
-                                                </Link>
-                                                <div className="text-xs text-red-500 text-right">
-                                                    <StarFilled />
-                                                    <StarFilled />
-                                                    <StarFilled />
-                                                    <StarFilled />
-                                                    <StarFilled />
-                                                </div>
-                                                <div className="line-clamp-3 text-gray-500 text-sm">{entity.description}</div>
+            <div className="text-blue-700 md:text-4xl text-2xl font-medium mb-8 -mt-4 text-center">{detail?.tenKhoaHoc}</div>
+            {
+                detail && (
+                    <ProList<API.ChuongTrinhHocListItem>
+                        loading={loading}
+                        headerTitle="Chọn chương trình học"
+                        request={(params) => chuongTrinhHoc(params, detail.khoaHocId)}
+                        pagination={{
+                            defaultPageSize: 8
+                        }}
+                        grid={{ gutter: 16, column: 4, xs: 1 }}
+                        showActions="always"
+                        metas={{
+                            content: {
+                                dataIndex: 'description',
+                                render: (dom, entity) => (
+                                    <div className="-m-6">
+                                        <picture>
+                                            <img src={entity.thumbnail || 'https://cdn.getvisa.vn/images/cogiao.jpg'} alt="IMG" className="mb-2" />
+                                        </picture>
+                                        <div className="px-2 pb-1">
+                                            <Link key={1} href={`/bai-giang/${entity.id}`}>
+                                                <div className="line-clamp-2 font-medium text-blue-500 mb-1 min-h-[50px]">{entity.name}</div>
+                                            </Link>
+                                            <div className="text-xs text-red-500 text-right">
+                                                <StarFilled />
+                                                <StarFilled />
+                                                <StarFilled />
+                                                <StarFilled />
+                                                <StarFilled />
                                             </div>
+                                            <div className="line-clamp-3 text-gray-500 text-sm">{entity.description}</div>
                                         </div>
-                                    )
-                                },
-                                actions: {
-                                    cardActionProps: 'actions',
-                                    render: (dom, entity) => [
-                                        <Link key={1} href={`/bai-giang/${entity.id}`}>
-                                            Xem thêm
-                                        </Link>
-                                    ]
-                                }
-                            }}
-                        />
-                    )
-                }
-            </PageContainer>
+                                    </div>
+                                )
+                            },
+                            actions: {
+                                cardActionProps: 'actions',
+                                render: (dom, entity) => [
+                                    <Link key={1} href={`/bai-giang/${entity.id}`}>
+                                        Xem thêm
+                                    </Link>
+                                ]
+                            }
+                        }}
+                    />
+                )
+            }
         </>
     )
 }

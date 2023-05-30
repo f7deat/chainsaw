@@ -24,7 +24,7 @@ const Header: React.FC = () => {
             <div className="flex gap-4 py-4">
                 <div className="flex-1 md:flex gap-4 items-center justify-between">
                     <Link href="/">
-                        <div className="font-bold text-blue-700 md:text-3xl text-lg flex gap-2 px-4" style={inter.style}>
+                        <div className="font-bold text-blue-700 md:text-3xl text-2xl flex gap-2 px-4" style={inter.style}>
                             <FireTwoTone twoToneColor="#f97316" />
                             E-Learning
                         </div>

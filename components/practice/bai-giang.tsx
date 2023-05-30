@@ -20,7 +20,9 @@ const BaiGiang: React.FC<BaiGiangProps> = (props) => {
             <div className="mb-10">
                 <button className="bg-blue-500 text-white text-2xl px-6 py-2 shadow rounded-lg uppercase font-medium">Câu {index + 1}</button>
             </div>
-            <div className="text-3xl mb-5">{data.title}</div>
+            <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
+                __html: data.title
+            }}></div>
             <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
                 __html: data.content
             }}></div>

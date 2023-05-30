@@ -65,22 +65,6 @@ export default function Home() {
         <MyCourse defaultPageSize={4} />
       </div>
 
-      <div className='bg-blue-200 items-center h-64 rounded-lg flex px-4 pt-4 md:mb-20 mb-4 gap-4' data-aos="fade-up">
-        <picture>
-          <img src='https://kitpro.site/tutturu/wp-content/uploads/sites/69/2022/02/Elearning100720010-Converted0-800x653.png' alt='' className='h-52' />
-        </picture>
-        <div>
-          <div className='text-yellow-500 text-2xl font-medium mb-2'>Đăng ký</div>
-          <div className='text-lg mb-2 text-gray-600'>Nhận thông tin mới nhất từ chúng tôi</div>
-          <ProForm layout='vertical' submitter={false}>
-            <div className='flex gap-4'>
-              <input type='text' placeholder='Nhập địa chỉ email' className='rounded-full px-4 py-2' />
-              <button type='button' className='bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600'>Đăng ký</button>
-            </div>
-          </ProForm>
-        </div>
-      </div>
-
       <Partner />
 
     </>

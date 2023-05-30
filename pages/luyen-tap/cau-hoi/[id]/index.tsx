@@ -93,13 +93,13 @@ export default function LuyenTap() {
                 <title>{baiGiang?.tenBaiGiang}</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
-            <div className="text-blue-700 md:text-4xl font-medium mb-8 -mt-4 text-center">{baiGiang?.tenBaiGiang}</div>
+            <div className="text-blue-700 md:text-4xl text-2xl font-medium mb-8 -mt-4 text-center">{baiGiang?.tenBaiGiang}</div>
             <ProCard
                 title={(
                     <div className="p-2 text-blue-500 text-2xl text-center bg-white font-medium flex gap-2">
                         <GiftOutlined />
                         <span>Điểm: </span>
-                        <span>{score}/{data?.filter((x: API.QuestionListItem) => x.type !== 'baigiang').length}</span>
+                        <span className="text-red-500">{score}/{data?.filter((x: API.QuestionListItem) => x.type !== 'baigiang').length}</span>
                     </div>
                 )}
                 className="shadow mb-4"
@@ -121,7 +121,6 @@ export default function LuyenTap() {
                     data?.length > 0 ? (
                         <Tabs
                             tabPosition="top"
-                            style={{ height: 1000 }}
                             items={data?.map((item: API.QuestionListItem, i: number) => {
                                 const id = String(i + 1);
                                 return {
@@ -131,8 +130,8 @@ export default function LuyenTap() {
                                 };
                             })}
                             onTabClick={(activeKey) => {
-                                const question = data?.find(x => x.id.toString() === activeKey)
-                                if (question && question.type === QuestionType.BAI_GIANG) {
+                                const question = data?.find(x => x.id.toString() === activeKey);
+                                if (question?.suggestion.endsWith('.mp3')) {
                                     playAudio(question?.suggestion);
                                 }
                             }}

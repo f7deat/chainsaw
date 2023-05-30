@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import CourseSummary from "@/components/bai-giang/summary";
 import { Button, Divider, Tooltip, Typography, message } from "antd";
 import { CheckCircleFilled, ClockCircleFilled, EditOutlined, PlayCircleOutlined, QuestionCircleFilled, SearchOutlined } from "@ant-design/icons";
-import { ProList } from "@ant-design/pro-components";
+import { ProCard, ProList } from "@ant-design/pro-components";
 
 export default function CourseContent() {
     const router = useRouter();
@@ -65,11 +65,6 @@ export default function CourseContent() {
                         </div>
                     </div>
 
-                    <div className="mb-2 text-2xl font-medium">Thông tin khóa học</div>
-                    <div className="bg-white p-4 rounded-lg mb-4 text-gray-600" dangerouslySetInnerHTML={{
-                        __html: chuongTrinhHoc?.moTaChiTiet
-                    }}>
-                    </div>
                     <div className="text-4xl font-medium mb-4">Chương trình học</div>
                     {
                         data?.map((group: any, index: number) => (
@@ -136,6 +131,15 @@ export default function CourseContent() {
                 </div>
                 <div className="md:w-1/3">
                     <CourseSummary isBought={hasAccess} data={chuongTrinhHoc} />
+
+                    <Divider />
+
+                    <ProCard className="shadow">
+                        <div className="mb-2 text-2xl font-medium">Thông tin khóa học</div>
+                        <div className="bg-white p-4 rounded-lg mb-4 text-gray-600 text-base" dangerouslySetInnerHTML={{
+                            __html: chuongTrinhHoc?.moTaChiTiet
+                        }}></div>
+                    </ProCard>
                 </div>
             </div>
         </>

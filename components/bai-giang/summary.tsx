@@ -1,6 +1,7 @@
 import { getParent } from "@/services/user";
 import { CheckOutlined, LoginOutlined, PhoneOutlined } from "@ant-design/icons"
-import { Button, Input, Modal, Space, message } from "antd"
+import { ProCard } from "@ant-design/pro-components";
+import { Button, Modal, Space, message } from "antd"
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -32,13 +33,13 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
     }
 
     return (
-        <div className="bg-white shadow p-2 rounded-lg">
+        <ProCard className="shadow">
             <div className="h-52 bg-gray-500 rounded-lg mb-2">
                 <picture>
                     <img src="https://cdn.getvisa.vn/images/cogiao.jpg" className="w-full h-52 object-cover" alt="cover" />
                 </picture>
             </div>
-            <div className="mb-4 text-gray-500">
+            <div className="mb-4 text-gray-500 text-base">
                 {props.data?.moTaChuongTrinh}
             </div>
             <div className="py-4 text-center" hidden={!props.isBought}>
@@ -100,7 +101,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                     <CheckOutlined /> Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất!
                 </div>
             </Modal>
-        </div>
+        </ProCard>
     )
 }
 
