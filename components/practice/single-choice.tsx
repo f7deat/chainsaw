@@ -70,12 +70,8 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
                         Câu {index + 1}
                     </span>
                 </div>
-                <div className="text-3xl mb-5">{data.title}</div>
-                <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
-                    __html: data.content
-                }}>
-
-                </div>
+                <div className="text-3xl mb-5 text-center" dangerouslySetInnerHTML={{ __html: data.title }} />
+                <div className="text-3xl mb-5 text-center" dangerouslySetInnerHTML={{ __html: data.content }} />
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Divider />
                 <div className={`grid md:grid-cols-${data.answers.length} gap-4 mb-4`}>
@@ -104,7 +100,7 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
                 </div>
 
                 {
-                    data?.suggestion.endsWith('.mp3') && (
+                    (data?.suggestion.endsWith('.mp3') || data?.suggestion.endsWith('.m4a')) && (
                         <Button onClick={() => playAudio(data.suggestion)} size="large" type="primary">
                             <Space>
                                 <SoundOutlined />

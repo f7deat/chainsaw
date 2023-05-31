@@ -88,7 +88,9 @@ export default function CourseContent() {
                                     title: {
                                         render: (dom, entity) => (
                                             <div className="text-lg font-medium">
-                                                <div>{entity.name}</div>
+                                                <div dangerouslySetInnerHTML={{
+                                                    __html: entity.name
+                                                }}></div>
                                             </div>
                                         )
                                     },

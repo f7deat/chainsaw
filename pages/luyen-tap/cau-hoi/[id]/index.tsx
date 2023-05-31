@@ -3,9 +3,9 @@ import { BaiGiang, FreeInput, MultipleChoice, OrderChoice, SingleChoice } from "
 import { getBaiGiang, listQuestion, resetResult } from "@/services/course";
 import { playAudio } from "@/utils/audio";
 import { QuestionType } from "@/utils/constants";
-import { CheckCircleOutlined, GifOutlined, GiftOutlined, RedoOutlined, StopOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, ArrowRightOutlined, CheckCircleOutlined, GiftOutlined, InfoCircleOutlined, RedoOutlined, StopOutlined } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
-import { Alert, Button, Empty, Popconfirm, Space, Tabs, message } from "antd";
+import { Alert, Button, Empty, Popconfirm, Popover, Space, Tabs, message } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
@@ -16,13 +16,14 @@ export default function LuyenTap() {
     const [data, setData] = useState<API.QuestionListItem[]>([]);
     const [error, setError] = useState<string>();
     const [baiGiang, setBaiGiang] = useState<any>();
+    const [activeKey, setActiveKey] = useState<string>('0')
 
     useEffect(() => {
         if (router?.query?.id) {
             listQuestion(router.query.id).then(response => {
                 if (response.succeeded) {
-                    setData(response.data);
                     if (response.data) {
+                        setData(response.data);
                         let point = 0;
                         const length = response.data.filter((x: API.QuestionListItem) => x.type !== 'baigiang').length;
                         for (let index = 0; index < length; index++) {
@@ -53,14 +54,14 @@ export default function LuyenTap() {
         } else if (item.type === QuestionType.BAI_GIANG) {
             return <BaiGiang data={item} index={index} />
         }
-        else if (item.type === QuestionType.SAPXEP) {
+        else if (item.type === QuestionType.SORTABLE) {
             return <OrderChoice data={item} index={index} score={score} setScore={setScore} />
         } else {
             return <SingleChoice data={item} index={index} score={score} setScore={setScore} />
         }
     }
 
-    const labelRender = (item: API.QuestionListItem, index: string) => {
+    const labelRender = (item: API.QuestionListItem, index: number) => {
         if (item.isCompleted) {
             if (item.result) {
                 return <Space>
@@ -87,13 +88,26 @@ export default function LuyenTap() {
         }
     }
 
+    const onNextTab = (isNext: boolean) => {
+        const newKey = isNext ? (Number(activeKey)) + 1 : (Number(activeKey)) - 1;
+        setActiveKey(newKey.toString());
+        onSound(newKey)
+    }
+
+    const onSound = (index: number) => {
+        const question = data[index];
+        if (question?.suggestion.endsWith('.mp3') || question?.suggestion.endsWith('.m4a')) {
+            playAudio(question?.suggestion);
+        }
+    }
+
     return (
         <>
             <Head>
-                <title>{baiGiang?.tenBaiGiang}</title>
+                <title>{baiGiang?.name} - {baiGiang?.subject}</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
-            <div className="text-blue-700 md:text-4xl text-2xl font-medium mb-8 -mt-4 text-center">{baiGiang?.tenBaiGiang}</div>
+            <div className="text-blue-700 md:text-4xl text-2xl font-medium mb-8 -mt-4 text-center">{baiGiang?.name}</div>
             <ProCard
                 title={(
                     <div className="p-2 text-blue-500 text-2xl text-center bg-white font-medium flex gap-2">
@@ -120,25 +134,59 @@ export default function LuyenTap() {
                 {
                     data?.length > 0 ? (
                         <Tabs
+                            centered
+                            activeKey={activeKey}
                             tabPosition="top"
                             items={data?.map((item: API.QuestionListItem, i: number) => {
-                                const id = String(i + 1);
+                                const id = String(i);
                                 return {
-                                    label: labelRender(item, id),
-                                    key: item.id.toString(),
-                                    children: renderTab(item, i),
+                                    label: labelRender(item, i + 1),
+                                    key: id,
+                                    children: (
+                                        <div>
+                                            {renderTab(item, i)}
+                                            {
+                                                (baiGiang?.subjectId === 1 && item.suggestion) && (
+                                                    <div className="flex justify-end gap-2">
+                                                        <Popover content={item.suggestion}>
+                                                            <Button type="link">
+                                                                <Space>
+                                                                    <InfoCircleOutlined /> Gợi ý
+                                                                </Space>
+                                                            </Button>
+                                                        </Popover>
+                                                    </div>
+                                                )
+                                            }
+                                        </div>
+                                    ),
                                 };
                             })}
                             onTabClick={(activeKey) => {
-                                const question = data?.find(x => x.id.toString() === activeKey);
-                                if (question?.suggestion.endsWith('.mp3')) {
-                                    playAudio(question?.suggestion);
-                                }
+                                setActiveKey(activeKey);
+                                onSound(Number(activeKey));
                             }}
                         />
                     ) : <Empty />
                 }
-
+                {
+                    data && (
+                        <div className="flex mt-4 justify-between">
+                            <Button type="primary" disabled={activeKey === "0"} onClick={() => onNextTab(false)}>
+                                <Space>
+                                    <ArrowLeftOutlined />
+                                    Câu hỏi trước
+                                </Space>
+                            </Button>
+                            <Button type="primary" disabled={activeKey === (data?.length - 1).toString()} onClick={() => onNextTab(true)}>
+                                <Space>
+                                    Câu hỏi sau
+                                    <ArrowRightOutlined />
+                                </Space>
+                            </Button>
+                        </div>
+                    )
+                }
             </ProCard>
             <div className="md:grid-cols-2"></div>
             <CommentComponent />
