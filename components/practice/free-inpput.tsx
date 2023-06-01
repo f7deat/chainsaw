@@ -1,5 +1,6 @@
 import { checkAnswer } from "@/services/course";
 import { playFalseSound, playTrueSound } from "@/utils/audio";
+import { QuestionCircleOutlined } from "@ant-design/icons";
 import { Alert, Button, Divider, Form, Input, message } from "antd"
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
@@ -10,7 +11,6 @@ type PracticeContentProps = {
     score: number;
     index: number;
 }
-
 
 const PracticeContent: React.FC<PracticeContentProps> = (props) => {
 
@@ -46,12 +46,13 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
         <div>
             <div className="flex flex-col items-center justify-center p-4">
                 <div className="mb-10">
-                    <button className="bg-orange-500 text-white text-2xl px-6 py-2 shadow rounded-lg uppercase font-medium">Câu {index + 1}</button>
+                    <button className="bg-orange-500 flex gap-2 text-white text-2xl px-6 py-2 shadow rounded-lg uppercase font-medium">
+                        <QuestionCircleOutlined />
+                        <span>Câu {index + 1}</span>
+                    </button>
                 </div>
-                <div className="text-3xl mb-5">{item.title}</div>
-                <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
-                    __html: item.content
-                }}></div>
+                <div className="text-3xl mb-5 image-central" dangerouslySetInnerHTML={{ __html: item.title }} />
+                <div className="text-3xl mb-5 image-central" dangerouslySetInnerHTML={{ __html: item.content }} />
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Form onFinish={onFinish}>
                     <Form.Item initialValue={item.type} name="type" hidden />
