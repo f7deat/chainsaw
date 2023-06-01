@@ -51,8 +51,8 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
                         <span>Câu {index + 1}</span>
                     </button>
                 </div>
-                <div className="text-3xl mb-5 image-central" dangerouslySetInnerHTML={{ __html: item.title }} />
-                <div className="text-3xl mb-5 image-central" dangerouslySetInnerHTML={{ __html: item.content }} />
+                <div className="text-3xl mb-5 image-central text-center" dangerouslySetInnerHTML={{ __html: item.title }} />
+                <div className="text-3xl mb-5 image-central text-center" dangerouslySetInnerHTML={{ __html: item.content }} />
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Form onFinish={onFinish}>
                     <Form.Item initialValue={item.type} name="type" hidden />
