@@ -12,11 +12,10 @@ import { Fragment, useEffect, useState } from "react";
 
 export default function LuyenTap() {
     const router = useRouter();
-
     const [data, setData] = useState<API.QuestionListItem[]>([]);
     const [error, setError] = useState<string>();
-    const [baiGiang, setBaiGiang] = useState<any>();
-    const [activeKey, setActiveKey] = useState<string>('0')
+    const [module, setModule] = useState<any>();
+    const [activeKey, setActiveKey] = useState<string>('0');
 
     useEffect(() => {
         if (router?.query?.id) {
@@ -39,7 +38,7 @@ export default function LuyenTap() {
                 }
             });
             getBaiGiang(router.query.id).then(response => {
-                setBaiGiang(response);
+                setModule(response);
             })
         }
     }, [router])
@@ -53,12 +52,10 @@ export default function LuyenTap() {
             return <MultipleChoice data={item} index={index} score={score} setScore={setScore} />
         } else if (item.type === QuestionType.BAI_GIANG) {
             return <BaiGiang data={item} index={index} />
-        }
-        else if (item.type === QuestionType.SORTABLE) {
+        } else if (item.type === QuestionType.SORTABLE) {
             return <OrderChoice data={item} index={index} score={score} setScore={setScore} />
-        } else {
-            return <SingleChoice data={item} index={index} score={score} setScore={setScore} />
         }
+        return <SingleChoice data={item} index={index} score={score} setScore={setScore} />
     }
 
     const labelRender = (item: API.QuestionListItem, index: number) => {
@@ -104,10 +101,10 @@ export default function LuyenTap() {
     return (
         <>
             <Head>
-                <title>{baiGiang?.name} - {baiGiang?.subject}</title>
+                <title>{module?.name} - {module?.subject}</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
-            <div className="text-blue-700 md:text-4xl text-2xl font-medium mb-8 -mt-4 text-center">{baiGiang?.name}</div>
+            <div className="text-blue-700 md:text-4xl text-2xl font-medium mb-8 -mt-4 text-center">{module?.name}</div>
             <ProCard
                 title={(
                     <div className="p-2 text-blue-500 text-2xl text-center bg-white font-medium flex gap-2">
@@ -134,7 +131,6 @@ export default function LuyenTap() {
                 {
                     data?.length > 0 ? (
                         <Tabs
-                            centered
                             activeKey={activeKey}
                             tabPosition="top"
                             items={data?.map((item: API.QuestionListItem, i: number) => {
@@ -146,9 +142,11 @@ export default function LuyenTap() {
                                         <div>
                                             {renderTab(item, i)}
                                             {
-                                                (baiGiang?.subjectId === 1 && item.suggestion) && (
+                                                (module?.subjectId === 1 && item.suggestion) && (
                                                     <div className="flex justify-end gap-2">
-                                                        <Popover content={item.suggestion}>
+                                                        <Popover content={
+                                                            <div dangerouslySetInnerHTML={{ __html: item.suggestion}} />
+                                                        }>
                                                             <Button type="link">
                                                                 <Space>
                                                                     <InfoCircleOutlined /> Gợi ý

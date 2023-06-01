@@ -51,23 +51,25 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = (props) => {
                 <div className="mb-10">
                     <button className="bg-blue-500 text-white text-2xl px-6 py-2 shadow rounded-lg uppercase font-medium">Câu {index + 1}</button>
                 </div>
-                <div className="text-3xl mb-5">{data.title}</div>
-                <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
-                    __html: data.content
-                }}>
-
-                </div>
+                <div className="text-3xl mb-5 text-center image-central" dangerouslySetInnerHTML={{ __html: data.title}} />
+                <div className="text-3xl mb-5 text-center image-central" dangerouslySetInnerHTML={{ __html: data.content }}/>
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Divider />
-                <ProForm onFinish={onFinish}>
+                <ProForm onFinish={onFinish} className="text-center">
                     <ProFormCheckbox.Group 
-                    name="dapAnIds"
+                        name="dapAnIds"
                         options={data.answers.map(o => {
                             return {
-                                label: <span className="font-medium">{o.text}</span>,
+                                label: <span className="font-medium" dangerouslySetInnerHTML={{ __html: o.text }}></span>,
                                 value: o.id
                             }
                         })}
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng chọn câu trả lời'
+                            }
+                        ]}
                     />
                 </ProForm>
 

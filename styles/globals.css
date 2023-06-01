@@ -6,6 +6,10 @@ body {
     background: url(https://cdn.getvisa.vn/images/background.jpg) fixed 50%;
 }
 
+p {
+    margin: 0.5rem 0;
+}
+
 .ant-btn-primary {
     background-color: #1677ff;
 }
@@ -52,4 +56,8 @@ body {
 
 .shadow {
     box-shadow: 0 0 30px rgba(1, 41, 111, .0784313725490196);
+}
+
+.image-central img {
+    display: initial;
 }

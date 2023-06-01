@@ -26,7 +26,7 @@ const StudentInfo: React.FC = () => {
                     },
                     {
                         name: 'gender',
-                        value: response.data.gender ? 0 : 1
+                        value: response.data.gender
                     },
                     {
                         name: 'referalCode',
@@ -41,7 +41,6 @@ const StudentInfo: React.FC = () => {
     }, []);
 
     const onFinish = async (values: any) => {
-        values.gender = values.gender === 1;
         const response = await updateStudent(values);
         if (response.succeeded) {
             message.success('Lưu thành công!');
@@ -65,12 +64,12 @@ const StudentInfo: React.FC = () => {
                 md: 12
             }} options={[
                 {
-                    value: 1,
+                    value: true as any,
                     label: 'Nam'
                 },
                 
                 {
-                    value: 0,
+                    value: false as any,
                     label: 'Nữ'
                 }
             ]} />

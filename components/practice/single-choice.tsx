@@ -70,7 +70,7 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
                         Câu {index + 1}
                     </span>
                 </div>
-                <div className="text-3xl mb-5 text-center" dangerouslySetInnerHTML={{ __html: data.title }} />
+                <div className="text-3xl mb-5 text-center image-central" dangerouslySetInnerHTML={{ __html: data.title }} />
                 <div className="text-3xl mb-5 text-center" dangerouslySetInnerHTML={{ __html: data.content }} />
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Divider />
