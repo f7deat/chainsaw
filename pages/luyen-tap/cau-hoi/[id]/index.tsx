@@ -3,7 +3,7 @@ import { BaiGiang, FreeInput, MultipleChoice, OrderChoice, SingleChoice } from "
 import { getBaiGiang, listQuestion, resetResult } from "@/services/course";
 import { playAudio } from "@/utils/audio";
 import { QuestionType } from "@/utils/constants";
-import { ArrowLeftOutlined, ArrowRightOutlined, CheckCircleOutlined, GiftOutlined, InfoCircleOutlined, RedoOutlined, StopOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, ArrowRightOutlined, CheckCircleOutlined, GiftOutlined, InfoCircleOutlined, RedoOutlined, SoundOutlined, StopOutlined } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
 import { Alert, Button, Empty, Popconfirm, Popover, Space, Tabs, message } from "antd";
 import Head from "next/head";
@@ -98,6 +98,13 @@ export default function LuyenTap() {
         }
     }
 
+    const speak = (text: string) => {
+        const synth = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = synth.getVoices()[0];
+        synth.speak(utterance);
+    };
+
     return (
         <>
             <Head>
@@ -141,11 +148,12 @@ export default function LuyenTap() {
                                     children: (
                                         <div>
                                             {renderTab(item, i)}
-                                            {
-                                                (module?.subjectId === 1 && item.suggestion) && (
-                                                    <div className="flex justify-end gap-2">
+                                            <div className="flex justify-end gap-2">
+                                                <Button className="flex items-center" onClick={() => speak(item.title)} icon={<SoundOutlined />}>Nghe đọc bài</Button>
+                                                {
+                                                    (module?.subjectId === 1 && item.suggestion) && (
                                                         <Popover content={
-                                                            <div dangerouslySetInnerHTML={{ __html: item.suggestion}} />
+                                                            <div dangerouslySetInnerHTML={{ __html: item.suggestion }} />
                                                         }>
                                                             <Button type="link">
                                                                 <Space>
@@ -153,9 +161,9 @@ export default function LuyenTap() {
                                                                 </Space>
                                                             </Button>
                                                         </Popover>
-                                                    </div>
-                                                )
-                                            }
+                                                    )
+                                                }
+                                            </div>
                                         </div>
                                     ),
                                 };
@@ -187,6 +195,7 @@ export default function LuyenTap() {
                 }
             </ProCard>
             <div className="md:grid-cols-2"></div>
+            <div className="md:grid-cols-5"></div>
             <CommentComponent />
         </>
     )
