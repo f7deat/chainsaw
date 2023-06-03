@@ -20,16 +20,6 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
 
     const [answered, setAnswered] = useState<boolean>(false);
 
-    const ShowMessage = (item: API.QuestionListItem) => {
-        if (item.isCompleted && item.result) {
-            return <Alert message="Bạn đã hoàn thành chính xác câu hỏi này" type="success" showIcon className="text-lg" />
-        }
-        if (item.isCompleted && !item.result) {
-            return <Alert message="Bạn đã trả lời sai câu hỏi này" type="error" showIcon className="text-lg" />
-        }
-        return <Fragment />
-    }
-
     const onAnswer = async (values: API.AnswerListItem) => {
         if (answered || data.isCompleted) {
             return;
@@ -109,10 +99,6 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
                         </Button>
                     )
                 }
-
-                <Divider />
-
-                {ShowMessage(data)}
 
             </div>
         </div>

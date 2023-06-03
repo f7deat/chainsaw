@@ -5,18 +5,18 @@ import { ProColumns, ProTable } from "@ant-design/pro-components";
 import { Button } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 
-export default function Index() {
+export const getServerSideProps: GetServerSideProps<{
+    subject: API.Subject;
+}> = async (context) => {
+    const subject = await getSubject(context.params?.id);
+    return { props: { subject } };
+};
+
+export default function Index({ subject }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
     const router = useRouter();
-    const [subject, setSubject] = useState<API.Subject>()
-
-    useEffect(() => {
-        if (router?.query?.id) {
-            getSubject(router.query.id).then(response => setSubject(response));
-        }
-    }, [router]);
 
     const columns: ProColumns<any>[] = [
         {

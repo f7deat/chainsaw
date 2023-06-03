@@ -32,16 +32,6 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
         setAnswered(true);
     }
 
-    const ShowMessage = (item: API.QuestionListItem) => {
-        if (item.isCompleted && item.result) {
-            return <Alert message="Bạn đã hoàn thành chính xác câu hỏi này" type="success" showIcon className="text-lg" />
-        }
-        if (item.isCompleted && !item.result) {
-            return <Alert message="Bạn đã trả lời sai câu hỏi này" type="error" showIcon className="text-lg" />
-        }
-        return <Fragment />
-    }
-
     return (
         <div>
             <div className="flex flex-col items-center justify-center p-4">
@@ -66,10 +56,6 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
                     </Form.Item>
                     <Button disabled={item.isCompleted || answered} size="large" htmlType="submit" className="w-full bg-blue-500 font-bold" type="primary">Gửi câu trả lời</Button>
                 </Form>
-
-                <Divider />
-
-                {ShowMessage(item)}
 
             </div>
         </div>

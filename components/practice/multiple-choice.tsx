@@ -19,16 +19,6 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = (props) => {
 
     const [answered, setAnswered] = useState<boolean>(false);
 
-    const ShowMessage = (item: API.QuestionListItem) => {
-        if (item.isCompleted && item.result) {
-            return <Alert message="Bạn đã hoàn thành chính xác câu hỏi này" type="success" showIcon className="text-lg" />
-        }
-        if (item.isCompleted && !item.result) {
-            return <Alert message="Bạn đã trả lời sai câu hỏi này" type="error" showIcon className="text-lg" />
-        }
-        return <Fragment />
-    }
-
     const onFinish = async (values: any) => {
         if (answered || data.isCompleted) {
             return;
@@ -49,7 +39,7 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = (props) => {
         <div>
             <div className="flex flex-col items-center justify-center p-4">
                 <div className="mb-10">
-                    <button className="bg-blue-500 text-white text-2xl px-6 py-2 shadow rounded-lg uppercase font-medium">Câu {index + 1}</button>
+                    <span className="bg-pink-500 text-white text-2xl px-6 py-2 shadow rounded-lg uppercase font-medium">Câu {index + 1}</span>
                 </div>
                 <div className="text-3xl mb-5 text-center image-central" dangerouslySetInnerHTML={{ __html: data.title}} />
                 <div className="text-3xl mb-5 text-center image-central" dangerouslySetInnerHTML={{ __html: data.content }}/>
@@ -72,10 +62,6 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = (props) => {
                         ]}
                     />
                 </ProForm>
-
-                <Divider />
-
-                {ShowMessage(data)}
 
             </div>
         </div>
