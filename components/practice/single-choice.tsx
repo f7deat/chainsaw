@@ -25,29 +25,24 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
             return;
         }
         const response = await checkAnswer(values.questionId, values.id, '', undefined, data.type, router.query.id);
-        let newData = { ...data };
         if (response.correct) {
             setScore(score + 1);
             playTrueSound();
             message.success('Đúng rồi, con giỏi lắm!');
-            newData.result = true;
         } else {
             playFalseSound();
             message.error('Sai rồi!');
-            newData.result = false;
         }
-        newData.isCompleted = true;
-        console.log(newData)
-        setData(newData);
+        setData(response.question);
         setAnswered(true);
     }
 
     const getBorder = (item: API.AnswerListItem) => {
         if (item.yourAnswer) {
             if (data.result) {
-                return 'border-green-500';
+                return 'border-green-500 bg-slate-100';
             }
-            return 'border-red-500';
+            return 'border-red-500 bg-slate-100';
         }
         return '';
     }

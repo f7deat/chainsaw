@@ -128,7 +128,7 @@ export default function LuyenTap() {
                 <title>{module?.name} - {module?.subject}</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
-            <div className="mb-2">
+            <div className="mb-4">
                 <Breadcrumb items={[
                     {
                         title: (
@@ -141,6 +141,13 @@ export default function LuyenTap() {
                         title: (
                             <Link href={`/mon-hoc/${module?.subjectId}`}>
                                 <BookOutlined /> {module?.subject}
+                            </Link>
+                        )
+                    },
+                    {
+                        title: (
+                            <Link href={`/bai-giang/${module?.topicId}`}>
+                                <BookOutlined /> {module?.topic}
                             </Link>
                         )
                     }
