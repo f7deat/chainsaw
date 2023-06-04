@@ -1,5 +1,6 @@
 import { QuestionType } from "@/utils/constants";
 import request from "./request";
+const API_HOST = process.env.API_HOST;
 
 export async function listCourse() {
     return request.get(`khoahoc/getkhoahocs`);
@@ -12,11 +13,13 @@ export async function listKhoaHoc(data: any) {
     });
 }
 
-export async function queryKhoaHoc(id: string | string[]) {
-    return request.get(`khoahoc/${id}`);
+export async function queryKhoaHoc(id?: string | string[]) {
+    const res = await fetch(`${API_HOST}khoahoc/${id}`);
+    return res.json();
+
 }
 
-export async function chuongTrinhHoc(params: any, id?: string | string[]) {
+export async function chuongTrinhHoc(params: any, id: number) {
     return request({
         url: `khoahoc/danh-sach-chuong-trinh-hoc/${id}`,
         params
@@ -83,7 +86,8 @@ export async function listClassroom(params: any) {
 }
 
 export async function getChuongTrinhHoc(id?: string | string[]) {
-    return request.get(`chuong-trinh-hoc/${id}`);
+    const res = await fetch(`${API_HOST}chuong-trinh-hoc/${id}`);
+    return res.json();
 }
 
 export async function listChuongTrinhHocBySubjectId( params: any, id?: string | string[] | number) {

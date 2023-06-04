@@ -6,20 +6,24 @@ import CourseSummary from "@/components/bai-giang/summary";
 import { Button, Divider, Tooltip, Typography, message } from "antd";
 import { CheckCircleFilled, ClockCircleFilled, EditOutlined, PlayCircleOutlined, QuestionCircleFilled, SearchOutlined } from "@ant-design/icons";
 import { ProCard, ProList } from "@ant-design/pro-components";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
-export default function CourseContent() {
+export const getServerSideProps: GetServerSideProps<{
+    topic: API.ChuongTrinhHoc;
+}> = async (context) => {
+    const topic = await getChuongTrinhHoc(context.params?.id);
+    return { props: { topic } };
+};
+
+export default function Index({ topic }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const router = useRouter();
     const [data, setData] = useState<any>();
     const [hasAccess, setHasAccess] = useState<boolean>(false);
-    const [chuongTrinhHoc, setChuongTrinhHoc] = useState<any>();
 
     useEffect(() => {
         if (router.query.id) {
             listNhomBaiGiang(router.query.id).then(response => {
                 setData(response)
-            })
-            getChuongTrinhHoc(router.query.id).then(response => {
-                setChuongTrinhHoc(response)
             })
             isBought(router.query.id).then(response => setHasAccess(response?.trangThai))
         }
@@ -41,12 +45,9 @@ export default function CourseContent() {
     return (
         <>
             <Head>
-                <title>{chuongTrinhHoc?.tenChuongTrinhHoc}</title>
-                <meta name="description" content="" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
+                <title>{topic.tenChuongTrinhHoc}</title>
             </Head>
-            <Typography.Title level={3}>{chuongTrinhHoc?.tenChuongTrinhHoc}</Typography.Title>
+            <Typography.Title level={3}>{topic.tenChuongTrinhHoc}</Typography.Title>
             <Divider dashed />
             <div className="md:flex gap-4">
                 <div className="md:w-2/3">
@@ -132,14 +133,14 @@ export default function CourseContent() {
                     }
                 </div>
                 <div className="md:w-1/3">
-                    <CourseSummary isBought={hasAccess} data={chuongTrinhHoc} />
+                    <CourseSummary isBought={hasAccess} data={topic} />
 
                     <Divider />
 
                     <ProCard className="shadow">
                         <div className="mb-2 text-2xl font-medium">Thông tin khóa học</div>
                         <div className="bg-white p-4 rounded-lg mb-4 text-gray-600 text-base" dangerouslySetInnerHTML={{
-                            __html: chuongTrinhHoc?.moTaChiTiet
+                            __html: topic?.moTaChiTiet
                         }}></div>
                     </ProCard>
                 </div>

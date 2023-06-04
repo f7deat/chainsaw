@@ -1,5 +1,7 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 
+export const API_HOST = process.env.API_HOST;
+
 const request = axios.create({
   baseURL: process.env.API_HOST,
 }) as any;
