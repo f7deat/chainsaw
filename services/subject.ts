@@ -1,5 +1,3 @@
-import request from "./request";
-
 const API_HOST = process.env.API_HOST;
 
 export async function getSubject(id?: string | string[]) {
@@ -8,8 +6,6 @@ export async function getSubject(id?: string | string[]) {
 }
 
 export async function listSubject(params: any) {
-  return request({
-    url: `subject/list`,
-    params,
-  });
+  const res = await fetch(`${API_HOST}subject/list`);
+  return res.json();
 }

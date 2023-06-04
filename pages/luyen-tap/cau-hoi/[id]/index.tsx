@@ -128,19 +128,25 @@ export default function LuyenTap() {
                 <title>{module?.name} - {module?.subject}</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
-            <Breadcrumb>
-                <Breadcrumb.Item>
-                    <Link href="/">
-                        <HomeOutlined /> Trang chủ
-                    </Link>
-                </Breadcrumb.Item>
-                <Breadcrumb.Item>
-                    <Link href={`/mon-hoc/${module?.subjectId}`}>
-                        <BookOutlined /> {module?.subject}
-                    </Link>
-                </Breadcrumb.Item>
-            </Breadcrumb>
-            <div className="text-blue-700 md:text-4xl text-2xl font-medium mb-8 -mt-4 text-center">{module?.name}</div>
+            <div className="mb-2">
+                <Breadcrumb items={[
+                    {
+                        title: (
+                            <Link href="/">
+                                <HomeOutlined /> Trang chủ
+                            </Link>
+                        )
+                    },
+                    {
+                        title: (
+                            <Link href={`/mon-hoc/${module?.subjectId}`}>
+                                <BookOutlined /> {module?.subject}
+                            </Link>
+                        )
+                    }
+                ]} />
+            </div>
+            <div className="text-blue-700 md:text-4xl text-2xl font-medium mb-8 text-center">{module?.name}</div>
             <ProCard
                 title={(
                     <div className="p-2 text-blue-500 text-2xl text-center bg-white font-medium flex gap-2">
@@ -177,21 +183,21 @@ export default function LuyenTap() {
                                     key: id,
                                     children: (
                                         <div>
+                                            {
+                                                (module?.subjectId === 1 && item.title) && (
+                                                    <Button className="flex items-center" onClick={() => speak(item.title)} icon={<SoundOutlined />}>Nghe đọc bài</Button>
+                                                )
+                                            }
                                             {renderTab(item, i)}
                                             <div className="mb-4">
                                                 {ShowMessage(item)}
                                             </div>
                                             <div className="flex justify-end gap-2">
                                                 {
-                                                    (module?.subjectId === 1 && item.title) && (
-                                                        <Button className="flex items-center" onClick={() => speak(item.title)} icon={<SoundOutlined />}>Nghe đọc bài</Button>
-                                                    )
-                                                }
-                                                {
                                                     (module?.subjectId === 1 && item.suggestion) && (
                                                         <Popover content={
                                                             <div dangerouslySetInnerHTML={{ __html: item.suggestion }} />
-                                                        }>
+                                                        } trigger="click">
                                                             <Button type="link">
                                                                 <Space>
                                                                     <InfoCircleOutlined /> Gợi ý

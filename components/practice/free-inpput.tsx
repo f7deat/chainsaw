@@ -45,7 +45,9 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
                 <div className="text-3xl mb-5 image-central text-center" dangerouslySetInnerHTML={{ __html: item.content }} />
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Form onFinish={onFinish}>
-                    <Form.Item initialValue={item.type} name="type" hidden />
+                    <Form.Item initialValue={item.type} name="type" hidden>
+                        <Input />
+                    </Form.Item>
                     <Form.Item name="answer" rules={[
                         {
                             required: true,

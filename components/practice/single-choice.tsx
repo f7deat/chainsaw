@@ -1,9 +1,9 @@
 import { checkAnswer } from "@/services/course";
 import { playAudio, playFalseSound, playTrueSound } from "@/utils/audio";
 import { QuestionCircleOutlined, SoundOutlined } from "@ant-design/icons";
-import { Alert, Button, Col, Divider, Row, Space, Typography, message } from "antd";
+import { Button, Divider, Space, Typography, message } from "antd";
 import { useRouter } from "next/router";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 type SingleChoiceProps = {
     data: API.QuestionListItem;
@@ -37,6 +37,7 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
             newData.result = false;
         }
         newData.isCompleted = true;
+        console.log(newData)
         setData(newData);
         setAnswered(true);
     }
@@ -64,7 +65,7 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
                 <div className="text-3xl mb-5 text-center" dangerouslySetInnerHTML={{ __html: data.content }} />
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Divider />
-                <div className={`grid md:grid-cols-${data.answers.length} gap-4 mb-4`}>
+                <div className={`grid grid-cols-2 md:grid-cols-${data.answers.length} gap-4 mb-4`}>
                     {
                         data.answers.map(answer => (
                             <div key={answer.id} className="flex justify-center">
