@@ -17,7 +17,6 @@ export default function Active() {
                 <title>Kích hoạt khóa học</title>
                 <meta name="description" content="" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className="py-4 px-4 md:py-10">
                 <div className="container mx-auto">

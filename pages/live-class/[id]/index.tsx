@@ -1,6 +1,6 @@
 import { AudioOutlined, CameraOutlined, CiCircleFilled, DesktopOutlined, FlagOutlined, TrademarkCircleOutlined } from "@ant-design/icons";
-import { ProCard } from "@ant-design/pro-components";
-import { Empty } from "antd";
+import { ProCard, ProForm, ProFormTextArea, ProList } from "@ant-design/pro-components";
+import { Divider } from "antd";
 import Head from "next/head";
 
 export default function Index() {
@@ -61,7 +61,16 @@ export default function Index() {
                     </div>
                     <div className="md:w-1/4">
                         <ProCard className="shadow" title="Bình luận" headerBordered>
-                            <Empty />
+                            <ProList />
+                            <Divider dashed />
+                            <ProForm>
+                                <ProFormTextArea label="Gửi bình luận" name="comment" rules={[
+                                    {
+                                        required: true,
+                                        message: 'Vui lòng nhập nội dung'
+                                    }
+                                ]} />
+                            </ProForm>
                         </ProCard>
                     </div>
                 </div>

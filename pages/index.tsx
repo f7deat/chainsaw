@@ -1,8 +1,6 @@
 import Head from 'next/head'
 import CourseList from '@/components/course';
 import MyCourse from '@/components/course/my-course';
-import { PageContainer, ProForm, ProFormText } from '@ant-design/pro-components';
-import { Fragment } from 'react';
 import Partner from '@/components/home/partner';
 import ChuongTrinhHocBySubject from '@/components/subject/chuong-trinh-hoc';
 import Link from 'next/link';

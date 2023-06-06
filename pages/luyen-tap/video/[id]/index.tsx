@@ -1,5 +1,3 @@
-import Footer from "@/components/footer";
-import Header from "@/components/header/header";
 import Head from "next/head";
 
 export default function Video() {
@@ -11,7 +9,6 @@ export default function Video() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header />
             <main className="container mx-auto mt-10">
                 <div className="md:flex gap-4">
                     <div className="md:w-2/3">

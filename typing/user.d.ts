@@ -7,6 +7,7 @@ namespace API {
     avatar: string;
     name: string;
     phoneNumber: string;
+    dateOfBirth: Date;
   };
   type ReferListItem = BaseEntity & {
     name: string;

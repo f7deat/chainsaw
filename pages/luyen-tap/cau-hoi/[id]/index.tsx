@@ -9,9 +9,10 @@ import { Alert, Breadcrumb, Button, Empty, Popconfirm, Popover, Space, Tabs, mes
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Script from "next/script";
 import { Fragment, useEffect, useState } from "react";
 
-export default function LuyenTap() {
+export default function Index() {
     const router = useRouter();
     const [data, setData] = useState<API.QuestionListItem[]>([]);
     const [error, setError] = useState<string>();
@@ -128,125 +129,130 @@ export default function LuyenTap() {
                 <title>{module?.name} - {module?.subject}</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
-            <div className="mb-4">
-                <Breadcrumb items={[
+            <div>
+                <div className="mb-4">
+                    <Breadcrumb items={[
+                        {
+                            title: (
+                                <Link href="/">
+                                    <HomeOutlined /> Trang chủ
+                                </Link>
+                            )
+                        },
+                        {
+                            title: (
+                                <Link href={`/mon-hoc/${module?.subjectId}`}>
+                                    <BookOutlined /> {module?.subject}
+                                </Link>
+                            )
+                        },
+                        {
+                            title: (
+                                <Link href={`/bai-giang/${module?.topicId}`}>
+                                    <BookOutlined /> {module?.topic}
+                                </Link>
+                            )
+                        }
+                    ]} />
+                </div>
+                <div className="text-blue-700 md:text-4xl text-2xl font-medium mb-8 text-center">{module?.name}</div>
+                <ProCard
+                    title={(
+                        <div className="p-2 text-blue-500 text-2xl text-center bg-white font-medium flex gap-2">
+                            <GiftOutlined />
+                            <span>Điểm: </span>
+                            <span className="text-red-500">{score}/{data?.filter((x: API.QuestionListItem) => x.type !== 'baigiang').length}</span>
+                        </div>
+                    )}
+                    className="shadow mb-4"
+                    headerBordered
+                    extra={<Popconfirm title="Bạn có chắc chắn muốn làm lại không?" onConfirm={onConfirm}>
+                        <Button type="primary">
+                            <Space>
+                                <RedoOutlined />
+                                Làm lại
+                            </Space>
+                        </Button>
+                    </Popconfirm>}
+                >
                     {
-                        title: (
-                            <Link href="/">
-                                <HomeOutlined /> Trang chủ
-                            </Link>
-                        )
-                    },
+                        error ? <Alert type="error" message={error} /> : (<Fragment />)
+                    }
+
                     {
-                        title: (
-                            <Link href={`/mon-hoc/${module?.subjectId}`}>
-                                <BookOutlined /> {module?.subject}
-                            </Link>
-                        )
-                    },
+                        data?.length > 0 ? (
+                            <>
+                                <Tabs
+                                    type="card"
+                                    activeKey={activeKey}
+                                    tabPosition="top"
+                                    items={data?.map((item: API.QuestionListItem, i: number) => {
+                                        const id = String(i);
+                                        return {
+                                            label: labelRender(item, i + 1),
+                                            key: id,
+                                            children: (
+                                                <div>
+                                                    {
+                                                        (module?.subjectId === 1 && item.title) && (
+                                                            <Button className="flex items-center" onClick={() => speak(item.title)} icon={<SoundOutlined />}>Nghe đọc bài</Button>
+                                                        )
+                                                    }
+                                                    {renderTab(item, i)}
+                                                    <div className="mb-4">
+                                                        {ShowMessage(item)}
+                                                    </div>
+                                                    <div className="flex justify-end gap-2">
+                                                        {
+                                                            (module?.subjectId === 1 && item.suggestion) && (
+                                                                <Popover content={
+                                                                    <div dangerouslySetInnerHTML={{ __html: item.suggestion }} />
+                                                                } trigger="click">
+                                                                    <Button type="link">
+                                                                        <Space>
+                                                                            <InfoCircleOutlined /> Gợi ý
+                                                                        </Space>
+                                                                    </Button>
+                                                                </Popover>
+                                                            )
+                                                        }
+                                                    </div>
+                                                </div>
+                                            ),
+                                        };
+                                    })}
+                                    onTabClick={(activeKey) => {
+                                        setActiveKey(activeKey);
+                                        onSound(Number(activeKey));
+                                    }}
+                                />
+                                <Script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" />
+                            </>
+                        ) : <Empty />
+                    }
                     {
-                        title: (
-                            <Link href={`/bai-giang/${module?.topicId}`}>
-                                <BookOutlined /> {module?.topic}
-                            </Link>
+                        data && (
+                            <div className="flex mt-4 justify-between">
+                                <Button type="primary" disabled={activeKey === "0"} onClick={() => onNextTab(false)}>
+                                    <Space>
+                                        <ArrowLeftOutlined />
+                                        Câu hỏi trước
+                                    </Space>
+                                </Button>
+                                <Button type="primary" disabled={activeKey === (data?.length - 1).toString()} onClick={() => onNextTab(true)}>
+                                    <Space>
+                                        Câu hỏi sau
+                                        <ArrowRightOutlined />
+                                    </Space>
+                                </Button>
+                            </div>
                         )
                     }
-                ]} />
+                </ProCard>
+                <div className="md:grid-cols-2"></div>
+                <div className="md:grid-cols-5"></div>
+                <CommentComponent />
             </div>
-            <div className="text-blue-700 md:text-4xl text-2xl font-medium mb-8 text-center">{module?.name}</div>
-            <ProCard
-                title={(
-                    <div className="p-2 text-blue-500 text-2xl text-center bg-white font-medium flex gap-2">
-                        <GiftOutlined />
-                        <span>Điểm: </span>
-                        <span className="text-red-500">{score}/{data?.filter((x: API.QuestionListItem) => x.type !== 'baigiang').length}</span>
-                    </div>
-                )}
-                className="shadow mb-4"
-                headerBordered
-                extra={<Popconfirm title="Bạn có chắc chắn muốn làm lại không?" onConfirm={onConfirm}>
-                    <Button type="primary">
-                        <Space>
-                            <RedoOutlined />
-                            Làm lại
-                        </Space>
-                    </Button>
-                </Popconfirm>}
-            >
-                {
-                    error ? <Alert type="error" message={error} /> : (<Fragment />)
-                }
-
-                {
-                    data?.length > 0 ? (
-                        <Tabs
-                            type="card"
-                            activeKey={activeKey}
-                            tabPosition="top"
-                            items={data?.map((item: API.QuestionListItem, i: number) => {
-                                const id = String(i);
-                                return {
-                                    label: labelRender(item, i + 1),
-                                    key: id,
-                                    children: (
-                                        <div>
-                                            {
-                                                (module?.subjectId === 1 && item.title) && (
-                                                    <Button className="flex items-center" onClick={() => speak(item.title)} icon={<SoundOutlined />}>Nghe đọc bài</Button>
-                                                )
-                                            }
-                                            {renderTab(item, i)}
-                                            <div className="mb-4">
-                                                {ShowMessage(item)}
-                                            </div>
-                                            <div className="flex justify-end gap-2">
-                                                {
-                                                    (module?.subjectId === 1 && item.suggestion) && (
-                                                        <Popover content={
-                                                            <div dangerouslySetInnerHTML={{ __html: item.suggestion }} />
-                                                        } trigger="click">
-                                                            <Button type="link">
-                                                                <Space>
-                                                                    <InfoCircleOutlined /> Gợi ý
-                                                                </Space>
-                                                            </Button>
-                                                        </Popover>
-                                                    )
-                                                }
-                                            </div>
-                                        </div>
-                                    ),
-                                };
-                            })}
-                            onTabClick={(activeKey) => {
-                                setActiveKey(activeKey);
-                                onSound(Number(activeKey));
-                            }}
-                        />
-                    ) : <Empty />
-                }
-                {
-                    data && (
-                        <div className="flex mt-4 justify-between">
-                            <Button type="primary" disabled={activeKey === "0"} onClick={() => onNextTab(false)}>
-                                <Space>
-                                    <ArrowLeftOutlined />
-                                    Câu hỏi trước
-                                </Space>
-                            </Button>
-                            <Button type="primary" disabled={activeKey === (data?.length - 1).toString()} onClick={() => onNextTab(true)}>
-                                <Space>
-                                    Câu hỏi sau
-                                    <ArrowRightOutlined />
-                                </Space>
-                            </Button>
-                        </div>
-                    )
-                }
-            </ProCard>
-            <div className="md:grid-cols-2"></div>
-            <div className="md:grid-cols-5"></div>
-            <CommentComponent />
         </>
     )
 }
