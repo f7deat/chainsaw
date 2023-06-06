@@ -3,7 +3,7 @@ import { playFalseSound, playTrueSound } from "@/utils/audio";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { Alert, Button, Divider, Form, Input, message } from "antd"
 import { useRouter } from "next/router";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 type PracticeContentProps = {
     item: API.QuestionListItem;
@@ -31,6 +31,12 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
 
         setAnswered(true);
     }
+
+    useEffect(() => {
+        if ((window as any).MathJax) {
+            (window as any).MathJax.typeset()
+        }
+    }, [])
 
     return (
         <div>
