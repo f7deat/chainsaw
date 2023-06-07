@@ -41,6 +41,11 @@ export async function getBaiGiang(id?: string | string[]) {
   return request.get(`bai-giang/${id}`);
 }
 
+export async function getBaiGiang2(id?: string | string[]) {
+  const res = await fetch(`${API_HOST}bai-giang/${id}`);
+  return res.json();
+}
+
 export async function listHighLight(slug: string) {
   return request.get(`khoahoc/high-light/${slug}`);
 }

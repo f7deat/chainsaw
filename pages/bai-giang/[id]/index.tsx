@@ -74,7 +74,8 @@ export default function Index({ topic }: InferGetServerSidePropsType<typeof getS
                                 id: number,
                                 name: string,
                                 free: boolean,
-                                status?: boolean
+                                status?: boolean,
+                                video?: string
                             }>
                                 className="mb-4"
                                 rowKey="id"
@@ -97,7 +98,13 @@ export default function Index({ topic }: InferGetServerSidePropsType<typeof getS
                                     },
                                     actions: {
                                         render: (dom, entity) => [
-                                            <Button key={0} type="link" icon={<PlayCircleOutlined />} disabled className="text-lg flex items-center" />,
+                                            <Button
+                                                key={0} type="link"
+                                                icon={<PlayCircleOutlined />}
+                                                disabled={!entity.video}
+                                                className="text-lg flex items-center"
+                                                onClick={() => router.push(`/luyen-tap/video/${entity.id}`)}
+                                            />,
                                             <Button key={1} type="link" onClick={() => onPractice(entity)} icon={<EditOutlined />} className="text-lg flex items-center" />
                                         ]
                                     },

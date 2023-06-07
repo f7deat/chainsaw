@@ -52,7 +52,9 @@ const MyCourse: React.FC<MyCourseProps> = (props) => {
                             </picture>
                             <div className="px-2 pb-1">
                                 <Link href={`/bai-giang/${entity.id}`}>
-                                    <div className="line-clamp-2 font-medium text-blue-500 mb-1">{entity.name}</div>
+                                    <div className="line-clamp-2 font-medium text-blue-500 mb-1" style={{
+                                        minHeight: 48
+                                    }}>{entity.name}</div>
                                 </Link>
                                 <div className="text-xs text-red-500 text-right">
                                     <StarFilled />
@@ -61,7 +63,9 @@ const MyCourse: React.FC<MyCourseProps> = (props) => {
                                     <StarFilled />
                                     <StarFilled />
                                 </div>
-                                <div className="line-clamp-3 text-gray-500">{entity.description}</div>
+                                <div className="line-clamp-3 text-gray-500" style={{
+                                    minHeight: 72
+                                }}>{entity.description}</div>
                             </div>
                         </div>
                     )
