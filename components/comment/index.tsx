@@ -34,7 +34,8 @@ const CommentComponent: React.FC = () => {
                 <ProForm onFinish={onFinish} formRef={formRef}>
                     <ProFormTextArea name="noiDung" label="Nội dung" rules={[
                         {
-                            required: true
+                            required: true,
+                            message: 'Vui lòng nhập nội dung'
                         }
                     ]} />
                 </ProForm>

@@ -1,3 +1,4 @@
+import CommentComponent from "@/components/comment";
 import MyCourse from "@/components/course/my-course";
 import { getBaiGiang2 } from "@/services/course";
 import { HomeOutlined, BookOutlined } from "@ant-design/icons";
@@ -82,15 +83,7 @@ export default function Index({ video }: InferGetServerSidePropsType<typeof getS
                             </span>
                             <button className="flex-1 py-3 border-r">Thông tin</button>
                         </div>
-                        <div className="border p-4">
-                            <ProList />
-                            <ProForm>
-                                <ProFormTextArea label="Bình luận" name="comment" rules={[{
-                                    required: true,
-                                    message: 'Vui lòng điền nội dung'
-                                }]} />
-                            </ProForm>
-                        </div>
+                        <CommentComponent />
                     </div>
 
                 </div>

@@ -1,4 +1,4 @@
-import { ConfigProvider } from 'antd'
+import { ConfigProvider, FloatButton } from 'antd'
 import type { AppProps } from 'next/app';
 import { Header } from '@/components/header';
 import Footer from '@/components/footer';
@@ -59,6 +59,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </main>
         </div>
         <Footer />
+        <FloatButton.BackTop />
       </UserContext.Provider>
     </ConfigProvider>
   )
