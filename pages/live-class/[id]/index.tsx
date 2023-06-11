@@ -1,3 +1,4 @@
+import { Title } from "@/components";
 import { AudioOutlined, CameraOutlined, CiCircleFilled, DesktopOutlined, FlagOutlined, TrademarkCircleOutlined } from "@ant-design/icons";
 import { ProCard, ProForm, ProFormTextArea, ProList } from "@ant-design/pro-components";
 import { Divider } from "antd";
@@ -12,7 +13,7 @@ export default function Index() {
             </Head>
 
             <main>
-                <h1 className="font-medium text-3xl text-blue-900 mb-4">Live-Class</h1>
+                <Title subTitle="Live-Class" title="Tiếng anh 3-5: Object Pronouns" />
                 <div className="md:flex gap-4">
                     <div className="md:w-3/4">
                         <div className="relative bg-gray-300 mb-4" style={{

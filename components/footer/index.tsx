@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
                                 <div className="md:w-1/2">
                                     <div className="mb-2 font-bold">Trung tâm trợ giúp</div>
                                     <div className="mb-2">Email: <span>hotro@getvisa.vn</span></div>
-                                    <div className="mb-2">Đường dây nóng: <span>0762 55 9696</span></div>
+                                    <div className="mb-2">Đường dây nóng: <span>0937 065 333</span></div>
                                 </div>
                                 <div className="md:w-1/2">
                                     <div className="mb-2">Hình thức thanh toán</div>
@@ -26,7 +26,11 @@ const Footer: React.FC = () => {
                             <div className="md:w-1/2">
                                 <div className="mb-4 text-xl uppercase font-medium">Giới thiệu</div>
                                 <div className="mb-2">Giới thiêu chương trình</div>
-                                <div className="mb-2">Liên hệ với chúng tôi</div>
+                                <div className="mb-2">
+                                    <Link href="/lien-he">
+                                        Liên hệ với chúng tôi
+                                    </Link>
+                                </div>
                                 <div className="mb-2">
                                     <Link href="/admin/login">
                                         Chương trình Affiliate
@@ -46,8 +50,8 @@ const Footer: React.FC = () => {
                 </div>
                 <div className="flex md:flex-row flex-col gap-6 items-center justify-end mb-4">
                     <div className="flex gap-6">
-                        <a href="/gioi-thieu">Giới thiệu</a>
-                        <a href="#">Blog</a>
+                        <Link href="/gioi-thieu">Giới thiệu</Link>
+                        <Link href="/tin-tuc">Blog</Link>
                         <a href="#">Hỗ trợ</a>
                         <a href="#">Liên hệ</a>
                     </div>
