@@ -1,3 +1,4 @@
+import { Title } from "@/components";
 import { chuongTrinhHoc, queryKhoaHoc } from "@/services/course";
 import { BookOutlined, HomeOutlined, StarFilled } from "@ant-design/icons";
 import { ProList } from "@ant-design/pro-components";
@@ -10,6 +11,7 @@ export const getServerSideProps: GetServerSideProps<{
     course: {
         tenKhoaHoc: string;
         khoaHocId: number;
+        moTaKhoaHoc: string;
     };
 }> = async (context) => {
     const course = await queryKhoaHoc(context.params?.id);
@@ -22,6 +24,7 @@ export default function Index({ course }: InferGetServerSidePropsType<typeof get
         <>
             <Head>
                 <title>{course?.tenKhoaHoc}</title>
+                <meta name="description" content={course?.moTaKhoaHoc} />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
             <div className="mb-4">
@@ -35,7 +38,7 @@ export default function Index({ course }: InferGetServerSidePropsType<typeof get
                     }
                 ]} />
             </div>
-            <div className="text-blue-700 md:text-4xl text-2xl font-medium mb-8 -mt-4 text-center">{course?.tenKhoaHoc}</div>
+            <Title subTitle="Khóa học" title={course?.tenKhoaHoc} />
             {
                 <ProList<API.ChuongTrinhHocListItem>
                     request={(params) => chuongTrinhHoc(params, course.khoaHocId)}

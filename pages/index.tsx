@@ -5,14 +5,15 @@ import Partner from '@/components/home/partner';
 import ChuongTrinhHocBySubject from '@/components/subject/chuong-trinh-hoc';
 import Link from 'next/link';
 import StatisticsHome from '@/components/statistics';
+import { Testimonial } from '@/components';
 
 export default function Home() {
 
   return (
     <>
       <Head>
-        <title>Trang chủ</title>
-        <meta name="description" content="" />
+        <title>Trang chủ - Elearning.GetVisa.Vn</title>
+        <meta name="description" content="Hệ thống học elearning getvisa.vn, chuyên cung cấp những khoá học online chất lượng cao cho học sinh tiểu học, THCS và THPT" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -54,11 +55,14 @@ export default function Home() {
 
       <StatisticsHome />
 
-      <div data-aos="fade-up">
+      <div data-aos="fade-up" className='md:mb-16 mb-4'>
         <ChuongTrinhHocBySubject id={2} headerTitle={
           <div className='text-2xl'>Khóa Tiếng Anh tiêu biểu</div>
         } />
       </div>
+
+      <Testimonial />
+
       <div data-aos="fade-up" className='mb-4'>
         <MyCourse defaultPageSize={4} />
       </div>

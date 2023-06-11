@@ -1,3 +1,4 @@
+import { Title } from "@/components";
 import { getHelp } from "@/services/user";
 import { PageContainer, ProCard } from "@ant-design/pro-components";
 import { Alert, Button, Card, Form, Input, message } from "antd";
@@ -27,11 +28,11 @@ export default function QuestionAndAnswer() {
         <>
             <Head>
                 <title>Hỏi đáp</title>
-                <meta name="description" content="" />
+                <meta name="description" content="Gửi câu hỏi" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className="text-blue-700 md:text-4xl text-2xl font-medium mb-8 -mt-4">Gửi câu hỏi</div>
+            <main>
+                <Title subTitle="Hỏi đáp" title="Gửi câu hỏi" />
                 <div className="md:flex gap-4">
                     <div className="md:w-2/3">
                         <ProCard className="h-full" title="Mẫu">
@@ -58,6 +59,7 @@ export default function QuestionAndAnswer() {
                         </picture>
                     </div>
                 </div>
+            </main>
         </>
     )
 }

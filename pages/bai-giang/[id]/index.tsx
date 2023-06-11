@@ -46,6 +46,7 @@ export default function Index({ topic }: InferGetServerSidePropsType<typeof getS
         <>
             <Head>
                 <title>{topic.tenChuongTrinhHoc}</title>
+                <meta name="description" content={topic.moTaChuongTrinh} />
             </Head>
             <Typography.Title level={3}>{topic.tenChuongTrinhHoc}</Typography.Title>
             <Divider dashed />
