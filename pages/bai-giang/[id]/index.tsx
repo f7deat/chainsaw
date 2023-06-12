@@ -25,7 +25,7 @@ export default function Index({ topic }: InferGetServerSidePropsType<typeof getS
             listNhomBaiGiang(router.query.id).then(response => {
                 setData(response)
             })
-            isBought(router.query.id).then(response => setHasAccess(response?.trangThai))
+            isBought(router.query.id).then(response => setHasAccess(response))
         }
     }, [router]);
 

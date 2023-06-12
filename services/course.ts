@@ -77,13 +77,7 @@ export async function checkAnswer(
 }
 
 export async function isBought(id?: string | string[]) {
-  return request({
-    url: `khoahoc/checkmuakhoahoc`,
-    method: "POST",
-    data: {
-      ChuongTrinhHocID: id,
-    },
-  });
+  return request(`khoahoc/allowed/${id}`);
 }
 
 export async function getMyCourse() {
