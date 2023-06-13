@@ -7,6 +7,7 @@ import { Button, Divider, Tooltip, Typography, message } from "antd";
 import { CheckCircleFilled, ClockCircleFilled, EditOutlined, PlayCircleOutlined, QuestionCircleFilled, SearchOutlined } from "@ant-design/icons";
 import { ProCard, ProList } from "@ant-design/pro-components";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { Title } from "@/components";
 
 export const getServerSideProps: GetServerSideProps<{
     topic: API.ChuongTrinhHoc;
@@ -48,8 +49,7 @@ export default function Index({ topic }: InferGetServerSidePropsType<typeof getS
                 <title>{topic.tenChuongTrinhHoc}</title>
                 <meta name="description" content={topic.moTaChuongTrinh} />
             </Head>
-            <Typography.Title level={3}>{topic.tenChuongTrinhHoc}</Typography.Title>
-            <Divider dashed />
+            <Title subTitle="Chương trình học" title={topic.tenChuongTrinhHoc} />
             <div className="md:flex gap-4">
                 <div className="md:w-2/3">
 

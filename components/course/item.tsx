@@ -9,7 +9,13 @@ const CourseItem: React.FC<CourseItemProps> = (props) => {
     return (
         <ProCard ghost className="shadow">
             <div className="flex flex-col mb-2">
-            <div className={`bg-white rounded-t-lg flex flex-col items-center justify-center text-blue-900`}>
+            <div className="bg-white rounded-t-lg flex flex-col items-center justify-center text-blue-900 relative">
+                <picture className="absolute top-0 right-0 w-24">
+                    <img src="https://www.hoyolab.com/_nuxt/img/cad6717.png" alt="BG" />
+                </picture>
+                <picture className="absolute top-0 left-0 w-16">
+                    <img src="https://www.hoyolab.com/_nuxt/img/1c8727f.png" alt="BG" />
+                </picture>
                 <div className="text-4xl font-medium pt-6">
                     {props.course.suffix}
                 </div>
