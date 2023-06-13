@@ -1,11 +1,15 @@
 import { addComment, listComment } from "@/services/comment";
 import { CalendarOutlined, UserOutlined } from "@ant-design/icons";
 import { ActionType, ProCard, ProForm, ProFormInstance, ProFormTextArea, ProList } from "@ant-design/pro-components";
-import { Avatar, Divider, Tag, message } from "antd";
+import { Avatar, Tag, message } from "antd";
 import { useRouter } from "next/router";
 import { Fragment, useRef } from "react";
 
-const CommentComponent: React.FC = () => {
+type CommentComponentProps = {
+    id: string | string[];
+}
+
+const CommentComponent: React.FC<CommentComponentProps> = () => {
     const router = useRouter();
     const { id } = router.query;
     const actionRef = useRef<ActionType>();

@@ -127,7 +127,7 @@ export default function Index() {
         <>
             <Head>
                 <title>{module?.name} - {module?.subject}</title>
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta name="description" content={module?.name} />
             </Head>
             <div>
                 <div className="mb-4">
@@ -251,7 +251,9 @@ export default function Index() {
                 </ProCard>
                 <div className="md:grid-cols-2"></div>
                 <div className="md:grid-cols-5"></div>
-                <CommentComponent />
+                {
+                    router?.query?.id && <CommentComponent id={router.query.id} />
+                }
             </div>
         </>
     )

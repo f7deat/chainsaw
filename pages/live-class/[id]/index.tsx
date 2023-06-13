@@ -1,7 +1,7 @@
 import { Title } from "@/components";
+import CommentComponent from "@/components/comment";
 import { AudioOutlined, CameraOutlined, CiCircleFilled, DesktopOutlined, FlagOutlined, TrademarkCircleOutlined } from "@ant-design/icons";
-import { ProCard, ProForm, ProFormTextArea, ProList } from "@ant-design/pro-components";
-import { Divider } from "antd";
+import { message } from "antd";
 import Head from "next/head";
 
 export default function Index() {
@@ -9,7 +9,7 @@ export default function Index() {
         <>
             <Head>
                 <title>Học trực tuyến</title>
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta name="description" content="Học trực tuyến" />
             </Head>
 
             <main>
@@ -53,7 +53,9 @@ export default function Index() {
                                 Rec
                             </div>
                             <div className="text-center">
-                                <button className="shadow h-12 w-12 rounded-full flex items-center justify-center mb-2 text-2xl bg-white hover:bg-blue-100">
+                                <button className="shadow h-12 w-12 rounded-full flex items-center justify-center mb-2 text-2xl bg-white hover:bg-blue-100" onClick={() => {
+                                    message.success('Báo lỗi thành công!')
+                                }}>
                                     <FlagOutlined />
                                 </button>
                                 Report
@@ -61,18 +63,7 @@ export default function Index() {
                         </div>
                     </div>
                     <div className="md:w-1/4">
-                        <ProCard className="shadow" title="Bình luận" headerBordered>
-                            <ProList />
-                            <Divider dashed />
-                            <ProForm>
-                                <ProFormTextArea label="Gửi bình luận" name="comment" rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập nội dung'
-                                    }
-                                ]} />
-                            </ProForm>
-                        </ProCard>
+                        <CommentComponent id={"0"} />
                     </div>
                 </div>
             </main>

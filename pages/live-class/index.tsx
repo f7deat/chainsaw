@@ -49,7 +49,6 @@ export default function LiveClass() {
         <>
             <Head>
                 <title>Học trực tuyến</title>
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
             <main>
                 <Title title="Lớp học trực tuyến" subTitle="Live class" />

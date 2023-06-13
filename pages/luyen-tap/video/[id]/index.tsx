@@ -2,8 +2,7 @@ import CommentComponent from "@/components/comment";
 import MyCourse from "@/components/course/my-course";
 import { getBaiGiang2 } from "@/services/course";
 import { HomeOutlined, BookOutlined } from "@ant-design/icons";
-import { ProForm, ProFormTextArea, ProList } from "@ant-design/pro-components";
-import { Breadcrumb, Divider, Empty } from "antd";
+import { Breadcrumb, Divider } from "antd";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -22,7 +21,6 @@ export const getServerSideProps: GetServerSideProps<{
     };
 }> = async (context) => {
     const video = await getBaiGiang2(context.params?.id);
-    console.log(video)
     return { props: { video } };
 };
 
@@ -32,7 +30,7 @@ export default function Index({ video }: InferGetServerSidePropsType<typeof getS
         <>
             <Head>
                 <title>{video.name}</title>
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta name="description" content={video.name} />
             </Head>
             <main className="container mx-auto">
                 <div className="md:text-3xl text-lg font-medium text-blue-800 text-center mb-4">{video.name}</div>
@@ -83,7 +81,7 @@ export default function Index({ video }: InferGetServerSidePropsType<typeof getS
                             </span>
                             <button className="flex-1 py-3 border-r">Thông tin</button>
                         </div>
-                        <CommentComponent />
+                        <CommentComponent id={video.id.toString()} />
                     </div>
 
                 </div>

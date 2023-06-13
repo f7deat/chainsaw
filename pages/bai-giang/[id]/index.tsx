@@ -54,7 +54,7 @@ export default function Index({ topic }: InferGetServerSidePropsType<typeof getS
                 <div className="md:w-2/3">
 
                     <div className="flex bg-white shadow rounded-lg md:mb-10 mb-4">
-                        <div className="flex-grow grid grid-cols-2 font-medium text-2xl text-center">
+                        <div className="flex-grow grid grid-cols-2 font-medium md:text-2xl text-center">
                             <button>
                                 <div className="border-r py-2 hover:bg-blue-100">Thông tin khóa học</div>
                             </button>
@@ -67,7 +67,7 @@ export default function Index({ topic }: InferGetServerSidePropsType<typeof getS
                         </div>
                     </div>
 
-                    <div className="text-4xl font-medium mb-4">Chương trình học</div>
+                    <div className="md:text-4xl text-xl font-medium mb-4">Chương trình học</div>
                     {
                         data?.map((group: any, index: number) => (
 

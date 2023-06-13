@@ -35,6 +35,13 @@ export default function Index({ course }: InferGetServerSidePropsType<typeof get
                                 <HomeOutlined /> Trang chủ
                             </Link>
                         )
+                    },
+                    {
+                        title: (
+                            <Link href="/khoa-hoc">
+                                <BookOutlined /> Khóa học
+                            </Link>
+                        )
                     }
                 ]} />
             </div>

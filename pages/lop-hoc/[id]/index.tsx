@@ -10,7 +10,9 @@ import { useEffect, useState } from "react";
 export default function Index() {
 
     const router = useRouter();
-    const [classroom, setClassroom] = useState<any>();
+    const [classroom, setClassroom] = useState<{
+        tenLopHoc: string
+    }>();
     const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
@@ -61,6 +63,7 @@ export default function Index() {
         <>
             <Head>
                 <title>{classroom?.tenLopHoc}</title>
+                <meta name="description" content={classroom?.tenLopHoc} />
             </Head>
             <div className="text-3xl font-medium mb-4">{classroom?.tenLopHoc}</div>
             <div className="md:flex gap-4">

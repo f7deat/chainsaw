@@ -11,7 +11,6 @@ export default function Duo() {
             <Head>
                 <title>Học nhóm</title>
                 <meta name="description" content="Lớp học theo nhóm" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
             <main>
                 <Title subTitle="Học nhóm" title="Lớp học nhóm" />

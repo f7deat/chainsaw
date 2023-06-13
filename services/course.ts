@@ -80,8 +80,11 @@ export async function isBought(id?: string | string[]) {
   return request(`khoahoc/allowed/${id}`);
 }
 
-export async function getMyCourse() {
-  return request.get(`khoahoc/my-course`);
+export async function getMyCourse(params: any) {
+  return request({
+    url: `khoahoc/my-course`,
+    params
+  });
 }
 
 export async function listClassroom(params: any) {
