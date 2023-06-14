@@ -4,9 +4,12 @@ import { PageContainer, ProCard, ProFormDatePicker, ProFormSelect, ProFormText, 
 import { Button, Col, Row, Typography, message } from "antd";
 import Head from "next/head";
 import Link from "next/link";
-import { Fragment, useState } from "react";
+import { useRouter } from "next/router";
+import { Fragment } from "react";
 
 export default function Register() {
+
+    const router = useRouter();
 
     const onParentCreate = async (values: API.PhuHuynh & {
         confirmPassword: string;
@@ -38,6 +41,7 @@ export default function Register() {
         const response = await register(body);
         if (response.succeeded) {
             message.success('Đăng ký thành công!');
+            router.push('/tai-khoan/dang-ky/thanh-cong');
         } else {
             message.error(response.errors[0].description);
         }
@@ -47,7 +51,7 @@ export default function Register() {
         <>
             <Head>
                 <title>Đăng ký</title>
-                <meta name="description" content="" />
+                <meta name="description" content="Đăng ký tài khoản mới" />
             </Head>
             <PageContainer title={<Fragment />}>
                 <ProCard title="Đăng ký">

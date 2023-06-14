@@ -1,6 +1,10 @@
 import Link from "next/link"
+import { useState } from "react"
 
 const Jumbotron: React.FC = () => {
+
+  const [hello, setHello] = useState<string>('https://www.hoyolab.com/_nuxt/img/2fd5018.png');
+
     return (
         <div className='md:flex gap-4 items-center md:mb-20 mb-4 md:flex-row flex-col'>
         <div className='md:w-1/2' data-aos="fade-up">
@@ -11,7 +15,9 @@ const Jumbotron: React.FC = () => {
           <div className='text-gray-500 mb-8 md:text-lg text-sm'>
             E-Learning là một trải nghiệm học tập tuyệt vời, cung cấp những khoá học online chất lượng cao cho học sinh tiểu học, THCS và THPT
           </div>
-          <div className='text-center md:text-left'>
+          <div className='text-center md:text-left' 
+          onMouseEnter={() => setHello('https://www.hoyolab.com/_nuxt/img/722ad6e.png')} 
+          onMouseLeave={() => setHello('https://www.hoyolab.com/_nuxt/img/2fd5018.png')}>
             <Link href='/tai-khoan/dang-ky' className="relative">
               <span className='md:px-12 px-4 md:py-3 py-2 hover:bg-blue-600 rounded-full text-xl bg-blue-500 text-white font-medium'>
                 Bắt đầu
@@ -20,7 +26,7 @@ const Jumbotron: React.FC = () => {
                 top: -38,
                 right: -48
               }}>
-                <img src="https://www.hoyolab.com/_nuxt/img/2fd5018.png" alt="hello" />
+                <img src={hello} alt="hello" />
               </picture>
             </Link>
           </div>
