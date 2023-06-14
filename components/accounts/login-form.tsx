@@ -37,7 +37,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
         try {
             const data = await login(values);
             if (data.succeeded) {
-                message.success(data.message);
+                message.success('Đăng nhập thành công!');
                 setOptions(data.data.map((u: any) => {
                     return {
                         label: u.user.name,
@@ -46,7 +46,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
                 }));
                 return true;
             } else {
-                message.error(data.message);
+                message.error(data.errors[0].description);
                 return false;
             }
         } catch (error) {

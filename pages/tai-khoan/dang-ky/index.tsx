@@ -43,7 +43,28 @@ export default function Register() {
             message.success('Đăng ký thành công!');
             router.push('/tai-khoan/dang-ky/thanh-cong');
         } else {
-            message.error(response.errors[0].description);
+            switch (response.errors[0].code) {
+                case 'PasswordTooShort':
+                    message.error('Mật khẩu cần ít nhất 6 ký tự');
+                    break;
+                case 'PasswordRequiresNonAlphanumeric':
+                    message.error('Mật khẩu cần ít nhất một chữ cái thường');
+                    break;
+                case 'PasswordRequiresNonAlphanumeric':
+                    message.error('Mật khẩu cần ít nhất một ký tự đặc biệt');
+                    break;
+                case 'PasswordRequiresLower':
+                    message.error('Mật khẩu cần ít nhất một chữ cái thường (a - z)');
+                    break;
+                case 'PasswordRequiresUpper':
+                    message.error('Mật khẩu cần ít nhất một chữ cái in hoa (A - Z)');
+                    break;
+                case 'PasswordRequiresDigit':
+                    message.error('Mật khẩu cần ít nhất một chữ số (0 - 9)');
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
