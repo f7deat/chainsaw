@@ -1,13 +1,14 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { listBaiGiang, getChuongTrinhHoc, isBought, listNhomBaiGiang } from "@/services/course";
 import { useRouter } from "next/router";
 import CourseSummary from "@/components/bai-giang/summary";
-import { Button, Divider, Tooltip, Typography, message } from "antd";
+import { Button, Divider, Tooltip, message } from "antd";
 import { CheckCircleFilled, ClockCircleFilled, EditOutlined, PlayCircleOutlined, QuestionCircleFilled, SearchOutlined } from "@ant-design/icons";
 import { ProCard, ProList } from "@ant-design/pro-components";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { Title } from "@/components";
+import { UserContext } from "@/models/user";
 
 export const getServerSideProps: GetServerSideProps<{
     topic: API.ChuongTrinhHoc;
@@ -20,15 +21,28 @@ export default function Index({ topic }: InferGetServerSidePropsType<typeof getS
     const router = useRouter();
     const [data, setData] = useState<any>();
     const [hasAccess, setHasAccess] = useState<boolean>(false);
+    const { user } = useContext<{
+        user: API.User
+      }>(UserContext);
+
+      const moduleGroups = useCallback(() => {
+          if (router.query.id) {
+              listNhomBaiGiang(router.query.id).then(response => {
+                  setData(response)
+              });
+              if (user) {
+                  isBought(router.query.id).then(response => {
+                      setHasAccess(response);
+                      console.log(11111)
+                  })
+              }
+          }
+      }, [router.query.id, user])
 
     useEffect(() => {
-        if (router.query.id) {
-            listNhomBaiGiang(router.query.id).then(response => {
-                setData(response)
-            })
-            isBought(router.query.id).then(response => setHasAccess(response))
-        }
-    }, [router]);
+        moduleGroups();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const onPractice = (item: any) => {
         const token = localStorage.getItem('access_token');

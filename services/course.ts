@@ -77,7 +77,7 @@ export async function checkAnswer(
 }
 
 export async function isBought(id?: string | string[]) {
-  return request(`khoahoc/allowed/${id}`);
+  return request.get(`khoahoc/allowed/${id}`);
 }
 
 export async function getMyCourse(params: any) {

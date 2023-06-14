@@ -1,5 +1,5 @@
-import { BarChartOutlined, BookOutlined, LogoutOutlined, MoneyCollectOutlined, UserOutlined } from "@ant-design/icons"
-import { Avatar, Button, Space } from "antd"
+import { BarChartOutlined, BellOutlined, BookOutlined, LogoutOutlined, MoneyCollectOutlined, UserOutlined } from "@ant-design/icons"
+import { Avatar, Badge, Button, Space } from "antd"
 import HeaderDropdown from "./header-dropdown"
 import { useRouter } from "next/router";
 import type { MenuInfo } from 'rc-menu/lib/interface';
@@ -78,25 +78,30 @@ const RightContent: React.FC = () => {
     ];
 
     return user ? (
-        <HeaderDropdown
-            menu={{
-                selectedKeys: [],
-                onClick: onMenuClick,
-                items: menuItems,
-            }}
-        >
-            <Button type="link" className="flex items-center gap-2">
-                <Avatar src={user?.avatar ? <picture>
-                    <img src={user?.avatar} alt="avatar" />
-                </picture> : <div className="bg-gray-500">
-                    <UserOutlined />
-                </div>} />
-                <div className="text-left">
-                    <div className="text-xs">Xin chào,</div>
-                    <div className="font-medium text-sm">{user?.name}</div>
-                </div>
-            </Button>
-        </HeaderDropdown>
+        <>
+            <HeaderDropdown
+                menu={{
+                    selectedKeys: [],
+                    onClick: onMenuClick,
+                    items: menuItems,
+                }}
+            >
+                <Button type="link" className="flex items-center gap-2">
+                    <Avatar src={user?.avatar ? <picture>
+                        <img src={user?.avatar} alt="avatar" />
+                    </picture> : <div className="bg-gray-500">
+                        <UserOutlined />
+                    </div>} />
+                    <div className="text-left">
+                        <div className="text-xs">Xin chào,</div>
+                        <div className="font-medium text-sm">{user?.name}</div>
+                    </div>
+                </Button>
+            </HeaderDropdown>
+            <Badge count={5}>
+                <Avatar icon={<BellOutlined />} />
+            </Badge>
+        </>
     ) : (
         <Space className="mr-4">
             <Button type="primary" size="large" onClick={() => setOpen(true)}>
