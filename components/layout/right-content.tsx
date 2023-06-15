@@ -1,4 +1,4 @@
-import { BarChartOutlined, BellOutlined, BookOutlined, LogoutOutlined, MoneyCollectOutlined, UserOutlined } from "@ant-design/icons"
+import { BarChartOutlined, BellOutlined, BookOutlined, CalendarOutlined, LogoutOutlined, MoneyCollectOutlined, UserOutlined } from "@ant-design/icons"
 import { Avatar, Badge, Button, Space } from "antd"
 import HeaderDropdown from "./header-dropdown"
 import { useRouter } from "next/router";
@@ -41,7 +41,7 @@ const RightContent: React.FC = () => {
             router.push(`/tai-khoan/thu-nhap`);
             return;
         }
-        router.push(`/accounts/${key}`);
+        router.push(`/tai-khoan/${key}`);
     }
 
     const menuItems = [
@@ -60,6 +60,11 @@ const RightContent: React.FC = () => {
                     key: 'history',
                     icon: <BarChartOutlined />,
                     label: 'Quá trình học tập',
+                },
+                {
+                    key: 'diem-danh',
+                    icon: <CalendarOutlined />,
+                    label: 'Điểm danh'
                 }
             ]),
         {
@@ -74,6 +79,7 @@ const RightContent: React.FC = () => {
             key: 'logout',
             icon: <LogoutOutlined />,
             label: 'Đăng xuất',
+            danger: true
         }
     ];
 
@@ -98,20 +104,20 @@ const RightContent: React.FC = () => {
                     </div>
                 </Button>
             </HeaderDropdown>
-            <Badge count={5}>
-                <Avatar icon={<BellOutlined />} />
-            </Badge>
+            <button onClick={() => router.push('/thong-bao')}>
+                <Badge count={5}>
+                    <Avatar icon={<BellOutlined />} />
+                </Badge>
+            </button>
         </>
     ) : (
-        <Space className="mr-4">
-            <Button type="primary" size="large" onClick={() => setOpen(true)}>
-                <Space>
-                    <UserOutlined />
-                    Đăng nhập
-                </Space>
-            </Button>
+        <>
+            <button onClick={() => setOpen(true)} className="flex gap-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full px-6 py-2 items-center text-lg">
+                <UserOutlined />
+                Đăng nhập
+            </button>
             <LoginForm open={open} setOpen={setOpen} />
-        </Space>
+        </>
     )
 }
 

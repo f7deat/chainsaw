@@ -1,8 +1,9 @@
 import { Title } from "@/components";
 import { listSubject } from "@/services/subject";
 import { EyeOutlined } from "@ant-design/icons";
-import { ProColumns, ProTable } from "@ant-design/pro-components";
-import { Button } from "antd";
+import { ProCard, ProColumns } from "@ant-design/pro-components";
+import { Button, Table } from "antd";
+import { ColumnsType } from "antd/es/table";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import router from "next/router";
@@ -19,10 +20,10 @@ export const getServerSideProps: GetServerSideProps<{
 
 export default function Index({ subjects }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
-    const columns: ProColumns<any>[] = [
+    const columns: ColumnsType<API.Subject> = [
         {
             title: '#',
-            valueType: 'indexBorder',
+            render: (value, record, index) => index + 1
         },
         {
             title: 'Môn học',
@@ -30,7 +31,6 @@ export default function Index({ subjects }: InferGetServerSidePropsType<typeof g
         },
         {
             title: '',
-            valueType: 'option',
             render: (dom, entity) => [
                 <Button key="view" icon={<EyeOutlined />} className="flex items-center justify-center" type="primary" onClick={() => router.push(`/mon-hoc/${entity.id}`)} />
             ]
@@ -42,17 +42,18 @@ export default function Index({ subjects }: InferGetServerSidePropsType<typeof g
             <Head>
                 <title>Danh sách môn học</title>
             </Head>
-            <Title subTitle="Môn học" title="Danh sách môn học" />
-            <div className="shadow mb-4">
-                <ProTable
-                    search={{
-                        layout: 'vertical'
-                    }}
-                    rowKey="id"
-                    dataSource={subjects}
-                    columns={columns}
-                />
-            </div>
+            <main>
+                <Title subTitle="Môn học" title="Danh sách môn học" />
+                <div className="shadow mb-4">
+                    <ProCard title="Danh sách">
+                        <Table
+                            rowKey="id"
+                            dataSource={subjects}
+                            columns={columns}
+                        />
+                    </ProCard>
+                </div>
+            </main>
         </>
     )
 }

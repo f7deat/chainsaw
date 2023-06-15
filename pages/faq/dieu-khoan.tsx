@@ -1,3 +1,4 @@
+import { Title } from "@/components";
 import Head from "next/head";
 
 export default function Term() {
@@ -5,11 +6,11 @@ export default function Term() {
         <>
             <Head>
                 <title>Điều khoản</title>
-                <meta name="description" content="" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
+                <meta name="description" content="Điều khoản sử dụng" />
             </Head>
-            <h1 className="font-medium text-3xl text-blue-700">Điều khoản sử dụng</h1>
+            <main>
+                <Title subTitle="Điều khoản" title="Điều khoản sử dụng" />
+            </main>
         </>
     )
 }

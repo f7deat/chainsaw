@@ -55,13 +55,11 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                 </div>
                 <div className="text-red-400 font-bold text-sm">Chỉ còn nốt 2 ngày</div>
                 <div className="py-3 flex justify-center gap-4">
-                    <Button size="large" type="primary" onClick={onRegister}>
+                    <button onClick={onRegister} className="px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white flex gap-2 text-lg font-medium">
                         <Space><LoginOutlined />Đăng ký ngay</Space>
-                    </Button>
-                    <a href="tel:+84911717772" className="px-4 py-2 rounded-full bg-red-500 text-white">
-                        <Space>
-                            <PhoneOutlined />Nhận tư vấn
-                        </Space>
+                    </button>
+                    <a href="tel:+84911717772" className="px-4 py-2 rounded-full bg-red-500 hover:bg-red-600 text-white flex gap-2 text-lg font-medium">
+                        <PhoneOutlined />Nhận tư vấn
                     </a>
                 </div>
             </div>

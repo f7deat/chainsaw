@@ -22,7 +22,7 @@ const Header: React.FC = () => {
         <header className={`${offset < 100 ? '' : 'bg-white shadow'} fixed top-0 left-0 right-0 z-50`}>
             <div className="container mx-auto">
                 <div className="flex gap-4 py-4">
-                    <div className="flex-1 md:flex gap-4 items-center justify-between">
+                    <div className="md:flex-1 md:flex gap-4 items-center justify-between">
                         <Link href="/">
                             <div className="font-bold text-blue-700 md:text-3xl text-2xl flex gap-2 px-4" style={inter.style}>
                                 <FireTwoTone twoToneColor="#f97316" />
@@ -33,11 +33,9 @@ const Header: React.FC = () => {
                             {
                                 navbars.map((navbar, index) => (
                                     <li key={index}>
-                                        <Link href={navbar.url}>
-                                            <Space className="font-medium hover:text-blue-500 text-lg">
-                                                {navbar.icon}
-                                                {navbar.name}
-                                            </Space>
+                                        <Link href={navbar.url} className="font-medium hover:text-blue-500 text-lg flex gap-2">
+                                            {navbar.icon}
+                                            {navbar.name}
                                         </Link>
                                     </li>
                                 ))

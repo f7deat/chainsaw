@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
                     <div className="flex gap-6">
                         <Link href="/gioi-thieu">Giới thiệu</Link>
                         <Link href="/tin-tuc">Blog</Link>
-                        <a href="#">Hỗ trợ</a>
+                        <Link href="/ho-tro">Hỗ trợ</Link>
                         <a href="#">Liên hệ</a>
                     </div>
                     <div className="flex gap-6 items-center">
