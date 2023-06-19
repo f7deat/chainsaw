@@ -1,5 +1,6 @@
 import CommentComponent from "@/components/comment";
 import { BaiGiang, FreeInput, MultipleChoice, OrderChoice, SingleChoice } from "@/components/practice";
+import Speech from "@/components/practice/speech";
 import { getBaiGiang, listQuestion, resetResult } from "@/services/course";
 import { playAudio } from "@/utils/audio";
 import { QuestionType } from "@/utils/constants";
@@ -56,6 +57,8 @@ export default function Index() {
             return <BaiGiang data={item} index={index} />
         } else if (item.type === QuestionType.SORTABLE) {
             return <OrderChoice data={item} index={index} score={score} setScore={setScore} />
+        } else if (item.type === QuestionType.SPEECH) {
+            return <Speech data={item} index={index} />
         }
         return <SingleChoice data={item} index={index} score={score} setScore={setScore} />
     }

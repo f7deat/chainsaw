@@ -28,7 +28,7 @@ declare namespace API {
         answerNumber: number;
         title: string;
         content: string;
-        type: 'tuluan' | 'donluachon' | 'dungsai' | 'daluachon' | 'baigiang' | 'sapxep',
+        type: string,
         suggestion: string;
         isCompleted: boolean;
         result: boolean;

@@ -4,7 +4,8 @@ export enum QuestionType {
     SINGLE_CHOICE = "donluachon",
     FREE_INPUT = "tuluan",
     BAI_GIANG = "baigiang",
-    SORTABLE = "sapxep"
+    SORTABLE = "sapxep",
+    SPEECH = "nghevalap"
 }
 
 export enum Role {

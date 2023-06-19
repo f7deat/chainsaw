@@ -121,10 +121,10 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
                                 },
                             }}>
                             <StepsForm.StepForm name="step1" title="Đăng nhập" onFinish={onLogin}>
-                                <Form.Item label="Số điện thoại" className="w-80" initialValue={"0911717772"} rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]} name="userName">
+                                <Form.Item label="Số điện thoại" className="w-80" rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]} name="userName">
                                     <Input size="large" />
                                 </Form.Item>
-                                <Form.Item label="Mật khẩu" className="w-80" initialValue="Password@123" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="password">
+                                <Form.Item label="Mật khẩu" className="w-80" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="password">
                                     <Input.Password size="large" />
                                 </Form.Item>
                             </StepsForm.StepForm>
