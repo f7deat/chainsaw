@@ -18,6 +18,7 @@ const Speech: React.FC<SpeechProps> = (props) => {
     const SpeechGrammarList = (window as any).SpeechGrammarList || (window as any).webkitSpeechGrammarList;
     const SpeechRecognitionEvent = (window as any).SpeechRecognitionEvent || (window as any).webkitSpeechRecognitionEvent;
     const [diagnostic, setDiagnostic] = useState<string>('');
+    const [recording, setRecording] = useState<boolean>(false);
 
     const recognition = new SpeechRecognition();
     const speechRecognitionList = new SpeechGrammarList();
@@ -28,7 +29,7 @@ const Speech: React.FC<SpeechProps> = (props) => {
     recognition.maxAlternatives = 1;
 
     const onSpeech = () => {
-
+        setRecording(true);
         recognition.start();
         console.log("Ready to receive a color command.");
     }
@@ -44,12 +45,15 @@ const Speech: React.FC<SpeechProps> = (props) => {
     recognition.onresult = (event: any) => {
         const result = event.results[0][0].transcript;
         setDiagnostic(result);
-        if (result === data.title) {
-            playTrueSound();
-        } else {
-            playFalseSound();
+        if (result) {
+            if ((result as string).toLocaleLowerCase() === data.title.toLocaleLowerCase()) {
+                playTrueSound();
+            } else {
+                playFalseSound();
+            }
         }
         console.log(`Confidence: ${event.results[0][0].confidence}`);
+        setRecording(false);
     };
 
     return (
@@ -72,9 +76,16 @@ const Speech: React.FC<SpeechProps> = (props) => {
 
                 </div>
 
-                <button className="h-32 w-32 rounded-full border flex justify-center items-center hover:bg-slate-100" onClick={onSpeech}>
-                    <AudioOutlined className="text-4xl" />
-                </button>
+                <div className="relative">
+                    <span hidden={!recording}>
+                        <span className="relative flex h-3 w-3">
+                            <span className="animate-ping inline-flex h-full w-full rounded-full bg-red-600 opacity-75"></span>
+                        </span>
+                    </span>
+                    <button className="h-32 w-32 rounded-full border flex justify-center items-center hover:bg-slate-100 relative" onClick={onSpeech}>
+                        <AudioOutlined className="text-4xl" />
+                    </button>
+                </div>
 
                 <Divider />
 
