@@ -1,6 +1,6 @@
 import { playFalseSound, playTrueSound } from "@/utils/audio";
 import { AudioOutlined, SoundOutlined } from "@ant-design/icons";
-import { Alert, Divider, Tooltip } from "antd";
+import { Alert, Divider, Select, Tooltip } from "antd";
 import { useState } from "react";
 
 type SpeechProps = {
@@ -11,14 +11,15 @@ type SpeechProps = {
 const Speech: React.FC<SpeechProps> = (props) => {
 
     const { data, index } = props;
-
     const synth = window.speechSynthesis;
+    const voices = synth.getVoices();
 
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     const SpeechGrammarList = (window as any).SpeechGrammarList || (window as any).webkitSpeechGrammarList;
     const SpeechRecognitionEvent = (window as any).SpeechRecognitionEvent || (window as any).webkitSpeechRecognitionEvent;
     const [diagnostic, setDiagnostic] = useState<string>('');
     const [recording, setRecording] = useState<boolean>(false);
+    const [selectedVoice, setSelectedVoice] = useState<number>(1);
 
     const recognition = new SpeechRecognition();
     const speechRecognitionList = new SpeechGrammarList();
@@ -35,9 +36,8 @@ const Speech: React.FC<SpeechProps> = (props) => {
     }
 
     const onRead = () => {
-        const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(data.title);
-        utterance.voice = synth.getVoices()[1];
+        utterance.voice = voices[selectedVoice];
         console.log(synth.getVoices())
         synth.speak(utterance);
     }
@@ -59,8 +59,16 @@ const Speech: React.FC<SpeechProps> = (props) => {
     return (
         <div>
             <div className="flex flex-col items-center justify-center p-4">
-                <div className="mb-10">
-                    <button className="bg-blue-500 text-white text-2xl px-6 py-2 shadow rounded-lg uppercase font-medium">Câu {index + 1}</button>
+                <div className="mb-4 w-full flex justify-end items-center">
+                    <div>
+                        <div className="mb-2 font-medium">Chọn giọng và ngôn ngữ:</div>
+                        <Select value={selectedVoice} options={voices.map((x, i) => {
+                            return {
+                                value: i,
+                                label: x.name
+                            }
+                        })} onChange={(value) => setSelectedVoice(value)} />
+                    </div>
                 </div>
                 <div className="flex gap-2 items-center mb-5">
                     <div className="text-3xl" dangerouslySetInnerHTML={{ __html: data.title }} />
