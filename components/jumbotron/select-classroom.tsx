@@ -17,7 +17,7 @@ const SelectClassroom: React.FC<SelectClassroomProps> = (props) => {
                 {
                     classrooms.map(x => (
                         <div key={x} className="h-16 flex items-center justify-center rounded bg-slate-100 hover:border-blue-500 border font-medium">
-                            Lớp {x}
+                            <button type="button">Lớp {x}</button>
                         </div>
                     ))
                 }

@@ -53,7 +53,7 @@ export default function Index() {
         {
             title: '',
             valueType: 'option',
-            render: (dom, entity) => [
+            render: (dom: any, entity: { id: any; }) => [
                 <Button key="view" icon={<EyeOutlined />} className="flex items-center justify-center" type="primary" onClick={() => router.push(`/tai-khoan/hoc-tap/${entity.id}`)} />
             ]
         }
@@ -97,7 +97,7 @@ export default function Index() {
                                     layout: 'vertical'
                                 }}
                                 columns={columns}
-                                request={(params) => getStudentInClassroom(params, router.query.id)} />
+                                request={(params: any) => getStudentInClassroom(params, router.query.id)} />
                         )
                     }
                 </div>
