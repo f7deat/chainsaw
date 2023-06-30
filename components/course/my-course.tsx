@@ -2,7 +2,8 @@ import { getMyCourse } from "@/services/course";
 import Link from "next/link";
 import { ProList } from "@ant-design/pro-components";
 import { ArrowRightOutlined, StarFilled } from "@ant-design/icons";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
+import { UserContext } from "@/models/user";
 
 type MyCourseProps = {
     defaultPageSize: number;
@@ -10,13 +11,11 @@ type MyCourseProps = {
 
 const MyCourse: React.FC<MyCourseProps> = (props) => {
 
-    const [token, setToken] = useState<string>();
-    useEffect(() => {
-        const access_token = localStorage.getItem('access_token') || '';
-        setToken(access_token)
-    }, []);
+    const { user } = useContext<{
+      user: API.User
+    }>(UserContext);
 
-    return token ? (
+    return user ? (
         <ProList<API.ChuongTrinhHocListItem>
             toolBarRender={() => {
                 return [
