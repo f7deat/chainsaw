@@ -1,4 +1,4 @@
-import request from "./request";
+import request, { API_HOST } from "./request";
 
 export async function getUser(id: string | string[] = '0') {
     return request.get(`user/${id}`);
@@ -103,4 +103,21 @@ export async function listQuestionHistory(params: any) {
         url: `user/question-history-detail`,
         params
     })
+}
+
+export async function queryTeachers(params: any) {
+    const res = await fetch(`${API_HOST}user/teachers?pageSize=${params.pageSize}&current=${params.current}`);
+    return await res.json();
+}
+
+export async function queryTeachersClient(params: any) {
+    return request({
+        url: `user/teachers`,
+        params
+    });
+}
+
+export async function queryTeacher(id?: string | string[]) {
+    const res = await fetch(`${API_HOST}user/teacher/${id}`);
+    return await res.json();
 }

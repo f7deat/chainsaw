@@ -5,8 +5,21 @@ import Partner from '@/components/home/partner';
 import ChuongTrinhHocBySubject from '@/components/subject/chuong-trinh-hoc';
 import StatisticsHome from '@/components/statistics';
 import { Jumbotron, Testimonial } from '@/components';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { queryTeachers } from '@/services/user';
+import Teachers from '@/components/accounts/teachers';
 
-export default function Home() {
+export const getServerSideProps: GetServerSideProps<{
+  teachers: API.User[];
+}> = async (context) => {
+  const teachers = await queryTeachers({
+    pageSize: 4,
+    current: 1
+  });
+  return { props: { teachers: teachers.data } };
+};
+
+export default function Home({ teachers }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
   return (
     <>
@@ -37,13 +50,19 @@ export default function Home() {
         } />
       </div>
 
+      {
+        teachers && (<Teachers data={teachers} />)
+      }
+
       <Testimonial />
 
-      <div data-aos="fade-up" className='mb-4'>
+      <div data-aos="fade-up" className='md:mb-10 mb-4'>
         <MyCourse defaultPageSize={4} />
       </div>
 
-      <Partner />
+      <div className='md:mb-10 mb-4'>
+        <Partner />
+      </div>
 
     </>
   )

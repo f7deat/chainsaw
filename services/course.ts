@@ -1,6 +1,5 @@
 import { QuestionType } from "@/utils/constants";
 import request from "./request";
-import { cookies } from "next/headers";
 const API_HOST = process.env.API_HOST;
 
 export async function listCourse() {

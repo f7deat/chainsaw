@@ -8,6 +8,7 @@ namespace API {
     name: string;
     phoneNumber: string;
     dateOfBirth: Date;
+    jobTitle: string;
   };
   type ReferListItem = BaseEntity & {
     name: string;
@@ -16,4 +17,9 @@ namespace API {
     avatar: string;
     dateOfBirth: Date;
   };
+
+  type Teacher = User & {
+    country: string;
+    bio: string;
+  }
 }
