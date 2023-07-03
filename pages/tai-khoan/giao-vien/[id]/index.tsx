@@ -1,7 +1,7 @@
 import { queryTeacher } from "@/services/user";
 import { InboxOutlined, PlusOutlined, UserAddOutlined } from "@ant-design/icons";
 import { ProCard, ProList } from "@ant-design/pro-components";
-import { Calendar, Form, Input, Rate } from "antd";
+import { Calendar, Form, Input, Rate, message } from "antd";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -14,6 +14,11 @@ export const getServerSideProps: GetServerSideProps<{
 };
 
 export default function Index({ teacher }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+
+    const onFinish = () => {
+        message.success('Nhận lịch đăng ký thành công!');
+    }
+
     return (
         <>
             <Head>
@@ -35,7 +40,7 @@ export default function Index({ teacher }: InferGetServerSidePropsType<typeof ge
                                     <div className="border-b-2 border-blue-500 mb-2 py-2">{teacher.jobTitle}</div>
                                     <div className="mb-2">Đến từ: <b>{teacher.country}</b></div>
                                     <div className="mb-4">
-                                        <Rate value={5} />
+                                        <Rate defaultValue={5} onChange={() => message.success('Đánh giá thành công!')} />
                                     </div>
                                     <div>
                                         <button className="px-6 py-2 rounded bg-white border rounded hover:border-blue-500 hover:text-blue-500 mr-2"><UserAddOutlined /> Theo dõi</button>
@@ -79,7 +84,7 @@ export default function Index({ teacher }: InferGetServerSidePropsType<typeof ge
                             <Calendar fullscreen={false} />
                         </ProCard>
                         <ProCard className="shadow mb-4">
-                            <Form layout="vertical">
+                            <Form layout="vertical" onFinish={onFinish}>
                                 <Form.Item label="Đăng ký nhận lịch học" name="email" rules={[
                                     {
                                         required: true,
@@ -88,7 +93,7 @@ export default function Index({ teacher }: InferGetServerSidePropsType<typeof ge
                                 ]}>
                                     <Input size="large" placeholder="Nhập địa chỉ email" />
                                 </Form.Item>
-                                <button className="w-full bg-blue-500 px-4 py-2 rounded text-white hover:text-blue-600 hover:text-white font-medium"><InboxOutlined /> Đăng ký</button>
+                                <button type="submit" className="w-full bg-blue-500 px-4 py-2 rounded text-white hover:text-blue-600 hover:text-white font-medium"><InboxOutlined /> Đăng ký</button>
                             </Form>
                         </ProCard>
                     </div>

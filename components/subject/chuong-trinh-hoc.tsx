@@ -1,5 +1,4 @@
 import { listChuongTrinhHocBySubjectId } from "@/services/course"
-import { StarFilled } from "@ant-design/icons";
 import { ProList } from "@ant-design/pro-components"
 import { Rate } from "antd";
 import Link from "next/link"
@@ -15,10 +14,11 @@ const ChuongTrinhHocBySubject: React.FC<ChuongTrinhHocBySubjectProps> = (props) 
     return (
         <ProList<API.ChuongTrinhHocListItem>
             headerTitle={props.headerTitle}
-            request={(params: any) => listChuongTrinhHocBySubjectId(params, props.id)}
-            pagination={{
-                defaultPageSize: 4
-            }}
+            request={() => listChuongTrinhHocBySubjectId({
+                pageSize: 4,
+                current: 1
+            }, props.id)}
+            pagination={false}
             grid={{ gutter: 16, column: 4, md: 4, xs: 1 }}
             showActions="always"
             ghost={true}
@@ -37,14 +37,16 @@ const ChuongTrinhHocBySubject: React.FC<ChuongTrinhHocBySubjectProps> = (props) 
                                 <div className="text-right mb-2">
                                     <Rate value={5} disabled /> 
                                 </div>
-                                <div className="line-clamp-3 text-gray-500 min-h-[70px]">{entity.description}</div>
+                                {
+                                    entity.description && (<div className="line-clamp-3 text-gray-500 min-h-[70px]">{entity.description}</div>)
+                                }
                             </div>
                         </div>
                     )
                 },
                 actions: {
                     cardActionProps: 'actions',
-                    render: (dom, entity) => [
+                    render: (_dom: any, entity: { id: any; }) => [
                         <Link key={1} href={`/bai-giang/${entity.id}`}>
                             Xem thêm
                         </Link>

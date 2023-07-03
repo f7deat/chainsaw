@@ -40,7 +40,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                 </picture>
             </div>
             <div className="text-right mb-2">
-                <Rate defaultValue={5} />
+                <Rate defaultValue={5} onChange={() => message.success('Đánh giá thành công!')} />
             </div>
             <div className="mb-4 text-gray-500 text-base">
                 {props.data?.moTaChuongTrinh}

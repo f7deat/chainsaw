@@ -8,7 +8,9 @@ type TeachersProps = {
 const Teachers: React.FC<TeachersProps> = (props) => {
     return (
         <div className="md:mb-10 mb-4">
-            <Title title="Đội ngũ giáo viên" subTitle="Giáo viên" />
+            <Link href="/tai-khoan/giao-vien">
+                <Title title="Đội ngũ giáo viên" subTitle="Giáo viên" />
+            </Link>
             <div className="grid grid-cols-4 md:gap-10 gap-4 mb-4" data-aos="fade-up">
                 {
                     props.data.map((user: API.User) => (
@@ -29,11 +31,6 @@ const Teachers: React.FC<TeachersProps> = (props) => {
                         </div>
                     ))
                 }
-            </div>
-            <div className="text-center border border-dashed border-gray-300">
-                <Link href="/tai-khoan/giao-vien">
-                    <span className="font-medium text-blue-500">Xem tất cả</span>
-                </Link>
             </div>
         </div>
     )
