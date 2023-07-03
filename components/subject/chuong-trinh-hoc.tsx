@@ -1,6 +1,7 @@
 import { listChuongTrinhHocBySubjectId } from "@/services/course"
 import { StarFilled } from "@ant-design/icons";
 import { ProList } from "@ant-design/pro-components"
+import { Rate } from "antd";
 import Link from "next/link"
 import { ReactNode } from "react";
 
@@ -14,7 +15,7 @@ const ChuongTrinhHocBySubject: React.FC<ChuongTrinhHocBySubjectProps> = (props) 
     return (
         <ProList<API.ChuongTrinhHocListItem>
             headerTitle={props.headerTitle}
-            request={(params) => listChuongTrinhHocBySubjectId(params, props.id)}
+            request={(params: any) => listChuongTrinhHocBySubjectId(params, props.id)}
             pagination={{
                 defaultPageSize: 4
             }}
@@ -24,21 +25,17 @@ const ChuongTrinhHocBySubject: React.FC<ChuongTrinhHocBySubjectProps> = (props) 
             metas={{
                 content: {
                     dataIndex: 'description',
-                    render: (dom, entity) => (
+                    render: (dom: any, entity: API.ChuongTrinhHocListItem) => (
                         <div className="-m-6">
                             <picture>
-                                <img src={entity.thumbnail || 'https://cdn.getvisa.vn/images/cogiao.jpg'} alt="IMG" className="mb-2" />
+                                <img src={entity.thumbnail || 'https://cdn.getvisa.vn/images/cogiao.jpg'} alt="IMG" className="mb-2" loading="lazy" />
                             </picture>
                             <div className="px-2 pb-1">
                                 <Link href={`/bai-giang/${entity.id}`}>
                                     <div className="line-clamp-2 font-medium text-blue-500 mb-1 min-h-[45px]">{entity.name}</div>
                                 </Link>
-                                <div className="text-xs text-red-500 text-right">
-                                    <StarFilled />
-                                    <StarFilled />
-                                    <StarFilled />
-                                    <StarFilled />
-                                    <StarFilled />
+                                <div className="text-right mb-2">
+                                    <Rate value={5} disabled /> 
                                 </div>
                                 <div className="line-clamp-3 text-gray-500 min-h-[70px]">{entity.description}</div>
                             </div>

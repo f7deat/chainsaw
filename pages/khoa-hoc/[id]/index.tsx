@@ -2,7 +2,7 @@ import { Title } from "@/components";
 import { chuongTrinhHoc, queryKhoaHoc } from "@/services/course";
 import { BookOutlined, HomeOutlined, StarFilled } from "@ant-design/icons";
 import { ProList } from "@ant-design/pro-components";
-import { Breadcrumb } from "antd";
+import { Breadcrumb, Rate } from "antd";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -48,6 +48,7 @@ export default function Index({ course }: InferGetServerSidePropsType<typeof get
             <Title subTitle="Khóa học" title={course?.tenKhoaHoc} />
             {
                 <ProList<API.ChuongTrinhHocListItem>
+                    ghost
                     request={(params) => chuongTrinhHoc(params, course.khoaHocId)}
                     pagination={{
                         defaultPageSize: 8
@@ -66,12 +67,8 @@ export default function Index({ course }: InferGetServerSidePropsType<typeof get
                                         <Link key={1} href={`/bai-giang/${entity.id}`}>
                                             <div className="line-clamp-2 font-medium text-blue-500 mb-1 min-h-[50px]">{entity.name}</div>
                                         </Link>
-                                        <div className="text-xs text-red-500 text-right">
-                                            <StarFilled />
-                                            <StarFilled />
-                                            <StarFilled />
-                                            <StarFilled />
-                                            <StarFilled />
+                                        <div className="text-right mb-2">
+                                            <Rate defaultValue={5} disabled />
                                         </div>
                                         <div className="line-clamp-3 text-gray-500 text-sm">{entity.description}</div>
                                     </div>

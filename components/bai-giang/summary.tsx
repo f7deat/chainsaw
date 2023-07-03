@@ -1,7 +1,7 @@
 import { getParent } from "@/services/user";
 import { CheckOutlined, LoginOutlined, PhoneOutlined } from "@ant-design/icons"
 import { ProCard } from "@ant-design/pro-components";
-import { Button, Modal, Space, message } from "antd"
+import { Button, Modal, Rate, Space, message } from "antd"
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -36,8 +36,11 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
         <ProCard className="shadow">
             <div className="h-52 bg-gray-500 rounded-lg mb-2">
                 <picture>
-                    <img src="https://cdn.getvisa.vn/images/cogiao.jpg" className="w-full h-52 object-cover" alt="cover" />
+                    <img src="https://cdn.getvisa.vn/images/cogiao.jpg" className="w-full h-52 object-cover" alt="cover" loading="lazy" />
                 </picture>
+            </div>
+            <div className="text-right mb-2">
+                <Rate defaultValue={5} />
             </div>
             <div className="mb-4 text-gray-500 text-base">
                 {props.data?.moTaChuongTrinh}

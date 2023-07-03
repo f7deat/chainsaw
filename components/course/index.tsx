@@ -4,16 +4,14 @@ import { elementary } from "@/mock/elementary"
 
 const CourseList: React.FC = () => {
     return (
-        <div>
-            <Row gutter={16}>
-                {
-                    elementary.map((ele, i) => (
-                        <Col md={4} xs={12} key={i}>
-                            <CourseItem course={ele} />
-                        </Col>
-                    ))
-                }
-            </Row>
+        <div className="grid md:grid-cols-6 grid-cols-2 gap-4">
+            {
+                elementary.map((ele, i) => (
+                    <div key={i}>
+                        <CourseItem course={ele} />
+                    </div>
+                ))
+            }
         </div>
     )
 }
