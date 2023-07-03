@@ -37,7 +37,7 @@ const Partner: React.FC = () => {
                 {
                     data.map(x => (
                         <picture key={x.id}>
-                            <img src={x.logo} alt="" className="w-full transform transition duration-500 hover:scale-110" loading="lazy" />
+                            <img src={x.logo} alt="" className="w-full transform transition duration-500 hover:scale-110" loading="lazy" height={96} />
                         </picture>
                     ))
                 }

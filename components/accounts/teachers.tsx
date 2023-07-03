@@ -18,7 +18,7 @@ const Teachers: React.FC<TeachersProps> = (props) => {
                             <div className="flex gap-2 items-center flex-col">
                                 <div className="w-32 pt-4">
                                     <picture>
-                                        <img src={user.avatar} alt={user.name} className="rounded-full" loading="lazy" />
+                                        <img src={user.avatar} alt={user.name} className="rounded-full w-32 h-32" loading="lazy" />
                                     </picture>
                                 </div>
                                 <div className="flex-grow text-center mb-4">

@@ -28,7 +28,7 @@ const ChuongTrinhHocBySubject: React.FC<ChuongTrinhHocBySubjectProps> = (props) 
                     render: (dom: any, entity: API.ChuongTrinhHocListItem) => (
                         <div className="-m-6">
                             <picture>
-                                <img src={entity.thumbnail || 'https://cdn.getvisa.vn/images/cogiao.jpg'} alt="IMG" className="mb-2" loading="lazy" />
+                                <img src={entity.thumbnail || 'https://cdn.getvisa.vn/images/cogiao.jpg'} alt="IMG" className="mb-2 w-full" loading="lazy" height={222} />
                             </picture>
                             <div className="px-2 pb-1">
                                 <Link href={`/bai-giang/${entity.id}`}>
