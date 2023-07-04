@@ -1,18 +1,25 @@
 import { BarChartOutlined, BellOutlined, BookOutlined, CalendarOutlined, LogoutOutlined, MoneyCollectOutlined, UserOutlined } from "@ant-design/icons"
-import { Avatar, Badge, Button, Space } from "antd"
+import { Avatar, Badge, Button } from "antd"
 import HeaderDropdown from "./header-dropdown"
 import { useRouter } from "next/router";
-import type { MenuInfo } from 'rc-menu/lib/interface';
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Role } from "@/utils/constants";
 import { UserContext } from "@/models/user";
 import LoginForm from "../accounts/login-form";
+import { notificationCount } from "@/services/notification";
 
 const RightContent: React.FC = () => {
 
     const router = useRouter();
     const [open, setOpen] = useState<boolean>(false);
     const { user } = useContext(UserContext);
+    const [notiCount, setNotiCount] = useState<number>(0);
+
+    useEffect(() => {
+        notificationCount().then(response => {
+            setNotiCount(response);
+        })
+    }, []);
 
     const loginOut = async () => {
         localStorage.removeItem('access_token');
@@ -23,7 +30,7 @@ const RightContent: React.FC = () => {
         }
     };
 
-    const onMenuClick = (event: MenuInfo) => {
+    const onMenuClick = (event: any) => {
         const { key } = event;
         if (key === 'logout') {
             loginOut();
@@ -105,7 +112,7 @@ const RightContent: React.FC = () => {
                 </Button>
             </HeaderDropdown>
             <button onClick={() => router.push('/thong-bao')}>
-                <Badge count={5}>
+                <Badge count={notiCount}>
                     <Avatar icon={<BellOutlined />} />
                 </Badge>
             </button>
