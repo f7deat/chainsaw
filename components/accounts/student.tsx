@@ -1,6 +1,6 @@
 import { getUser, listUserSelect, updateStudent } from "@/services/user";
 import { ProForm, ProFormDatePicker, ProFormInstance, ProFormSelect, ProFormText } from "@ant-design/pro-components"
-import { message } from "antd";
+import { Typography, message } from "antd";
 import { useEffect, useRef, useState } from "react"
 
 const StudentInfo: React.FC = () => {
@@ -30,7 +30,7 @@ const StudentInfo: React.FC = () => {
                     },
                     {
                         name: 'referalCode',
-                        value: response.data.referalCode,
+                        value: response.data.referalCode?.toLowerCase(),
                     }
                 ]);
                 if (response.data.referalCode) {
@@ -50,36 +50,66 @@ const StudentInfo: React.FC = () => {
     }
 
     return (
-        <ProForm grid formRef={formRef} onFinish={onFinish}>
-            <ProFormText label="Họ và tên" name="name" rules={[
-                {
-                    required: true
-                }
-            ]} 
-            colProps={{
-                md: 12
-            }}
-            />
-            <ProFormSelect label="Giới tính" name="gender" colProps={{
-                md: 12
-            }} options={[
-                {
-                    value: true as any,
-                    label: 'Nam'
-                },
-                
-                {
-                    value: false as any,
-                    label: 'Nữ'
-                }
-            ]} />
-            <ProFormDatePicker label="Ngày sinh" name="dateOfBirth" colProps={{
-                md: 6
-            }} />
-            <ProFormText label="Ảnh đại diện" name="avatar" colProps={{
-                md: 18
-            }} />
-            <ProFormSelect request={listUserSelect} label="Người giới thiệu" name="referalCode" showSearch disabled={disable}/>
+        <ProForm formRef={formRef} onFinish={onFinish}>
+            <div>
+                <div>
+                    <Typography.Title level={5}>Thông tin cơ bản</Typography.Title>
+                </div>
+                <div className="md:flex gap-4">
+                    <div className="flex-1">
+                        <ProFormText label="Họ và tên" name="name" rules={[
+                            {
+                                required: true
+                            }
+                        ]}
+                        />
+                    </div>
+                    <ProFormSelect label="Giới tính" name="gender" options={[
+                        {
+                            value: true as any,
+                            label: 'Nam'
+                        },
+
+                        {
+                            value: false as any,
+                            label: 'Nữ'
+                        }
+                    ]} />
+                    <ProFormDatePicker label="Ngày sinh" name="dateOfBirth" colProps={{
+                        md: 6
+                    }} />
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <Typography.Title level={5}>Địa chỉ</Typography.Title>
+                </div>
+                <div className="md:flex gap-4">
+                    <div className="flex-1">
+                        <ProFormText name="address" label="Địa chỉ" />
+                    </div>
+                    <div>
+                        <ProFormSelect name="country" label="Quốc tịch" />
+                    </div>
+                    <div>
+                        <ProFormSelect name="city" label="Thành phố" />
+                    </div>
+                    <div>
+                        <ProFormSelect name="district" label="Quận/Huyện" />
+                    </div>
+                    <div>
+                        <ProFormSelect name="line" label="Xã/Phường/Thị Trấn" />
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <Typography.Title level={5}>Thông tin khác</Typography.Title>
+                </div>
+                <ProFormSelect request={listUserSelect} label="Người giới thiệu" name="referalCode" showSearch disabled={disable} />
+            </div>
         </ProForm>
     )
 }
