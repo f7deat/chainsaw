@@ -5,7 +5,8 @@ export enum QuestionType {
     FREE_INPUT = "tuluan",
     BAI_GIANG = "baigiang",
     SORTABLE = "sapxep",
-    SPEECH = "nghevalap"
+    SPEECH = "nghevalap",
+    DRAG_DROP = "keotha",
 }
 
 export enum Role {

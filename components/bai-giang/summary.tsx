@@ -1,7 +1,7 @@
 import { getParent } from "@/services/user";
 import { CheckOutlined, LoginOutlined, PhoneOutlined } from "@ant-design/icons"
 import { ProCard } from "@ant-design/pro-components";
-import { Button, Modal, Rate, Space, message } from "antd"
+import { Button, Modal, Rate, message } from "antd"
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -59,7 +59,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                 <div className="text-red-400 font-bold text-sm">Chỉ còn nốt 2 ngày</div>
                 <div className="py-3 flex justify-center gap-4">
                     <button onClick={onRegister} className="px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white flex gap-2 text-lg font-medium">
-                        <Space><LoginOutlined />Đăng ký ngay</Space>
+                        <LoginOutlined />Đăng ký ngay
                     </button>
                     <a href="tel:+84911717772" className="px-4 py-2 rounded-full bg-red-500 hover:bg-red-600 text-white flex gap-2 text-lg font-medium">
                         <PhoneOutlined />Nhận tư vấn
