@@ -18,16 +18,26 @@ const Footer: React.FC = () => {
                                         <div className="mb-2">Đường dây nóng: <span>0937 065 333</span></div>
                                     </div>
                                     <div className="md:w-1/2">
-                                        <div className="mb-2">Hình thức thanh toán</div>
-                                        <div className="mb-2">Trả hàng & hoàn tiền</div>
-                                        <div className="mb-2">Chính sách bảo mật</div>
+                                        <div className="mb-2">
+                                            <Link href="/faq/hinh-thuc-thanh-toan">Hình thức thanh toán</Link>
+                                        </div>
+                                        <div className="mb-2">
+                                            <Link href="/faq/tra-hang-hoan-tien">
+                                                Trả hàng & hoàn tiền
+                                            </Link>
+                                        </div>
+                                        <div className="mb-2">
+                                            <Link href="/faq/chinh-sach-bao-mat">Chính sách bảo mật</Link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="md:w-1/3 md:flex gap-4">
                                 <div className="md:w-1/2">
                                     <div className="mb-4 text-xl uppercase font-medium">Giới thiệu</div>
-                                    <div className="mb-2">Giới thiêu chương trình</div>
+                                    <div className="mb-2">
+                                        <Link href="/gioi-thieu-chuong-trinh">Giới thiêu chương trình</Link>
+                                    </div>
                                     <div className="mb-2">
                                         <Link href="/lien-he">
                                             Liên hệ với chúng tôi
@@ -48,17 +58,17 @@ const Footer: React.FC = () => {
                 <div className="border-b border-slate-600"></div>
                 <div className="pt-4 px-4 flex md:flex-row flex-col items-center justify-between container mx-auto">
                     <div className="mb-4">
-                        © All rights reserved. Made by <a href="#" className="font-bold">GETVISA</a>
+                        © All rights reserved. Made by <a href="https://getvisa.vn/" className="font-bold">GETVISA</a>
                     </div>
                     <div className="flex md:flex-row flex-col gap-6 items-center justify-end mb-4">
                         <div className="flex gap-6">
                             <Link href="/gioi-thieu">Giới thiệu</Link>
                             <Link href="/tin-tuc">Blog</Link>
-                            <Link href="/ho-tro">Hỗ trợ</Link>
-                            <a href="#">Liên hệ</a>
+                            <Link href="/faq/ho-tro">Hỗ trợ</Link>
+                            <Link href="/faq/lien-he">Liên hệ</Link>
                         </div>
                         <div className="flex gap-6 items-center">
-                            <FacebookOutlined />
+                            <a href="https://www.facebook.com/eleaningget"><FacebookOutlined /></a>
                             <TwitterOutlined />
                             <GoogleOutlined />
                             <GithubOutlined />

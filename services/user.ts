@@ -1,6 +1,10 @@
 import request, { API_HOST } from "./request";
 
-export async function getUser(id: string | string[] = '0') {
+export async function getCurrentUser() {
+    return request.get(`user`);
+}
+
+export async function getUser(id: string | string[]) {
     return request.get(`user/${id}`);
 }
 
@@ -120,4 +124,22 @@ export async function queryTeachersClient(params: any) {
 export async function queryTeacher(id?: string | string[]) {
     const res = await fetch(`${API_HOST}user/teacher/${id}`);
     return await res.json();
+}
+
+export async function queryCountry() {
+    return request({
+        url: `country/list-select`
+    });
+}
+
+export async function queryProvince() {
+    return request({
+        url: `province/list-select`
+    });
+}
+
+export async function queryDistrict() {
+    return request({
+        url: `district/list-select`
+    });
 }

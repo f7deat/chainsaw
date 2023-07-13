@@ -6,7 +6,7 @@ import '@/styles/globals.css';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { getUser } from '@/services/user';
+import { getCurrentUser } from '@/services/user';
 import { UserContext } from '@/models/user';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const [user, setUser] = useState<API.User>();
 
   const login = useCallback(() => {
-    getUser().then(response => {
+    getCurrentUser().then(response => {
       setUser(response.data)
     })
   }, [])

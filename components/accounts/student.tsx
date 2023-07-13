@@ -1,15 +1,20 @@
-import { getUser, listUserSelect, updateStudent } from "@/services/user";
+import { UserContext } from "@/models/user";
+import { getCurrentUser, listUserSelect, queryCountry, queryDistrict, queryProvince, updateStudent } from "@/services/user";
+import { Role } from "@/utils/constants";
 import { ProForm, ProFormDatePicker, ProFormInstance, ProFormSelect, ProFormText } from "@ant-design/pro-components"
 import { Typography, message } from "antd";
-import { useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 
 const StudentInfo: React.FC = () => {
 
     const formRef = useRef<ProFormInstance>();
     const [disable, setDisable] = useState<boolean>(false);
+    const { user } = useContext<{
+        user: API.User
+      }>(UserContext);
 
     useEffect(() => {
-        getUser().then(response => {
+        getCurrentUser().then(response => {
             if (response.succeeded) {
                 formRef.current?.setFields([
                     {
@@ -90,21 +95,18 @@ const StudentInfo: React.FC = () => {
                         <ProFormText name="address" label="Địa chỉ" />
                     </div>
                     <div>
-                        <ProFormSelect name="country" label="Quốc tịch" />
+                        <ProFormSelect name="country" label="Quốc tịch" params={undefined} valueEnum={undefined} request={queryCountry} debounceTime={undefined} />
                     </div>
                     <div>
-                        <ProFormSelect name="city" label="Thành phố" />
+                        <ProFormSelect name="city" label="Thành phố" params={undefined} debounceTime={undefined} request={queryProvince} valueEnum={undefined} />
                     </div>
                     <div>
-                        <ProFormSelect name="district" label="Quận/Huyện" />
-                    </div>
-                    <div>
-                        <ProFormSelect name="line" label="Xã/Phường/Thị Trấn" />
+                        <ProFormSelect name="district" label="Quận/Huyện" params={undefined} debounceTime={undefined} request={queryDistrict} valueEnum={undefined} />
                     </div>
                 </div>
             </div>
 
-            <div>
+            <div hidden={user?.roles.includes(Role.Referal)}>
                 <div>
                     <Typography.Title level={5}>Thông tin khác</Typography.Title>
                 </div>

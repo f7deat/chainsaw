@@ -1,7 +1,7 @@
 import { Title } from "@/components";
 import { LoginOutlined } from "@ant-design/icons";
 import { ProColumns, ProTable } from "@ant-design/pro-components";
-import { Button, Divider, Space } from "antd";
+import { Button, Divider, Space, Table } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
@@ -28,8 +28,7 @@ export default function LiveClass() {
         },
         {
             title: 'Thời gian diễn ra',
-            dataIndex: 'liveTime',
-            valueType: 'dateTime'
+            dataIndex: 'liveTime'
         },
         {
             title: '',
@@ -52,15 +51,13 @@ export default function LiveClass() {
             </Head>
             <main>
                 <Title title="Lớp học trực tuyến" subTitle="Live class" />
-                <ProTable 
-                search={{
-                    layout: "vertical"
-                }}
-                headerTitle="Livestream sắp diễn ra" 
-                columns={columns} 
-                dataSource={data} />
-                <Divider />
-                <ProTable headerTitle="Danh sách Livestream" />
+                <Table
+                    columns={columns}
+                    dataSource={data} />
+                <div>
+                    <Title subTitle="Lived" title="Danh sách Livestream" />
+                    <Table />
+                </div>
             </main>
         </>
     )

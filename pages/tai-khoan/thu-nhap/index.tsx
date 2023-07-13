@@ -1,6 +1,6 @@
 import { getClassroomBySchool } from "@/services/classroom";
 import { getSchoolByUser } from "@/services/school";
-import { getUser, listRefer } from "@/services/user";
+import { getCurrentUser, listRefer } from "@/services/user";
 import { ArrowRightOutlined, BarChartOutlined, EyeOutlined, GlobalOutlined, HeatMapOutlined, HomeOutlined, InfoCircleOutlined, MoneyCollectOutlined, UserAddOutlined, UserOutlined } from "@ant-design/icons";
 import { ProCard, ProColumns, ProList, ProTable } from "@ant-design/pro-components";
 import { Button, Divider, Space } from "antd";
@@ -18,7 +18,7 @@ export default function Index() {
         getSchoolByUser().then(response => {
             setSchool(response);
         });
-        getUser().then(response => {
+        getCurrentUser().then(response => {
             setUser(response.data)
         });
     }, []);
@@ -53,7 +53,7 @@ export default function Index() {
         {
             title: '',
             valueType: 'option',
-            render: (dom, entity) => [
+            render: (dom: any, entity: API.ReferListItem) => [
                 <Button key="view" icon={<EyeOutlined />} className="flex items-center justify-center" type="primary" onClick={() => router.push(`/tai-khoan/hoc-tap/${entity.id}`)} />
             ]
         }
@@ -100,7 +100,7 @@ export default function Index() {
                                     pageSize: 5
                                 }}
                                 headerTitle="Danh sách lớp"
-                                request={(params) => getClassroomBySchool(params, school?.id)}
+                                request={(params: any) => getClassroomBySchool(params, school?.id)}
                                 metas={{
                                     title: {
                                         dataIndex: 'name',
@@ -113,7 +113,7 @@ export default function Index() {
                                         )
                                     },
                                     actions: {
-                                        render: (dom, entity) => <Button type="link" onClick={() => router.push(`/lop-hoc/${entity.id}`)}>
+                                        render: (dom: any, entity: { id: any; }) => <Button type="link" onClick={() => router.push(`/lop-hoc/${entity.id}`)}>
                                             <Space>
                                                 <InfoCircleOutlined /> Chi tiết
                                             </Space>

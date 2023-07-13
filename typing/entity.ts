@@ -41,4 +41,15 @@ declare namespace API {
         yourAnswer: boolean;
         mp3Link: string;
     }
+    type Article = {
+        articleID: number;
+        articleCatID: number;
+        languageId: string;
+        title: string;
+        summary: string;
+        imagePath: string;
+        detail: string;
+        seo: string;
+        counter: number;
+    }
 }
