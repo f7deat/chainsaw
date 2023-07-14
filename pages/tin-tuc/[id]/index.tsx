@@ -11,16 +11,16 @@ export const getServerSideProps: GetServerSideProps<{
     return { props: { article } };
 };
 
-export default function Article({ article }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Index({ article }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     return (
         <>
             <Head>
                 <title>{article.title}</title>
             </Head>
             <main>
-                <Title subTitle="FAQ" title={article.title} />
+                <Title subTitle="Bài viết" title={article.title} />
                 <div className="bg-white shadow p-4">
-                    <div dangerouslySetInnerHTML={{ __html: article.detail }} />
+                    <div dangerouslySetInnerHTML={{ __html: article.detail}} />
                     <div className="py-4 text-sm text-gray-400 text-right">
                         <EyeOutlined /> {article.counter} Lượt xem
                     </div>

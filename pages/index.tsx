@@ -8,6 +8,7 @@ import { Jumbotron, Testimonial } from '@/components';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { queryTeachers } from '@/services/user';
 import Teachers from '@/components/accounts/teachers';
+import ArticleSpotlight from '@/components/articles/article-spotlight';
 
 export const getServerSideProps: GetServerSideProps<{
   teachers: API.User[];
@@ -59,6 +60,8 @@ export default function Home({ teachers }: InferGetServerSidePropsType<typeof ge
       <div data-aos="fade-up" className='md:mb-10 mb-4'>
         <MyCourse defaultPageSize={4} />
       </div>
+
+      <ArticleSpotlight />
 
       <div className='md:mb-10 mb-4'>
         <Partner />
