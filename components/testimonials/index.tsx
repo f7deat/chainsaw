@@ -1,37 +1,81 @@
-import { Avatar } from "antd"
-import { Title } from ".."
-import { QuoteOutlined } from "../icons"
+import Link from "next/link"
+import { ArrowRightOutlined, StarFilled } from "@ant-design/icons"
 
 const Testimonial: React.FC = () => {
     return (
-        <div className="md:mb-16 mb-4">
-            <Title subTitle="Đánh giá" title="Phụ huynh nói gì về chúng tôi" />
-            <div className="flex flex-wrap -m-4">
-                <div className="p-4 md:w-1/2 w-full">
-                    <div className="h-full bg-gray-100 p-8 rounded" data-aos="fade-up">
-                        <QuoteOutlined />
-                        <p className="leading-relaxed mb-6">Con nhà mình không phải lười học nhưng tư duy hơi chậm. Ở nhà mình cố gắng dạy con học nhưng không có chuyên môn nên được 1 lúc là lại nóng lên quát con.
-                            Tuần học đến bài phân số, kiến thức mới, cô giảng trên lớp hơi nhanh nên con chưa hiểu lắm, làm bài tập sai nhiều. Về nhà mình cho con nghe lại bài giảng của thầy Tám. Thầy có phương pháp dạy đơn giản nhưng dễ hiểu, lấy hình ảnh quen thuộc như quả cáo, pizza minh họa nên con mình dễ tưởng tượng lắm. Kỳ này cô chủ nhiệm cũng bảo con tiến bộ, hăng hái phát biểu hơn...</p>
-                        <div className="inline-flex items-center">
-                            <img src="https://cdn.getvisa.vn/files/0123.png" alt="I" width={40} height={40} className="rounded-full" loading="lazy" />
-                            <span className="flex-grow flex flex-col pl-4">
-                                <span className="title-font font-medium text-gray-900">Phụ huynh Tùng Lâm</span>
-                                <span className="text-gray-500 text-sm">Học sinh Đỗ Huy Quang</span>
-                            </span>
+        <div className="md:mb-40 mb-4">
+            <div className="md:flex md:gap-20">
+                <div style={{
+                    maxWidth: 607
+                }}>
+                    <div className="flex gap-4 items-center mb-4">
+                        <div className="border-b-2 border-slate-300 w-20"></div>
+                        <div className="uppercase text-slate-400">Đánh giá</div>
+                    </div>
+                    <div className="text-4xl font-medium text-blue-900 mb-6">Phụ Huynh Nói Gì?</div>
+                    <div className="text-gray-500 text-lg mb-8">
+                        <div className="mb-4 text-gray-500">
+                            E-Learning đã nhận được hơn 100 nghìn xếp hạng tích cực từ người dùng của chúng tôi trên khắp thế giới.
+                        </div>
+                        <div className="mb-4 text-gray-500">
+                            Một số học sinh và giáo viên đã được E-Learning giúp đỡ rất nhiều.
+                        </div>
+                        <div className="mb-4 text-gray-500">
+                            Bạn cũng vậy? Xin vui lòng cho đánh giá của bạn
                         </div>
                     </div>
+                    <div>
+                        <Link href="/" className="flex">
+                            <div className="pl-6 rounded-full border border-blue-500 border-r-0 flex items-center gap-6 text-blue-500">
+                                Viết đánh giá của bạn
+                                <span className="rounded-full h-12 flex items-center justify-center w-12 border-blue-500 border">
+                                    <ArrowRightOutlined />
+                                </span>
+                            </div>
+                        </Link>
+                    </div>
                 </div>
-                <div className="p-4 md:w-1/2 w-full">
-                    <div className="h-full bg-gray-100 p-8 rounded" data-aos="fade-up">
-                        <QuoteOutlined />
-                        <p className="leading-relaxed mb-6">Bạn bé nhà mình học ở GET được gần 2 tháng rồi. Trước bạn ấy ko tự giác học lắm, phải có mẹ kè kè ngồi bên kèm tí một. Nhưng giờ con rất thích học, cứ 7 rưỡi là tự giác ngồi vào bàn học.
-                            Cô vẫn giảng các bài theo SGK nhưng có cách dạy khác; giống như trò chuyện, vui chơi với con. Ví dụ thay vì yêu cầu con “làm bài 1,2,3” thì cô bảo con cùng giải cứu gia đình Thỏ bằng cách trả lời đúng các câu hỏi của bà phù thủy chẳng hạn. Thế nên mình thấy con thích học hơn nhiều.</p>
-                        <div className="inline-flex items-center">
-                            <img src="https://cdn.getvisa.vn/files/msthuytrang.jpg" alt="I" width={40} height={40} className="rounded-full" loading="lazy" />
-                            <span className="flex-grow flex flex-col pl-4">
-                                <span className="title-font font-medium text-gray-900">Phụ Huynh Đặng Thùy Dung</span>
-                                <span className="text-gray-500 text-sm">Học sinh Nguyễn Khánh Toàn</span>
-                            </span>
+                <div className="flex-1">
+                    <div className="relative">
+                        <div className="relative text-center">
+                            <picture className="relative flex" style={{
+                                maxWidth: 560
+                            }}>
+                                <img src="https://i.imgur.com/VRp1hwz.png" alt="IMG" loading="lazy" className="rounded-lg w-full" />
+                                <Link href="/">
+                                    <span style={{
+                                        top: '40%',
+                                        right: -24
+                                    }} className="absolute h-14 w-14 shadow bg-white rounded-full flex items-center justify-center text-blue-500">
+                                        <ArrowRightOutlined />
+                                    </span>
+                                </Link>
+                            </picture>
+                        </div>
+                        <div className="absolute left-16 bg-white shadow rounded" style={{
+                            maxWidth: 680,
+                            bottom: -72
+                        }}>
+                            <div className="border-l-8 border-red-400 p-6 rounded">
+                                <div className="border-l border-gray-300 px-4 text-gray-500 mb-8 text-lg">
+                                    Thank you so much for your help. It is exactly what I have been looking for. You wont regret it. It really saves me time and effort. E-LEarning is exactly what our business has been lacking.
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <div className="font-bold text-lg text-slate-500">
+                                        Gloria Rose
+                                    </div>
+                                    <div>
+                                        <div className="flex gap-1 text-yellow-500 mb-2">
+                                            <StarFilled />
+                                            <StarFilled />
+                                            <StarFilled />
+                                            <StarFilled />
+                                            <StarFilled />
+                                        </div>
+                                        <div className="text-sm text-gray-400">2 tuần trước</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

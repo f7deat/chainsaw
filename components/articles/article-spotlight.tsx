@@ -86,7 +86,7 @@ const ArticleSpotlight: React.FC = () => {
                 </div>
                 <div>
                     {
-                        articles.filter(x => x.articleID !== articles[0].articleID)?.map(article => (
+                        articles && articles.filter(x => x.articleID !== articles[0].articleID)?.map(article => (
                             <div key={article.articleID} className="mb-10">
                                 <div className="flex gap-10">
                                     <div className="relative">

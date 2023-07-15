@@ -7,7 +7,7 @@ type TeachersProps = {
 
 const Teachers: React.FC<TeachersProps> = (props) => {
     return (
-        <div className="md:mb-10 mb-4">
+        <div className="md:mb-32 mb-4">
             <Link href="/tai-khoan/giao-vien">
                 <Title title="Đội ngũ giáo viên" subTitle="Giáo viên" />
             </Link>
