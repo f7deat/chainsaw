@@ -68,7 +68,7 @@ const ArticleSpotlight: React.FC = () => {
                                 <div style={{
                                     maxWidth: 640
                                 }}>
-                                    <div className="font-medium text-3xl mb-4 hover:text-blue-500">
+                                    <div className="font-medium md:text-3xl text-xl mb-4 hover:text-blue-500">
                                         <Link href={`/tin-tuc/${articles[0].seo}`}>
                                             {articles[0].title}
                                         </Link>
@@ -88,7 +88,7 @@ const ArticleSpotlight: React.FC = () => {
                     {
                         articles && articles.filter(x => x.articleID !== articles[0].articleID)?.map(article => (
                             <div key={article.articleID} className="mb-10">
-                                <div className="flex gap-10">
+                                <div className="flex gap-10 flex-col md:flex-row">
                                     <div className="relative">
                                         <picture>
                                             <img src={article.imagePath} alt={article.title} width={280} height={200} loading="lazy" />

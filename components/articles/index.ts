@@ -1,0 +1,1 @@
+export { default as ArticleSpotlight } from './article-spotlight';

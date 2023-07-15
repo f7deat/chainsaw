@@ -1,5 +1,5 @@
 import { getParent } from "@/services/user";
-import { CheckOutlined, LoginOutlined, PhoneOutlined } from "@ant-design/icons"
+import { CheckOutlined, FacebookFilled, FacebookOutlined, FileGifOutlined, IdcardFilled, IdcardOutlined, LoginOutlined, PhoneOutlined, SketchOutlined, TwitterOutlined, YoutubeFilled } from "@ant-design/icons"
 import { ProCard } from "@ant-design/pro-components";
 import { Button, Modal, Rate, message } from "antd"
 import { useRouter } from "next/router";
@@ -57,13 +57,38 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                     <span className="text-4xl">{props.data?.gia}</span>
                 </div>
                 <div className="text-red-400 font-bold text-sm">Chỉ còn nốt 2 ngày</div>
-                <div className="py-3 flex justify-center gap-4">
-                    <button onClick={onRegister} className="px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white flex gap-2 text-lg font-medium">
+                <div className="py-4 flex justify-center gap-4 border-b">
+                    <button onClick={onRegister} className="px-4 py-2 rounded-full items-center bg-blue-500 hover:bg-blue-600 text-white flex gap-2 text-lg font-medium">
                         <LoginOutlined />Đăng ký ngay
                     </button>
                     <a href="tel:+84911717772" className="px-4 py-2 rounded-full bg-red-500 hover:bg-red-600 text-white flex gap-2 text-lg font-medium">
                         <PhoneOutlined />Nhận tư vấn
                     </a>
+                </div>
+                <div className="mb-4 text-left py-3 border-b">
+                    <div className="text-2xl font-medium mb-4">Khóa học bao gồm</div>
+                    <div className="text-gray-500 font-medium">
+                        <div className="flex gap-2 items-center mb-2">
+                            <SketchOutlined className="text-blue-500 text-lg" />Money Back Guarantee
+                        </div>
+                        <div className="flex gap-2 items-center mb-2">
+                            <IdcardFilled className="text-blue-500 text-lg" />Chứng chỉ sau khóa học
+                        </div>
+                    </div>
+                </div>
+                <div className="mb-4 text-left">
+                    <div className="text-xl font-medium mb-4">Chia sẻ khóa học</div>
+                    <div className="flex gap-4 text-xl">
+                        <div className="h-8 w-8 flex items-center justify-center rounded-full bg-sky-500 text-white">
+                            <TwitterOutlined />
+                        </div>
+                        <div className="h-8 w-8 flex items-center justify-center rounded-full bg-blue-500 text-white">
+                            <FacebookFilled />
+                        </div>
+                        <div className="h-8 w-8 flex items-center justify-center rounded-full bg-red-500 text-white">
+                            <YoutubeFilled />
+                        </div>
+                    </div>
                 </div>
             </div>
 

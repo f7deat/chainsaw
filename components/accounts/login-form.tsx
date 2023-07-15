@@ -44,6 +44,12 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
                         value: u.token
                     }
                 }));
+                if (data.data.length === 1) {
+                    await onFinish({
+                        token: data.data[0].token
+                    });
+                    return false;
+                }
                 return true;
             } else {
                 message.error(data.errors[0].description);

@@ -2,7 +2,7 @@ import { getMyCourse } from "@/services/course";
 import Link from "next/link";
 import { ProList } from "@ant-design/pro-components";
 import { ArrowRightOutlined, StarFilled } from "@ant-design/icons";
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext } from "react";
 import { UserContext } from "@/models/user";
 
 type MyCourseProps = {
