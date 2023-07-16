@@ -69,7 +69,7 @@ export default function Index() {
                                                 }>
                                                     ghost
                                                     headerTitle="Bài giảng gần đây"
-                                                    request={(params) => learningHistory(params, router.query.id)}
+                                                    request={(params: any) => learningHistory(params, router.query.id)}
                                                     pagination={{
                                                         pageSize: 5
                                                     }}
@@ -82,7 +82,7 @@ export default function Index() {
                                                             valueType: 'fromNow'
                                                         },
                                                         avatar: {
-                                                            render: (dom, entity) => {
+                                                            render: (dom: any, entity: { status: any; }) => {
                                                                 if (entity.status) {
                                                                     return (
                                                                         <Tooltip title="Đã hoàn thành bài giảng">
@@ -102,7 +102,7 @@ export default function Index() {
                                                             }
                                                         },
                                                         actions: {
-                                                            render: (dom, entity) => [
+                                                            render: (dom: any, entity: { id: any; }) => [
                                                                 <Tooltip title="Thông tin chi tiết" key="info">
                                                                     <Button className="text-lg text-gray-500 flex items-center" type="link" icon={<InfoCircleOutlined />}
                                                                         onClick={() => router.push(`/tai-khoan/hoc-tap/chi-tiet/${entity.id}?userId=${router.query?.id}`)} />

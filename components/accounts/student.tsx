@@ -79,7 +79,7 @@ const StudentInfo: React.FC = () => {
                             value: false as any,
                             label: 'Nữ'
                         }
-                    ]} />
+                    ]} params={undefined} debounceTime={undefined} request={undefined} valueEnum={undefined} />
                     <ProFormDatePicker label="Ngày sinh" name="dateOfBirth" colProps={{
                         md: 6
                     }} />
@@ -95,7 +95,7 @@ const StudentInfo: React.FC = () => {
                         <ProFormText name="address" label="Địa chỉ" />
                     </div>
                     <div>
-                        <ProFormSelect name="country" label="Quốc tịch" params={undefined} valueEnum={undefined} request={queryCountry} debounceTime={undefined} />
+                        <ProFormSelect name="countryId" label="Quốc tịch" params={undefined} valueEnum={undefined} request={queryCountry} debounceTime={undefined} />
                     </div>
                     <div>
                         <ProFormSelect name="city" label="Thành phố" params={undefined} debounceTime={undefined} request={queryProvince} valueEnum={undefined} />
@@ -110,7 +110,7 @@ const StudentInfo: React.FC = () => {
                 <div>
                     <Typography.Title level={5}>Thông tin khác</Typography.Title>
                 </div>
-                <ProFormSelect request={listUserSelect} label="Người giới thiệu" name="referalCode" showSearch disabled={disable} />
+                <ProFormSelect request={listUserSelect} label="Người giới thiệu" name="referalCode" showSearch disabled={disable} params={undefined} debounceTime={undefined} valueEnum={undefined} />
             </div>
         </ProForm>
     )

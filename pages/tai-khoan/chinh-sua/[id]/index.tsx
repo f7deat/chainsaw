@@ -1,5 +1,5 @@
-import { allRole, getUser, updateUser } from "@/services/user";
-import { ProCard, ProForm, ProFormInstance, ProFormSelect, ProFormText } from "@ant-design/pro-components";
+import { allRole, getUser, queryCountry, updateUser } from "@/services/user";
+import { ProCard, ProForm, ProFormInstance, ProFormSelect, ProFormText, ProFormTextArea } from "@ant-design/pro-components";
 import { message } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -22,6 +22,18 @@ export default function Index() {
                     {
                         name: 'avatar',
                         value: response.avatar
+                    },
+                    {
+                        name: 'bio',
+                        value: response.bio
+                    },
+                    {
+                        name: 'jobTitle',
+                        value: response.jobTitle
+                    },
+                    {
+                        name: 'countryId',
+                        value: response.countryId
                     },
                     {
                         name: 'role',
@@ -50,9 +62,12 @@ export default function Index() {
             <main>
                 <ProCard>
                     <ProForm onFinish={onFinish} formRef={formRef}>
-                        <ProFormText name="name" label="Name" />
-                        <ProFormText name="avatar" label="Avatar" />
-                        <ProFormSelect name="role" label="Role" request={() => allRole().then(response => {
+                        <ProFormText name="name" label="Họ và tên" />
+                        <ProFormText name="avatar" label="Ảnh đại diện" />
+                        <ProFormText name="jobTitle" label="Chức vụ/Công việc" />
+                        <ProFormTextArea name="bio" label="Giới thiệu/Tiểu sử" />
+                        <ProFormSelect name="countryId" label="Quốc tịch" params={undefined} valueEnum={undefined} request={queryCountry} debounceTime={undefined} />
+                        <ProFormSelect name="role" label="Quyền" request={() => allRole().then(response => {
                             return response.map((role: any) => {
                                 return {
                                     value: role.name,
