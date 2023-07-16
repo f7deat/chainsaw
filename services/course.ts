@@ -2,10 +2,6 @@ import { QuestionType } from "@/utils/constants";
 import request from "./request";
 const API_HOST = process.env.API_HOST;
 
-export async function listCourse() {
-  return request.get(`khoahoc/getkhoahocs`);
-}
-
 export async function listKhoaHoc(data: any) {
   return request({
     url: `khoahoc/list`,

@@ -1,55 +1,33 @@
+import { Title } from "@/components";
+import CardTeacher from "@/components/accounts/teachers/card";
 import { UserContext } from "@/models/user";
-import { queryTeachersClient } from "@/services/user";
+import { queryTeachers } from "@/services/user";
 import { Role } from "@/utils/constants";
 import { EditOutlined, EyeOutlined } from "@ant-design/icons";
 import { ProColumns, ProTable } from "@ant-design/pro-components";
 import { Button } from "antd";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 
-export default function Index() {
+export const getServerSideProps: GetServerSideProps<{
+    teachers: API.User[];
+}> = async (context) => {
+    const teachers = await queryTeachers({
+        pageSize: 4,
+        current: 1
+    });
+    return { props: { teachers: teachers.data } };
+};
+
+
+export default function Index({ teachers }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const router = useRouter();
     const { user } = useContext<{
         user: API.User
     }>(UserContext);
-
-    const columns: ProColumns<API.User>[] = [
-        {
-            title: '#',
-            valueType: 'indexBorder',
-        },
-        {
-            title: 'Họ và tên',
-            dataIndex: 'name'
-        },
-        {
-            title: 'Số điện thoại',
-            dataIndex: 'phoneNumber'
-        },
-        {
-            title: 'Ngày sinh',
-            dataIndex: 'dateOfBirth',
-            valueType: 'date',
-            search: false
-        },
-        {
-            title: 'Giới tính',
-            dataIndex: 'gender',
-            search: false
-        },
-        {
-            title: '',
-            valueType: 'option',
-            render: (dom: any, entity: { id: any; }) => [
-                <Button key="view" icon={<EyeOutlined />} className="flex items-center justify-center" type="primary" onClick={() => router.push(`/tai-khoan/giao-vien/${entity.id}`)} />,
-                <Link href={`/tai-khoan/chinh-sua/${entity.id}`} key="edit" hidden={!user.roles.includes(Role.Admin)}>
-                    <EditOutlined className="h-8 w-8 btn-icon border rounded-full" />
-                </Link>
-            ]
-        }
-    ]
 
     return (
         <>
@@ -58,15 +36,11 @@ export default function Index() {
                 <meta name="description" content="Danh sách giáo viên" />
             </Head>
             <main>
-                <div>
-                    <ProTable
-                        rowKey="id"
-                        search={{
-                            layout: 'vertical'
-                        }}
-                        columns={columns}
-                        request={queryTeachersClient}
-                    />
+                <Title subTitle="Teacher" title="Danh sách giáo viên" />
+                <div className="grid md:grid-cols-4 gap-10 py-5">
+                    {
+                        teachers.map(teacher => <CardTeacher key={teacher.id} data={teacher} isAdmin={user?.roles.includes(Role.Admin)} />)
+                    }
                 </div>
             </main>
         </>

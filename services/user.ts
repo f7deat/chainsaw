@@ -114,13 +114,6 @@ export async function queryTeachers(params: any) {
     return await res.json();
 }
 
-export async function queryTeachersClient(params: any) {
-    return request({
-        url: `user/teachers`,
-        params
-    });
-}
-
 export async function queryTeacher(id?: string | string[]) {
     const res = await fetch(`${API_HOST}user/teacher/${id}`);
     return await res.json();
