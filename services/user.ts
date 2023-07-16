@@ -143,3 +143,17 @@ export async function queryDistrict() {
         url: `district/list-select`
     });
 }
+
+export async function allRole() {
+    return request({
+        url: `role/all`
+    })
+}
+
+export async function updateUser(data: any) {
+    return request({
+        url: `user/update`,
+        method: 'POST',
+        data
+    })
+}

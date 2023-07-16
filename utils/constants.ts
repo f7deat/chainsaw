@@ -10,5 +10,6 @@ export enum QuestionType {
 }
 
 export enum Role {
-    Referal = 'Referal'
+    Referal = 'Referal',
+    Admin = 'Admin'
 }
