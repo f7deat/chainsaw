@@ -9,7 +9,6 @@ export async function getArticle(id?: string | string[]) {
     current: number;
     pageSize: number;
   }) {
-    return request(`article/list`, {
-      params: params
-    })
+    const res = await fetch(`${API_HOST}article/list?current=${params.current}&pageSize=${params.pageSize}`);
+    return res.json();
   }
