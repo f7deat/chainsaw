@@ -3,7 +3,7 @@ import { CalendarOutlined, UserOutlined } from "@ant-design/icons";
 import { ActionType, ProCard, ProForm, ProFormInstance, ProFormTextArea, ProList } from "@ant-design/pro-components";
 import { Avatar, Tag, message } from "antd";
 import { useRouter } from "next/router";
-import { Fragment, useRef } from "react";
+import { Fragment, JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, useRef } from "react";
 
 type CommentComponentProps = {
     id: string | string[];
@@ -53,20 +53,20 @@ const CommentComponent: React.FC<CommentComponentProps> = () => {
                             pageSize: 5
                         }}
                         actionRef={actionRef}
-                        request={(params) => listComment(params, id)}
+                        request={(params: any) => listComment(params, id)}
                         rowKey="id"
                         headerTitle="Danh sách"
                         metas={{
                             title: {
                                 dataIndex: 'name',
-                                render: (dom, entity) => (
+                                render: (dom: any, entity: { role: string; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; }) => (
                                     <div className="flex justify-between items-center">
                                         <Tag color="blue">{roleName(entity.role)}</Tag><div className="font-medium">{entity.name}</div>
                                     </div>
                                 )
                             },
                             description: {
-                                render: (dom, entity) => {
+                                render: (dom: any, entity: { content: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; createdDate: { toLocaleString: () => string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; }; }) => {
                                     return (
                                         <div>
                                             <div className="mb-2">{entity.content}</div>

@@ -16,7 +16,6 @@ export const getServerSideProps: GetServerSideProps<{
         current: Number(context?.query?.current || 1),
         pageSize: 20
     });
-    console.log(articles)
     return { props: { articles: articles.data, total: articles.total, current: Number(context?.query?.current || 1) } };
 };
 

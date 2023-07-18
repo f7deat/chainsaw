@@ -32,7 +32,7 @@ export default function Index() {
                                 metas={{
                                     title: {
                                         dataIndex: 'title',
-                                        render: (dom: React.ReactElement, record: any) => (<button className="font-medium" type="button" onClick={() => onRead(record.id)}>{dom}</button>)
+                                        render: (dom: any, record: any) => (<button className="font-medium" type="button" onClick={() => onRead(record.id)}>{dom}</button>)
                                     },
                                     avatar: {
                                         render: () => <Avatar icon={<InboxOutlined />} />

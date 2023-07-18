@@ -1,15 +1,16 @@
 import { ProCard, ProForm, ProFormInstance, ProFormSelect, ProFormText } from "@ant-design/pro-components";
 import Head from "next/head";
 import 'react-quill/dist/quill.snow.css';
-import ReactQuill from 'react-quill';
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useRouter } from "next/router";
 import { getArticle } from "@/services/article";
+import dynamic from "next/dynamic";
 
 export default function Index() {
 
     const formRef = useRef<ProFormInstance>();
     const router = useRouter();
+    const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }),[]);
 
     useEffect(() => {
         const id = router?.query?.id;

@@ -1,7 +1,7 @@
 import { Title } from "@/components";
 import { LoginOutlined } from "@ant-design/icons";
-import { ProColumns, ProTable } from "@ant-design/pro-components";
 import { Button, Divider, Space, Table } from "antd";
+import { ColumnType } from "antd/es/table";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
@@ -17,10 +17,10 @@ export default function LiveClass() {
         }
     ]
 
-    const columns: ProColumns<any>[] = [
+    const columns: ColumnType<any>[] = [
         {
             title: '#',
-            valueType: 'indexBorder'
+            render: (v, r, i) => i + 1
         },
         {
             title: 'Khóa học',
@@ -32,7 +32,6 @@ export default function LiveClass() {
         },
         {
             title: '',
-            valueType: 'option',
             render: (dom, entity) => [
                 <Button key={0} type="primary" onClick={() => router.push(`/live-class/${entity.id}`)}>
                     <Space>

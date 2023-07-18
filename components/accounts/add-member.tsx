@@ -19,23 +19,19 @@ const AddMember: React.FC = () => {
                     required: true
                 }
             ]} />
-            <ProFormDatePicker name="dateOfBirth" colProps={{
-                md: 8
-            }} label="Ngày sinh" />
-            <ProFormSelect name="gender" colProps={{
-                md: 16
-            }} label="Giới tính"
-                options={[
-                    {
-                        label: 'Nam',
-                        value: 1
-                    },
-                    {
-                        label: 'Nữ',
-                        value: 0
-                    }
-                ]} />
-            <ProFormSelect request={listUserSelect} label="Người giới thiệu" name="maGioiThieu" showSearch />
+            <ProFormDatePicker name="dateOfBirth" label="Ngày sinh" />
+            <ProFormSelect name="gender" label="Giới tính"
+            options={[
+                {
+                    label: 'Nam',
+                    value: 1
+                },
+                {
+                    label: 'Nữ',
+                    value: 0
+                }
+            ]} params={undefined} debounceTime={undefined} request={undefined} valueEnum={undefined} />
+            <ProFormSelect request={listUserSelect} label="Người giới thiệu" name="maGioiThieu" showSearch params={undefined} debounceTime={undefined} valueEnum={undefined} />
         </ProForm>
     )
 }
