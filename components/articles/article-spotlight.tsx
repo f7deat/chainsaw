@@ -70,12 +70,14 @@ const ArticleSpotlight: React.FC = () => {
                                 }}>
                                     <div className="font-medium md:text-3xl text-xl mb-4 hover:text-blue-500">
                                         <Link href={`/tin-tuc/${articles[0].seo}`}>
-                                            {articles[0].title}
+                                            <div dangerouslySetInnerHTML={{ __html: articles[0].title }} />
                                         </Link>
                                     </div>
-                                    <div className="text-gray-400 mb-8">{articles[0].summary}</div>
+                                    <div className="text-gray-400 mb-8">
+                                        <div dangerouslySetInnerHTML={{ __html: articles[0].summary }} />
+                                    </div>
                                     <div className="mb-4 text-slate-500 font-medium">
-                                        <Link href={`/tin-tuc/${articles[0].seo}`}>
+                                        <Link href={`/tin-tuc`}>
                                             <u>Đọc tiếp</u>
                                         </Link>
                                     </div>
@@ -101,7 +103,9 @@ const ArticleSpotlight: React.FC = () => {
                                                 {subTitle(article.title)}
                                             </Link>
                                         </div>
-                                        <div className="text-gray-400">{subSummary(article.summary)}</div>
+                                        <div className="text-gray-400">
+                                            <div dangerouslySetInnerHTML={{ __html: subSummary(article.summary) }} />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

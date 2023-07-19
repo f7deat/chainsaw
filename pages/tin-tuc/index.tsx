@@ -1,6 +1,6 @@
 import { Title } from "@/components";
 import { listArticle } from "@/services/article";
-import { Table } from "antd";
+import { PaginationProps, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
@@ -33,10 +33,22 @@ export default function Index({ articles, total, current }: InferGetServerSidePr
             title: 'Tiêu đề',
             dataIndex: 'title',
             render: (dom, record) => (
-                <Link href={`/tin-tuc/${record.seo}`}>{dom}</Link>
+                <Link href={`/tin-tuc/${record.seo}`}>
+                    <div dangerouslySetInnerHTML={{__html: dom}} />
+                </Link>
             )
         }
     ]
+
+    const itemRender: PaginationProps['itemRender'] = (page, type, originalElement) => {
+        if (type === 'prev') {
+          return <Link href={`/tin-tuc?current=${page}`}>Trang trước</Link>;
+        }
+        if (type === 'next') {
+          return <Link href={`/tin-tuc?current=${page}`}>Trang sau</Link>;
+        }
+        return originalElement;
+      };
 
     return (
         <>
@@ -52,6 +64,7 @@ export default function Index({ articles, total, current }: InferGetServerSidePr
                     onChange(page, pageSize) {
                         router.push(`/tin-tuc?current=${page}`);
                     },
+                    itemRender: itemRender
                 }} rowKey="id" />
             </main>
         </>

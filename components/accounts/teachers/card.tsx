@@ -1,5 +1,6 @@
 import { EditOutlined, FacebookFilled, TwitterCircleFilled, YoutubeFilled } from "@ant-design/icons";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 type CardTeacherProps = {
     data: API.User;
@@ -9,6 +10,7 @@ type CardTeacherProps = {
 const CardTeacher: React.FC<CardTeacherProps> = (props) => {
 
     const { data, isAdmin } = props;
+    const router = useRouter();
 
     return (
         <div className="relative" >
@@ -37,9 +39,9 @@ const CardTeacher: React.FC<CardTeacherProps> = (props) => {
                         </button>
                     </div>
                     <div className="border-t mt-4 pt-2" hidden={!isAdmin}>
-                        <Link href={`/tai-khoan/chinh-sua/${data.id}`}>
+                        <button type="button" onClick={() => router.push(`/tai-khoan/chinh-sua/${data.id}`)}>
                             <EditOutlined className="h-8 w-8 btn-icon border rounded-full" />
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </div>
