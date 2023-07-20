@@ -37,7 +37,7 @@ export default function Index() {
                                 </div>
                             </div>
                         </div>
-                        <ProList<API.ChuongTrinhHocListItem>
+                        <ProList<API.TopicListItem>
                             ghost
                             headerTitle="Khóa học của tôi"
                             request={getMyCourse}

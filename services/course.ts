@@ -21,6 +21,11 @@ export async function chuongTrinhHoc(params: any, id: number) {
   });
 }
 
+export async function listTopic(params: any, id: number) {
+  const res = await fetch(`${API_HOST}khoahoc/danh-sach-chuong-trinh-hoc/${id}?current=${params.current}&pageSize=${params.pageSize}`);
+  return res.json();
+}
+
 export async function listNhomBaiGiang(id?: string | string[]) {
   return request.get(`bai-giang/nhom-bai-giang/${id}`);
 }

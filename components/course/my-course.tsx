@@ -16,7 +16,7 @@ const MyCourse: React.FC<MyCourseProps> = (props) => {
     }>(UserContext);
 
     return user ? (
-        <ProList<API.ChuongTrinhHocListItem>
+        <ProList<API.TopicListItem>
             toolBarRender={() => {
                 return [
                     <Link key="viewMore" href="/tai-khoan/khoa-hoc">

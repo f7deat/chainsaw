@@ -12,7 +12,7 @@ type ChuongTrinhHocBySubjectProps = {
 const ChuongTrinhHocBySubject: React.FC<ChuongTrinhHocBySubjectProps> = (props) => {
 
     return (
-        <ProList<API.ChuongTrinhHocListItem>
+        <ProList<API.TopicListItem>
             headerTitle={props.headerTitle}
             request={() => listChuongTrinhHocBySubjectId({
                 pageSize: 4,
@@ -25,7 +25,7 @@ const ChuongTrinhHocBySubject: React.FC<ChuongTrinhHocBySubjectProps> = (props) 
             metas={{
                 content: {
                     dataIndex: 'description',
-                    render: (dom: any, entity: API.ChuongTrinhHocListItem) => (
+                    render: (dom: any, entity: API.TopicListItem) => (
                         <div className="-m-6">
                             <picture>
                                 <img src={entity.thumbnail || 'https://cdn.getvisa.vn/images/cogiao.jpg'} alt="IMG" className="mb-2 w-full" loading="lazy" height={222} />

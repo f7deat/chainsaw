@@ -11,7 +11,7 @@ namespace API {
         slug: string;
     }
 
-    export type ChuongTrinhHocListItem = {
+    export type TopicListItem = {
         id: number;
         name: string;
         description: string;
