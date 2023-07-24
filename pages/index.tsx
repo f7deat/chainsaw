@@ -9,6 +9,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { queryTeachers } from '@/services/user';
 import Teachers from '@/components/accounts/teachers';
 import ArticleSpotlight from '@/components/articles/article-spotlight';
+import WhatIs from '@/components/home/what-is';
 
 export const getServerSideProps: GetServerSideProps<{
   teachers: API.User[];
@@ -33,9 +34,11 @@ export default function Home({ teachers }: InferGetServerSidePropsType<typeof ge
 
       <Jumbotron />
 
-      <div data-aos='fade-up' className='py-4'>
+      <div data-aos='fade-up' className='md:mb-20 mb-8'>
         <CourseList />
       </div>
+
+      <WhatIs />
 
       <div data-aos="fade-up" className='py-4'>
         <ChuongTrinhHocBySubject id={1} headerTitle={

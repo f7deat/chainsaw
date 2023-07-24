@@ -1,5 +1,5 @@
-import { Title } from "@/components";
-import { getArticle } from "@/services/article";
+import { ArticleRelated, Title } from "@/components";
+import { getArticle, listArticle } from "@/services/article";
 import { EyeOutlined } from "@ant-design/icons";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
@@ -7,12 +7,17 @@ import Link from "next/link";
 
 export const getServerSideProps: GetServerSideProps<{
     article: API.ArticleDetail;
+    articles: API.Article[];
 }> = async (context) => {
     const article = await getArticle(context.params?.id);
-    return { props: { article } };
+    const articles = await listArticle({
+        current: 1,
+        pageSize: 3
+    });
+    return { props: { article, articles: articles.data } };
 };
 
-export default function Index({ article }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Index({ article, articles }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     return (
         <>
             <Head>
@@ -20,7 +25,7 @@ export default function Index({ article }: InferGetServerSidePropsType<typeof ge
             </Head>
             <main>
                 <Title subTitle="Bài viết" title={article.title} />
-                <div className="bg-white shadow p-4">
+                <div className="bg-white shadow p-4 md:mb-10 mb-4">
                     <div dangerouslySetInnerHTML={{ __html: article.detail }} />
 
                     <div className="py-3">
@@ -34,6 +39,9 @@ export default function Index({ article }: InferGetServerSidePropsType<typeof ge
                     <div className="py-4 text-sm text-gray-400 text-right">
                         <EyeOutlined /> {article.counter} Lượt xem
                     </div>
+                </div>
+                <div className="mb-4">
+                    <ArticleRelated articles={articles} />
                 </div>
             </main>
         </>
