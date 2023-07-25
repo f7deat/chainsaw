@@ -1,9 +1,11 @@
+import { UserContext } from "@/models/user";
 import { addComment, listComment } from "@/services/comment";
 import { CalendarOutlined, UserOutlined } from "@ant-design/icons";
 import { ActionType, ProCard, ProForm, ProFormInstance, ProFormTextArea, ProList } from "@ant-design/pro-components";
 import { Avatar, Tag, message } from "antd";
+import dayjs from "dayjs";
 import { useRouter } from "next/router";
-import { Fragment, JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, useRef } from "react";
+import { Fragment, JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, useContext, useRef } from "react";
 
 type CommentComponentProps = {
     id: string | string[];
@@ -14,6 +16,9 @@ const CommentComponent: React.FC<CommentComponentProps> = () => {
     const { id } = router.query;
     const actionRef = useRef<ActionType>();
     const formRef = useRef<ProFormInstance>();
+    const { user } = useContext<{
+        user: API.User
+    }>(UserContext);
 
     const onFinish = async (values: any) => {
         values.baiGiangId = id;
@@ -35,7 +40,7 @@ const CommentComponent: React.FC<CommentComponentProps> = () => {
     return (
         <div>
             <ProCard title="Bình luận" className="shadow mb-4">
-                <ProForm onFinish={onFinish} formRef={formRef}>
+                <ProForm onFinish={onFinish} formRef={formRef} disabled={!user}>
                     <ProFormTextArea name="noiDung" label="Nội dung" rules={[
                         {
                             required: true,
@@ -66,12 +71,12 @@ const CommentComponent: React.FC<CommentComponentProps> = () => {
                                 )
                             },
                             description: {
-                                render: (dom: any, entity: { content: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; createdDate: { toLocaleString: () => string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; }; }) => {
+                                render: (dom: any, entity: { content: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; createdDate: Date; }) => {
                                     return (
                                         <div>
                                             <div className="mb-2">{entity.content}</div>
                                             <div className="text-gray-500 text-sm text-right">
-                                                <CalendarOutlined /> {entity.createdDate.toLocaleString()}
+                                                <CalendarOutlined /> {dayjs(entity.createdDate).format('DD/MM/YYYY hh:mm:ss')}
                                             </div>
                                         </div>
                                     )

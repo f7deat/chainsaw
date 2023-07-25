@@ -112,10 +112,14 @@ export default function Index() {
     const speak = (text: string) => {
         const doc = document.createElement('div');
         doc.innerHTML = text;
-        const voice = window.speechSynthesis.getVoices().find(x => x.lang === 'vi-VN') || window.speechSynthesis.getVoices()[0];
-        const utterance = new SpeechSynthesisUtterance(doc.textContent || '');
-        utterance.voice = voice;
-        window.speechSynthesis.speak(utterance);
+        const voice = window.speechSynthesis.getVoices().find(x => x.lang === 'vi-VN');
+        if (voice) {
+            const utterance = new SpeechSynthesisUtterance(doc.textContent || '');
+            utterance.voice = voice;
+            window.speechSynthesis.speak(utterance);
+        } else {
+            playAudio(`https://texttospeech.responsivevoice.org/v1/text:synthesize?text=${doc.textContent}&lang=vi&engine=g1&name=&pitch=0.5&rate=0.5&volume=1&key=kvfbSITh&gender=female`)
+        }
     };
 
     const ShowMessage = (item: API.QuestionListItem) => {
