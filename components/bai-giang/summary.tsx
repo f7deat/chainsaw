@@ -1,9 +1,11 @@
+import { UserContext } from "@/models/user";
 import { getParent } from "@/services/user";
-import { CheckOutlined, FacebookFilled, FacebookOutlined, FileGifOutlined, IdcardFilled, IdcardOutlined, LoginOutlined, PhoneOutlined, SketchOutlined, TwitterOutlined, YoutubeFilled } from "@ant-design/icons"
+import { CheckOutlined, FacebookFilled, IdcardFilled, LoginOutlined, PhoneOutlined, SketchOutlined, TwitterOutlined, YoutubeFilled } from "@ant-design/icons"
 import { ProCard } from "@ant-design/pro-components";
-import { Button, Modal, Rate, message } from "antd"
+import { Button, Modal, message } from "antd"
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import Rate from "../commons/rate";
 
 type CourseSummaryProps = {
     isBought: boolean;
@@ -13,17 +15,19 @@ type CourseSummaryProps = {
 const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
 
     const [open, setOpen] = useState<boolean>(false);
-    const [user, setUser] = useState<API.User>();
+    const [parrent, setParrent] = useState<API.User>();
+    const { user } = useContext<{
+        user: API.User
+      }>(UserContext);
     const router = useRouter();
 
     const onRegister = async () => {
-        const token = localStorage.getItem('access_token');
-        if (!token) {
+        if (!user) {
             router.push('/tai-khoan/dang-ky');
             return;
         }
         const response = await getParent();
-        setUser(response.data);
+        setParrent(response.data);
         setOpen(true);
     }
 
@@ -40,15 +44,15 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                 </picture>
             </div>
             <div className="text-right mb-2">
-                <Rate defaultValue={5} onChange={() => message.success('Đánh giá thành công!')} />
+                <Rate value={5} />
             </div>
             <div className="mb-4 text-gray-500 text-base">
                 {props.data?.moTaChuongTrinh}
             </div>
             <div className="py-4 text-center" hidden={!props.isBought}>
-                <button className="px-10 py-2 rounded bg-green-500 text-white">
+                <div className="px-10 py-2 rounded bg-green-500 text-white">
                     <CheckOutlined /> Đã đăng ký
-                </button>
+                </div>
             </div>
             <div className="text-right" hidden={props.isBought}>
                 <div className="text-xl text-gray-500 mb-2"><s>{props.data?.giaCu} đ</s></div>
@@ -95,11 +99,11 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
             <Modal open={open} onCancel={() => setOpen(false)} title="Đăng ký khóa học" footer={false} centered>
                 <div className="mb-4">
                     <label className="font-bold block mb-2">Họ và tên</label>
-                    <div className="px-2 bg-slate-100 py-1 rounded border">{user?.name}</div>
+                    <div className="px-2 bg-slate-100 py-1 rounded border">{parrent?.name}</div>
                 </div>
                 <div className="mb-4">
                     <label className="font-bold block mb-2">Số điện thoại</label>
-                    <div className="px-2 bg-slate-100 py-1 rounded border">{user?.phoneNumber}</div>
+                    <div className="px-2 bg-slate-100 py-1 rounded border">{parrent?.phoneNumber}</div>
                 </div>
                 <div className="mb-2">Để đăng ký khóa học, bạn vui lòng chuyển khoản tới:</div>
                 <div className="font-bold mb-2">Ngân hàng TMCP Đông Nam Á (SeABank)</div>
@@ -118,7 +122,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                     <div className="mb-2">
                         <div className="mb-2 text-orange-700">Nội dung chuyển khoản:</div>
                         <div className="font-bold">
-                            KH{props.data?.khoaHocId} {user?.phoneNumber}
+                            KH{props.data?.khoaHocId} {parrent?.phoneNumber}
                             <Button type="link" onClick={onCopy}>Sao chép</Button>
                         </div>
                     </div>

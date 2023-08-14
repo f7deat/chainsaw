@@ -1,7 +1,8 @@
 import { UserContext } from "@/models/user";
-import { BarChartOutlined, CalendarOutlined, EditOutlined, InboxOutlined, MessageOutlined, UserAddOutlined } from "@ant-design/icons"
-import { ModalForm, ProCard } from "@ant-design/pro-components";
-import { Button, Image, Space, Tooltip, Upload, message } from "antd"
+import { changeAvatar } from "@/services/user";
+import { BarChartOutlined, CalendarOutlined, EditOutlined, MessageOutlined, UserAddOutlined } from "@ant-design/icons"
+import { ProCard } from "@ant-design/pro-components";
+import { Image, Space, Tooltip, Upload, UploadProps, message } from "antd"
 import dayjs from "dayjs";
 import Link from "next/link"
 import { useContext, useState } from "react";
@@ -9,18 +10,29 @@ import { useContext, useState } from "react";
 type AccountLeftBarProps = {
     tab: number;
 }
-const { Dragger } = Upload;
 
 const AccountLeftBar: React.FC<AccountLeftBarProps> = (props) => {
+
+    const API_HOST = process.env.API_HOST;
 
     const { user } = useContext<{
         user: API.User
     }>(UserContext);
 
-    const [open, setOpen] = useState<boolean>(false);
-
     const onFollow = () => {
         message.success('Theo giõi thành công!');
+    }
+
+    const onChange = async (data: { file: any; }) => {
+        let formData = new FormData();
+        formData.append("file", data.file);
+        const response = await changeAvatar(formData);
+        if (response.succeeded) {
+            message.success('Đổi ảnh đại diện thành công!');
+            window.location.reload();
+        } else {
+            message.error(response.errors[0].description);
+        }
     }
 
     return (
@@ -34,10 +46,12 @@ const AccountLeftBar: React.FC<AccountLeftBarProps> = (props) => {
                     <MessageOutlined key={2} />
                 ]}>
                 <div className="mb-4 text-center relative">
-                    <button type="button" className="absolute right-0" onClick={() => setOpen(true)}>
-                        <Tooltip title="Đổi ảnh đại diện">
-                            <EditOutlined />
-                        </Tooltip>
+                    <button type="button" className="absolute right-0">
+                        <Upload accept=".png, .jpg, .jpeg" method="POST" beforeUpload={() => false} onChange={onChange}>
+                            <Tooltip title="Đổi ảnh đại diện">
+                                <EditOutlined />
+                            </Tooltip>
+                        </Upload>
                     </button>
                     <Image src={user?.avatar ? user.avatar : 'https://placehold.jp/200x200.png'} alt="IMG" width={200} height={200} className="rounded-full" />
                 </div>
@@ -68,47 +82,6 @@ const AccountLeftBar: React.FC<AccountLeftBarProps> = (props) => {
                     </div>
                 </Link>
             </ProCard>
-            <ModalForm open={open} onOpenChange={setOpen} title="Đổi ảnh đại diện"
-                submitter={{
-                    render: () => {
-                        return [
-                            <Button
-                                key="next"
-                                type="primary"
-                                onClick={() => {
-                                    setOpen(false)
-                                }}
-                            >Đóng lại</Button>,
-                        ];
-                    },
-                }}>
-                <div className="md:flex">
-                    <div className="md:w-1/3 flex items-center justify-center">
-                        {
-                            user?.avatar ? (
-                                <picture>
-                                    <img src={user?.avatar} alt="avatar" className="bg-gray-300 h-32 w-32 rounded-full" />
-                                </picture>
-                            ) : (
-                                <div className="bg-gray-300 h-32 w-32 rounded-full">
-                                </div>
-                            )
-                        }
-
-                    </div>
-                    <div className="md:w-2/3">
-                        <Dragger>
-                            <p className="ant-upload-drag-icon">
-                                <InboxOutlined />
-                            </p>
-                            <p className="ant-upload-text">Chọn hoặc kéo thả tệp tin</p>
-                            <p className="ant-upload-hint">
-                                Hỗ trợ các định dạng hình ảnh cho phép
-                            </p>
-                        </Dragger>
-                    </div>
-                </div>
-            </ModalForm>
         </div>
     )
 }

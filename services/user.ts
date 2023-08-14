@@ -150,3 +150,11 @@ export async function updateUser(data: any) {
         data
     })
 }
+
+export async function changeAvatar(data: any) {
+    return request({
+        url: `user/change-avatar`,
+        method: 'POST',
+        data
+    })
+}

@@ -1,11 +1,15 @@
 import AccountLeftBar from "@/components/accounts/left-bar";
+import Rate from "@/components/commons/rate";
 import { getMyCourse } from "@/services/course";
 import { BookOutlined, QuestionCircleOutlined, StarFilled } from "@ant-design/icons";
-import { PageContainer, ProList } from "@ant-design/pro-components";
+import { ActionType, PageContainer, ProList } from "@ant-design/pro-components";
 import Head from "next/head";
 import Link from "next/link";
+import { useRef } from "react";
 
 export default function Index() {
+
+    const actionRef = useRef<ActionType>();
 
     return (
         <>
@@ -25,7 +29,9 @@ export default function Index() {
                                     <BookOutlined className="text-3xl text-red-500" />
                                     <div>
                                         <div className="text-sm text-gray-400">Khóa học</div>
-                                        <div className="text-2xl font-bold">-</div>
+                                        <div className="text-2xl font-bold">
+                                            {actionRef.current?.pageInfo?.total}
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="px-8 py-4 rounded shadow bg-white flex gap-4">
@@ -40,12 +46,16 @@ export default function Index() {
                         <ProList<API.TopicListItem>
                             ghost
                             headerTitle="Khóa học của tôi"
+                            actionRef={actionRef}
                             request={getMyCourse}
                             grid={{
                                 gutter: 16,
                                 column: 3,
                                 md: 3,
                                 xs: 1,
+                            }}
+                            pagination={{
+                                pageSize: 12
                             }}
                             showActions="always"
                             metas={{
@@ -60,11 +70,7 @@ export default function Index() {
                                                     <div className="line-clamp-2 font-medium text-blue-500 mb-1 min-h-[45px]">{entity.name}</div>
                                                 </Link>
                                                 <div className="text-xs text-red-500 text-right">
-                                                    <StarFilled />
-                                                    <StarFilled />
-                                                    <StarFilled />
-                                                    <StarFilled />
-                                                    <StarFilled />
+                                                    <Rate value={5} />
                                                 </div>
                                                 <div className="line-clamp-3 text-gray-500 min-h-[72px]">{entity.description}</div>
                                             </div>
