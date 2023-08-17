@@ -8,6 +8,7 @@ import "aos/dist/aos.css";
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { getCurrentUser } from '@/services/user';
 import { UserContext } from '@/models/user';
+import theme from '@/theme/themeConfig';
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -39,18 +40,7 @@ export default function App({ Component, pageProps }: AppProps) {
       locale={{
         locale: 'vi-VN',
       }}
-      theme={{
-        token: {
-          fontSize: 16,
-          colorText: '#0e1c71'
-        },
-        components: {
-          Button: {
-            borderRadius: 999,
-            borderRadiusLG: 999
-          }
-        }
-      }}>
+      theme={theme}>
       <UserContext.Provider value={contextValue}>
         <Header />
         <div className='md:flex gap-10 pt-32'>
