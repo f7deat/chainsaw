@@ -7,7 +7,7 @@ function MyDocument() {
     <Html lang="vi">
       <Head>
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-6DB91NHLW6"
+          src="https://www.googletagmanager.com/gtag/js?id=G-ZKVN88HD3J"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -16,7 +16,7 @@ function MyDocument() {
           function gtag(){window.dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', 'G-6DB91NHLW6');
+          gtag('config', 'G-ZKVN88HD3J');
         `}
         </Script>
       </Head>
