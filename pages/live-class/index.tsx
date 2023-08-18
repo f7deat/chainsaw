@@ -1,5 +1,5 @@
 import { Title } from "@/components";
-import { LoginOutlined } from "@ant-design/icons";
+import { FacebookOutlined, LinkedinOutlined, LoginOutlined, PlayCircleOutlined, StarOutlined, TwitterOutlined, UserAddOutlined } from "@ant-design/icons";
 import { Button, Divider, Space, Table } from "antd";
 import { ColumnType } from "antd/es/table";
 import Head from "next/head";
@@ -47,8 +47,39 @@ export default function LiveClass() {
         <>
             <Head>
                 <title>Học trực tuyến</title>
+                <meta name="description" content="Học trực tuyến với những giáo viên hàng đầu" />
             </Head>
             <main>
+                <div className="flex flex-col md:flex-row md:gap-10 gap-4 md:p-10 p-4 h-72 rounded-3xl md:mb-10 mb-4" style={{
+                    backgroundImage: 'url(https://i.imgur.com/PgKxsbb.png)'
+                }}>
+                    <div className="md:w-1/5"></div>
+                    <div className="md:w-4/5">
+                        <div className="bg-white rounded-lg p-4 opacity-75">
+                            <div className="font-medium text-3xl mb-2">John Anderson</div>
+                            <div className="text-gray-500 mb-2">Assistant Professor at Mcmaster University</div>
+                            <div className="mb-2">
+                                Thank you so much for your help. It's exactly what I've been looking for. You won't regret it. It really saves me time and effort. Elearning is exactly what our business has been lacking.
+                            </div>
+                            <div className="flex justify-between">
+                                <div className="">
+                                    <StarOutlined /> 4.9 instructor Rating
+                                </div>
+                                <div>
+                                    <UserAddOutlined /> 1,592 Students
+                                </div>
+                                <div>
+                                    <PlayCircleOutlined /> Courses
+                                </div>
+                                <div className="flex gap-4">
+                                    <Button icon={<FacebookOutlined />} type="primary" shape="circle" />
+                                    <Button icon={<TwitterOutlined />} type="primary" shape="circle" />
+                                    <Button icon={<LinkedinOutlined />} type="primary" shape="circle" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <Title title="Lớp học trực tuyến" subTitle="Live class" />
                 <Table
                     columns={columns}

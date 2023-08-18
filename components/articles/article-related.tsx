@@ -1,4 +1,5 @@
 import { ArrowLeftOutlined, ArrowRightOutlined, EyeOutlined } from "@ant-design/icons";
+import { Carousel } from "antd";
 import Link from "next/link";
 
 type ArticleProps = {
@@ -16,14 +17,14 @@ const ArticleRelated: React.FC<ArticleProps> = (props) => {
                     Xem tất cả
                 </Link>
             </div>
-            <div className="grid md:grid-cols-3 md:gap-8 gap-4 mb-4">
+            <Carousel slidesToShow={3} autoplay={true}>
                 {
                     articles.map(article => (
                         <ArticleItem article={article} key={article.articleID} />
                     ))
                 }
-            </div>
-            <div className="flex gap-2 justify-end">
+            </Carousel>
+            <div className="flex gap-2 justify-end mt-4">
                 <button type="button" className="h-10 w-10 bg-blue-500 opacity-75 text-white rounded">
                     <ArrowLeftOutlined />
                 </button>
@@ -44,18 +45,18 @@ const ArticleItem: React.FC<ArticleItemProps> = (props) => {
     const { article } = props;
 
     return (
-        <div className="shadow rounded p-4 flex flex-col bg-white">
+        <div className="shadow rounded p-4 flex flex-col bg-white mx-2">
             <picture className="h-64 mb-4">
                 <img src={article.imagePath} alt={article.title} className="w-full rounded h-64 object-cover" />
             </picture>
-            <div className="font-medium text-xl mb-2">
+            <div className="font-medium text-xl mb-2 line-clamp2" style={{
+                minHeight: 52
+            }}>
                 <Link href={`/tin-tuc/${article.seo}`}>
                     <span dangerouslySetInnerHTML={{ __html: article.title }}></span>
                 </Link>
             </div>
-            <div className="text-gray-400 mb-4" dangerouslySetInnerHTML={{ __html: article.summary}}>
-
-            </div>
+            <div className="text-gray-400 mb-4 line-clamp3" dangerouslySetInnerHTML={{ __html: article.summary}}></div>
             <div className="flex justify-between">
                 <Link href={`/tin-tuc/${article.seo}`} className="font-medium text-gray-400 border-b">Đọc tiếp</Link>
                 <span className="text-gray-400">

@@ -12,7 +12,7 @@ export const getServerSideProps: GetServerSideProps<{
     const article = await getArticle(context.params?.id);
     const articles = await listArticle({
         current: 1,
-        pageSize: 3
+        pageSize: 6
     });
     return { props: { article, articles: articles.data } };
 };
@@ -22,6 +22,7 @@ export default function Index({ article, articles }: InferGetServerSidePropsType
         <>
             <Head>
                 <title>{article.title}</title>
+                <meta name="description" content={article?.summary} />
             </Head>
             <main>
                 <Title subTitle="Bài viết" title={article.title} />
