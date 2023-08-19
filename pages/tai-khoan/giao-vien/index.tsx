@@ -1,6 +1,6 @@
 import { Title } from "@/components";
 import CardTeacher from "@/components/accounts/teachers/card";
-import { UserContext } from "@/models/user";
+import { AppContext } from "@/models/app-context";
 import { queryTeachers } from "@/services/user";
 import { Role } from "@/utils/constants";
 import { UserAddOutlined } from "@ant-design/icons";
@@ -22,9 +22,7 @@ export const getServerSideProps: GetServerSideProps<{
 
 
 export default function Index({ teachers }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    const { user } = useContext<{
-        user: API.User
-    }>(UserContext);
+    const { user } = useContext<API.AppContext>(AppContext);
 
     const router = useRouter();
 

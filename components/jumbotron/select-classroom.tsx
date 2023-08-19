@@ -16,9 +16,11 @@ const SelectClassroom: React.FC<SelectClassroomProps> = (props) => {
             <div className="grid grid-cols-4 gap-4">
                 {
                     classrooms.map(x => (
-                        <div key={x} className="h-16 flex items-center justify-center rounded bg-slate-100 hover:border-blue-500 border font-medium">
-                            <button type="button">Lớp {x}</button>
-                        </div>
+                        <button type="button" key={x}>
+                            <div className="h-16 flex items-center justify-center rounded bg-slate-100 hover:border-blue-500 border font-medium">
+                                Lớp {x}
+                            </div>
+                        </button>
                     ))
                 }
             </div>

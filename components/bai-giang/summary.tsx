@@ -1,4 +1,3 @@
-import { UserContext } from "@/models/user";
 import { getParent } from "@/services/user";
 import { CheckOutlined, FacebookFilled, IdcardFilled, LoginOutlined, PhoneOutlined, SketchOutlined, TwitterOutlined, YoutubeFilled } from "@ant-design/icons"
 import { ProCard } from "@ant-design/pro-components";
@@ -6,6 +5,7 @@ import { Button, Modal, message } from "antd"
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import Rate from "../commons/rate";
+import { AppContext } from "@/models/app-context";
 
 type CourseSummaryProps = {
     isBought: boolean;
@@ -16,9 +16,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
 
     const [open, setOpen] = useState<boolean>(false);
     const [parrent, setParrent] = useState<API.User>();
-    const { user } = useContext<{
-        user: API.User
-      }>(UserContext);
+    const { user } = useContext<API.AppContext>(AppContext);
     const router = useRouter();
 
     const onRegister = async () => {

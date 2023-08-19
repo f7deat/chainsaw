@@ -8,7 +8,7 @@ import { CheckCircleFilled, ClockCircleFilled, EditOutlined, PlayCircleOutlined,
 import { ProCard, ProList } from "@ant-design/pro-components";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { Title } from "@/components";
-import { UserContext } from "@/models/user";
+import { AppContext } from "@/models/app-context";
 
 export const getServerSideProps: GetServerSideProps<{
     topic: API.ChuongTrinhHoc;
@@ -21,9 +21,7 @@ export default function Index({ topic }: InferGetServerSidePropsType<typeof getS
     const router = useRouter();
     const [data, setData] = useState<any>();
     const [hasAccess, setHasAccess] = useState<boolean>(false);
-    const { user } = useContext<{
-        user: API.User
-      }>(UserContext);
+    const { user } = useContext<API.AppContext>(AppContext);
 
       const moduleGroups = useCallback(() => {
           if (router.query.id) {

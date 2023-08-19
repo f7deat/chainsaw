@@ -7,8 +7,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { getCurrentUser } from '@/services/user';
-import { UserContext } from '@/models/user';
 import theme from '@/theme/themeConfig';
+import { AppContext } from '@/models/app-context';
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
         locale: 'vi-VN',
       }}
       theme={theme}>
-      <UserContext.Provider value={contextValue}>
+      <AppContext.Provider value={contextValue}>
         <Header />
         <div className='md:flex gap-10 pt-32'>
           <main className='mx-auto container flex-1 p-4'>
@@ -50,7 +50,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </div>
         <Footer />
         <FloatButton.BackTop />
-      </UserContext.Provider>
+      </AppContext.Provider>
     </ConfigProvider>
   )
 }

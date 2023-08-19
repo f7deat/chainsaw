@@ -1,4 +1,4 @@
-import { UserContext } from "@/models/user";
+import { AppContext } from "@/models/app-context";
 import { getCurrentUser, listUserSelect, queryCountry, queryDistrict, queryProvince, updateStudent } from "@/services/user";
 import { Role } from "@/utils/constants";
 import { ProForm, ProFormDatePicker, ProFormInstance, ProFormSelect, ProFormText } from "@ant-design/pro-components"
@@ -9,9 +9,7 @@ const StudentInfo: React.FC = () => {
 
     const formRef = useRef<ProFormInstance>();
     const [disable, setDisable] = useState<boolean>(false);
-    const { user } = useContext<{
-        user: API.User
-      }>(UserContext);
+    const { user } = useContext<API.AppContext>(AppContext);
 
     useEffect(() => {
         getCurrentUser().then(response => {

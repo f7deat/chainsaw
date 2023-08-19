@@ -11,6 +11,10 @@ p {
     margin: 0.5rem 0;
 }
 
+input {
+    outline: none;
+}
+
 .ant-btn-primary {
     background-color: #1677ff;
 }

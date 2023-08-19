@@ -31,7 +31,7 @@ const Testimonial: React.FC = () => {
                         </div>
                     </div>
                     <div className="mb-4">
-                        <Link href="/" className="flex">
+                        <Link href="/tai-khoan/dang-ky" className="flex">
                             <div className="pl-6 rounded-full border border-blue-500 border-r-0 flex items-center gap-6 text-blue-500 md:text-xl" style={poppins.style}>
                                 Viết đánh giá của bạn
                                 <span className="rounded-full md:h-14 h-10 flex items-center justify-center md:w-14 w-10 border-blue-500 border">

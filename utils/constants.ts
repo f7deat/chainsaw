@@ -13,3 +13,5 @@ export enum Role {
     Referal = 'Referal',
     Admin = 'Admin'
 }
+
+export const FACEBOOK_FANPAGE = 'https://www.facebook.com/eleaningget';

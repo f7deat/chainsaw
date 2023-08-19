@@ -29,13 +29,11 @@ export default function Register() {
             email: values.email,
             parent: {
                 name: values.parentName,
-                address: values.address,
-                gender: values.parentGender === 1
+                address: values.address
             },
             student: {
                 name: values.studentName,
-                dateOfBirth: values.dateOfBirth,
-                gender: values.studentGender === 1
+                dateOfBirth: values.dateOfBirth
             }
         }
         const response = await register(body);
@@ -89,6 +87,7 @@ export default function Register() {
                                                 onClick={() => {
                                                     form?.resetFields();
                                                 }}
+                                                shape="round"
                                             >
                                                 Làm lại
                                             </Button>,
@@ -99,11 +98,13 @@ export default function Register() {
                                                     onClick={() => {
                                                         onPre?.();
                                                     }}
+                                                    shape="round"
                                                 >
                                                     Quay lại
                                                 </Button>
                                             ),
                                             <Button
+                                            shape="round"
                                                 size="large"
                                                 key="next"
                                                 type="primary"
@@ -130,26 +131,13 @@ export default function Register() {
                                     onFinish={onParentCreate}
                                     grid
                                 >
-                                    <ProFormText label="Tên phụ huynh" rules={[{ required: true, message: 'Vui lòng nhập họ và tên' }]} name="parentName" colProps={{
-                                        md: 12
-                                    }} />
+                                    <ProFormText fieldProps={{
+                                        size: "large"
+                                    }} label="Tên phụ huynh" rules={[{ required: true, message: 'Vui lòng nhập họ và tên' }]} name="parentName" />
 
-                                    <ProFormSelect label="Giới tính" name="parentGender" colProps={{
-                                        md: 12
+                                    <ProFormText fieldProps={{
+                                        size: "large"
                                     }}
-                                        options={[
-                                            {
-                                                value: 1,
-                                                label: 'Nam'
-                                            },
-                                            {
-                                                value: 0,
-                                                label: 'Nữ'
-                                            }
-                                        ]}
-                                    />
-
-                                    <ProFormText
                                         label="Số điện thoại"
                                         rules={[{
                                             required: true,
@@ -165,7 +153,9 @@ export default function Register() {
                                             md: 12
                                         }}
                                     />
-                                    <ProFormText
+                                    <ProFormText fieldProps={{
+                                        size: "large"
+                                    }}
                                         label="Email"
                                         name="email"
                                         colProps={{
@@ -178,12 +168,29 @@ export default function Register() {
                                             }
                                         ]}
                                     />
-                                    <ProFormText label="Địa chỉ" name="address" />
-                                    <ProFormText.Password label="Mật khẩu" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="password" />
-                                    <ProFormText.Password label="Nhập lại mật khẩu" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="confirmPassword" />
+                                    <ProFormText fieldProps={{
+                                        size: "large"
+                                    }} label="Địa chỉ"
+                                    name="address" />
+                                    <ProFormText.Password fieldProps={{
+                                        size: "large"
+                                    }}
+                                    colProps={{
+                                        md: 12
+                                    }} label="Mật khẩu" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="password" />
+                                    <ProFormText.Password fieldProps={{
+                                        size: "large"
+                                    }}
+                                    colProps={{
+                                        md: 12
+                                    }} label="Nhập lại mật khẩu" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]} name="confirmPassword" />
                                 </StepsForm.StepForm>
                                 <StepsForm.StepForm name="step2" title="Học sinh" grid>
-                                    <ProFormText label="Tên học viên" name="studentName" rules={[
+                                    <ProFormText fieldProps={{
+                                        size: "large"
+                                    }} colProps={{
+                                        md: 16
+                                    }} label="Tên học viên" name="studentName" rules={[
                                         {
                                             required: true
                                         }
@@ -192,22 +199,9 @@ export default function Register() {
                                         md: 8
                                     }}
                                         fieldProps={{
-                                            disabledDate: (current) => current.valueOf() > Date.now()
+                                            disabledDate: (current) => current.valueOf() > Date.now(),
+                                            size: "large"
                                         }}
-                                    />
-                                    <ProFormSelect label="Giới tính" name="studentGender" colProps={{
-                                        md: 16
-                                    }}
-                                        options={[
-                                            {
-                                                value: 1,
-                                                label: 'Nam'
-                                            },
-                                            {
-                                                value: 0,
-                                                label: 'Nữ'
-                                            }
-                                        ]}
                                     />
                                 </StepsForm.StepForm>
                             </StepsForm>

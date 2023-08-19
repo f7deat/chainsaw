@@ -1,6 +1,6 @@
 import { userLogin } from "@/services/user";
 import { PageContainer, ProCard, ProForm, ProFormCheckbox, ProFormText } from "@ant-design/pro-components";
-import { message } from "antd";
+import { Button, message } from "antd";
 import Head from "next/head";
 
 export default function Index() {
@@ -22,26 +22,46 @@ export default function Index() {
                 <title>Đăng nhập quản trị</title>
             </Head>
             <div className="md:flex gap-4">
-                <div className="md:w-1/2">
+                <div className="md:w-1/3">
                     <ProCard title="Thông tin đăng nhập" className="h-full">
-                        <ProForm onFinish={onFinish}>
-                            <ProFormText label="Email" name="username" rules={[
+                        <ProForm onFinish={onFinish} submitter={{
+                            render: ({ submit }) => {
+                                return [
+                                    <Button
+                                        size="large"
+                                        key="login"
+                                        onClick={() => {
+                                            submit?.();
+                                        }}
+                                        shape="round"
+                                        type="primary"
+                                        className="w-full"
+                                    >
+                                        Đăng nhập
+                                    </Button>
+                                ]
+                            }
+                        }}>
+                            <ProFormText fieldProps={{
+                                size: "large"
+                            }} label="Email" name="username" rules={[
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập tài khoản'
                                 }
                             ]} />
-                            <ProFormText.Password label="Mật khẩu" name="password" rules={[
+                            <ProFormText.Password fieldProps={{
+                                size: "large"
+                            }} label="Mật khẩu" name="password" rules={[
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập mật khẩu'
                                 }
                             ]} />
-                            <ProFormCheckbox label="Nhớ đăng nhập" name="rememberMe" />
                         </ProForm>
                     </ProCard>
                 </div>
-                <div className="md:w-1/2">
+                <div className="md:w-2/3">
                     <picture>
                         <img src="https://static.vecteezy.com/system/resources/thumbnails/005/879/539/small_2x/cloud-computing-modern-flat-concept-for-web-banner-design-man-enters-password-and-login-to-access-cloud-storage-for-uploading-and-processing-files-illustration-with-isolated-people-scene-free-vector.jpg" alt="" />
                     </picture>

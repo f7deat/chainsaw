@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ProList } from "@ant-design/pro-components";
 import { ArrowRightOutlined, StarFilled } from "@ant-design/icons";
 import { Fragment, useContext } from "react";
-import { UserContext } from "@/models/user";
+import { AppContext } from "@/models/app-context";
 
 type MyCourseProps = {
     defaultPageSize: number;
@@ -11,9 +11,7 @@ type MyCourseProps = {
 
 const MyCourse: React.FC<MyCourseProps> = (props) => {
 
-    const { user } = useContext<{
-      user: API.User
-    }>(UserContext);
+    const { user } = useContext<API.AppContext>(AppContext);
 
     return user ? (
         <ProList<API.TopicListItem>

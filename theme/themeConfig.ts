@@ -7,8 +7,7 @@ const theme: ThemeConfig = {
   },
   components: {
     Input: {
-        borderRadiusLG: 48,
-        colorBorder: '#1890ff'
+        borderRadiusLG: 48
     }
   }
 };

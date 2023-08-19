@@ -3,7 +3,7 @@ import ChangePasswordComponent from "@/components/accounts/change-password";
 import AccountLeftBar from "@/components/accounts/left-bar";
 import ParentInfo from "@/components/accounts/parent";
 import StudentInfo from "@/components/accounts/student";
-import { UserContext } from "@/models/user";
+import { AppContext } from "@/models/app-context";
 import { Role } from "@/utils/constants";
 import { ProCard } from "@ant-design/pro-components";
 import Head from "next/head";
@@ -12,9 +12,7 @@ import { useContext, useState } from "react";
 export default function Profile() {
 
   const [tab, setTab] = useState<string>('student');
-  const { user } = useContext<{
-    user: API.User
-  }>(UserContext);
+  const { user } = useContext<API.AppContext>(AppContext);
 
   return (
     <>

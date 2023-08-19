@@ -4,15 +4,15 @@ import HeaderDropdown from "./header-dropdown"
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { Role } from "@/utils/constants";
-import { UserContext } from "@/models/user";
 import LoginForm from "../accounts/login-form";
 import { notificationCount } from "@/services/notification";
+import { AppContext } from "@/models/app-context";
 
 const RightContent: React.FC = () => {
 
     const router = useRouter();
     const [open, setOpen] = useState<boolean>(false);
-    const { user } = useContext(UserContext);
+    const { user } = useContext<API.AppContext>(AppContext);
     const [notiCount, setNotiCount] = useState<number>(0);
 
     useEffect(() => {

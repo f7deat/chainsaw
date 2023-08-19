@@ -1,4 +1,4 @@
-import { UserContext } from "@/models/user";
+import { AppContext } from "@/models/app-context";
 import { changeAvatar } from "@/services/user";
 import { BarChartOutlined, CalendarOutlined, EditOutlined, MessageOutlined, UserAddOutlined } from "@ant-design/icons"
 import { ProCard } from "@ant-design/pro-components";
@@ -15,9 +15,7 @@ const AccountLeftBar: React.FC<AccountLeftBarProps> = (props) => {
 
     const API_HOST = process.env.API_HOST;
 
-    const { user } = useContext<{
-        user: API.User
-    }>(UserContext);
+    const { user } = useContext<API.AppContext>(AppContext);
 
     const onFollow = () => {
         message.success('Theo giõi thành công!');

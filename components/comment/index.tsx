@@ -1,4 +1,4 @@
-import { UserContext } from "@/models/user";
+import { AppContext } from "@/models/app-context";
 import { addComment, listComment } from "@/services/comment";
 import { CalendarOutlined, UserOutlined } from "@ant-design/icons";
 import { ActionType, ProCard, ProForm, ProFormInstance, ProFormTextArea, ProList } from "@ant-design/pro-components";
@@ -16,9 +16,7 @@ const CommentComponent: React.FC<CommentComponentProps> = () => {
     const { id } = router.query;
     const actionRef = useRef<ActionType>();
     const formRef = useRef<ProFormInstance>();
-    const { user } = useContext<{
-        user: API.User
-    }>(UserContext);
+    const { user } = useContext<API.AppContext>(AppContext);
 
     const onFinish = async (values: any) => {
         values.baiGiangId = id;
