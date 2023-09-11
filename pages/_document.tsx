@@ -6,6 +6,7 @@ function MyDocument() {
   return (
     <Html lang="vi">
       <Head>
+      <meta name="google-site-verification" content="Xr2_noi_Vicla6EW34W0S2yQiESZGMMrglcjO_yRWnk" />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-ZKVN88HD3J"
           strategy="afterInteractive"

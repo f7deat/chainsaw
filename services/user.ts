@@ -158,3 +158,26 @@ export async function changeAvatar(data: any) {
         data
     })
 }
+
+export async function createWithCoupon(data: any) {
+    return request({
+        url: `user/create-with-coupon`,
+        method: 'POST',
+        data
+    })
+}
+
+export async function queryUsers(params: any) {
+    return request({
+        url: `user/list`,
+        method: 'GET',
+        params
+    })
+}
+
+export async function deleteUser(id: string) {
+    return request({
+        url: `user/delete/${id}`,
+        method: 'POST'
+    })
+}

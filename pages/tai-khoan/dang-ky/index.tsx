@@ -1,7 +1,7 @@
 import { register } from "@/services/user";
 import { CheckCircleTwoTone } from "@ant-design/icons";
 import { PageContainer, ProCard, ProFormDatePicker, ProFormSelect, ProFormText, StepsForm } from "@ant-design/pro-components";
-import { Button, Col, Row, Typography, message } from "antd";
+import { Alert, Button, Col, Row, Typography, message } from "antd";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -73,6 +73,15 @@ export default function Register() {
                 <meta name="description" content="Đăng ký tài khoản mới" />
             </Head>
             <PageContainer title={<Fragment />}>
+
+                <div className="mb-4">
+                <Alert showIcon message={
+                    <div>
+                        Bạn có phiếu giảm giá? <Link href="/tai-khoan/redeem" className="font-medium">Nhập mã</Link>
+                    </div>
+                } type="info"></Alert>
+                </div>
+
                 <ProCard title="Đăng ký">
                     <Row gutter={20}>
                         <Col md={12}>
