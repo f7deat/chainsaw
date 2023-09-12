@@ -99,7 +99,7 @@ const RightContent: React.FC = () => {
                     items: menuItems,
                 }}
             >
-                <Button type="link" className="flex items-center gap-2">
+                <div className="flex items-center gap-2">
                     <Avatar src={user?.avatar ? <picture>
                         <img src={user?.avatar} alt="avatar" />
                     </picture> : <div className="bg-gray-500">
@@ -109,7 +109,7 @@ const RightContent: React.FC = () => {
                         <div className="text-xs">Xin chào,</div>
                         <div className="font-medium text-sm">{user?.name}</div>
                     </div>
-                </Button>
+                </div>
             </HeaderDropdown>
             <button onClick={() => router.push('/thong-bao')}>
                 <Badge count={notiCount}>

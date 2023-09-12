@@ -1,3 +1,4 @@
+import { message } from "antd";
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 
 export const API_HOST = process.env.API_HOST;
@@ -29,7 +30,15 @@ request.interceptors.response.use(
   function (error: any) {
     if (error && error.response) {
       if (error.response.status === 401) {
-        // TODO: tandc on handle
+        const token = localStorage.getItem("access_token");
+        if (!token) {
+          window.location.href = '/tai-khoan/dang-nhap'
+        } else {
+          message.error('Bạn không có quyền truy cập!')
+        }
+      } else if (error.response.status === 400) {
+        message.error(error.response.data);
+        return;
       }
     }
     // if the server throws an error (404, 500 etc.)

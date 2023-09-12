@@ -11,7 +11,8 @@ export enum QuestionType {
 
 export enum Role {
     Referal = 'Referal',
-    Admin = 'Admin'
+    Admin = 'Admin',
+    Student = 'Student'
 }
 
 export const FACEBOOK_FANPAGE = 'https://www.facebook.com/eleaningget';

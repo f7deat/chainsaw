@@ -42,7 +42,7 @@ export default function Profile() {
                   label: 'Thông tin phụ huynh',
                   key: 'parent',
                   children: <ParentInfo />,
-                  disabled: user?.roles?.includes(Role.Referal)
+                  disabled: !user?.roles?.includes(Role.Student)
                 },
                 {
                   label: 'Thêm thành viên',

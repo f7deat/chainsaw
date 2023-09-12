@@ -1,4 +1,4 @@
-import { BookOutlined, EditOutlined, FireOutlined, HomeOutlined, MessageOutlined, RocketOutlined, VideoCameraOutlined } from "@ant-design/icons";
+import { BookOutlined, FireOutlined, GiftTwoTone, MessageOutlined, VideoCameraOutlined } from "@ant-design/icons";
 
 export const navbars = [
     {
@@ -17,13 +17,13 @@ export const navbars = [
         url: "/live-class"
     },
     {
-        name: "Góc học tập",
-        icon: <EditOutlined />,
-        url: "/"
-    },
-    {
         name: "Hỏi đáp",
         icon: <MessageOutlined />,
         url: "/hoi-dap"
+    },
+    {
+        name: "Nhận quà",
+        icon: <GiftTwoTone twoToneColor="red" />,
+        url: "/tai-khoan/redeem"
     }
 ]
