@@ -9,6 +9,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { getCurrentUser } from '@/services/user';
 import theme from '@/theme/themeConfig';
 import { AppContext } from '@/models/app-context';
+import { PhoneOutlined } from '@ant-design/icons';
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -49,7 +50,10 @@ export default function App({ Component, pageProps }: AppProps) {
           </main>
         </div>
         <Footer />
+        <FloatButton.Group>
+        <FloatButton icon={<PhoneOutlined />} type='primary' onClick={() => window.location.href = 'tel:0937065333'} />
         <FloatButton.BackTop />
+      </FloatButton.Group>
       </AppContext.Provider>
     </ConfigProvider>
   )

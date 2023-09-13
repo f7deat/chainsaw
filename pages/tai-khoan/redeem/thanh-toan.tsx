@@ -14,11 +14,11 @@ export default function ToCheckout() {
                 <title>Thanh toán</title>
             </Head>
             <main>
-                <div className="mb-2 text-center font-medium text-xl">Thông tin thanh toán:</div>
                 <div className="flex justify-center mb-4">
                     <div className="md:w-1/3">
-                        <div className="py-1 px-2 bg-slate-100">
-                        <div className="font-bold mb-2">Ngân hàng TMCP Đông Nam Á (SeABank)</div>
+                        <div className="mb-2 text-center font-medium text-xl">Thông tin thanh toán:</div>
+                        <div className="py-1 px-2">
+                            <div className="font-bold mb-2">Ngân hàng TMCP Đông Nam Á (SeABank)</div>
                             <div className="flex mb-2">
                                 <div className="flex-1">
                                     <ul>
@@ -39,6 +39,13 @@ export default function ToCheckout() {
                         </div>
                         <div className="text-gray-500 text-xs text-right">
                             <CheckOutlined /> Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất!
+                        </div>
+                    </div>
+                    <div className="md:w-2/3">
+                        <div className="flex justify-center">
+                            <picture>
+                                <img src="https://i.imgur.com/cxIoRRH.jpg" alt="QrCode" className="w-72" />
+                            </picture>
                         </div>
                     </div>
                 </div>

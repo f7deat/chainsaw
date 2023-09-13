@@ -48,9 +48,10 @@ export default function Index() {
                 <title>Lịch sử thanh toán</title>
             </Head>
             <main>
-                <ProTable columns={columns} request={listTransactionHistoryByCurrentUser}>
-
-                </ProTable>
+                <ProTable columns={columns} request={listTransactionHistoryByCurrentUser} search={{
+                    layout: 'vertical'
+                }}
+                rowSelection={{}} />
             </main>
         </>
     )

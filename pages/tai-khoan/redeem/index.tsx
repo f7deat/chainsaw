@@ -17,9 +17,11 @@ export default function Index() {
 
     const onGetVoucher = async (values: any) => {
         const response = await queryVoucher(values.code);
-        message.success('Áp dụng thành công!')
-        setVoucher(response);
-        setHidden(true);
+        if (response) {
+            message.success('Áp dụng thành công!')
+            setVoucher(response);
+            setHidden(true);
+        }
     }
 
     const onFinish = async (values: any) => {
@@ -32,6 +34,10 @@ export default function Index() {
         if (response.succeeded) {
             router.push('/tai-khoan/redeem/thanh-toan');
             return;
+        } else {
+            if (response.errors[0].code === 'DuplicateUserName') {
+                message.error('Tài khoản đã tồn tại, vui lòng đăng nhập!');
+            }
         }
     }
 
@@ -44,7 +50,12 @@ export default function Index() {
                 <div className="justify-center flex">
                     <div className="md:w-1/3">
                         <ProForm onFinish={onGetVoucher}>
-                            <ProFormText name="code" label="Voucher" />
+                            <ProFormText name="code" label="Voucher" rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập mã khuyến mại'
+                                }
+                            ]} />
                         </ProForm>
                         <div className="text-gray-500 text-right mt-2">
                             <a href="#">Điều khoản và dịch vụ</a>

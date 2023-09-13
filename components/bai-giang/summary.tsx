@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import Rate from "../commons/rate";
 import { AppContext } from "@/models/app-context";
+import { formatter } from "@/utils/formatter";
 
 type CourseSummaryProps = {
     isBought: boolean;
@@ -56,7 +57,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                 <div className="text-xl text-gray-500 mb-2"><s>{props.data?.giaCu} đ</s></div>
                 <div className="flex gap-2 justify-end font-bold mb-1">
                     <b>Chỉ còn</b>
-                    <span className="text-4xl">{props.data?.gia}</span>
+                    <span className="text-4xl">{formatter.format(props.data?.gia || 0)}</span>
                 </div>
                 <div className="text-red-400 font-bold text-sm">Chỉ còn nốt 2 ngày</div>
                 <div className="py-4 flex justify-center gap-4 border-b">
