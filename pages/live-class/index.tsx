@@ -1,6 +1,6 @@
 import { Title } from "@/components";
 import { FacebookOutlined, LinkedinOutlined, LoginOutlined, PlayCircleOutlined, StarOutlined, TwitterOutlined, UserAddOutlined } from "@ant-design/icons";
-import { Button, Divider, Space, Table } from "antd";
+import { Button, Space, Table } from "antd";
 import { ColumnType } from "antd/es/table";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -59,7 +59,7 @@ export default function LiveClass() {
                             <div className="font-medium text-3xl mb-2">John Anderson</div>
                             <div className="text-gray-500 mb-2">Assistant Professor at Mcmaster University</div>
                             <div className="mb-2">
-                                Thank you so much for your help. It's exactly what I've been looking for. You won't regret it. It really saves me time and effort. Elearning is exactly what our business has been lacking.
+                                Thank you so much for your help. It&apos;s exactly what I&apos;ve been looking for. You won&apos;t regret it. It really saves me time and effort. Elearning is exactly what our business has been lacking.
                             </div>
                             <div className="flex justify-between">
                                 <div className="">
