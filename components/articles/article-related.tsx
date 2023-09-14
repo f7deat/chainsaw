@@ -17,7 +17,14 @@ const ArticleRelated: React.FC<ArticleProps> = (props) => {
                     Xem tất cả
                 </Link>
             </div>
-            <Carousel slidesToShow={3} autoplay={true}>
+            <Carousel slidesToShow={3} autoplay={true} infinite responsive={[
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]}>
                 {
                     articles.map(article => (
                         <ArticleItem article={article} key={article.articleID} />
@@ -56,7 +63,9 @@ const ArticleItem: React.FC<ArticleItemProps> = (props) => {
                     <span dangerouslySetInnerHTML={{ __html: article.title }}></span>
                 </Link>
             </div>
-            <div className="text-gray-400 mb-4 line-clamp3" dangerouslySetInnerHTML={{ __html: article.summary}}></div>
+            <div className="text-gray-400 mb-4 line-clamp3" dangerouslySetInnerHTML={{ __html: article.summary}} style={{
+                minHeight: 60
+            }}></div>
             <div className="flex justify-between">
                 <Link href={`/tin-tuc/${article.seo}`} className="font-medium text-gray-400 border-b">Đọc tiếp</Link>
                 <span className="text-gray-400">

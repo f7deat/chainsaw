@@ -1,3 +1,4 @@
+import { AppContext } from "@/models/app-context";
 import { createWithCoupon } from "@/services/user";
 import { queryVoucher } from "@/services/voucher";
 import { formatDate, formatter } from "@/utils/formatter";
@@ -6,11 +7,12 @@ import { ProCard, ProForm, ProFormText } from "@ant-design/pro-components";
 import { Button, message } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 export default function Index() {
 
     const router = useRouter();
+    const { user } = useContext<API.AppContext>(AppContext);
 
     const [voucher, setVoucher] = useState<API.Voucher>();
     const [hidden, setHidden] = useState<boolean>(false);
@@ -83,18 +85,28 @@ export default function Index() {
                 </div>
             </div>
             <div hidden={!hidden}>
-                <div className="md:flex gap-4">
-                    <div className="md:w-2/3">
+                <div className="md:flex gap-4 justify-center">
+                    <div className="md:w-2/3" hidden={user !== null}>
                         <ProCard title="Thông tin">
                             <ProForm onFinish={onFinish}>
-                                <ProFormText name="parentName" label="Họ và tên phụ huynh" />
+                                <ProFormText name="parentName" label="Họ và tên phụ huynh" rules={[
+                                    {
+                                        required: true,
+                                        message: 'Vui lòng nhập họ và tên phụ huynh'
+                                    }
+                                ]} />
                                 <ProFormText name="phoneNumber" label="Số điện thoại" rules={[
                                     {
                                         required: true,
                                         message: 'Vui lòng nhập số điện thoại'
                                     }
                                 ]} />
-                                <ProFormText name="studentName" label="Họ và tên học sinh" />
+                                <ProFormText name="studentName" label="Họ và tên học sinh" rules={[
+                                    {
+                                        required: true,
+                                        message: 'Vui lòng nhập họ và tên học sinh'
+                                    }
+                                ]} />
                                 <ProFormText.Password name="password" label="Mật khẩu" rules={[
                                     {
                                         required: true,

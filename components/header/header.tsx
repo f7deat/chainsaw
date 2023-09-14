@@ -4,18 +4,24 @@ import Link from "next/link";
 import { Playfair_Display } from 'next/font/google';
 import { useEffect, useState } from "react";
 import RightContent from "../layout/right-content";
+import { useRouter } from "next/router";
 
 const inter = Playfair_Display({ subsets: ['latin'] });
 
 const Header: React.FC = () => {
 
     const [offset, setOffset] = useState(0);
+    const router = useRouter();
 
     useEffect(() => {
         window.onscroll = () => {
             setOffset(window.pageYOffset)
         }
     }, []);
+
+    useEffect(() => {
+        setCollapsed(false);
+    }, [router])
 
     const [collapsed, setCollapsed] = useState(false);
 

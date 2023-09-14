@@ -9,7 +9,7 @@ const Rate: React.FC<RateProps> = (props) => {
     const data = () => {
         const stars = [];
         for (let i = 0; i < props.value; i++) {
-            stars.push(<StarFilled />)
+            stars.push(<StarFilled key={i} />)
         }
         return stars;
     }

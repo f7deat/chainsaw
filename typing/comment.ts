@@ -5,5 +5,6 @@ namespace API {
         content: string;
         createdDate: Date;
         role: string;
+        avatar: string;
     }
 }

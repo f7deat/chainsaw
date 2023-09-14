@@ -10,6 +10,10 @@ import { queryTeachers } from '@/services/user';
 import Teachers from '@/components/accounts/teachers';
 import ArticleSpotlight from '@/components/articles/article-spotlight';
 import WhatIs from '@/components/home/what-is';
+import { Modal } from 'antd';
+import { useContext, useEffect, useState } from 'react';
+import Link from 'next/link';
+import { AppContext } from '@/models/app-context';
 
 export const getServerSideProps: GetServerSideProps<{
   teachers: API.User[];
@@ -22,6 +26,16 @@ export const getServerSideProps: GetServerSideProps<{
 };
 
 export default function Home({ teachers }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+
+  const [open, setOpen] = useState(true);
+  const [isClient, setIsClient] = useState(false);
+  const { user } = useContext<API.AppContext>(AppContext);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsClient(true)
+    }, 2000);
+  }, [])
 
   return (
     <>
@@ -69,6 +83,22 @@ export default function Home({ teachers }: InferGetServerSidePropsType<typeof ge
       <div className='md:mb-10 mb-4'>
         <Partner />
       </div>
+
+      {
+        isClient && !user && (
+          <Modal open={open} centered footer={false} onCancel={() => setOpen(false)}>
+            <Link href="/tai-khoan/redeem">
+              <picture className='relative'>
+                <img src='https://i.imgur.com/NljwhIm.jpg' alt='KM' loading='lazy' />
+              </picture>
+              <div className='text-center'>
+                <button className='left-50 px-6 py-2 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white'>Nhận quà</button>
+              </div>
+            </Link>
+          </Modal>
+        )
+      }
+
 
     </>
   )

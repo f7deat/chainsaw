@@ -31,7 +31,6 @@ export default function Index({ topic }: InferGetServerSidePropsType<typeof getS
               if (user) {
                   isBought(router.query.id).then(response => {
                       setHasAccess(response);
-                      console.log(11111)
                   })
               }
           }

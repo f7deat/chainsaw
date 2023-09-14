@@ -74,7 +74,7 @@ export default function Index({ course, topics, total, articles }: InferGetServe
                 </div>
                 <div className="md:mb-20 mb-10">
                     <Title subTitle="Khóa học" title={course?.tenKhoaHoc} />
-                    <div className="grid grid-cols-4 gap-4 mb-4">
+                    <div className="grid md:grid-cols-4 grid-cols-2 gap-4 mb-4">
                         {
                             topics.map(topic => (
                                 <div className="flex flex-col bg-white shadow rounded" key={topic.id}>

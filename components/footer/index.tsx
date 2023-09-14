@@ -19,15 +19,15 @@ const Footer: React.FC = () => {
                                     </div>
                                     <div className="md:w-1/2">
                                         <div className="mb-2">
-                                            <Link href="/faq/hinh-thuc-thanh-toan">Hình thức thanh toán</Link>
+                                            <Link href="/tin-tuc/hinh-thuc-thanh-toan">Hình thức thanh toán</Link>
                                         </div>
                                         <div className="mb-2">
-                                            <Link href="/faq/tra-hang-hoan-tien">
+                                            <Link href="/tin-tuc/tra-hang-hoan-tien">
                                                 Trả hàng & hoàn tiền
                                             </Link>
                                         </div>
                                         <div className="mb-2">
-                                            <Link href="/faq/chinh-sach-bao-mat">Chính sách bảo mật</Link>
+                                            <Link href="/tin-tuc/chinh-sach-bao-mat">Chính sách bảo mật</Link>
                                         </div>
                                     </div>
                                 </div>
