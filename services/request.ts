@@ -30,12 +30,8 @@ request.interceptors.response.use(
   function (error: any) {
     if (error && error.response) {
       if (error.response.status === 401) {
-        const token = localStorage.getItem("access_token");
-        if (!token) {
-          window.location.href = '/tai-khoan/dang-nhap'
-        } else {
-          message.error('Bạn không có quyền truy cập!')
-        }
+        // TODO: handle -> redirect: maybe
+       return;
       } else if (error.response.status === 400) {
         message.error(error.response.data);
         return;

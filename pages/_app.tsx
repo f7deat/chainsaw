@@ -51,7 +51,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </div>
         <Footer />
         <FloatButton.Group>
-        <FloatButton icon={<PhoneOutlined />} type='primary' onClick={() => window.location.href = 'tel:0937065333'} />
+        <FloatButton icon={<PhoneOutlined />} type='primary' onClick={() => window.location.href = 'tel:0762559696'} />
         <FloatButton.BackTop />
       </FloatButton.Group>
       </AppContext.Provider>

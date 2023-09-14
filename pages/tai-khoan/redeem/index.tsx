@@ -3,7 +3,7 @@ import { queryVoucher } from "@/services/voucher";
 import { formatDate, formatter } from "@/utils/formatter";
 import { GiftOutlined } from "@ant-design/icons";
 import { ProCard, ProForm, ProFormText } from "@ant-design/pro-components";
-import { message } from "antd";
+import { Button, message } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -49,13 +49,32 @@ export default function Index() {
             <div hidden={hidden}>
                 <div className="justify-center flex">
                     <div className="md:w-1/3">
-                        <ProForm onFinish={onGetVoucher}>
-                            <ProFormText name="code" label="Voucher" rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập mã khuyến mại'
-                                }
-                            ]} />
+                        <ProForm onFinish={onGetVoucher} submitter={{
+                            render: ({ form }) => {
+                                return [
+                                    <Button
+                                        key="submit"
+                                        onClick={() => {
+                                            form?.submit();
+                                        }}
+                                        size="large"
+                                        type="primary"
+                                        className="w-full rounded-full"
+                                    >
+                                        Xác nhận
+                                    </Button>
+                                ]
+                            }
+                        }}>
+                            <ProFormText name="code" label="Voucher"
+                                fieldProps={{
+                                    size: 'large'
+                                }} rules={[
+                                    {
+                                        required: true,
+                                        message: 'Vui lòng nhập mã khuyến mại'
+                                    }
+                                ]} />
                         </ProForm>
                         <div className="text-gray-500 text-right mt-2">
                             <a href="#">Điều khoản và dịch vụ</a>
