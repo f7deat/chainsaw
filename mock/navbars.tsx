@@ -22,8 +22,8 @@ export const navbars = [
         url: "/hoi-dap"
     },
     {
-        name: "Nhận quà",
-        icon: <GiftTwoTone twoToneColor="red" />,
+        name: <span className="text-red-500 animate-bounce">Nhận quà</span>,
+        icon: <span className="animate-bounce"><GiftTwoTone twoToneColor="red" /></span>,
         url: "/tai-khoan/redeem"
     }
 ]

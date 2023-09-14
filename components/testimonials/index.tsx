@@ -51,8 +51,7 @@ const Testimonial: React.FC = () => {
                                 <Link href="/">
                                     <span style={{
                                         top: '40%',
-                                        right: -24
-                                    }} className="absolute h-14 w-14 shadow bg-white rounded-full flex items-center justify-center text-blue-500">
+                                    }} className="absolute h-14 w-14 shadow bg-white rounded-full flex items-center justify-center text-blue-500 -right-4">
                                         <ArrowRightOutlined />
                                     </span>
                                 </Link>

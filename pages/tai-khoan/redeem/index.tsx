@@ -47,7 +47,7 @@ export default function Index() {
                 <title>Redeem Code</title>
             </Head>
             <div hidden={hidden}>
-                <div className="justify-center flex">
+                <div className="justify-center md:flex">
                     <div className="md:w-1/3">
                         <ProForm onFinish={onGetVoucher} submitter={{
                             render: ({ form }) => {
@@ -83,7 +83,7 @@ export default function Index() {
                 </div>
             </div>
             <div hidden={!hidden}>
-                <div className="flex gap-4">
+                <div className="md:flex gap-4">
                     <div className="md:w-2/3">
                         <ProCard title="Thông tin">
                             <ProForm onFinish={onFinish}>

@@ -35,6 +35,9 @@ request.interceptors.response.use(
       } else if (error.response.status === 400) {
         message.error(error.response.data);
         return;
+      } else if (error.response.status === 404) {
+        message.error('Không tìm thấy API!');
+        return;
       }
     }
     // if the server throws an error (404, 500 etc.)
