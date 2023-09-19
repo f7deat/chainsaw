@@ -1,3 +1,4 @@
+import AdminMenu from "@/components/menu/admin";
 import { deleteUser, queryUsers } from "@/services/user";
 import { DeleteOutlined } from "@ant-design/icons";
 import { ActionType, ProColumnType, ProTable } from "@ant-design/pro-components";
@@ -38,7 +39,7 @@ export default function Index() {
             title: '',
             valueType: 'option',
             render: (dom, entity) => [
-                <Popconfirm  key="delete" title="Are you sure?" onConfirm={() => onConfirm(entity.id)}>
+                <Popconfirm key="delete" title="Are you sure?" onConfirm={() => onConfirm(entity.id)}>
                     <Button type="primary" danger icon={<DeleteOutlined />} />
                 </Popconfirm>
             ]
@@ -50,8 +51,18 @@ export default function Index() {
             <Head>
                 <title>Quản trị người dùng</title>
             </Head>
-            <main>
-                <ProTable request={queryUsers} columns={columns} actionRef={actionRef} />
+            <main className="md:flex gap-4">
+                <div className="md:w-64">
+                    <AdminMenu current="users" />
+                </div>
+                <div className="flex-1">
+                    <ProTable 
+                    rowSelection={{}}
+                    search={{
+                        layout: 'vertical'
+                    }}
+                    request={queryUsers} columns={columns} actionRef={actionRef} />
+                </div>
             </main>
         </>
     )

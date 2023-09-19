@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
                                 <div className="md:w-1/2">
                                     <div className="mb-4 text-xl uppercase font-medium">Giới thiệu</div>
                                     <div className="mb-2">
-                                        <Link href="/gioi-thieu-chuong-trinh">Giới thiêu chương trình</Link>
+                                        <Link href="/tin-tuc/gioi-thieu-chuong-trinh">Giới thiêu chương trình</Link>
                                     </div>
                                     <div className="mb-2">
                                         <Link href="/lien-he">

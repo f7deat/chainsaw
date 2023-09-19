@@ -11,6 +11,10 @@ p {
     margin: 0.5rem 0;
 }
 
+img {
+    display: initial;
+}
+
 input {
     outline: none;
 }

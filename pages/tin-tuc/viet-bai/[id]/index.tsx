@@ -10,7 +10,7 @@ export default function Index() {
 
     const formRef = useRef<ProFormInstance>();
     const router = useRouter();
-    const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }),[]);
+    const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), []);
 
     useEffect(() => {
         const id = router?.query?.id;
@@ -63,9 +63,11 @@ export default function Index() {
                                 required: true
                             }
                         ]} />
-                        <ProForm.Item name="detail" label="Nội dung" className="mb-16">
-                            <ReactQuill theme="snow" className="h-72" />
-                        </ProForm.Item>
+                        <div className="mb-16">
+                            <ProForm.Item name="detail" label="Nội dung">
+                                <ReactQuill theme="snow" className="h-72" />
+                            </ProForm.Item>
+                        </div>
                         <ProFormSelect name="articleCatID" label="Danh mục" params={undefined} debounceTime={undefined} request={undefined} valueEnum={undefined} />
                     </ProForm>
                 </ProCard>
