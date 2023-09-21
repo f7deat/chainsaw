@@ -181,3 +181,18 @@ export async function deleteUser(id: string) {
         method: 'POST'
     })
 }
+
+export async function listRoleByUser(id?: string | string[]) {
+    return request(`user/list-role-by-user/${id}`);
+}
+
+export async function removeFromRole(roleName: string, id?: string | string[]) {
+    return request({
+        url: `user/remove-from-role`,
+        data: {
+            roleName,
+            userId: id
+        },
+        method: 'POST'
+    })
+}

@@ -1,13 +1,15 @@
 import AdminMenu from "@/components/menu/admin";
 import { deleteUser, queryUsers } from "@/services/user";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, FolderOutlined } from "@ant-design/icons";
 import { ActionType, ProColumnType, ProTable } from "@ant-design/pro-components";
 import { Button, Popconfirm, message } from "antd";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useRef } from "react";
 
 export default function Index() {
 
+    const router = useRouter();
     const actionRef = useRef<ActionType>();
 
     const onConfirm = async (id: string) => {
@@ -39,6 +41,7 @@ export default function Index() {
             title: '',
             valueType: 'option',
             render: (dom, entity) => [
+                <Button key="view" icon={<FolderOutlined />} type="primary" onClick={() => router.push(`/admin/users/${entity.id}`)}></Button>,
                 <Popconfirm key="delete" title="Are you sure?" onConfirm={() => onConfirm(entity.id)}>
                     <Button type="primary" danger icon={<DeleteOutlined />} />
                 </Popconfirm>

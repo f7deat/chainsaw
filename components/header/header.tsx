@@ -1,15 +1,18 @@
 import { navbars } from "@/mock"
-import { FireTwoTone, MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { DashboardOutlined, FireTwoTone, MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { Playfair_Display } from 'next/font/google';
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RightContent from "../layout/right-content";
 import { useRouter } from "next/router";
+import { AppContext } from "@/models/app-context";
+import { Role } from "@/utils/constants";
 
 const inter = Playfair_Display({ subsets: ['latin'] });
 
 const Header: React.FC = () => {
 
+    const { user } = useContext<API.AppContext>(AppContext);
     const [offset, setOffset] = useState(0);
     const router = useRouter();
 
@@ -50,6 +53,16 @@ const Header: React.FC = () => {
                                         </Link>
                                     </li>
                                 ))
+                            }
+                            {
+                                user?.roles?.find((x: any) => x === Role.Admin) && (
+                                    <li key="admin">
+                                        <Link href="/admin" className="font-medium hover:text-blue-500 text-lg flex gap-2">
+                                            <DashboardOutlined />
+                                            Quản trị
+                                        </Link>
+                                    </li>
+                                )
                             }
                         </ul>
                     </div>

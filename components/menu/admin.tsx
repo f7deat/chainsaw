@@ -1,4 +1,4 @@
-import { BookOutlined, CameraOutlined, DashboardOutlined, HistoryOutlined, MoneyCollectOutlined, SettingOutlined, TransactionOutlined, UserOutlined } from "@ant-design/icons";
+import { BookOutlined, CameraOutlined, CommentOutlined, DashboardOutlined, HistoryOutlined, MoneyCollectOutlined, SettingOutlined, TransactionOutlined, UserOutlined } from "@ant-design/icons";
 import { MenuProps, Menu } from "antd";
 import { useRouter } from "next/router";
 
@@ -25,6 +25,11 @@ const AdminMenu: React.FC<AdminMenuProps> = ({ current }) => {
             label: 'Người dùng',
             key: 'users',
             icon: <UserOutlined />
+        },
+        {
+            label: 'Bình luận',
+            key: 'comment',
+            icon: <CommentOutlined />
         },
         {
             label: 'Môn học',

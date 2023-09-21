@@ -1,5 +1,6 @@
 import { AppContext } from "@/models/app-context";
 import { addComment, listComment } from "@/services/comment";
+import { Role } from "@/utils/constants";
 import { CalendarOutlined, UserOutlined } from "@ant-design/icons";
 import { ActionType, ProCard, ProForm, ProFormInstance, ProFormTextArea, ProList } from "@ant-design/pro-components";
 import { Avatar, Tag, message } from "antd";
@@ -31,8 +32,10 @@ const CommentComponent: React.FC<CommentComponentProps> = () => {
     const roleName = (normalizedName: string) => {
         if (normalizedName === 'Student') {
             return 'Học sinh';
-        }
-        return 'Giáo viên';
+        } else if (normalizedName === Role.Admin) {
+            return 'Admin';
+        } else if (normalizedName === Role.Parent)
+        return 'Phụ huynh';
     }
 
     return (
@@ -81,7 +84,13 @@ const CommentComponent: React.FC<CommentComponentProps> = () => {
                                 },
                             },
                             avatar: {
-                                render: () => <Avatar icon={<UserOutlined />} />
+                                render: (dom, entity) => {
+                                    if (entity.avatar) {
+                                        return <Avatar src={entity.avatar} />
+                                    } else {
+                                        return <Avatar icon={<UserOutlined />} />
+                                    }
+                                }
                             }
                         }}
                     />
