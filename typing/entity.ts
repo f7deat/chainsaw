@@ -32,7 +32,8 @@ declare namespace API {
         suggestion: string;
         isCompleted: boolean;
         result: boolean;
-        answers: AnswerListItem[]
+        answers: AnswerListItem[];
+        voiceUrl?: string;
     }
     type AnswerListItem = {
         id: number;

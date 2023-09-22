@@ -3,7 +3,7 @@ import { addComment, listComment } from "@/services/comment";
 import { Role } from "@/utils/constants";
 import { CalendarOutlined, UserOutlined } from "@ant-design/icons";
 import { ActionType, ProCard, ProForm, ProFormInstance, ProFormTextArea, ProList } from "@ant-design/pro-components";
-import { Avatar, Tag, message } from "antd";
+import { Avatar, Divider, Tag, message } from "antd";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import { Fragment, JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, useContext, useRef } from "react";
@@ -35,7 +35,7 @@ const CommentComponent: React.FC<CommentComponentProps> = () => {
         } else if (normalizedName === Role.Admin) {
             return 'Admin';
         } else if (normalizedName === Role.Parent)
-        return 'Phụ huynh';
+            return 'Phụ huynh';
     }
 
     return (
@@ -50,7 +50,7 @@ const CommentComponent: React.FC<CommentComponentProps> = () => {
                     ]} />
                 </ProForm>
             </ProCard>
-
+            <Divider />
             {
                 id ? (
                     <ProList<API.CommentListItem>

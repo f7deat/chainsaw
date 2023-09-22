@@ -1,12 +1,12 @@
 import CommentComponent from "@/components/comment";
 import { BaiGiang, DragDrop, FreeInput, MultipleChoice, OrderChoice, SingleChoice } from "@/components/practice";
 import Speech from "@/components/practice/speech";
-import { getBaiGiang, listQuestion, resetResult } from "@/services/course";
+import { fetchAudio, getBaiGiang, listQuestion, resetResult } from "@/services/course";
 import { playAudio } from "@/utils/audio";
 import { QuestionType } from "@/utils/constants";
 import { ArrowLeftOutlined, ArrowRightOutlined, BookOutlined, CheckCircleOutlined, GiftOutlined, HomeOutlined, InfoCircleOutlined, RedoOutlined, SoundOutlined, StopOutlined } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
-import { Alert, Breadcrumb, Button, Empty, Popconfirm, Popover, Space, Tabs, message } from "antd";
+import { Alert, Breadcrumb, Button, Divider, Empty, Popconfirm, Popover, Space, Tabs, message } from "antd";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -109,16 +109,21 @@ export default function Index() {
         }
     }
 
-    const speak = (text: string) => {
+    const speak = (text: string, questionId: number, voiceUrl?: string) => {
         const doc = document.createElement('div');
         doc.innerHTML = text;
         const voice = window.speechSynthesis.getVoices().find(x => x.lang === 'vi-VN');
+
         if (voice) {
             const utterance = new SpeechSynthesisUtterance(doc.textContent || '');
             utterance.voice = voice;
             window.speechSynthesis.speak(utterance);
         } else {
-            playAudio(`https://texttospeech.responsivevoice.org/v1/text:synthesize?text=${doc.textContent}&lang=vi&engine=g1&name=&pitch=0.5&rate=0.5&volume=1&key=kvfbSITh&gender=female`)
+            if (voiceUrl) {
+                playAudio(voiceUrl)
+            } else {
+                message.info('Trình duyệt không hỗ trợ, vui lòng cập nhập phiên bản mới nhất');
+            }
         }
     };
 
@@ -207,7 +212,7 @@ export default function Index() {
                                                 <div>
                                                     {
                                                         (module?.subjectId === 1 && item.title) && (
-                                                            <Button className="flex items-center" onClick={() => speak(item.title)} icon={<SoundOutlined />}>Nghe đọc bài</Button>
+                                                            <Button className="flex items-center" onClick={() => speak(item.title, item.id, item.voiceUrl)} icon={<SoundOutlined />}>Nghe đọc bài</Button>
                                                         )
                                                     }
                                                     {renderTab(item, i)}
@@ -261,6 +266,7 @@ export default function Index() {
                         )
                     }
                 </ProCard>
+                <Divider />
                 <div className="md:grid-cols-2"></div>
                 <div className="md:grid-cols-5"></div>
                 {

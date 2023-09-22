@@ -51,7 +51,7 @@ export async function listHighLight(slug: string) {
 }
 
 export async function listQuestion(id?: string | string[]) {
-  return request.get(`cau-hoi/danh-sach/${id}`);
+  return request.get(`question/danh-sach/${id}`);
 }
 
 export async function checkAnswer(
@@ -63,7 +63,7 @@ export async function checkAnswer(
   baiGiangId?: string | string[]
 ) {
   return request({
-    url: "cau-hoi/kiem-tra",
+    url: "question/kiem-tra",
     method: "POST",
     data: {
       CauHoiID: questionId,
@@ -114,4 +114,15 @@ export async function resetResult(id?: string | string[]) {
     url: `bai-giang/reset/${id}`,
     method: "POST",
   });
+}
+
+export async function fetchAudio(questionId: number, text: string | null) {
+  return request({
+    url: `question/fetch-audio`,
+    method: 'POST',
+    data: {
+      questionId,
+      text
+    }
+  })
 }
