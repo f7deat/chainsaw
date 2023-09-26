@@ -114,16 +114,17 @@ export default function Index() {
         doc.innerHTML = text;
         const voice = window.speechSynthesis.getVoices().find(x => x.lang === 'vi-VN');
 
+        if (!doc.textContent) {
+            message.warning('Không tìm thấy nội dung câu hỏi!');
+            return;
+        }
+
         if (voice) {
             const utterance = new SpeechSynthesisUtterance(doc.textContent || '');
             utterance.voice = voice;
             window.speechSynthesis.speak(utterance);
         } else {
-            if (voiceUrl) {
-                playAudio(voiceUrl)
-            } else {
-                message.info('Trình duyệt không hỗ trợ, vui lòng cập nhập phiên bản mới nhất');
-            }
+            playAudio(`https://texttospeech.responsivevoice.org/v1/text:synthesize?text=${doc.textContent}&lang=vi&engine=g1&name=&pitch=0.5&rate=0.5&volume=1&key=kvfbSITh&gender=female`)
         }
     };
 
