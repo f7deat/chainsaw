@@ -31,7 +31,7 @@ request.interceptors.response.use(
     if (error && error.response) {
       if (error.response.status === 401) {
         // TODO: handle -> redirect: maybe
-       return;
+       return error;
       } else if (error.response.status === 400) {
         message.error(error.response.data);
         return;

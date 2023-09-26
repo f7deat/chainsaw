@@ -37,7 +37,11 @@ export default function Index() {
                         setScore(point);
                     }
                 } else {
-                    setError(response.errors[0].description);
+                    if (response.errors) {
+                        setError(response.errors[0].description);
+                    } else {
+                        message.error('Vui lòng đăng nhập!');
+                    }
                 }
             });
             getBaiGiang(router.query.id).then(response => {
@@ -158,14 +162,14 @@ export default function Index() {
                             )
                         },
                         {
-                            title: (
+                            title: module?.subjectId && (
                                 <Link href={`/mon-hoc/${module?.subjectId}`}>
                                     <BookOutlined /> {module?.subject}
                                 </Link>
                             )
                         },
                         {
-                            title: (
+                            title: module?.topicId && (
                                 <Link href={`/bai-giang/${module?.topicId}`}>
                                     <BookOutlined /> {module?.topic}
                                 </Link>
