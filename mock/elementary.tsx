@@ -2,7 +2,6 @@ export const elementary = [
     {
         suffix: "Tiền lớp",
         name: "1",
-        bg: "bg-pink-400",
         courses: [
             {
                 name: "Toán học",
@@ -17,7 +16,6 @@ export const elementary = [
     {
         suffix: "Lớp",
         name: "1",
-        bg: "bg-yellow-400",
         courses: [
             {
                 name: "Toán học",
@@ -32,7 +30,6 @@ export const elementary = [
     {
         suffix: "Lớp",
         name: "2",
-        bg: "bg-blue-400",
         courses: [
             {
                 name: "Toán học",
@@ -47,7 +44,6 @@ export const elementary = [
     {
         suffix: "Lớp",
         name: "3",
-        bg: "bg-green-400",
         courses: [
             {
                 name: "Toán học",
@@ -62,7 +58,6 @@ export const elementary = [
     {
         suffix: "Lớp",
         name: "4",
-        bg: "bg-cyan-400",
         courses: [
             {
                 name: "Toán học",
@@ -77,7 +72,6 @@ export const elementary = [
     {
         suffix: "Lớp",
         name: "5",
-        bg: "bg-fuchsia-600",
         courses: [
             {
                 name: "Toán học",
@@ -88,5 +82,75 @@ export const elementary = [
                 url: "/khoa-hoc/tieng-anh-lop-5"
             }
         ]
-    }
+    },
+    {
+        suffix: "Lớp",
+        name: "6",
+        courses: [
+            {
+                name: "Toán học",
+                url: "/khoa-hoc/toan-hoc-lop-6"
+            },
+            {
+                name: "Tiếng anh",
+                url: "/khoa-hoc/tieng-anh-lop-6"
+            }
+        ]
+    },
+    {
+        suffix: "Lớp",
+        name: "7",
+        courses: [
+            {
+                name: "Toán học",
+                url: "/khoa-hoc/toan-hoc-lop-7"
+            },
+            {
+                name: "Tiếng anh",
+                url: "/khoa-hoc/tieng-anh-lop-7"
+            }
+        ]
+    },
+    {
+        suffix: "Lớp",
+        name: "8",
+        courses: [
+            {
+                name: "Toán học",
+                url: "/khoa-hoc/toan-hoc-lop-8"
+            },
+            {
+                name: "Tiếng anh",
+                url: "/khoa-hoc/tieng-anh-lop-8"
+            }
+        ]
+    },
+    {
+        suffix: "Lớp",
+        name: "9",
+        courses: [
+            {
+                name: "Toán học",
+                url: "/khoa-hoc/toan-hoc-lop-9"
+            },
+            {
+                name: "Tiếng anh",
+                url: "/khoa-hoc/tieng-anh-lop-9"
+            }
+        ]
+    },
+    {
+        suffix: "Lớp",
+        name: "10",
+        courses: [
+            {
+                name: "Toán học",
+                url: "/khoa-hoc/toan-hoc-lop-10"
+            },
+            {
+                name: "Tiếng anh",
+                url: "/khoa-hoc/tieng-anh-lop-10"
+            }
+        ]
+    },
 ]
