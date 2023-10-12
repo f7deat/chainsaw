@@ -48,45 +48,43 @@ export default function Index() {
             <Head>
                 <title>Redeem Code</title>
             </Head>
-            <div hidden={hidden}>
-                <div className="justify-center md:flex">
-                    <div className="md:w-1/3">
-                        <ProForm onFinish={onGetVoucher} submitter={{
-                            render: ({ form }) => {
-                                return [
-                                    <Button
-                                        key="submit"
-                                        onClick={() => {
-                                            form?.submit();
-                                        }}
-                                        size="large"
-                                        type="primary"
-                                        className="w-full rounded-full"
-                                    >
-                                        Xác nhận
-                                    </Button>
-                                ]
-                            }
-                        }}>
-                            <ProFormText name="code" label="Voucher"
-                                fieldProps={{
-                                    size: 'large'
-                                }} rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập mã khuyến mại'
-                                    }
-                                ]} />
-                        </ProForm>
-                        <div className="text-gray-500 text-right mt-2">
-                            <a href="#">Điều khoản và dịch vụ</a>
-                        </div>
+            <div>
+                <div className="justify-center md:flex gap-4">
+                    <div className="md:w-1/3" hidden={hidden}>
+                        <ProCard title="Nhập voucher">
+                            <ProForm onFinish={onGetVoucher} submitter={{
+                                render: ({ form }) => {
+                                    return [
+                                        <Button
+                                            key="submit"
+                                            onClick={() => {
+                                                form?.submit();
+                                            }}
+                                            size="large"
+                                            type="primary"
+                                            className="w-full rounded-full"
+                                        >
+                                            Áp dụng
+                                        </Button>
+                                    ]
+                                }
+                            }}>
+                                <ProFormText name="code" label="Voucher"
+                                    fieldProps={{
+                                        size: 'large'
+                                    }} rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập mã khuyến mại'
+                                        }
+                                    ]} />
+                            </ProForm>
+                            <div className="text-gray-500 text-right mt-2">
+                                <a href="#">Điều khoản và dịch vụ</a>
+                            </div>
+                        </ProCard>
                     </div>
-                </div>
-            </div>
-            <div hidden={!hidden}>
-                <div className="md:flex gap-4 justify-center">
-                    <div className="md:w-2/3" hidden={user !== null}>
+                    <div className="md:w-2/3" hidden={!hidden}>
                         <ProCard title="Thông tin">
                             <ProForm onFinish={onFinish}>
                                 <ProFormText name="parentName" label="Họ và tên phụ huynh" rules={[
@@ -153,6 +151,7 @@ export default function Index() {
                     </div>
                 </div>
             </div>
+
         </>
     )
 }

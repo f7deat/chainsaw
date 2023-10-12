@@ -171,12 +171,6 @@ export default function Register() {
                                     colProps={{
                                         md: 12
                                     }}
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập email'
-                                        }
-                                    ]}
                                 />
                                 <ProFormText fieldProps={{
                                     size: "large"

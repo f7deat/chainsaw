@@ -9,7 +9,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { getCurrentUser } from '@/services/user';
 import theme from '@/theme/themeConfig';
 import { AppContext } from '@/models/app-context';
-import { PhoneOutlined } from '@ant-design/icons';
+import { MessageOutlined, PhoneOutlined } from '@ant-design/icons';
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -21,8 +21,12 @@ export default function App({ Component, pageProps }: AppProps) {
   const [user, setUser] = useState<API.User>();
 
   const login = useCallback(() => {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      return;
+    }
     getCurrentUser().then(response => {
-      setUser(response.data)
+      setUser(response?.data)
     })
   }, [])
 
@@ -54,6 +58,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <div className='mb-4'>
             <span className="animate-ping absolute inline-flex h-10 w-10 rounded-full bg-sky-400 opacity-75"></span>
             <FloatButton icon={<PhoneOutlined />} type='primary' onClick={() => window.location.href = 'tel:0762559696'} />
+            <FloatButton icon={<MessageOutlined />} onClick={() => window.location.href = 'https://zalo.me/0762559696'} />
           </div>
           <FloatButton.BackTop />
         </FloatButton.Group>

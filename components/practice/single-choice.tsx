@@ -1,7 +1,7 @@
 import { checkAnswer } from "@/services/course";
 import { playAudio, playFalseSound, playTrueSound } from "@/utils/audio";
 import { QuestionCircleOutlined, SoundOutlined } from "@ant-design/icons";
-import { Button, Divider, Space, Typography, message } from "antd";
+import { Button, Divider, Space, message } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -67,11 +67,11 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
                                 <button type="button"
                                     className={`py-4 px-8 flex justify-center w-full items-center hover:bg-slate-200 rounded border ${getBorder(answer)}`}
                                     onClick={() => onAnswer(answer)}>
-                                    <Typography.Title level={2}>
+                                    <div className="md:text-3xl text-lg font-medium">
                                         <div dangerouslySetInnerHTML={{
                                             __html: answer.text
                                         }} />
-                                    </Typography.Title>
+                                    </div>
                                 </button>
                                 {
                                     answer.mp3Link && (

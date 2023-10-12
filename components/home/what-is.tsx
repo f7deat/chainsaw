@@ -10,7 +10,7 @@ const WhatIs: React.FC = () => {
             <div className="absolute h-full w-full flex items-center justify-center flex-col">
                 <div className="md:text-3xl text-sm font-medium text-white md:mb-6 mb-3 uppercase">{title}</div>
                 {
-                    !isPrimary && (<Link href="/admin/login" className="text-white transition duration-500 hover:bg-sky-400 text-sm md:text-xl font-medium md:px-10 px-4 md:py-3 py-1 rounded-full border border-white">Bắt đầu ngay</Link>)
+                    !isPrimary && (<Link href="/tai-khoan/dang-ky" className="text-white transition duration-500 hover:bg-sky-400 text-sm md:text-xl font-medium md:px-10 px-4 md:py-3 py-1 rounded-full border border-white">Bắt đầu ngay</Link>)
                 }
                 {
                     isPrimary && (

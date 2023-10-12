@@ -60,11 +60,11 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                     <span className="text-4xl">{formatter.format(props.data?.gia || 0)}</span>
                 </div>
                 <div className="text-red-400 font-bold text-sm">Chỉ còn nốt 2 ngày</div>
-                <div className="py-4 flex justify-center gap-4 border-b">
-                    <button onClick={onRegister} className="px-4 py-2 rounded-full items-center bg-blue-500 hover:bg-blue-600 text-white flex gap-2 text-lg font-medium">
+                <div className="py-4 flex md:flex-row flex-col justify-center gap-4 border-b">
+                    <button onClick={onRegister} className="px-4 py-2 rounded-full justify-center items-center bg-blue-500 hover:bg-blue-600 text-white flex gap-2 md:text-lg font-medium">
                         <LoginOutlined />Đăng ký ngay
                     </button>
-                    <a href="tel:+84911717772" className="px-4 py-2 rounded-full bg-red-500 hover:bg-red-600 text-white flex gap-2 text-lg font-medium">
+                    <a href="tel:+84911717772" className="px-4 py-2 rounded-full justify-center bg-red-500 hover:bg-red-600 text-white flex gap-2 md:text-lg font-medium">
                         <PhoneOutlined />Nhận tư vấn
                     </a>
                 </div>

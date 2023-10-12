@@ -7,38 +7,40 @@ import { Button, Divider, Tooltip, message } from "antd";
 import { CheckCircleFilled, ClockCircleFilled, EditOutlined, PlayCircleOutlined, QuestionCircleFilled, SearchOutlined } from "@ant-design/icons";
 import { ProCard, ProList } from "@ant-design/pro-components";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { Title } from "@/components";
+import { ArticleRelated, Title } from "@/components";
 import { AppContext } from "@/models/app-context";
+import { listArticleRandom } from "@/services/article";
 
 export const getServerSideProps: GetServerSideProps<{
     topic: API.ChuongTrinhHoc;
+    articles: API.Article[];
 }> = async (context) => {
     const topic = await getChuongTrinhHoc(context.params?.id);
-    return { props: { topic } };
+    const articles = await listArticleRandom();
+    return { props: { topic, articles } };
 };
 
-export default function Index({ topic }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Index({ topic, articles }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const router = useRouter();
     const [data, setData] = useState<any>();
     const [hasAccess, setHasAccess] = useState<boolean>(false);
     const { user } = useContext<API.AppContext>(AppContext);
 
-      const moduleGroups = useCallback(() => {
-          if (router.query.id) {
-              listNhomBaiGiang(router.query.id).then(response => {
-                  setData(response)
-              });
-              if (user) {
-                  isBought(router.query.id).then(response => {
-                      setHasAccess(response);
-                  })
-              }
-          }
-      }, [router.query.id, user])
+    const moduleGroups = useCallback(() => {
+        if (router.query.id) {
+            listNhomBaiGiang(router.query.id).then(response => {
+                setData(response)
+            });
+            if (user) {
+                isBought(router.query.id).then(response => {
+                    setHasAccess(response);
+                })
+            }
+        }
+    }, [router.query.id, user])
 
     useEffect(() => {
         moduleGroups();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const onPractice = (item: any) => {
@@ -101,10 +103,17 @@ export default function Index({ topic }: InferGetServerSidePropsType<typeof getS
                                 metas={{
                                     title: {
                                         render: (dom, entity) => (
-                                            <div className="text-lg font-medium">
+                                            <div className="text-lg font-medium flex gap-2">
                                                 <div dangerouslySetInnerHTML={{
                                                     __html: entity.name
-                                                }}></div>
+                                                }} onClick={() => onPractice(entity)}></div>
+                                                {
+                                                    entity.free && (
+                                                        <div>
+                                                            <span className="text-xs bg-red-500 text-white p-1 rounded font-normal">Miễn phí</span>
+                                                        </div>
+                                                    )
+                                                }
                                             </div>
                                         )
                                     },
@@ -164,6 +173,7 @@ export default function Index({ topic }: InferGetServerSidePropsType<typeof getS
                     </ProCard>
                 </div>
             </div>
+            <ArticleRelated articles={articles} />
         </>
     )
 }

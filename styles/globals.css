@@ -76,3 +76,7 @@ input {
     align-items: center;
     display: flex;
 }
+
+.wp-block-image {
+    text-align: center;
+}

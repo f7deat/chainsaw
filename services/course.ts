@@ -51,7 +51,7 @@ export async function listHighLight(slug: string) {
 }
 
 export async function listQuestion(id?: string | string[]) {
-  return request.get(`question/danh-sach/${id}`);
+  return request.get(`question/list/${id}`);
 }
 
 export async function checkAnswer(
