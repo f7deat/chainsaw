@@ -2,7 +2,7 @@ import AdminMenu from "@/components/menu/admin";
 import { deleteUser, queryUsers } from "@/services/user";
 import { DeleteOutlined, FolderOutlined } from "@ant-design/icons";
 import { ActionType, ProColumnType, ProTable } from "@ant-design/pro-components";
-import { Button, Popconfirm, message } from "antd";
+import { Button, Card, Empty, Popconfirm, message } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useRef } from "react";
@@ -59,12 +59,35 @@ export default function Index() {
                     <AdminMenu current="users" />
                 </div>
                 <div className="flex-1">
-                    <ProTable 
-                    rowSelection={{}}
-                    search={{
-                        layout: 'vertical'
-                    }}
-                    request={queryUsers} columns={columns} actionRef={actionRef} />
+                    <Card tabList={[
+                        {
+                            key: 'all',
+                            label: 'Tất cả',
+                            children: <ProTable
+                                rowSelection={{}}
+                                search={{
+                                    layout: 'vertical'
+                                }}
+                                request={queryUsers} columns={columns} actionRef={actionRef} />
+                        },
+                        {
+                            key: 'student',
+                            label: 'Học sinh',
+                            children: <Empty />
+                        },
+                        {
+                            key: 'referal',
+                            label: 'Người giới thiệu',
+                            children: <Empty />
+                        },
+                        {
+                            key: 'admin',
+                            label: 'Admin',
+                            children: <Empty />
+                        }
+                    ]}>
+
+                    </Card>
                 </div>
             </main>
         </>

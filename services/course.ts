@@ -126,3 +126,17 @@ export async function fetchAudio(questionId: number, text: string | null) {
     }
   })
 }
+
+export async function activeCourse(data: any) {
+  return request({
+    url: `khoahoc/active-course`,
+    method: 'POST',
+    data
+  })
+}
+
+export async function qyerySelectCourse() {
+  return request({
+    url: `khoahoc/select`
+  })
+}

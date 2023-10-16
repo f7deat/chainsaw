@@ -1,4 +1,5 @@
 import { login } from "@/services/user";
+import { Role } from "@/utils/constants";
 import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
 import { StepsForm, ProFormSelect, ProFormInstance } from "@ant-design/pro-components";
 import { Modal, Button, Space, Form, Input, Typography, message, SelectProps } from "antd";
@@ -36,8 +37,14 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
     const onLogin = async (values: any) => {
         try {
             const data = await login(values);
+            console.log(data);
             if (data.succeeded) {
                 message.success('Đăng nhập thành công!');
+                if (data.roles && data.roles.include(Role.Admin)) {
+                    localStorage.setItem('access_token', data.token);
+                    window.location.reload();
+                    return;
+                }
                 setOptions(data.data.map((u: any) => {
                     return {
                         label: u.user.name,
