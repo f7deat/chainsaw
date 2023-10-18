@@ -40,7 +40,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
             console.log(data);
             if (data.succeeded) {
                 message.success('Đăng nhập thành công!');
-                if (data.roles && data.roles.include(Role.Admin)) {
+                if (data.roles && data.roles.includes(Role.Admin)) {
                     localStorage.setItem('access_token', data.token);
                     window.location.reload();
                     return;

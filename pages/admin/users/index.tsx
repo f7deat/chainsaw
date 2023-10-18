@@ -1,7 +1,7 @@
 import AdminMenu from "@/components/menu/admin";
 import { deleteUser, queryUsers } from "@/services/user";
 import { DeleteOutlined, FolderOutlined } from "@ant-design/icons";
-import { ActionType, ProColumnType, ProTable } from "@ant-design/pro-components";
+import { ActionType, ProCard, ProColumnType, ProTable } from "@ant-design/pro-components";
 import { Button, Card, Empty, Popconfirm, message } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -59,35 +59,27 @@ export default function Index() {
                     <AdminMenu current="users" />
                 </div>
                 <div className="flex-1">
-                    <Card tabList={[
-                        {
-                            key: 'all',
-                            label: 'Tất cả',
-                            children: <ProTable
+                    <ProCard tabs={{
+                        type: 'card'
+                    }}>
+                        <ProCard.TabPane key="all" tab="Tất cả">
+                            <ProTable
                                 rowSelection={{}}
                                 search={{
                                     layout: 'vertical'
                                 }}
                                 request={queryUsers} columns={columns} actionRef={actionRef} />
-                        },
-                        {
-                            key: 'student',
-                            label: 'Học sinh',
-                            children: <Empty />
-                        },
-                        {
-                            key: 'referal',
-                            label: 'Người giới thiệu',
-                            children: <Empty />
-                        },
-                        {
-                            key: 'admin',
-                            label: 'Admin',
-                            children: <Empty />
-                        }
-                    ]}>
-
-                    </Card>
+                        </ProCard.TabPane>
+                        <ProCard.TabPane key="student" tab="Học sinh">
+                            <Empty />
+                        </ProCard.TabPane>
+                        <ProCard.TabPane key="referal" tab="Người giới thiệu">
+                            <Empty />
+                        </ProCard.TabPane>
+                        <ProCard.TabPane key="admin" tab="Admin">
+                            <Empty />
+                        </ProCard.TabPane>
+                    </ProCard>
                 </div>
             </main>
         </>
