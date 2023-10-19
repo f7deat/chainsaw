@@ -1,7 +1,7 @@
 import { listTransactionHistoryByCurrentUser } from "@/services/payment";
-import { MoneyCollectOutlined } from "@ant-design/icons";
-import { ProColumnType, ProTable } from "@ant-design/pro-components";
-import { Button, Tooltip } from "antd";
+import { MoneyCollectOutlined, PlusOutlined } from "@ant-design/icons";
+import { ProCard, ProColumnType, ProTable } from "@ant-design/pro-components";
+import { Button, Empty, Tooltip } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
@@ -21,7 +21,8 @@ export default function Index() {
         {
             title: 'Ngày tạo',
             dataIndex: 'createdDate',
-            valueType: 'dateTime'
+            valueType: 'dateTime',
+            search: false
         },
         {
             title: 'Trạng thái',
@@ -35,7 +36,7 @@ export default function Index() {
             title: '',
             valueType: 'option',
             render: (dom, entity) => [
-                <Tooltip  key="delete" title="Tới thanh toán">
+                <Tooltip key="delete" title="Tới thanh toán">
                     <Button type="primary" icon={<MoneyCollectOutlined />} onClick={() => router.push('/tai-khoan/redeem/thanh-toan')} />
                 </Tooltip>
             ]
@@ -48,10 +49,21 @@ export default function Index() {
                 <title>Lịch sử thanh toán</title>
             </Head>
             <main>
-                <ProTable columns={columns} request={listTransactionHistoryByCurrentUser} search={{
-                    layout: 'vertical'
-                }}
-                rowSelection={{}} />
+                <div className="md:flex gap-4">
+                    <div className="md:w-2/3">
+                        <ProCard title="Lịch sử thanh toán" headerBordered className="shadow">
+                            <ProTable columns={columns} request={listTransactionHistoryByCurrentUser} search={{
+                                layout: 'vertical'
+                            }}
+                                rowSelection={{}} />
+                        </ProCard>
+                    </div>
+                    <div className="md:w-1/3">
+                        <ProCard title="Thông tin thanh toán" className="shadow" headerBordered extra={<Button type="primary">Thêm</Button>}>
+                            <Empty />
+                        </ProCard>
+                    </div>
+                </div>
             </main>
         </>
     )

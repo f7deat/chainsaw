@@ -1,8 +1,8 @@
 import { Title } from "@/components";
 import { QuestionCircleOutlined } from "@ant-design/icons";
-import { Badge, BadgeProps, Calendar } from "antd";
+import { Badge, BadgeProps, Calendar, message } from "antd";
 import Head from "next/head";
-import type { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 export default function Index() {
 
@@ -67,7 +67,18 @@ export default function Index() {
             <main>
                 <Title subTitle="Checkin" title="Điểm danh hằng ngày" />
                 <div className="mb-4">
-                    <Calendar cellRender={cellRender} />
+                    <Calendar cellRender={cellRender}
+                        disabledDate={(currentDate: Dayjs) => {
+                            return dayjs() > currentDate.add(1, 'day')
+                        }}
+                        onSelect={(date) => {
+                            console.log(date)
+                            if (date.day() !== dayjs().day()) {
+                                return;
+                            }
+                            message.success('Điểm danh thành công!');
+                        }}
+                    />
                 </div>
                 <div className="mb-4 flex justify-end gap-4">
                     <button>

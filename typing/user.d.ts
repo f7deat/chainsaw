@@ -22,4 +22,9 @@ namespace API {
     country: string;
     bio: string;
   }
+
+  type Role = BaseEntity & {
+    name: string;
+    normalizedName: string;
+  }
 }

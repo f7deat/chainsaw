@@ -1,7 +1,7 @@
 import AdminMenu from "@/components/menu/admin";
 import { HomeOutlined } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
-import { Breadcrumb } from "antd";
+import { Breadcrumb, Statistic } from "antd";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -39,6 +39,11 @@ export default function Index() {
                         <AdminMenu current="dashboard" />
                     </div>
                     <div className="flex-1">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <ProCard className="shadow">
+                                <Statistic title="Học viên" value={0} />
+                            </ProCard>
+                        </div>
                         <ProCard />
                     </div>
                 </div>
