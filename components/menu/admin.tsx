@@ -1,4 +1,4 @@
-import { BookOutlined, CameraOutlined, CommentOutlined, DashboardOutlined, HistoryOutlined, MoneyCollectOutlined, SettingOutlined, TransactionOutlined, UserOutlined } from "@ant-design/icons";
+import { BookOutlined, CameraOutlined, CommentOutlined, DashboardOutlined, HistoryOutlined, HomeOutlined, MoneyCollectOutlined, SettingOutlined, TransactionOutlined, UserOutlined } from "@ant-design/icons";
 import { MenuProps, Menu } from "antd";
 import { useRouter } from "next/router";
 
@@ -25,6 +25,11 @@ const AdminMenu: React.FC<AdminMenuProps> = ({ current }) => {
             label: 'Người dùng',
             key: 'users',
             icon: <UserOutlined />
+        },
+        {
+            label: 'Trường học',
+            key: 'schools',
+            icon: <HomeOutlined />
         },
         {
             label: 'Bình luận',
@@ -61,12 +66,16 @@ const AdminMenu: React.FC<AdminMenuProps> = ({ current }) => {
         } else if (e.key === 'users') {
             router.push('/admin/users');
         }
+        if (e.key === 'schools') {
+            router.push('/admin/schools');
+            return;
+        }
         console.log('click ', e);
     };
     return (
-        <>
+        <div className="w-64">
             <Menu onClick={onClick} selectedKeys={[current]} mode="vertical" items={items} />
-        </>
+        </div>
     )
 }
 

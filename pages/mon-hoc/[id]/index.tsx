@@ -1,4 +1,4 @@
-import { listChuongTrinhHocBySubjectId } from "@/services/course";
+import { listTopicBySubjectIdServer } from "@/services/course";
 import { getSubject } from "@/services/subject";
 import { EyeOutlined } from "@ant-design/icons";
 import { ProColumns, ProTable } from "@ant-design/pro-components";
@@ -9,16 +9,18 @@ import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 
 export const getServerSideProps: GetServerSideProps<{
     subject: API.Subject;
+    topics: API.Topic[];
 }> = async (context) => {
     const subject = await getSubject(context.params?.id);
-    return { props: { subject } };
+    const topics = await listTopicBySubjectIdServer(context.params?.id);
+    return { props: { subject, topics: topics.data } };
 };
 
-export default function Index({ subject }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Index({ subject, topics }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
     const router = useRouter();
 
-    const columns: ProColumns<any>[] = [
+    const columns: ProColumns<API.Topic>[] = [
         {
             title: '#',
             valueType: 'indexBorder',
@@ -46,7 +48,7 @@ export default function Index({ subject }: InferGetServerSidePropsType<typeof ge
                 router?.query?.id && (
                     <ProTable
                         rowKey="id"
-                        request={(params) => listChuongTrinhHocBySubjectId(params, router.query.id)}
+                        dataSource={topics}
                         columns={columns}
                     />
                 )

@@ -99,7 +99,7 @@ export async function getChuongTrinhHoc(id?: string | string[]) {
   return res.json();
 }
 
-export async function listChuongTrinhHocBySubjectId(
+export async function listTopicBySubjectId(
   params: any,
   id?: string | string[] | number
 ) {
@@ -107,6 +107,11 @@ export async function listChuongTrinhHocBySubjectId(
     url: `subject/chuong-trinh-hoc/${id}`,
     params,
   });
+}
+
+export async function listTopicBySubjectIdServer(id?: string | string[] | number) {
+  const res = await fetch(`${API_HOST}subject/chuong-trinh-hoc/${id}`);
+  return res.json();
 }
 
 export async function resetResult(id?: string | string[]) {

@@ -1,7 +1,7 @@
 import { ArticleRelated, Title } from "@/components";
 import { listArticleRandom } from "@/services/article";
 import { listSubject } from "@/services/subject";
-import { BookOutlined, ExportOutlined, EyeOutlined, GlobalOutlined } from "@ant-design/icons";
+import { ExportOutlined, GlobalOutlined } from "@ant-design/icons";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import Link from "next/link";

@@ -1,4 +1,4 @@
-import { listChuongTrinhHocBySubjectId } from "@/services/course"
+import { listTopicBySubjectId } from "@/services/course"
 import { ProList } from "@ant-design/pro-components"
 import { Rate } from "antd";
 import Link from "next/link"
@@ -14,7 +14,7 @@ const ChuongTrinhHocBySubject: React.FC<ChuongTrinhHocBySubjectProps> = (props) 
     return (
         <ProList<API.TopicListItem>
             headerTitle={props.headerTitle}
-            request={() => listChuongTrinhHocBySubjectId({
+            request={() => listTopicBySubjectId({
                 pageSize: 4,
                 current: 1
             }, props.id)}

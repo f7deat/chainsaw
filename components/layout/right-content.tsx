@@ -1,4 +1,4 @@
-import { BarChartOutlined, BellOutlined, BookOutlined, CalendarOutlined, LogoutOutlined, MoneyCollectOutlined, UserOutlined } from "@ant-design/icons"
+import { BarChartOutlined, BellOutlined, BookOutlined, CalendarOutlined, DashboardOutlined, LogoutOutlined, MoneyCollectOutlined, UserOutlined } from "@ant-design/icons"
 import { Avatar, Badge, Button } from "antd"
 import HeaderDropdown from "./header-dropdown"
 import { useRouter } from "next/router";
@@ -48,16 +48,27 @@ const RightContent: React.FC = () => {
             router.push(`/tai-khoan/thu-nhap`);
             return;
         }
+        if (key === 'admin') {
+            router.push(`/admin`);
+            return;
+        }
         router.push(`/tai-khoan/${key}`);
     }
 
     const menuItems = [
-        ...(user?.roles?.find((x: any) => x === Role.Referal) ?
-            [{
-                key: 'refer',
-                icon: <MoneyCollectOutlined />,
-                label: 'Thu nhập của tôi',
-            }] : [
+        ...(user?.roles?.find((x: any) => x === Role.Referal || x === Role.Admin) ?
+            [
+                {
+                    key: 'admin',
+                    icon: <DashboardOutlined />,
+                    label: 'Quản trị',
+                },
+                {
+                    key: 'refer',
+                    icon: <MoneyCollectOutlined />,
+                    label: 'Thu nhập của tôi',
+                }
+            ] : [
                 {
                     key: 'settings',
                     icon: <BookOutlined />,
@@ -105,13 +116,13 @@ const RightContent: React.FC = () => {
                     </picture> : <div className="bg-gray-500">
                         <UserOutlined />
                     </div>} />
-                    <div className="text-left">
+                    <div className="text-left cursor-pointer">
                         <div className="text-xs">Xin chào,</div>
-                        <div className="font-medium text-sm">{user?.name}</div>
+                        <div className="font-medium text-sm hover:text-blue-500">{user?.name}</div>
                     </div>
                 </div>
             </HeaderDropdown>
-            <button onClick={() => router.push('/thong-bao')}>
+            <button onClick={() => router.push('/thong-bao')} className="hover:scale-125 ml-2 transition">
                 <Badge count={notiCount}>
                     <Avatar icon={<BellOutlined />} />
                 </Badge>

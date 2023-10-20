@@ -23,6 +23,12 @@ declare namespace API {
         gia: number;
         giaCu: number;
     }
+    type Topic = {
+        id: number;
+        name: string;
+        description: string;
+        thumbnail: string;
+    }
     type QuestionListItem = {
         id: number;
         answerNumber: number;

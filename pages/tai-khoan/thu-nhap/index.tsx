@@ -66,23 +66,23 @@ export default function Index() {
             </Head>
             <div className="md:flex gap-4">
                 <div className="md:w-1/4">
-                    <ProCard 
-                    title="Thông tin" 
-                    headerBordered className="mb-4"
-                    actions={[
-                        <HeatMapOutlined key={1} />,
-                        <EyeOutlined key={2} />
-                    ]}
+                    <ProCard
+                        title="Thông tin"
+                        headerBordered className="mb-4"
+                        actions={[
+                            <HeatMapOutlined key={1} />,
+                            <EyeOutlined key={2} />
+                        ]}
                     >
                         <div className="text-base mb-2">
                             <HomeOutlined className="text-sm text-gray-400 mr-2" />
                             Trường: <b>{school?.name}</b>
                         </div>
                         <div className="text-base mb-2">
-                            <UserAddOutlined className="text-sm text-gray-400 mr-2" /> 
+                            <UserAddOutlined className="text-sm text-gray-400 mr-2" />
                             <span className="mr-2">Chức vụ:</span>
                             <span className="font-medium">
-                                { user?.roles.includes('President') ? 'Hiệu trưởng' : 'Giáo viên'}
+                                {user?.roles.includes('President') ? 'Hiệu trưởng' : 'Giáo viên'}
                             </span>
                         </div>
                         <div className="text-base mb-2">
