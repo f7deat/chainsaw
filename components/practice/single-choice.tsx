@@ -56,13 +56,13 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
                         Câu {index + 1}
                     </span>
                 </div>
-                <div className="text-3xl mb-5 text-center image-central" dangerouslySetInnerHTML={{ __html: data.title }} />
-                <div className="text-3xl mb-5 text-center" dangerouslySetInnerHTML={{ __html: data.content }} />
+                <div className="text-3xl mb-5 text-center image-central" dangerouslySetInnerHTML={{ __html: data?.title }} />
+                <div className="text-3xl mb-5 text-center" dangerouslySetInnerHTML={{ __html: data?.content }} />
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Divider />
-                <div className={`grid grid-cols-2 md:grid-cols-${data.answers.length} gap-4 mb-4`}>
+                <div className={`grid grid-cols-2 md:grid-cols-${data?.answers.length} gap-4 mb-4`}>
                     {
-                        data.answers.map(answer => (
+                        data?.answers.map(answer => (
                             <div key={answer.id} className="flex justify-center">
                                 <button type="button"
                                     className={`py-4 px-8 flex justify-center w-full items-center hover:bg-slate-200 rounded border ${getBorder(answer)}`}
