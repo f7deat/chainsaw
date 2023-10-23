@@ -16,7 +16,7 @@ export const formatDate = (input?: Date) => {
     return dayjs(input).format('DD/MM/YYYY')
 }
 
-export const stripeHTML = (html: string) => {
+export const stripeHTML = (html?: string) => {
     if (!html) {
         return '';
     }

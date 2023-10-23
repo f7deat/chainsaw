@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import Rate from "../commons/rate";
 import { AppContext } from "@/models/app-context";
-import { formatter } from "@/utils/formatter";
+import { formatter, stripeHTML } from "@/utils/formatter";
 
 type CourseSummaryProps = {
     isBought: boolean;
@@ -50,7 +50,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                 <Rate value={5} />
             </div>
             <div className="mb-4 text-gray-500 text-base">
-                {props.data?.moTaChuongTrinh}
+                {stripeHTML(props.data?.moTaChuongTrinh)}
             </div>
             <div className="py-4 text-center" hidden={!props.isBought}>
                 <div className="px-10 py-2 rounded bg-green-500 text-white">

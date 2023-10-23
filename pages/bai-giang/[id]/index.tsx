@@ -26,8 +26,8 @@ export default function Index({ topic, articles }: InferGetServerSidePropsType<t
     const [hasAccess, setHasAccess] = useState<boolean>(false);
     const { user } = useContext<API.AppContext>(AppContext);
 
-    const moduleGroups = useCallback(() => {
-        if (router.query.id) {
+    useEffect(() => {
+        if (router?.query?.id) {
             listNhomBaiGiang(router.query.id).then(response => {
                 setData(response)
             });
@@ -37,11 +37,7 @@ export default function Index({ topic, articles }: InferGetServerSidePropsType<t
                 })
             }
         }
-    }, [router.query.id, user])
-
-    useEffect(() => {
-        moduleGroups();
-    }, []);
+    }, [router, user]);
 
     const onPractice = (item: any) => {
         const token = localStorage.getItem('access_token');

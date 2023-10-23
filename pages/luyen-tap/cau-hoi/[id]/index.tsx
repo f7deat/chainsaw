@@ -25,8 +25,8 @@ export const getServerSideProps: GetServerSideProps<{
         topic: string;
     };
 }> = async (context) => {
-    const module = await getBaiGiang2(context.params?.id);
-    return { props: { module } };
+    const response = await getBaiGiang2(context.params?.id);
+    return { props: { module: response } };
 };
 
 export default function Index({ module }: InferGetServerSidePropsType<typeof getServerSideProps>) {
