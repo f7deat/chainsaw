@@ -4,9 +4,9 @@ import Speech from "@/components/practice/speech";
 import { getBaiGiang2, listQuestion, resetResult } from "@/services/course";
 import { playAudio } from "@/utils/audio";
 import { QuestionType } from "@/utils/constants";
-import { ArrowLeftOutlined, ArrowRightOutlined, BookOutlined, CheckCircleOutlined, GiftOutlined, HomeOutlined, InfoCircleOutlined, RedoOutlined, SoundOutlined, StopOutlined } from "@ant-design/icons";
+import { BookOutlined, CheckCircleOutlined, GiftOutlined, HomeOutlined, InfoCircleOutlined, LeftOutlined, RedoOutlined, RightOutlined, SoundOutlined, StopOutlined } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
-import { Alert, Breadcrumb, Button, Divider, Empty, Popconfirm, Popover, Space, Tabs, message } from "antd";
+import { Alert, Breadcrumb, Button, Divider, Empty, Popconfirm, Popover, Space, Tabs, Tooltip, message } from "antd";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -37,7 +37,7 @@ export default function Index({ module }: InferGetServerSidePropsType<typeof get
     const [learn, setLearn] = useState<API.QuestionListItem[]>([]);
     const [quiz, setQuiz] = useState<API.QuestionListItem[]>([]);
     const [activeTab, setActiveTab] = useState<string>('learn');
-    const [learnDisabled, setLearnDisabled] = useState<boolean>(false); 
+    const [learnDisabled, setLearnDisabled] = useState<boolean>(false);
 
     useEffect(() => {
         if (router?.query?.id) {
@@ -187,7 +187,12 @@ export default function Index({ module }: InferGetServerSidePropsType<typeof get
                                     label: labelRender(item, i + 1),
                                     key: id,
                                     children: (
-                                        <div>
+                                        <div className="relative">
+                                            <div className="absolute left-0 inset-y-1/2">
+                                                <Button type="primary" shape="circle" disabled={activeKey === "0"} onClick={() => onNextTab(false)}>
+                                                    <span><LeftOutlined /></span>
+                                                </Button>
+                                            </div>
                                             {
                                                 (module?.subjectId === 1 && item.title) && (
                                                     <Button className="flex items-center" onClick={() => speak(item.title, item.id, item.voiceUrl)} icon={<SoundOutlined />}>Nghe đọc bài</Button>
@@ -212,6 +217,12 @@ export default function Index({ module }: InferGetServerSidePropsType<typeof get
                                                     )
                                                 }
                                             </div>
+                                            <div className="absolute right-0 inset-y-1/2">
+                                                <Button type="primary" shape="circle"
+                                                    disabled={activeKey === (items?.length - 1).toString()} onClick={() => onNextTab(true)}>
+                                                    <span><RightOutlined /></span>
+                                                </Button>
+                                            </div>
                                         </div>
                                     ),
                                 };
@@ -224,24 +235,6 @@ export default function Index({ module }: InferGetServerSidePropsType<typeof get
                         <Script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" />
                     </>
                 ) : <Empty />
-            }
-            {
-                data && (
-                    <div className="flex mt-4 justify-between">
-                        <Button type="primary" disabled={activeKey === "0"} onClick={() => onNextTab(false)}>
-                            <Space>
-                                <ArrowLeftOutlined />
-                                Câu hỏi trước
-                            </Space>
-                        </Button>
-                        <Button type="primary" disabled={activeKey === (data?.length - 1).toString()} onClick={() => onNextTab(true)}>
-                            <Space>
-                                Câu hỏi sau
-                                <ArrowRightOutlined />
-                            </Space>
-                        </Button>
-                    </div>
-                )
             }
         </>
     )
