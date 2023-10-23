@@ -26,6 +26,10 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
             return;
         }
         const response = await getParent();
+        if (!response.data.phoneNumber) {
+            message.warning('Vui lòng cập nhật số điện thoại!');
+            return;
+        }
         setParrent(response.data);
         setOpen(true);
     }

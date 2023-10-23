@@ -110,7 +110,7 @@ export default function Index({ topic, articles }: InferGetServerSidePropsType<t
                                                 {
                                                     entity.free && (
                                                         <div>
-                                                            <span className="text-xs bg-red-500 text-white p-1 rounded font-normal">Miễn phí</span>
+                                                            <span className="text-xs bg-red-500 text-white px-1 rounded font-normal animate-bounce absolute">Miễn phí</span>
                                                         </div>
                                                     )
                                                 }

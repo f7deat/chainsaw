@@ -98,8 +98,6 @@ export default function Home({ teachers }: InferGetServerSidePropsType<typeof ge
           </Modal>
         )
       }
-
-
     </>
   )
 }

@@ -34,21 +34,22 @@ export default function Profile() {
                   children: <StudentInfo />,
                 },
                 {
-                  label: 'Đổi mật khẩu',
-                  key: 'setting',
-                  children: <ChangePasswordComponent />,
-                },
-                {
                   label: 'Thông tin phụ huynh',
                   key: 'parent',
                   children: <ParentInfo />,
                   disabled: !user?.roles?.includes(Role.Student)
                 },
                 {
+                  label: 'Đổi mật khẩu',
+                  key: 'setting',
+                  children: <ChangePasswordComponent />,
+                  disabled: user?.roles.includes(Role.Student)
+                },
+                {
                   label: 'Thêm thành viên',
                   key: 'add',
                   children: <AddMember />,
-                  disabled: user?.roles?.includes(Role.Referal)
+                  disabled: user?.roles?.includes(Role.Referal) || user?.roles.includes(Role.Student)
                 },
               ],
               onChange: (key) => {

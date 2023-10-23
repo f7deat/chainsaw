@@ -15,3 +15,12 @@ export const formatDate = (input?: Date) => {
     }
     return dayjs(input).format('DD/MM/YYYY')
 }
+
+export const stripeHTML = (html: string) => {
+    if (!html) {
+        return '';
+    }
+    const dom = document.createElement('div');
+    dom.innerHTML = html;
+    return dom.textContent;
+}

@@ -1,24 +1,43 @@
 import CommentComponent from "@/components/comment";
 import { BaiGiang, DragDrop, FreeInput, MultipleChoice, OrderChoice, SingleChoice } from "@/components/practice";
 import Speech from "@/components/practice/speech";
-import { fetchAudio, getBaiGiang, listQuestion, resetResult } from "@/services/course";
+import { getBaiGiang2, listQuestion, resetResult } from "@/services/course";
 import { playAudio } from "@/utils/audio";
 import { QuestionType } from "@/utils/constants";
 import { ArrowLeftOutlined, ArrowRightOutlined, BookOutlined, CheckCircleOutlined, GiftOutlined, HomeOutlined, InfoCircleOutlined, RedoOutlined, SoundOutlined, StopOutlined } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
 import { Alert, Breadcrumb, Button, Divider, Empty, Popconfirm, Popover, Space, Tabs, message } from "antd";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Script from "next/script";
 import { Fragment, useEffect, useState } from "react";
 
-export default function Index() {
+export const getServerSideProps: GetServerSideProps<{
+    module: {
+        id: number;
+        name: string;
+        video: string;
+        subjectId: number;
+        subject: string;
+        topicId: number;
+        topic: string;
+    };
+}> = async (context) => {
+    const module = await getBaiGiang2(context.params?.id);
+    return { props: { module } };
+};
+
+export default function Index({ module }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const router = useRouter();
     const [data, setData] = useState<API.QuestionListItem[]>([]);
     const [error, setError] = useState<string>();
-    const [module, setModule] = useState<any>();
     const [activeKey, setActiveKey] = useState<string>('0');
+    const [learn, setLearn] = useState<API.QuestionListItem[]>([]);
+    const [quiz, setQuiz] = useState<API.QuestionListItem[]>([]);
+    const [activeTab, setActiveTab] = useState<string>('learn');
+    const [learnDisabled, setLearnDisabled] = useState<boolean>(false); 
 
     useEffect(() => {
         if (router?.query?.id) {
@@ -26,6 +45,13 @@ export default function Index() {
                 if (response.succeeded) {
                     if (response.data) {
                         setData(response.data);
+                        const learnData = response.data.filter((x: any) => x.type === QuestionType.BAI_GIANG);
+                        if (!learnData || learnData.length < 1) {
+                            setActiveTab('pratice');
+                            setLearnDisabled(true);
+                        }
+                        setLearn(learnData);
+                        setQuiz(response.data.filter((x: any) => x.type !== QuestionType.BAI_GIANG));
                         let point = 0;
                         const length = response.data.filter((x: API.QuestionListItem) => x.type !== 'baigiang').length;
                         for (let index = 0; index < length; index++) {
@@ -44,9 +70,6 @@ export default function Index() {
                     }
                 }
             });
-            getBaiGiang(router.query.id).then(response => {
-                setModule(response);
-            })
         }
     }, [router])
 
@@ -145,6 +168,84 @@ export default function Index() {
         return <Fragment />
     }
 
+    const RenderObject = (items: API.QuestionListItem[]) => (
+        <>
+            {
+                error ? <Alert type="error" message={error} /> : (<Fragment />)
+            }
+
+            {
+                items?.length > 0 ? (
+                    <>
+                        <Tabs
+                            type="card"
+                            activeKey={activeKey}
+                            tabPosition="top"
+                            items={items?.map((item: API.QuestionListItem, i: number) => {
+                                const id = String(i);
+                                return {
+                                    label: labelRender(item, i + 1),
+                                    key: id,
+                                    children: (
+                                        <div>
+                                            {
+                                                (module?.subjectId === 1 && item.title) && (
+                                                    <Button className="flex items-center" onClick={() => speak(item.title, item.id, item.voiceUrl)} icon={<SoundOutlined />}>Nghe đọc bài</Button>
+                                                )
+                                            }
+                                            {renderTab(item, i)}
+                                            <div className="mb-4">
+                                                {ShowMessage(item)}
+                                            </div>
+                                            <div className="flex justify-end gap-2">
+                                                {
+                                                    (module?.subjectId === 1 && item.suggestion) && (
+                                                        <Popover content={
+                                                            <div dangerouslySetInnerHTML={{ __html: item.suggestion }} />
+                                                        } trigger="click">
+                                                            <Button type="link">
+                                                                <Space>
+                                                                    <InfoCircleOutlined /> Gợi ý
+                                                                </Space>
+                                                            </Button>
+                                                        </Popover>
+                                                    )
+                                                }
+                                            </div>
+                                        </div>
+                                    ),
+                                };
+                            })}
+                            onTabClick={(activeKey) => {
+                                setActiveKey(activeKey);
+                                onSound(Number(activeKey));
+                            }}
+                        />
+                        <Script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" />
+                    </>
+                ) : <Empty />
+            }
+            {
+                data && (
+                    <div className="flex mt-4 justify-between">
+                        <Button type="primary" disabled={activeKey === "0"} onClick={() => onNextTab(false)}>
+                            <Space>
+                                <ArrowLeftOutlined />
+                                Câu hỏi trước
+                            </Space>
+                        </Button>
+                        <Button type="primary" disabled={activeKey === (data?.length - 1).toString()} onClick={() => onNextTab(true)}>
+                            <Space>
+                                Câu hỏi sau
+                                <ArrowRightOutlined />
+                            </Space>
+                        </Button>
+                    </div>
+                )
+            }
+        </>
+    )
+
     return (
         <>
             <Head>
@@ -179,6 +280,23 @@ export default function Index() {
                 </div>
                 <div className="text-blue-700 md:text-4xl text-2xl font-medium mb-8 text-center">{module?.name}</div>
                 <ProCard
+                    tabs={{
+                        activeKey: activeTab,
+                        onChange: (actKey) => setActiveTab(actKey),
+                        items: [
+                            {
+                                label: 'Bài giảng',
+                                children: RenderObject(learn),
+                                key: 'learn',
+                                disabled: learnDisabled
+                            },
+                            {
+                                label: 'Luyện tập',
+                                children: RenderObject(quiz),
+                                key: 'pratice'
+                            }
+                        ]
+                    }}
                     title={(
                         <div className="p-2 text-blue-500 text-2xl text-center bg-white font-medium flex gap-2">
                             <GiftOutlined />
@@ -197,79 +315,7 @@ export default function Index() {
                         </Button>
                     </Popconfirm>}
                 >
-                    {
-                        error ? <Alert type="error" message={error} /> : (<Fragment />)
-                    }
 
-                    {
-                        data?.length > 0 ? (
-                            <>
-                                <Tabs
-                                    type="card"
-                                    activeKey={activeKey}
-                                    tabPosition="top"
-                                    items={data?.map((item: API.QuestionListItem, i: number) => {
-                                        const id = String(i);
-                                        return {
-                                            label: labelRender(item, i + 1),
-                                            key: id,
-                                            children: (
-                                                <div>
-                                                    {
-                                                        (module?.subjectId === 1 && item.title) && (
-                                                            <Button className="flex items-center" onClick={() => speak(item.title, item.id, item.voiceUrl)} icon={<SoundOutlined />}>Nghe đọc bài</Button>
-                                                        )
-                                                    }
-                                                    {renderTab(item, i)}
-                                                    <div className="mb-4">
-                                                        {ShowMessage(item)}
-                                                    </div>
-                                                    <div className="flex justify-end gap-2">
-                                                        {
-                                                            (module?.subjectId === 1 && item.suggestion) && (
-                                                                <Popover content={
-                                                                    <div dangerouslySetInnerHTML={{ __html: item.suggestion }} />
-                                                                } trigger="click">
-                                                                    <Button type="link">
-                                                                        <Space>
-                                                                            <InfoCircleOutlined /> Gợi ý
-                                                                        </Space>
-                                                                    </Button>
-                                                                </Popover>
-                                                            )
-                                                        }
-                                                    </div>
-                                                </div>
-                                            ),
-                                        };
-                                    })}
-                                    onTabClick={(activeKey) => {
-                                        setActiveKey(activeKey);
-                                        onSound(Number(activeKey));
-                                    }}
-                                />
-                                <Script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" />
-                            </>
-                        ) : <Empty />
-                    }
-                    {
-                        data && (
-                            <div className="flex mt-4 justify-between">
-                                <Button type="primary" disabled={activeKey === "0"} onClick={() => onNextTab(false)}>
-                                    <Space>
-                                        <ArrowLeftOutlined />
-                                        Câu hỏi trước
-                                    </Space>
-                                </Button>
-                                <Button type="primary" disabled={activeKey === (data?.length - 1).toString()} onClick={() => onNextTab(true)}>
-                                    <Space>
-                                        Câu hỏi sau
-                                        <ArrowRightOutlined />
-                                    </Space>
-                                </Button>
-                            </div>
-                        )
-                    }
                 </ProCard>
                 <Divider />
                 <div className="md:grid-cols-2"></div>

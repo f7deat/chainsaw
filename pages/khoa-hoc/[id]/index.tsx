@@ -1,6 +1,7 @@
 import { ArticleRelated, Title } from "@/components";
 import { listArticle } from "@/services/article";
 import { listTopic, queryKhoaHoc } from "@/services/course";
+import { stripeHTML } from "@/utils/formatter";
 import { BookOutlined, HomeOutlined } from "@ant-design/icons";
 import { Breadcrumb, Pagination, PaginationProps, Rate } from "antd";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
@@ -86,12 +87,12 @@ export default function Index({ course, topics, total, articles }: InferGetServe
                                         </Link>
                                         <div className="px-2 pb-1">
                                             <Link href={`/bai-giang/${topic.id}`}>
-                                                <div className="line-clamp-2 font-medium text-blue-500 mb-1 min-h-[50px]">{topic.name}</div>
+                                                <div className="line-clamp-2 font-medium text-blue-500 mb-1 min-h-[50px] text-lg hover:text-blue-600">{topic.name}</div>
                                             </Link>
                                             <div className="text-right mb-2">
                                                 <Rate defaultValue={5} disabled />
                                             </div>
-                                            <div className="line-clamp-3 text-gray-500 text-sm">{topic.description}</div>
+                                            <div className="line-clamp-3 text-gray-500">{stripeHTML(topic.description)}</div>
                                         </div>
                                     </div>
                                 </div>

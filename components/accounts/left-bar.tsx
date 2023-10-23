@@ -1,7 +1,8 @@
 import { AppContext } from "@/models/app-context";
 import { changeAvatar } from "@/services/user";
+import { Role } from "@/utils/constants";
 import { formatDate } from "@/utils/formatter";
-import { BarChartOutlined, CalendarOutlined, EditOutlined, MessageOutlined, MoneyCollectOutlined, UserAddOutlined } from "@ant-design/icons"
+import { BarChartOutlined, BookOutlined, CalendarOutlined, EditOutlined, MessageOutlined, MoneyCollectOutlined, UserAddOutlined } from "@ant-design/icons"
 import { ProCard } from "@ant-design/pro-components";
 import { Image, Space, Tooltip, Upload, UploadProps, message } from "antd"
 import Link from "next/link"
@@ -69,24 +70,42 @@ const AccountLeftBar: React.FC<AccountLeftBarProps> = (props) => {
                         </Space>
                     </div>
                 </Link>
-                <Link href={`/tai-khoan/diem-danh`}>
-                    <div className={`px-4 py-2 rounded border mb-1 hover:border-blue-500`}>
-                        <Space>
-                            <CalendarOutlined />
-                            <div className="text-lg">
-                                Điểm danh
-                            </div>
-                        </Space>
-                    </div>
-                </Link>
-                <Link href={`/tai-khoan/thanh-toan/lich-su`} className="px-4 py-2 rounded border mb-1 hover:border-blue-500 block">
-                    <Space>
-                        <MoneyCollectOutlined />
-                        <div className="text-lg">
-                            Lịch sử thanh toán
+                {
+                    user?.roles.includes(Role.Student) && (
+                        <div>
+                            <Link href={`/tai-khoan/khoa-hoc`} className="px-4 py-2 rounded border mb-1 hover:border-blue-500 block">
+                                <Space>
+                                    <BookOutlined />
+                                    <div className="text-lg">
+                                        Khóa học của tôi
+                                    </div>
+                                </Space>
+                            </Link>
+                            <Link href={`/tai-khoan/diem-danh`}>
+                                <div className={`px-4 py-2 rounded border mb-1 hover:border-blue-500`}>
+                                    <Space>
+                                        <CalendarOutlined />
+                                        <div className="text-lg">
+                                            Điểm danh
+                                        </div>
+                                    </Space>
+                                </div>
+                            </Link>
                         </div>
-                    </Space>
-                </Link>
+                    )
+                }
+                {
+                    !user?.roles.includes(Role.Student) && (
+                        <Link href={`/tai-khoan/thanh-toan/lich-su`} className="px-4 py-2 rounded border mb-1 hover:border-blue-500 block">
+                            <Space>
+                                <MoneyCollectOutlined />
+                                <div className="text-lg">
+                                    Lịch sử thanh toán
+                                </div>
+                            </Space>
+                        </Link>
+                    )
+                }
             </ProCard>
         </div>
     )
