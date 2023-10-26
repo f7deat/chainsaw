@@ -4,8 +4,7 @@ import { LeftOutlined, SoundOutlined, InfoCircleOutlined, RightOutlined, CheckCi
 import { Alert, Tabs, Button, Popover, Space, Empty, message } from "antd";
 import Script from "next/script";
 import { Fragment, useState } from "react";
-import { FreeInput } from ".";
-import BaiGiang from "./bai-giang";
+import { FreeInput, Mime } from ".";
 import DragDrop from "./drag-drop";
 import MultipleChoice from "./multiple-choice";
 import SingleChoice from "./single-choice";
@@ -52,7 +51,7 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
         } else if (item.type === QuestionType.MULTIPLE_CHOICE) {
             return <MultipleChoice data={item} index={index} score={score} setScore={setScore} />
         } else if (item.type === QuestionType.BAI_GIANG) {
-            return <BaiGiang data={item} index={index} />
+            return <Mime data={item} index={index} />
         } else if (item.type === QuestionType.SORTABLE) {
             return <OrderChoice data={item} index={index} score={score} setScore={setScore} />
         } else if (item.type === QuestionType.SPEECH) {
@@ -61,13 +60,6 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
             return <DragDrop data={item} index={index} score={score} setScore={setScore} />
         }
         return <SingleChoice data={item} index={index} score={score} setScore={setScore} />
-    }
-
-    const onSound = (index: number) => {
-        const question = items[index];
-        if (question?.suggestion.endsWith('.mp3') || question?.suggestion.endsWith('.m4a')) {
-            playAudio(question?.suggestion);
-        }
     }
 
     const speak = (text: string, questionId: number, voiceUrl?: string) => {
@@ -109,7 +101,6 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
     const onNextTab = (isNext: boolean) => {
         const newKey = isNext ? (Number(activeKey)) + 1 : (Number(activeKey)) - 1;
         setActiveKey(newKey.toString());
-        onSound(newKey)
     }
 
     return (
@@ -173,7 +164,6 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                             })}
                             onTabClick={(activeKey) => {
                                 setActiveKey(activeKey);
-                                onSound(Number(activeKey));
                             }}
                         />
                         <Script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" />

@@ -1,25 +1,18 @@
 import { playAudio } from "@/utils/audio";
 import { SoundOutlined } from "@ant-design/icons";
-import { Button, Divider, Space, Typography } from "antd";
+import { Button, Divider, Typography } from "antd";
 
-type BaiGiangProps = {
+type MimeProps = {
     data: API.QuestionListItem;
     index: number;
 }
 
-const BaiGiang: React.FC<BaiGiangProps> = (props) => {
+const Mime: React.FC<MimeProps> = (props) => {
 
     const { data, index } = props;
 
-    const onListen = () => {
-        playAudio(data.suggestion);
-    }
-
     return (
         <div className="flex flex-col items-center justify-center p-4">
-            <div className="mb-10">
-                <button className="bg-blue-500 text-white text-2xl px-6 py-2 shadow rounded-lg uppercase font-medium">Câu {index + 1}</button>
-            </div>
             <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
                 __html: data.title
             }}></div>
@@ -29,17 +22,15 @@ const BaiGiang: React.FC<BaiGiangProps> = (props) => {
 
             {
                 data?.suggestion && (
-                    <Button onClick={onListen} size="large" type="primary">
-                        <Space>
-                            <SoundOutlined />
-                            <span className="font-medium">Nghe lại</span>
-                        </Space>
-                    </Button>
+                    <audio controls>
+                        <source src={data.suggestion} type="audio/mpeg" />
+                        Your browser does not support the audio element.
+                    </audio>
                 )
             }
 
             <Divider dashed />
-            <div className={`grid md:grid-cols-${data.answers.length} gap-4`}>
+            <div className={`grid md:grid-cols-${data.answers.length} gap-4 mb-4`}>
                 {
                     data.answers.map(answer => (
                         <div key={answer.id} className={`${answer.text ? 'flex' : 'hidden'} justify-center`}>
@@ -62,8 +53,11 @@ const BaiGiang: React.FC<BaiGiangProps> = (props) => {
                     ))
                 }
             </div>
+            <div className="text-center">
+                Trang {index + 1}
+            </div>
         </div>
     )
 }
 
-export default BaiGiang
+export default Mime

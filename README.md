@@ -13,3 +13,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Testing
 
 Account: 0911717772/Password@123
+
+### Các loại câu hỏi:
+
+- Mine: Kịch bản dành cho học viên học trước khi làm bài tập
