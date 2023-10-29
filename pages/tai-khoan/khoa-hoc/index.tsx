@@ -1,8 +1,8 @@
 import AccountLeftBar from "@/components/accounts/left-bar";
-import Rate from "@/components/commons/rate";
 import { getMyCourse } from "@/services/course";
-import { BookOutlined, QuestionCircleOutlined, StarFilled } from "@ant-design/icons";
+import { BookOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 import { ActionType, PageContainer, ProList } from "@ant-design/pro-components";
+import { Rate } from "antd";
 import Head from "next/head";
 import Link from "next/link";
 import { useRef } from "react";
@@ -70,7 +70,7 @@ export default function Index() {
                                                     <div className="line-clamp-2 font-medium text-blue-500 mb-1 min-h-[45px]">{entity.name}</div>
                                                 </Link>
                                                 <div className="text-xs text-red-500 text-right">
-                                                    <Rate value={5} />
+                                                    <Rate defaultValue={5} />
                                                 </div>
                                                 <div className="line-clamp-3 text-gray-500 min-h-[72px]">{entity.description}</div>
                                             </div>

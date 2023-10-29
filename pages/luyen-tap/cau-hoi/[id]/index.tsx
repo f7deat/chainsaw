@@ -1,4 +1,5 @@
 import CommentComponent from "@/components/comment";
+import ModuleList from "@/components/module/list";
 import QuizContent from "@/components/practice/content";
 import { getBaiGiang2, listBaiGiang, listQuestion, resetResult } from "@/services/course";
 import { QuestionType } from "@/utils/constants";
@@ -26,7 +27,7 @@ export const getServerSideProps: GetServerSideProps<{
     };
 }> = async (context) => {
     const response = await getBaiGiang2(context.params?.id);
-    return { props: { module: response } };
+    return { props: { module: response || {} } };
 };
 
 export default function Index({ module }: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -158,78 +159,16 @@ export default function Index({ module }: InferGetServerSidePropsType<typeof get
 
                         </ProCard>
                         {
-                            router?.query?.id && <CommentComponent id={router.query.id} />
+                            router?.query?.id && (
+                                <div>
+                                    <Divider />
+                                    <CommentComponent id={router.query.id} />
+                                </div>
+                            )
                         }
                     </div>
                     <div className="md:w-1/4">
-                        <ProList
-                            className="mb-4 shadow"
-                            rowKey="id"
-                            headerTitle={<div className=" font-medium text-2xl rounded-t text-blue-600 truncate">{module.groupModule}</div>}
-                            request={(params) => listBaiGiang({
-                                nhomBaiGiangId: module.groupModuleId,
-                                ...params
-                            })}
-                            showActions="always"
-                            metas={{
-                                title: {
-                                    render: (dom, entity: any) => (
-                                        <div className="md:text-lg font-medium flex gap-2">
-                                            <div dangerouslySetInnerHTML={{
-                                                __html: entity.name
-                                            }}></div>
-                                            {
-                                                entity.free && (
-                                                    <div>
-                                                        <span className="text-xs bg-red-500 text-white px-1 rounded font-normal animate-bounce absolute">Miễn phí</span>
-                                                    </div>
-                                                )
-                                            }
-                                        </div>
-                                    )
-                                },
-                                actions: {
-                                    render: (dom, entity) => [
-                                        <Button
-                                            key={0} type="link"
-                                            icon={<PlayCircleOutlined />}
-                                            disabled={!entity.video}
-                                            className="text-lg flex items-center"
-                                            onClick={() => router.push(`/luyen-tap/video/${entity.id}`)}
-                                        />,
-                                        <Button 
-                                        disabled={entity.id === module.id}
-                                        key={1} type="link" icon={<EditOutlined />} className="text-lg flex items-center" onClick={() => router.push(`/luyen-tap/cau-hoi/${entity.id}`)} />
-                                    ]
-                                },
-                                avatar: {
-                                    render: (dom, entity) => {
-                                        if (entity.status == null) {
-                                            return <div className="text-xl ml-2">
-                                                <QuestionCircleFilled className="text-gray-500" />
-                                            </div>
-                                        }
-                                        if (entity.status) {
-                                            return (
-                                                <Tooltip title="Đã hoàn thành bài giảng">
-                                                    <div className="text-xl ml-2">
-                                                        <CheckCircleFilled style={{color: 'limegreen'}} />
-                                                    </div>
-                                                </Tooltip>
-                                            )
-                                        }
-                                        return (
-                                            <Tooltip title="Bài giảng đang học">
-                                                <div className="text-xl ml-2">
-                                                    <ClockCircleFilled style={{color: 'orange'}}/>
-                                                </div>
-                                            </Tooltip>
-                                        )
-                                    }
-                                }
-                            }}
-                            rowClassName="bg-white"
-                        />
+                        <ModuleList moduleGroupId={module.groupModuleId} moduleGroupName={module.groupModule} currentModuleId={module.id} />
                     </div>
                 </div>
                 <Divider />

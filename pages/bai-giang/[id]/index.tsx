@@ -10,6 +10,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { ArticleRelated, Title } from "@/components";
 import { AppContext } from "@/models/app-context";
 import { listArticleRandom } from "@/services/article";
+import ModuleList from "@/components/module/list";
 
 export const getServerSideProps: GetServerSideProps<{
     topic: API.ChuongTrinhHoc;
@@ -79,80 +80,7 @@ export default function Index({ topic, articles }: InferGetServerSidePropsType<t
                     <div className="md:text-4xl text-xl font-medium mb-4">Chương trình học</div>
                     {
                         data?.map((group: any, index: number) => (
-
-                            <ProList<{
-                                id: number,
-                                name: string,
-                                free: boolean,
-                                status?: boolean,
-                                video?: string
-                            }>
-                                className="mb-4"
-                                rowKey="id"
-                                key={group.id}
-                                headerTitle={<div className=" font-medium text-2xl rounded-t text-blue-600">{group.name}</div>}
-                                request={(params) => listBaiGiang({
-                                    nhomBaiGiangId: group.id,
-                                    ...params
-                                })}
-                                showActions="always"
-                                metas={{
-                                    title: {
-                                        render: (dom, entity) => (
-                                            <div className="text-lg font-medium flex gap-2">
-                                                <div dangerouslySetInnerHTML={{
-                                                    __html: entity.name
-                                                }} onClick={() => onPractice(entity)}></div>
-                                                {
-                                                    entity.free && (
-                                                        <div>
-                                                            <span className="text-xs bg-red-500 text-white px-1 rounded font-normal animate-bounce absolute">Miễn phí</span>
-                                                        </div>
-                                                    )
-                                                }
-                                            </div>
-                                        )
-                                    },
-                                    actions: {
-                                        render: (dom, entity) => [
-                                            <Button
-                                                key={0} type="link"
-                                                icon={<PlayCircleOutlined />}
-                                                disabled={!entity.video}
-                                                className="text-lg flex items-center"
-                                                onClick={() => router.push(`/luyen-tap/video/${entity.id}`)}
-                                            />,
-                                            <Button key={1} type="link" onClick={() => onPractice(entity)} icon={<EditOutlined />} className="text-lg flex items-center" />
-                                        ]
-                                    },
-                                    avatar: {
-                                        render: (dom, entity) => {
-                                            if (entity.status == null) {
-                                                return <div className="text-xl ml-2">
-                                                    <QuestionCircleFilled className="text-gray-500" />
-                                                </div>
-                                            }
-                                            if (entity.status) {
-                                                return (
-                                                    <Tooltip title="Đã hoàn thành bài giảng">
-                                                        <div className="text-xl ml-2">
-                                                            <CheckCircleFilled className="text-green-500" />
-                                                        </div>
-                                                    </Tooltip>
-                                                )
-                                            }
-                                            return (
-                                                <Tooltip title="Bài giảng đang học">
-                                                    <div className="text-xl ml-2">
-                                                        <ClockCircleFilled className="text-red-500" />
-                                                    </div>
-                                                </Tooltip>
-                                            )
-                                        }
-                                    }
-                                }}
-                                rowClassName="bg-white"
-                            />
+                            <ModuleList key={group.id} moduleGroupId={group.id} moduleGroupName={group.name} />
                         ))
                     }
                 </div>

@@ -1,10 +1,9 @@
 import { getParent } from "@/services/user";
 import { CheckOutlined, FacebookFilled, IdcardFilled, LoginOutlined, PhoneOutlined, SketchOutlined, TwitterOutlined, YoutubeFilled } from "@ant-design/icons"
 import { ProCard } from "@ant-design/pro-components";
-import { Button, Modal, message } from "antd"
+import { Button, Modal, Rate, message } from "antd"
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
-import Rate from "../commons/rate";
 import { AppContext } from "@/models/app-context";
 import { formatter, stripeHTML } from "@/utils/formatter";
 
@@ -47,7 +46,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                 </picture>
             </div>
             <div className="text-right mb-2">
-                <Rate value={5} />
+                <Rate defaultValue={5} />
             </div>
             <div className="mb-4 text-gray-500 text-base">
                 {stripeHTML(props.data?.moTaChuongTrinh)}

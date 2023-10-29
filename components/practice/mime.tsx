@@ -1,6 +1,7 @@
 import { playAudio } from "@/utils/audio";
 import { SoundOutlined } from "@ant-design/icons";
 import { Button, Divider, Typography } from "antd";
+import Player from "../commons/player";
 
 type MimeProps = {
     data: API.QuestionListItem;
@@ -13,21 +14,21 @@ const Mime: React.FC<MimeProps> = (props) => {
 
     return (
         <div className="flex flex-col items-center justify-center p-4">
+
+            {
+                data?.suggestion && (
+                    <div className="flex justify-end mb-4 md:mb-10 w-full">
+                        <Player sound={data.suggestion} />
+                    </div>
+                )
+            }
+
             <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
                 __html: data.title
             }}></div>
             <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
                 __html: data.content
             }}></div>
-
-            {
-                data?.suggestion && (
-                    <audio controls>
-                        <source src={data.suggestion} type="audio/mpeg" />
-                        Your browser does not support the audio element.
-                    </audio>
-                )
-            }
 
             <Divider dashed />
             <div className={`grid md:grid-cols-${data.answers.length} gap-4 mb-4`}>

@@ -43,6 +43,7 @@ export async function getBaiGiang(id?: string | string[]) {
 
 export async function getBaiGiang2(id?: string | string[]) {
   const res = await fetch(`${API_HOST}bai-giang/${id}`);
+  if (!res.ok || res.status !== 200) return null;
   return res.json();
 }
 

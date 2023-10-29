@@ -101,6 +101,14 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
     const onNextTab = (isNext: boolean) => {
         const newKey = isNext ? (Number(activeKey)) + 1 : (Number(activeKey)) - 1;
         setActiveKey(newKey.toString());
+        onSound(newKey);
+    }
+
+    const onSound = (index: number) => {
+        const question = items[index];
+        if (question?.suggestion.endsWith('.mp3') || question?.suggestion.endsWith('.m4a')) {
+            playAudio(question?.suggestion);
+        }
     }
 
     return (
@@ -154,7 +162,9 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                                             </div>
                                             <div className="absolute right-0 inset-y-1/2">
                                                 <Button type="primary" shape="circle"
-                                                    disabled={activeKey === (items?.length - 1).toString()} onClick={() => onNextTab(true)}>
+                                                    disabled={activeKey === (items?.length - 1).toString()} onClick={() => {
+                                                        onNextTab(true);
+                                                    }}>
                                                     <span><RightOutlined /></span>
                                                 </Button>
                                             </div>
@@ -164,6 +174,7 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                             })}
                             onTabClick={(activeKey) => {
                                 setActiveKey(activeKey);
+                                onSound(Number(activeKey));
                             }}
                         />
                         <Script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" />
