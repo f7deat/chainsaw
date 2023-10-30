@@ -3,7 +3,7 @@ import ModuleList from "@/components/module/list";
 import QuizContent from "@/components/practice/content";
 import { getBaiGiang2, listBaiGiang, listQuestion, resetResult } from "@/services/course";
 import { QuestionType } from "@/utils/constants";
-import { BookOutlined, CheckCircleFilled, CheckCircleOutlined, ClockCircleFilled, EditOutlined, GiftOutlined, HomeOutlined, InfoCircleOutlined, LeftOutlined, PlayCircleOutlined, QuestionCircleFilled, RedoOutlined, RightOutlined, SoundOutlined, StopOutlined } from "@ant-design/icons";
+import { BookOutlined, CheckCircleFilled, CheckCircleOutlined, ClockCircleFilled, EditOutlined, FullscreenExitOutlined, FullscreenOutlined, GiftOutlined, HomeOutlined, InfoCircleOutlined, LeftOutlined, PlayCircleOutlined, QuestionCircleFilled, RedoOutlined, RightOutlined, SoundOutlined, StopOutlined } from "@ant-design/icons";
 import { ProCard, ProList } from "@ant-design/pro-components";
 import { Alert, Breadcrumb, Button, Divider, Empty, Popconfirm, Popover, Space, Tabs, Tooltip, message } from "antd";
 import group from "antd/es/avatar/group";
@@ -11,7 +11,8 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 export const getServerSideProps: GetServerSideProps<{
     module: {
@@ -85,6 +86,8 @@ export default function Index({ module }: InferGetServerSidePropsType<typeof get
         }
     }
 
+    const handle = useFullScreenHandle();
+
     return (
         <>
             <Head>
@@ -120,44 +123,54 @@ export default function Index({ module }: InferGetServerSidePropsType<typeof get
                 <div className="text-blue-700 md:text-4xl text-2xl font-medium mb-8 md:mb-12 text-center">{module?.name}</div>
                 <div className="md:flex gap-4">
                     <div className="md:w-3/4">
-                        <ProCard
-                            tabs={{
-                                activeKey: activeTab,
-                                onChange: (actKey) => setActiveTab(actKey),
-                                items: [
-                                    {
-                                        label: 'Bài giảng',
-                                        children: <QuizContent items={learn} error={error} score={score} setScore={setScore} module={module} />,
-                                        key: 'learn',
-                                        disabled: learnDisabled
-                                    },
-                                    {
-                                        label: 'Luyện tập',
-                                        children: <QuizContent items={quiz} error={error} score={score} setScore={setScore} module={module} />,
-                                        key: 'pratice'
-                                    }
-                                ]
-                            }}
-                            title={(
-                                <div className="p-2 text-blue-500 text-2xl text-center bg-white font-medium flex gap-2">
-                                    <GiftOutlined />
-                                    <span>Điểm: </span>
-                                    <span className="text-red-500">{score}/{data?.filter((x: API.QuestionListItem) => x.type !== 'baigiang').length}</span>
-                                </div>
-                            )}
-                            className="shadow mb-4"
-                            headerBordered
-                            extra={<Popconfirm title="Bạn có chắc chắn muốn làm lại không?" onConfirm={onConfirm}>
-                                <Button type="primary">
-                                    <Space>
-                                        <RedoOutlined />
-                                        Làm lại
-                                    </Space>
-                                </Button>
-                            </Popconfirm>}
-                        >
+                        <FullScreen handle={handle}>
+                            <ProCard
+                                tabs={{
+                                    activeKey: activeTab,
+                                    onChange: (actKey) => setActiveTab(actKey),
+                                    items: [
+                                        {
+                                            label: 'Bài giảng',
+                                            children: <QuizContent items={learn} error={error} score={score} setScore={setScore} module={module} />,
+                                            key: 'learn',
+                                            disabled: learnDisabled
+                                        },
+                                        {
+                                            label: 'Luyện tập',
+                                            children: <QuizContent items={quiz} error={error} score={score} setScore={setScore} module={module} />,
+                                            key: 'pratice'
+                                        }
+                                    ]
+                                }}
+                                title={(
+                                    <div className="p-2 text-blue-500 text-2xl text-center bg-white font-medium flex gap-2">
+                                        <GiftOutlined />
+                                        <span>Điểm: </span>
+                                        <span className="text-red-500">{score}/{data?.filter((x: API.QuestionListItem) => x.type !== 'baigiang').length}</span>
+                                    </div>
+                                )}
+                                className="shadow mb-4 h-full"
+                                headerBordered
+                                extra={(
+                                    <div className="flex items-center">
+                                        <Popconfirm title="Bạn có chắc chắn muốn làm lại không?" onConfirm={onConfirm}>
+                                            <Button icon={<RedoOutlined />} type="link" />
+                                        </Popconfirm>
+                                        <Tooltip title="Toàn màn hình">
+                                            {
+                                                handle.active ? (
+                                                    <Button type="link" onClick={() => handle.exit()} icon={<FullscreenExitOutlined />} />
+                                                ) : (
+                                                    <Button type="link" onClick={() => handle.enter()} icon={<FullscreenOutlined />} />
+                                                )
+                                            }
+                                        </Tooltip>
+                                    </div>
+                                )}
+                            >
 
-                        </ProCard>
+                            </ProCard>
+                        </FullScreen>
                         {
                             router?.query?.id && (
                                 <div>
@@ -174,7 +187,7 @@ export default function Index({ module }: InferGetServerSidePropsType<typeof get
                 <Divider />
                 <div className="md:grid-cols-2"></div>
                 <div className="md:grid-cols-5"></div>
-            </div>
+            </div >
         </>
     )
 }

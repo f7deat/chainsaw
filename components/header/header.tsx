@@ -101,7 +101,7 @@ const Header: React.FC = () => {
                         <Link href="/">
                             <div className="font-bold text-blue-700 md:text-3xl text-2xl flex gap-2" style={inter.style}>
                                 <FireTwoTone twoToneColor="#f97316" />
-                                E-Learning
+                                <span className="truncate">E-Learning</span>
                             </div>
                         </Link>
                     </div>

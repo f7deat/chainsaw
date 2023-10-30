@@ -1,4 +1,4 @@
-import { PlayCircleFilled, StepBackwardFilled, StepForwardFilled, StopFilled, StopOutlined } from "@ant-design/icons";
+import { PlayCircleFilled, StepBackwardFilled, StepForwardFilled, StopFilled } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import useSound from "use-sound";
 
@@ -31,7 +31,6 @@ const Player: React.FC<PlayerProps> = (props) => {
                 sec: secRemain
             });
         }
-        console.log(duration)
     }, [isPlaying, duration]);
 
     useEffect(() => {
@@ -44,6 +43,10 @@ const Player: React.FC<PlayerProps> = (props) => {
                     min,
                     sec
                 });
+                const total = Math.floor((duration || 1) / 1000)
+                if (total == sec) {
+                    setIsPlaying(false);
+                }
             }
         }, 1000);
         return () => clearInterval(interval);
