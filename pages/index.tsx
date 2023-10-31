@@ -89,7 +89,7 @@ export default function Home({ teachers }: InferGetServerSidePropsType<typeof ge
           <Modal open={open} centered footer={false} onCancel={() => setOpen(false)}>
             <Link href="/tai-khoan/redeem">
               <picture className='relative'>
-                <img src='https://i.imgur.com/NljwhIm.jpg' alt='KM' loading='lazy' />
+                <img src='https://i.imgur.com/NwpiLrf.jpg' alt='KM' loading='lazy' />
               </picture>
               <div className='text-center'>
                 <button className='left-50 px-6 py-2 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white'>Nhận quà</button>
