@@ -3,7 +3,7 @@ import { QuestionType } from "@/utils/constants";
 import { LeftOutlined, SoundOutlined, InfoCircleOutlined, RightOutlined, CheckCircleOutlined, StopOutlined } from "@ant-design/icons";
 import { Alert, Tabs, Button, Popover, Space, Empty, message } from "antd";
 import Script from "next/script";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { FreeInput, Mime } from ".";
 import DragDrop from "./drag-drop";
 import MultipleChoice from "./multiple-choice";
@@ -11,6 +11,7 @@ import SingleChoice from "./single-choice";
 import OrderChoice from "./sortable";
 import Speech from "./speech";
 import Player from "../commons/player";
+import React from 'react'
 
 type QuizContentProps = {
     items: API.QuestionListItem[];
@@ -105,14 +106,19 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
         setActiveKey(newKey.toString());
         onSound(newKey);
     }
-
+    const buttonRef = useRef<HTMLButtonElement>(null);
     const onSound = (index: number) => {
         const question = items[index];
         if (question?.suggestion.endsWith('.mp3') || question?.suggestion.endsWith('.m4a')) {
-            playAudio(question?.suggestion);
+            //playAudio(question?.suggestion); 
+            // setTimeout(() => {
+            //     document.getElementById("supersecretbutton")?.click();
+            // }, 1000);
+            // setTimeout(() => {
+            //     buttonRef.current?.click();
+            //   }, 1000);
         }
     }
-
     return (
         <>
             {
@@ -134,7 +140,7 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                                     children: (
                                         <div className="relative">
                                             <div className="absolute left-0 inset-y-1/2">
-                                                <Button type="primary" shape="circle" disabled={activeKey === "0"} onClick={() => onNextTab(false)}>
+                                                <Button type="primary" shape="circle"  disabled={activeKey === "0"} onClick={() => onNextTab(false)}>
                                                     <span><LeftOutlined /></span>
                                                 </Button>
                                             </div>
@@ -185,7 +191,7 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                             })}
                             onTabClick={(activeKey) => {
                                 setActiveKey(activeKey);
-                                onSound(Number(activeKey));
+                                //onSound(Number(activeKey));
                             }}
                         />
                         <Script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" />

@@ -1,5 +1,5 @@
 import { PlayCircleFilled, StopFilled } from "@ant-design/icons";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useSound from "use-sound";
 
 type PlayerProps = {
@@ -25,36 +25,49 @@ const Player: React.FC<PlayerProps> = (props) => {
 
     const [play, { pause, duration, sound }] = useSound(props.sound);
 
+    // useEffect(() => {
+    //     if (duration) {
+    //         const sec = duration / 1000;
+    //         const min = Math.floor(sec / 60);
+    //         const secRemain = Math.floor(sec % 60);
+    //         setTime({
+    //             min: min,
+    //             sec: secRemain
+    //         });
+    //     }
+    // }, [isPlaying, duration, id]);
+    const buttonRef = useRef<HTMLButtonElement>(null);
     useEffect(() => {
-        if (duration) {
-            const sec = duration / 1000;
-            const min = Math.floor(sec / 60);
-            const secRemain = Math.floor(sec % 60);
-            setTime({
-                min: min,
-                sec: secRemain
-            });
-        }
-    }, [isPlaying, duration, id]);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            if (sound) {
-                setSeconds(sound.seek([]));
-                const min = Math.floor(sound.seek([]) / 60);
-                const sec = Math.floor(sound.seek([]) % 60);
-                setCurrTime({
-                    min,
-                    sec
-                });
-                const total = Math.floor((duration || 1) / 1000)
-                console.log(seconds)
-                if (total == seconds) {
-                    setIsPlaying(false);
-                }
-            }
-        }, 1000);
-        return () => clearInterval(interval);
+        //const element = buttonRef.current;
+        //console.log(element);
+        // const interval = setInterval(() => {
+        //     buttonRef.current?.click();
+        //   }, 1000);
+      
+        //   return () => {
+        //     clearInterval(interval);
+        //   };
+        setTimeout(() => {
+            //document.getElementById("supersecretbutton")?.click();
+            buttonRef.current?.click();
+          }, 1000);
+        // const interval = setInterval(() => {
+        //     // if (sound) {
+        //     //     setSeconds(sound.seek([]));
+        //     //     const min = Math.floor(sound.seek([]) / 60);
+        //     //     const sec = Math.floor(sound.seek([]) % 60);
+        //     //     setCurrTime({
+        //     //         min,
+        //     //         sec
+        //     //     });
+        //     //     const total = Math.floor((duration || 1) / 1000)
+        //     //     console.log(seconds)
+        //     //     if (total == seconds) {
+        //     //         setIsPlaying(false);
+        //     //     }
+        //     // }
+        // }, 1000);
+        //return () => clearInterval(interval);
     }, [sound]);
 
     const playingButton = () => {
@@ -72,7 +85,7 @@ const Player: React.FC<PlayerProps> = (props) => {
                 <div className="flex gap-2 items-end">
                     <div className="flex justify-center gap-4 text-xl">
                         {!isPlaying ? (
-                            <button className="text-blue-500" onClick={playingButton}>
+                            <button className="text-blue-500" id='supersecretbutton' ref={buttonRef} onClick={playingButton}>
                                 <PlayCircleFilled />
                             </button>
                         ) : (
@@ -81,15 +94,15 @@ const Player: React.FC<PlayerProps> = (props) => {
                             </button>
                         )}
                     </div>
-                    <div>
-                        <div className="flex justify-between items-center">
+                     <div>
+                       {/* <div className="flex justify-between items-center">
                             <div className="text-sm">
                                 {currTime.sec}s
                             </div>
                             <div className="text-sm">
                                 {time.sec}s
                             </div>
-                        </div>
+                        </div>*/}
                         <input
                             type="range"
                             min="0"
@@ -100,7 +113,7 @@ const Player: React.FC<PlayerProps> = (props) => {
                                 sound.seek([e.target.value]);
                             }}
                         />
-                    </div>
+                    </div> 
                 </div>
             </div>
         </>
