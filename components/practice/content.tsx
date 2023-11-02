@@ -146,7 +146,7 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
 
                                             {
                                                 item?.suggestion && (item?.suggestion.endsWith('.mp3') || item?.suggestion.endsWith('.m4a')) && (
-                                                    <div className="flex justify-end mb-4 md:mb-10 w-full py-2">
+                                                    <div className="flex justify-end mb-4 md:mb-10 w-full py-2 absolute">
                                                         <Player sound={item.suggestion} id={item.id} />
                                                     </div>
                                                 )
