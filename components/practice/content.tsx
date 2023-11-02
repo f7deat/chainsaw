@@ -10,6 +10,7 @@ import MultipleChoice from "./multiple-choice";
 import SingleChoice from "./single-choice";
 import OrderChoice from "./sortable";
 import Speech from "./speech";
+import Player from "../commons/player";
 
 type QuizContentProps = {
     items: API.QuestionListItem[];
@@ -23,6 +24,7 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
 
     const { items, error, score, setScore, module } = props;
     const [activeKey, setActiveKey] = useState<string>('0');
+    const [sound, setSound] = useState<string>('');
 
     const labelRender = (item: API.QuestionListItem, index: number) => {
         if (item.isCompleted) {
@@ -141,6 +143,15 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                                                     <Button className="flex items-center" onClick={() => speak(item.title, item.id, item.voiceUrl)} icon={<SoundOutlined />}>Nghe đọc bài</Button>
                                                 )
                                             }
+
+                                            {
+                                                item?.suggestion && (item?.suggestion.endsWith('.mp3') || item?.suggestion.endsWith('.m4a')) && (
+                                                    <div className="flex justify-end mb-4 md:mb-10 w-full py-2">
+                                                        <Player sound={item.suggestion} id={item.id} />
+                                                    </div>
+                                                )
+                                            }
+
                                             {renderTab(item, i)}
                                             <div className="mb-4">
                                                 {ShowMessage(item)}

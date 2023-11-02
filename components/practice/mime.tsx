@@ -1,7 +1,6 @@
 import { playAudio } from "@/utils/audio";
 import { SoundOutlined } from "@ant-design/icons";
 import { Button, Divider, Typography } from "antd";
-import Player from "../commons/player";
 
 type MimeProps = {
     data: API.QuestionListItem;
@@ -14,14 +13,6 @@ const Mime: React.FC<MimeProps> = (props) => {
 
     return (
         <div className="flex flex-col items-center justify-center p-4">
-
-            {
-                data?.suggestion && (
-                    <div className="flex justify-end mb-4 md:mb-10 w-full">
-                        <Player sound={data.suggestion} />
-                    </div>
-                )
-            }
 
             <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
                 __html: data.title

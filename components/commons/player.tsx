@@ -1,13 +1,17 @@
-import { PlayCircleFilled, StepBackwardFilled, StepForwardFilled, StopFilled } from "@ant-design/icons";
+import { PlayCircleFilled, StopFilled } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import useSound from "use-sound";
 
 type PlayerProps = {
     sound: string;
+    id: number;
 }
 
 const Player: React.FC<PlayerProps> = (props) => {
+
+    const { id } = props;
     const [isPlaying, setIsPlaying] = useState(false);
+
     const [time, setTime] = useState({
         min: 0,
         sec: 0
@@ -31,7 +35,7 @@ const Player: React.FC<PlayerProps> = (props) => {
                 sec: secRemain
             });
         }
-    }, [isPlaying, duration]);
+    }, [isPlaying, duration, id]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -44,7 +48,8 @@ const Player: React.FC<PlayerProps> = (props) => {
                     sec
                 });
                 const total = Math.floor((duration || 1) / 1000)
-                if (total == sec) {
+                console.log(seconds)
+                if (total == seconds) {
                     setIsPlaying(false);
                 }
             }
@@ -64,40 +69,38 @@ const Player: React.FC<PlayerProps> = (props) => {
     return (
         <>
             <div className="px-2 py-1 rounded border">
-                <div className="flex justify-between text-sm text-slate-500">
-                    <p>
-                        {currTime.min}:{currTime.sec}
-                    </p>
-                    <p>
-                        {time.min}:{time.sec}
-                    </p>
-                </div>
-                <input
-                    type="range"
-                    min="0"
-                    max={(duration || 1) / 1000}
-                    value={seconds}
-                    className="w-full"
-                    onChange={(e) => {
-                        sound.seek([e.target.value]);
-                    }}
-                />
-                <div className="flex justify-center gap-4 text-xl">
-                    <button className="text-blue-500">
-                        <StepBackwardFilled />
-                    </button>
-                    {!isPlaying ? (
-                        <button className="text-blue-500" onClick={playingButton}>
-                            <PlayCircleFilled />
-                        </button>
-                    ) : (
-                        <button className="text-blue-500" onClick={playingButton}>
-                            <StopFilled />
-                        </button>
-                    )}
-                    <button className="text-blue-500">
-                        <StepForwardFilled />
-                    </button>
+                <div className="flex gap-2 items-end">
+                    <div className="flex justify-center gap-4 text-xl">
+                        {!isPlaying ? (
+                            <button className="text-blue-500" onClick={playingButton}>
+                                <PlayCircleFilled />
+                            </button>
+                        ) : (
+                            <button className="text-blue-500" onClick={playingButton}>
+                                <StopFilled />
+                            </button>
+                        )}
+                    </div>
+                    <div>
+                        <div className="flex justify-between items-center">
+                            <div className="text-sm">
+                                {currTime.sec}s
+                            </div>
+                            <div className="text-sm">
+                                {time.sec}s
+                            </div>
+                        </div>
+                        <input
+                            type="range"
+                            min="0"
+                            max={(duration || 1) / 1000}
+                            value={seconds}
+                            className="w-full"
+                            onChange={(e) => {
+                                sound.seek([e.target.value]);
+                            }}
+                        />
+                    </div>
                 </div>
             </div>
         </>
