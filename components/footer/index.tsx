@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
                                     <div className="md:w-1/2">
                                         <div className="mb-2 font-bold">Trung tâm trợ giúp</div>
                                         <div className="mb-2">Email: <span>hotro@getvisa.vn</span></div>
-                                        <div className="mb-2">Đường dây nóng: <span>0937 065 333</span></div>
+                                        <div className="mb-2">Đường dây nóng: <span>0911.717.772</span></div>
                                     </div>
                                     <div className="md:w-1/2">
                                         <div className="mb-2">
