@@ -1,6 +1,5 @@
-import { ConfigProvider, FloatButton } from 'antd'
+import { ConfigProvider, FloatButton, Layout } from 'antd'
 import type { AppProps } from 'next/app';
-import { Header } from '@/components/header';
 import Footer from '@/components/footer';
 import '@/styles/globals.css';
 import AOS from "aos";
@@ -10,6 +9,7 @@ import { getCurrentUser } from '@/services/user';
 import theme from '@/theme/themeConfig';
 import { AppContext } from '@/models/app-context';
 import { MessageOutlined, PhoneOutlined } from '@ant-design/icons';
+import MyHeader from '@/components/header/header';
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -47,21 +47,23 @@ export default function App({ Component, pageProps }: AppProps) {
       }}
       theme={theme}>
       <AppContext.Provider value={contextValue}>
-        <Header />
-        <div className='md:flex gap-10 md:pt-32 pt-20'>
-          <main className='mx-auto container flex-1 p-4'>
-            <Component {...pageProps} />
-          </main>
-        </div>
-        <Footer />
-        <FloatButton.Group>
-          <div className='mb-4'>
-            <span className="animate-ping absolute inline-flex h-10 w-10 rounded-full bg-sky-400 opacity-75"></span>
-            <FloatButton icon={<PhoneOutlined />} type='primary' onClick={() => window.location.href = 'tel:0762559696'} />
-            <FloatButton icon={<MessageOutlined />} onClick={() => window.location.href = 'https://zalo.me/0762559696'} />
+        <Layout>
+          <MyHeader />
+          <div className='md:flex gap-10 md:pt-32 pt-20'>
+            <main className='mx-auto container flex-1 p-4'>
+              <Component {...pageProps} />
+            </main>
           </div>
-          <FloatButton.BackTop />
-        </FloatButton.Group>
+          <Footer />
+          <FloatButton.Group>
+            <div className='mb-4'>
+              <span className="animate-ping absolute inline-flex h-10 w-10 rounded-full bg-sky-400 opacity-75"></span>
+              <FloatButton icon={<PhoneOutlined />} type='primary' onClick={() => window.location.href = 'tel:0762559696'} />
+              <FloatButton icon={<MessageOutlined />} onClick={() => window.location.href = 'https://zalo.me/0762559696'} />
+            </div>
+            <FloatButton.BackTop />
+          </FloatButton.Group>
+        </Layout>
       </AppContext.Provider>
     </ConfigProvider>
   )

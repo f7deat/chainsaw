@@ -8,6 +8,10 @@ const theme: ThemeConfig = {
   components: {
     Input: {
         borderRadiusLG: 48
+    },
+    Layout: {
+      colorBgHeader: '#FFF',
+      colorBgBody: '#FFF'
     }
   }
 };

@@ -38,7 +38,7 @@ const ChuongTrinhHocBySubject: React.FC<ChuongTrinhHocBySubjectProps> = (props) 
                                     <Rate value={5} disabled /> 
                                 </div>
                                 {
-                                    entity.description && (<div className="line-clamp-3 text-gray-500 min-h-[70px]">{entity.description}</div>)
+                                    entity.description && (<div className="line-clamp-3 text-sm md:text-base text-gray-500 min-h-[70px]">{entity.description}</div>)
                                 }
                             </div>
                         </div>
