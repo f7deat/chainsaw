@@ -11,7 +11,7 @@ const theme: ThemeConfig = {
     },
     Layout: {
       colorBgHeader: '#FFF',
-      colorBgBody: '#FFF'
+      colorBgBody: '#FFF',
     }
   }
 };

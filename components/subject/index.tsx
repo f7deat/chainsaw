@@ -1,4 +1,4 @@
-import { listSubject } from "@/services/subject";
+import { serverSubjects } from "@/services/subject";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { ProList } from "@ant-design/pro-components";
 
@@ -10,7 +10,7 @@ const SubjectMenu: React.FC = () => {
             name: string;
         }>
             rowKey="id"
-            request={listSubject}
+            request={serverSubjects}
             metas={{
                 title: {
                     render: (dom, entity) => (

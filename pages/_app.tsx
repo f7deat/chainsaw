@@ -39,6 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
     login
   }), [user, login])
 
+  const { Content } = Layout;
 
   return (
     <ConfigProvider
@@ -49,11 +50,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <AppContext.Provider value={contextValue}>
         <Layout>
           <MyHeader />
-          <div className='md:flex gap-10 md:pt-32 pt-20'>
-            <main className='mx-auto container flex-1 p-4'>
+          <Content className='container mx-auto py-4 md:py-10 px-2 md:px-0'>
               <Component {...pageProps} />
-            </main>
-          </div>
+          </Content>
           <Footer />
           <FloatButton.Group>
             <div className='mb-4'>

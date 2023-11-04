@@ -1,6 +1,6 @@
 import { ArticleRelated, Title } from "@/components";
 import { listArticleRandom } from "@/services/article";
-import { listSubject } from "@/services/subject";
+import { serverSubjects } from "@/services/subject";
 import { ExportOutlined, GlobalOutlined } from "@ant-design/icons";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
@@ -10,10 +10,7 @@ export const getServerSideProps: GetServerSideProps<{
     subjects: API.Subject[];
     articles: API.Article[];
 }> = async (context) => {
-    const subjects = await listSubject({
-        current: context.params?.current,
-        pageSize: 10
-    });
+    const subjects = await serverSubjects();
     const articles = await listArticleRandom();
     return { props: { subjects: subjects.data, articles } };
 };

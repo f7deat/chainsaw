@@ -1,3 +1,5 @@
+import server from "./server";
+
 const API_HOST = process.env.API_HOST;
 
 export async function getSubject(id?: string | string[]) {
@@ -5,7 +7,6 @@ export async function getSubject(id?: string | string[]) {
   return await res.json();
 }
 
-export async function listSubject(params: any) {
-  const res = await fetch(`${API_HOST}subject/list`);
-  return res.json();
+export async function serverSubjects() {
+  return server.get(`subject/list`) as any;
 }

@@ -1,4 +1,4 @@
-import { listSubject } from "@/services/subject";
+import { serverSubjects } from "@/services/subject";
 import { ProFormSelect } from "@ant-design/pro-components"
 
 const FormSubject: React.FC = () => {
@@ -6,7 +6,7 @@ const FormSubject: React.FC = () => {
         <ProFormSelect label="Môn học" fieldProps={{
             size: "large"
         }} name="subject" request={async (params) => {
-            const response = await listSubject(params);
+            const response = await serverSubjects();
             return response.data.map((subject: API.Subject) => {
                 return {
                     label: subject.name,

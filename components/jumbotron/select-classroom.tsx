@@ -1,4 +1,5 @@
 import { Modal } from "antd";
+import Link from "next/link";
 
 type SelectClassroomProps = {
     open: boolean;
@@ -16,11 +17,11 @@ const SelectClassroom: React.FC<SelectClassroomProps> = (props) => {
             <div className="grid grid-cols-4 gap-4">
                 {
                     classrooms.map(x => (
-                        <button type="button" key={x}>
+                        <Link href={`/lop-hoc/${x}`} key={x}>
                             <div className="h-16 flex items-center justify-center rounded bg-slate-100 hover:border-blue-500 border font-medium">
                                 Lớp {x}
                             </div>
-                        </button>
+                        </Link>
                     ))
                 }
             </div>

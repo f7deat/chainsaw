@@ -102,7 +102,7 @@ const RightContent: React.FC = () => {
     ];
 
     return user ? (
-        <>
+        <div className="flex">
             <HeaderDropdown
                 menu={{
                     selectedKeys: [],
@@ -127,7 +127,7 @@ const RightContent: React.FC = () => {
                     <Avatar icon={<BellOutlined />} />
                 </Badge>
             </button>
-        </>
+        </div>
     ) : (
         <>
             <button onClick={() => setOpen(true)} className="flex gap-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full px-4 md:px-6 py-1 md:py-2 items-center md:text-lg">
