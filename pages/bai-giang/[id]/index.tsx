@@ -40,19 +40,6 @@ export default function Index({ topic, articles }: InferGetServerSidePropsType<t
         }
     }, [router, user]);
 
-    const onPractice = (item: any) => {
-        const token = localStorage.getItem('access_token');
-        if (!token) {
-            message.info('Vui lòng đăng nhập để tham gia khóa học!');
-            return;
-        }
-        if (!hasAccess && !item.free) {
-            message.info('Bạn chưa đăng ký mua khóa học này!');
-            return;
-        }
-        router.push(`/luyen-tap/cau-hoi/${item.id}`);
-    }
-
     return (
         <>
             <Head>
@@ -95,6 +82,8 @@ export default function Index({ topic, articles }: InferGetServerSidePropsType<t
                             __html: topic?.moTaChiTiet
                         }}></div>
                     </ProCard>
+
+                    <Divider />
                 </div>
             </div>
             <ArticleRelated articles={articles} />

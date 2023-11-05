@@ -5,7 +5,7 @@ import { Button, Modal, Rate, message } from "antd"
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { AppContext } from "@/models/app-context";
-import { formatter, stripeHTML } from "@/utils/formatter";
+import { formatter } from "@/utils/formatter";
 
 type CourseSummaryProps = {
     isBought: boolean;
@@ -39,7 +39,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
     }
 
     return (
-        <ProCard className="shadow">
+        <ProCard className="shadow mb-4">
             <div className="h-52 bg-gray-500 rounded-lg mb-2">
                 <picture>
                     <img src="https://cdn.getvisa.vn/images/cogiao.jpg" className="w-full h-52 object-cover" alt="cover" loading="lazy" />
@@ -49,7 +49,7 @@ const CourseSummary: React.FC<CourseSummaryProps> = (props) => {
                 <Rate defaultValue={5} />
             </div>
             <div className="mb-4 text-gray-500 text-base">
-                {stripeHTML(props.data?.moTaChuongTrinh)}
+                {props.data?.moTaChuongTrinh}
             </div>
             <div className="py-4 text-center" hidden={!props.isBought}>
                 <div className="px-10 py-2 rounded bg-green-500 text-white">
