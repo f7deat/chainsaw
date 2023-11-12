@@ -1,5 +1,5 @@
 import { ArticleRelated, Title } from "@/components";
-import { listArticle } from "@/services/article";
+import { listArticle, listArticleRandom } from "@/services/article";
 import { listTopic, queryKhoaHoc } from "@/services/course";
 import { stripeHTML } from "@/utils/formatter";
 import { BookOutlined, HomeOutlined } from "@ant-design/icons";
@@ -24,11 +24,8 @@ export const getServerSideProps: GetServerSideProps<{
         current: context.query.current || 1,
         pageSize: 12
     }, course.khoaHocId);
-    const articles = await listArticle({
-        current: 1,
-        pageSize: 3
-    });
-    return { props: { course, topics: topics.data, total: topics.total, articles: articles.data } };
+    const articles = await listArticleRandom() as any;
+    return { props: { course, topics: topics.data, total: topics.total, articles: articles } };
 };
 
 export default function Index({ course, topics, total, articles }: InferGetServerSidePropsType<typeof getServerSideProps>) {

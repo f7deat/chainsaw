@@ -8,7 +8,7 @@ const Jumbotron: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <div className='md:flex gap-4 items-center md:mb-20 mb-4 md:flex-row flex-col py-4'>
+    <div className='md:flex gap-4 items-center md:mb-20 mb-4 md:flex-row flex-col py-4 z-50'>
       <div className='md:w-1/2' data-aos="fade-up">
         <div className='text-blue-500 font-medium md:text-lg text-sm text-center md:text-left'>Sẵn sàng để học</div>
         <div className='md:text-7xl text-3xl font-bold mb-3 text-center md:text-left'>

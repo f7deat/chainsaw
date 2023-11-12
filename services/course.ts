@@ -1,5 +1,6 @@
 import { QuestionType } from "@/utils/constants";
 import request from "./request";
+import server from "./server";
 const API_HOST = process.env.API_HOST;
 
 export async function listKhoaHoc(data: any) {
@@ -95,9 +96,8 @@ export async function listClassroom(params: any) {
   });
 }
 
-export async function getChuongTrinhHoc(id?: string | string[]) {
-  const res = await fetch(`${API_HOST}chuong-trinh-hoc/${id}`);
-  return res.json();
+export async function getTopic(id?: string | string[]) {
+  return server(`${API_HOST}chuong-trinh-hoc/${id}`);
 }
 
 export async function listTopicBySubjectId(

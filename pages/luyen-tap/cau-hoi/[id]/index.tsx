@@ -168,7 +168,6 @@ export default function Index({ module }: InferGetServerSidePropsType<typeof get
                                     </div>
                                 )}
                             >
-
                             </ProCard>
                         </FullScreen>
                         {

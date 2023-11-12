@@ -17,3 +17,7 @@ Account: 0911717772/Password@123
 ### Các loại câu hỏi:
 
 - Mine: Kịch bản dành cho học viên học trước khi làm bài tập
+
+### Structure Core
+
+Cource > Topic > Module Group > Module > Question

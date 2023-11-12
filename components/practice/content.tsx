@@ -1,7 +1,7 @@
 import { playAudio } from "@/utils/audio";
 import { QuestionType } from "@/utils/constants";
-import { LeftOutlined, SoundOutlined, InfoCircleOutlined, RightOutlined, CheckCircleOutlined, StopOutlined } from "@ant-design/icons";
-import { Alert, Tabs, Button, Popover, Space, Empty, message } from "antd";
+import { LeftOutlined, SoundOutlined, InfoCircleOutlined, RightOutlined, CheckCircleOutlined, StopOutlined, AppstoreOutlined } from "@ant-design/icons";
+import { Alert, Tabs, Button, Popover, Space, Empty, message, Collapse, CollapseProps } from "antd";
 import Script from "next/script";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { FreeInput, Mime } from ".";
@@ -25,7 +25,7 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
 
     const { items, error, score, setScore, module } = props;
     const [activeKey, setActiveKey] = useState<string>('0');
-    const [sound, setSound] = useState<string>('');
+    const [currentIndex, setCurrentIndex] = useState<number>(0);
 
     const labelRender = (item: API.QuestionListItem, index: number) => {
         if (item.isCompleted) {
@@ -104,21 +104,9 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
     const onNextTab = (isNext: boolean) => {
         const newKey = isNext ? (Number(activeKey)) + 1 : (Number(activeKey)) - 1;
         setActiveKey(newKey.toString());
-        onSound(newKey);
+        setCurrentIndex(newKey);
     }
-    const buttonRef = useRef<HTMLButtonElement>(null);
-    const onSound = (index: number) => {
-        const question = items[index];
-        if (question?.suggestion.endsWith('.mp3') || question?.suggestion.endsWith('.m4a')) {
-            //playAudio(question?.suggestion); 
-            // setTimeout(() => {
-            //     document.getElementById("supersecretbutton")?.click();
-            // }, 1000);
-            // setTimeout(() => {
-            //     buttonRef.current?.click();
-            //   }, 1000);
-        }
-    }
+
     return (
         <>
             {
@@ -140,7 +128,7 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                                     children: (
                                         <div className="relative">
                                             <div className="absolute left-0 inset-y-1/2">
-                                                <Button type="primary" shape="circle"  disabled={activeKey === "0"} onClick={() => onNextTab(false)}>
+                                                <Button type="primary" shape="circle" disabled={activeKey === "0"} onClick={() => onNextTab(false)}>
                                                     <span><LeftOutlined /></span>
                                                 </Button>
                                             </div>
@@ -149,15 +137,13 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                                                     <Button className="flex items-center" onClick={() => speak(item.title, item.id, item.voiceUrl)} icon={<SoundOutlined />}>Nghe đọc bài</Button>
                                                 )
                                             }
-
                                             {
-                                                item?.suggestion && (item?.suggestion.endsWith('.mp3') || item?.suggestion.endsWith('.m4a')) && (
-                                                    <div className="flex justify-end mb-4 md:mb-10 w-full py-2 absolute">
-                                                        <Player sound={item.suggestion} id={item.id} />
+                                                (item?.suggestion.endsWith('.mp3') || item?.suggestion.endsWith('.m4a')) && (
+                                                    <div className="flex justify-end">
+                                                        <Player src={item.suggestion} index={i} current={currentIndex} />
                                                     </div>
                                                 )
                                             }
-
                                             {renderTab(item, i)}
                                             <div className="mb-4">
                                                 {ShowMessage(item)}
@@ -191,7 +177,7 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                             })}
                             onTabClick={(activeKey) => {
                                 setActiveKey(activeKey);
-                                //onSound(Number(activeKey));
+                                setCurrentIndex(Number(activeKey));
                             }}
                         />
                         <Script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" />

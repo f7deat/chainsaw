@@ -1,11 +1,11 @@
 import Head from "next/head";
-import { useCallback, useContext, useEffect, useState } from "react";
-import { listBaiGiang, getChuongTrinhHoc, isBought, listNhomBaiGiang } from "@/services/course";
+import { useContext, useEffect, useState } from "react";
+import { getTopic, isBought, listNhomBaiGiang } from "@/services/course";
 import { useRouter } from "next/router";
 import CourseSummary from "@/components/bai-giang/summary";
-import { Button, Divider, Tooltip, message } from "antd";
-import { CheckCircleFilled, ClockCircleFilled, EditOutlined, PlayCircleOutlined, QuestionCircleFilled, SearchOutlined } from "@ant-design/icons";
-import { ProCard, ProList } from "@ant-design/pro-components";
+import { Divider } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import { ProCard } from "@ant-design/pro-components";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { ArticleRelated, Title } from "@/components";
 import { AppContext } from "@/models/app-context";
@@ -16,8 +16,8 @@ export const getServerSideProps: GetServerSideProps<{
     topic: API.ChuongTrinhHoc;
     articles: API.Article[];
 }> = async (context) => {
-    const topic = await getChuongTrinhHoc(context.params?.id);
-    const articles = await listArticleRandom();
+    const topic = await getTopic(context.params?.id) as any;
+    const articles = await listArticleRandom() as any;
     return { props: { topic, articles } };
 };
 

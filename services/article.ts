@@ -1,4 +1,5 @@
 import request, { API_HOST } from "./request";
+import server from "./server";
 
 export async function getArticle(id?: string | string[]) {
   const res = await fetch(`${API_HOST}article/${id}`);
@@ -18,7 +19,5 @@ export async function listArticle(params: {
 }
 
 export async function listArticleRandom() {
-  const res = await fetch(`${API_HOST}article/random`);
-  console.log(res)
-  return res.json();
+  return server.get(`${API_HOST}article/random`);
 }
