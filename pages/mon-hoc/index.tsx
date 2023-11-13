@@ -11,7 +11,7 @@ export const getServerSideProps: GetServerSideProps<{
     articles: API.Article[];
 }> = async (context) => {
     const subjects = await serverSubjects();
-    const articles = await listArticleRandom();
+    const articles = await listArticleRandom() as any;
     return { props: { subjects: subjects.data, articles } };
 };
 

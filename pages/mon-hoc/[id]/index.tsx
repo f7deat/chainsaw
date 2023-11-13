@@ -4,7 +4,6 @@ import { ArrowRightOutlined, EyeOutlined } from "@ant-design/icons";
 import { ProColumns, ProTable } from "@ant-design/pro-components";
 import { Button } from "antd";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 import Link from "next/link";
 
