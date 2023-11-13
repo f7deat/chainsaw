@@ -1,9 +1,9 @@
 import { playAudio } from "@/utils/audio";
 import { QuestionType } from "@/utils/constants";
 import { LeftOutlined, SoundOutlined, InfoCircleOutlined, RightOutlined, CheckCircleOutlined, StopOutlined, AppstoreOutlined } from "@ant-design/icons";
-import { Alert, Tabs, Button, Popover, Space, Empty, message, Collapse, CollapseProps } from "antd";
+import { Alert, Tabs, Button, Popover, Space, Empty, message } from "antd";
 import Script from "next/script";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useState } from "react";
 import { FreeInput, Mime } from ".";
 import DragDrop from "./drag-drop";
 import MultipleChoice from "./multiple-choice";
@@ -50,7 +50,7 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
 
     const renderTab = (item: API.QuestionListItem, index: number) => {
         if (item.type === QuestionType.FREE_INPUT) {
-            return <FreeInput item={item} score={score} setScore={setScore} index={index} />
+            return <FreeInput item={item} score={score} setScore={setScore} />
         } else if (item.type === QuestionType.MULTIPLE_CHOICE) {
             return <MultipleChoice data={item} index={index} score={score} setScore={setScore} />
         } else if (item.type === QuestionType.BAI_GIANG) {
@@ -138,9 +138,9 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                                                 )
                                             }
                                             {
-                                                (item?.suggestion.endsWith('.mp3') || item?.suggestion.endsWith('.m4a')) && (
+                                                item?.voiceUrl && module?.subjectId === 2 && (
                                                     <div className="flex justify-end">
-                                                        <Player src={item.suggestion} index={i} current={currentIndex} />
+                                                        <Player src={item.voiceUrl} index={i} current={currentIndex} />
                                                     </div>
                                                 )
                                             }

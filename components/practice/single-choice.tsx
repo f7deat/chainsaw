@@ -50,12 +50,6 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
     return (
         <div>
             <div className="flex flex-col items-center justify-center p-4">
-                <div className="mb-10">
-                    <span className="bg-blue-500 text-white text-2xl px-6 py-2 shadow rounded-lg uppercase font-medium">
-                        <QuestionCircleOutlined className="mr-2" />
-                        Câu {index + 1}
-                    </span>
-                </div>
                 <div className="text-3xl mb-5 text-center image-central" dangerouslySetInnerHTML={{ __html: data?.title }} />
                 <div className="text-3xl mb-5 text-center" dangerouslySetInnerHTML={{ __html: data?.content }} />
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
