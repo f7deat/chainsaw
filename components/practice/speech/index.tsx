@@ -5,12 +5,11 @@ import { useState } from "react";
 
 type SpeechProps = {
     data: API.QuestionListItem;
-    index: number;
 }
 
 const Speech: React.FC<SpeechProps> = (props) => {
 
-    const { data, index } = props;
+    const { data} = props;
     const synth = window.speechSynthesis;
     const voices = synth.getVoices();
 
@@ -70,20 +69,6 @@ const Speech: React.FC<SpeechProps> = (props) => {
                         })} onChange={(value) => setSelectedVoice(value)} />
                     </div>
                 </div>
-                <div className="flex gap-2 items-center mb-5">
-                    <div className="text-3xl" dangerouslySetInnerHTML={{ __html: data.title }} />
-                    <Tooltip title="Nghe trước phát âm">
-                        <button className="text-orange-500" onClick={onRead}>
-                            <SoundOutlined className="text-2xl" />
-                        </button>
-                    </Tooltip>
-                </div>
-                <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
-                    __html: data.content
-                }}>
-
-                </div>
-
                 <div className="relative">
                     <span hidden={!recording}>
                         <span className="relative flex h-3 w-3">

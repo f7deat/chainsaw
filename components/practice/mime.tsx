@@ -14,13 +14,6 @@ const Mime: React.FC<MimeProps> = (props) => {
     return (
         <div className="flex flex-col items-center justify-center p-4">
 
-            <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
-                __html: data.title
-            }}></div>
-            <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
-                __html: data.content
-            }}></div>
-
             <Divider dashed />
             <div className={`grid md:grid-cols-${data.answers.length} gap-4 mb-4`}>
                 {

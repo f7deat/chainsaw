@@ -10,13 +10,12 @@ import { MenuOutlined } from "@ant-design/icons";
 
 type OrderChoiceProps = {
     data: API.QuestionListItem;
-    index: number;
     setScore: any;
     score: number;
 }
 
 const OrderChoice: React.FC<OrderChoiceProps> = (props) => {
-    const { index, setScore, score } = props;
+    const { setScore, score } = props;
     const [data, setData] = useState<API.QuestionListItem>(props.data)
     const router = useRouter();
 
@@ -84,12 +83,6 @@ const OrderChoice: React.FC<OrderChoiceProps> = (props) => {
     return (
         <div>
             <div className="flex flex-col items-center justify-center p-4">
-                <div className="text-3xl mb-5" dangerouslySetInnerHTML={{ __html: data.title}} />
-                <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
-                    __html: data.content
-                }}>
-
-                </div>
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Alert message="Kéo thả để sắp xếp các từ dưới đây thành câu đúng và nhấn đồng ý" type="info" showIcon closable />
                 <Divider />

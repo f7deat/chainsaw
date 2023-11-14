@@ -39,8 +39,6 @@ const PracticeContent: React.FC<PracticeContentProps> = (props) => {
     return (
         <div>
             <div className="flex flex-col items-center justify-center p-4">
-                <div className="text-3xl mb-5 image-central text-center" dangerouslySetInnerHTML={{ __html: item.title }} />
-                <div className="text-3xl mb-5 image-central text-center" dangerouslySetInnerHTML={{ __html: item.content }} />
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Form onFinish={onFinish}>
                     <Form.Item initialValue={item.type} name="type" hidden>

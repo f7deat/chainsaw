@@ -1,20 +1,19 @@
 import { checkAnswer } from "@/services/course";
 import { playAudio, playFalseSound, playTrueSound } from "@/utils/audio";
-import { QuestionCircleOutlined, SoundOutlined } from "@ant-design/icons";
+import { SoundOutlined } from "@ant-design/icons";
 import { Button, Divider, Space, message } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
 type SingleChoiceProps = {
     data: API.QuestionListItem;
-    index: number;
     setScore: any;
     score: number;
 }
 
 const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
 
-    const { index, setScore, score } = props;
+    const { setScore, score } = props;
     const [data, setData] = useState<API.QuestionListItem>(props.data)
     const router = useRouter();
 
@@ -50,8 +49,6 @@ const SingleChoice: React.FC<SingleChoiceProps> = (props) => {
     return (
         <div>
             <div className="flex flex-col items-center justify-center p-4">
-                <div className="text-3xl mb-5 text-center image-central" dangerouslySetInnerHTML={{ __html: data?.title }} />
-                <div className="text-3xl mb-5 text-center" dangerouslySetInnerHTML={{ __html: data?.content }} />
                 <div className="font-bold mb-4 text-2xl">Đáp án</div>
                 <Divider />
                 <div className={`grid grid-cols-2 md:grid-cols-${data?.answers.length} gap-4 mb-4`}>

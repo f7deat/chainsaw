@@ -56,16 +56,16 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
         } else if (item.type === QuestionType.BAI_GIANG) {
             return <Mime data={item} index={index} />
         } else if (item.type === QuestionType.SORTABLE) {
-            return <OrderChoice data={item} index={index} score={score} setScore={setScore} />
+            return <OrderChoice data={item} score={score} setScore={setScore} />
         } else if (item.type === QuestionType.SPEECH) {
-            return <Speech data={item} index={index} />
+            return <Speech data={item} />
         } else if (item.type === QuestionType.DRAG_DROP) {
             return <DragDrop data={item} index={index} score={score} setScore={setScore} />
         }
-        return <SingleChoice data={item} index={index} score={score} setScore={setScore} />
+        return <SingleChoice data={item} score={score} setScore={setScore} />
     }
 
-    const speak = (text: string, questionId: number, voiceUrl?: string) => {
+    const speak = (text: string) => {
         const doc = document.createElement('div');
         doc.innerHTML = text;
         const voice = window.speechSynthesis.getVoices().find(x => x.lang === 'vi-VN');
@@ -80,10 +80,6 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
             utterance.voice = voice;
             window.speechSynthesis.speak(utterance);
         } else {
-            if (voiceUrl) {
-                playAudio(voiceUrl);
-                return;
-            }
             playAudio(`https://texttospeech.responsivevoice.org/v1/text:synthesize?text=${doc.textContent}&lang=vi&engine=g1&name=&pitch=0.5&rate=0.5&volume=1&key=kvfbSITh&gender=female`)
         }
     };
@@ -133,17 +129,22 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                                                 </Button>
                                             </div>
                                             {
-                                                (module?.subjectId === 1 && item.title) && (
-                                                    <Button className="flex items-center" onClick={() => speak(item.title, item.id, item.voiceUrl)} icon={<SoundOutlined />}>Nghe đọc bài</Button>
-                                                )
-                                            }
-                                            {
-                                                item?.voiceUrl && module?.subjectId === 2 && (
+                                                item?.voiceUrl && (
                                                     <div className="flex justify-end">
                                                         <Player src={item.voiceUrl} index={i} current={currentIndex} />
                                                     </div>
                                                 )
                                             }
+
+                                            <div className="flex gap-2 mb-5 justify-center">
+                                                <div className="text-3xl" dangerouslySetInnerHTML={{
+                                                    __html: item.title
+                                                }}></div>
+                                                <Button icon={<SoundOutlined />} type="link" onClick={() => speak(item.title)} />
+                                            </div>
+                                            <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
+                                                __html: item.content
+                                            }}></div>
                                             {renderTab(item, i)}
                                             <div className="mb-4">
                                                 {ShowMessage(item)}
