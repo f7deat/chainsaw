@@ -151,7 +151,7 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                                             </div>
                                             <div className="flex justify-end gap-2">
                                                 {
-                                                    (module?.subjectId === 1 && item.suggestion) && (
+                                                    (item.suggestion) && (
                                                         <Popover content={
                                                             <div dangerouslySetInnerHTML={{ __html: item.suggestion }} />
                                                         } trigger="click">
