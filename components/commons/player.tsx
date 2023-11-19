@@ -1,5 +1,5 @@
 import { PlayCircleFilled, ReloadOutlined } from "@ant-design/icons";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type PlayerProps = {
     src: string;
@@ -12,25 +12,25 @@ const Player: React.FC<PlayerProps> = (props) => {
     const { src, index, current } = props;
     const [isPlaying, setIsPlaying] = useState(false);
 
-    const [audio] = useState(new Audio(src))
+    const audioRef = useRef<HTMLAudioElement>(null);
 
     useEffect(() => {
-        if (index === current) {
-            audio.play();
-            setIsPlaying(true);
-        } else {
-            audio.pause();
-            setIsPlaying(false);
+        if (current === index && audioRef.current) {
+            audioRef.current.src = src  + '?nocache=' + new Date().getTime();
+            audioRef.current?.play();
         }
-    }, [current]);
+    }, [current])
 
     const playingButton = () => {
         if (isPlaying) {
-            audio.pause();
+            audioRef.current?.pause();
             setIsPlaying(false);
         } else {
-            audio.play();
-            setIsPlaying(true);
+            if (audioRef.current) {
+                audioRef.current.src = src  + '?nocache=' + new Date().getTime();
+                audioRef.current?.play();
+                setIsPlaying(true);
+            }
         }
     };
 
@@ -39,6 +39,10 @@ const Player: React.FC<PlayerProps> = (props) => {
             <div className="px-2 py-1 border-b border-l border-r border-gray-100">
                 <div className="flex gap-2 items-end">
                     <div className="flex justify-center gap-4 text-xl">
+                        <audio controls autoPlay hidden ref={audioRef}>
+                            <source src={src} type="audio/ogg" />
+                            Your browser does not support the audio element.
+                        </audio>
                         {!isPlaying ? (
                             <button className="text-blue-500" id='supersecretbutton' onClick={playingButton} >
                                 <PlayCircleFilled />
@@ -48,13 +52,6 @@ const Player: React.FC<PlayerProps> = (props) => {
                                 <ReloadOutlined />
                             </button>
                         )}
-                    </div>
-                    <div>
-                        <input
-                            type="range"
-                            min="0"
-                            className="w-full"
-                        />
                     </div>
                 </div>
             </div>

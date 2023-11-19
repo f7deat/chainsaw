@@ -79,8 +79,6 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
             const utterance = new SpeechSynthesisUtterance(doc.textContent || '');
             utterance.voice = voice;
             window.speechSynthesis.speak(utterance);
-        } else {
-            playAudio(`https://texttospeech.responsivevoice.org/v1/text:synthesize?text=${doc.textContent}&lang=vi&engine=g1&name=&pitch=0.5&rate=0.5&volume=1&key=kvfbSITh&gender=female`)
         }
     };
 
