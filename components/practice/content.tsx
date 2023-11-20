@@ -65,7 +65,27 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
         return <SingleChoice data={item} score={score} setScore={setScore} />
     }
 
-    const speak = (text: string) => {
+    // const speak = (text: string) => {
+    //     const doc = document.createElement('div');
+    //     doc.innerHTML = text;
+    //     const voice = window.speechSynthesis.getVoices().find(x => x.lang === 'vi-VN');
+
+    //     if (!doc.textContent) {
+    //         message.warning('Không tìm thấy nội dung câu hỏi!');
+    //         return;
+    //     }
+
+    //     if (voice) {
+    //         const utterance = new SpeechSynthesisUtterance(doc.textContent || '');
+    //         utterance.voice = voice;
+    //         window.speechSynthesis.speak(utterance);
+    //     }
+    // };
+    const speak = (text: string, voiceUrl?: string) => {
+        if (voiceUrl) {
+            playAudio(voiceUrl);
+            return;
+        }
         const doc = document.createElement('div');
         doc.innerHTML = text;
         const voice = window.speechSynthesis.getVoices().find(x => x.lang === 'vi-VN');
@@ -74,11 +94,12 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
             message.warning('Không tìm thấy nội dung câu hỏi!');
             return;
         }
-
         if (voice) {
             const utterance = new SpeechSynthesisUtterance(doc.textContent || '');
             utterance.voice = voice;
             window.speechSynthesis.speak(utterance);
+        } else {
+            playAudio(`https://texttospeech.responsivevoice.org/v1/text:synthesize?text=${doc.textContent}&lang=vi&engine=g1&name=&pitch=0.5&rate=0.5&volume=1&key=kvfbSITh&gender=female`)
         }
     };
 
@@ -100,7 +121,12 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
         setActiveKey(newKey.toString());
         setCurrentIndex(newKey);
     }
-
+    const onSound = (index: number) => {
+        const question = items[index];
+        if (question?.voiceUrl) {
+            playAudio(question?.voiceUrl);
+        }
+    }
     return (
         <>
             {
@@ -127,9 +153,11 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                                                 </Button>
                                             </div>
                                             {
-                                                item?.voiceUrl && (
+                                                // item?.voiceUrl && 
+                                                (
                                                     <div className="flex justify-end">
-                                                        <Player src={item.voiceUrl} index={i} current={currentIndex} />
+                                                        <Button icon={<SoundOutlined />} type="link" onClick={() => speak(item.title,item.voiceUrl)} />
+                                                        {/* <Player src={item.voiceUrl} index={i} current={currentIndex} /> */}
                                                     </div>
                                                 )
                                             }
@@ -138,7 +166,7 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                                                 <div className="text-3xl" dangerouslySetInnerHTML={{
                                                     __html: item.title
                                                 }}></div>
-                                                <Button icon={<SoundOutlined />} type="link" onClick={() => speak(item.title)} />
+                                                {/* <Button icon={<SoundOutlined />} type="link" onClick={() => speak(item.title)} /> */}
                                             </div>
                                             <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
                                                 __html: item.content
@@ -177,6 +205,7 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                             onTabClick={(activeKey) => {
                                 setActiveKey(activeKey);
                                 setCurrentIndex(Number(activeKey));
+                                onSound(Number(activeKey));
                             }}
                         />
                         <Script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" />
