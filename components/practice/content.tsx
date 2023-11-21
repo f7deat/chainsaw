@@ -129,6 +129,8 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
     //const indexRef  = useRef<null | HTMLDivElement>(null);
     useEffect(() => {
         //const element = indexRef.current.querySelectorAll(".read-text");
+            const au = document.querySelector(".audio");
+            if(au) (au as HTMLButtonElement).focus();
             const nodeList= document.querySelectorAll(".read-text");
             nodeList.forEach(element => {
                 element.addEventListener('click', (e) => {
@@ -166,7 +168,7 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                                                 // item?.voiceUrl && 
                                                 (
                                                     <div className="flex justify-end">
-                                                        <Button icon={<SoundOutlined />} type="link" onClick={() => speak(item.title,item.voiceUrl)} />
+                                                        <Button icon={<SoundOutlined />} type="link" onClick={() => speak(item.title,item.voiceUrl)} className="audio" />
                                                         {/* <Player src={item.voiceUrl} index={i} current={currentIndex} /> */}
                                                     </div>
                                                 )
