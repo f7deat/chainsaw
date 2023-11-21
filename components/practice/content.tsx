@@ -3,7 +3,7 @@ import { QuestionType } from "@/utils/constants";
 import { LeftOutlined, SoundOutlined, InfoCircleOutlined, RightOutlined, CheckCircleOutlined, StopOutlined, AppstoreOutlined } from "@ant-design/icons";
 import { Alert, Tabs, Button, Popover, Space, Empty, message } from "antd";
 import Script from "next/script";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { FreeInput, Mime } from ".";
 import DragDrop from "./drag-drop";
 import MultipleChoice from "./multiple-choice";
@@ -64,23 +64,6 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
         }
         return <SingleChoice data={item} score={score} setScore={setScore} />
     }
-
-    // const speak = (text: string) => {
-    //     const doc = document.createElement('div');
-    //     doc.innerHTML = text;
-    //     const voice = window.speechSynthesis.getVoices().find(x => x.lang === 'vi-VN');
-
-    //     if (!doc.textContent) {
-    //         message.warning('Không tìm thấy nội dung câu hỏi!');
-    //         return;
-    //     }
-
-    //     if (voice) {
-    //         const utterance = new SpeechSynthesisUtterance(doc.textContent || '');
-    //         utterance.voice = voice;
-    //         window.speechSynthesis.speak(utterance);
-    //     }
-    // };
     const speak = (text: string, voiceUrl?: string) => {
         if (voiceUrl) {
             playAudio(voiceUrl);
@@ -120,6 +103,13 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
         const newKey = isNext ? (Number(activeKey)) + 1 : (Number(activeKey)) - 1;
         setActiveKey(newKey.toString());
         setCurrentIndex(newKey);
+        const nodeList= document.querySelectorAll(".read-text");
+        nodeList.forEach(element => {
+            element.addEventListener('click', (e) => {
+            const a = (e.target as HTMLSpanElement).getAttribute('data-url');
+            if(a) playAudio(a.toString());
+            });
+        });
     }
     const onSound = (index: number) => {
         const question = items[index];
@@ -127,6 +117,26 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
             playAudio(question?.voiceUrl);
         }
     }
+    const bindclick = ()=>{
+        const nodeList= document.querySelectorAll(".read-text");
+        nodeList.forEach(element => {
+            element.addEventListener('click', (e) => {
+            const a = (e.target as HTMLSpanElement).getAttribute('data-url');
+            if(a) playAudio(a.toString());
+            });
+        });
+    }
+    //const indexRef  = useRef<null | HTMLDivElement>(null);
+    useEffect(() => {
+        //const element = indexRef.current.querySelectorAll(".read-text");
+            const nodeList= document.querySelectorAll(".read-text");
+            nodeList.forEach(element => {
+                element.addEventListener('click', (e) => {
+                const a = (e.target as HTMLSpanElement).getAttribute('data-url');
+                if(a) playAudio(a.toString());
+                });
+            });
+      }, []);
     return (
         <>
             {
@@ -163,7 +173,7 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                                             }
 
                                             <div className="flex gap-2 mb-5 justify-center">
-                                                <div className="text-3xl" dangerouslySetInnerHTML={{
+                                                <div className="text-3xl" onMouseOver={()=>bindclick()} dangerouslySetInnerHTML={{
                                                     __html: item.title
                                                 }}></div>
                                                 {/* <Button icon={<SoundOutlined />} type="link" onClick={() => speak(item.title)} /> */}
@@ -217,3 +227,7 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
 }
 
 export default QuizContent
+
+function useRef<T>(arg0: null) {
+    throw new Error("Function not implemented.");
+}
