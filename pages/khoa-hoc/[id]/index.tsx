@@ -1,6 +1,6 @@
 import { ArticleRelated, Title } from "@/components";
 import { listArticle, listArticleRandom } from "@/services/article";
-import { listTopic, queryKhoaHoc } from "@/services/course";
+import { listTopic, listCourse } from "@/services/course";
 import { stripeHTML } from "@/utils/formatter";
 import { BookOutlined, HomeOutlined } from "@ant-design/icons";
 import { Breadcrumb, Pagination, PaginationProps, Rate } from "antd";
@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps<{
     total: number;
     articles: API.Article[];
 }> = async (context) => {
-    const course = await queryKhoaHoc(context.params?.id);
+    const course = await listCourse(context.params?.id) as any;
     const topics = await listTopic({
         current: context.query.current || 1,
         pageSize: 12

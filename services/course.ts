@@ -10,9 +10,8 @@ export async function listKhoaHoc(data: any) {
   });
 }
 
-export async function queryKhoaHoc(id?: string | string[]) {
-  const res = await fetch(`${API_HOST}khoahoc/${id}`);
-  return res.json();
+export async function listCourse(id?: string | string[]) {
+  return server(`${API_HOST}khoahoc/${id}`);
 }
 
 export async function chuongTrinhHoc(params: any, id: number) {

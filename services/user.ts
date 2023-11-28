@@ -196,3 +196,13 @@ export async function removeFromRole(roleName: string, id?: string | string[]) {
         method: 'POST'
     })
 }
+
+export async function loginGoogle(credential: string) {
+    return request({
+        url: `user/google-signin`,
+        method: 'POST',
+        data: {
+            credential
+        }
+    })
+}

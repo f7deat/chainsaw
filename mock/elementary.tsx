@@ -10,6 +10,10 @@ export const elementary = [
             {
                 name: "Tiếng anh",
                 url: "/khoa-hoc/tieng-anh-tien-lop-1"
+            },
+            {
+                name: "Tiếng việt",
+                url: "/khoa-hoc/tieng-viet-tien-lop-1"
             }
         ]
     },
@@ -24,6 +28,10 @@ export const elementary = [
             {
                 name: "Tiếng anh",
                 url: "/khoa-hoc/tieng-anh-lop-1"
+            },
+            {
+                name: "Tiếng việt",
+                url: "/khoa-hoc/tieng-viet-lop-1"
             }
         ]
     },
@@ -38,6 +46,10 @@ export const elementary = [
             {
                 name: "Tiếng anh",
                 url: "/khoa-hoc/tieng-anh-lop-2"
+            },
+            {
+                name: "Tiếng việt",
+                url: "/khoa-hoc/tieng-viet-lop-2"
             }
         ]
     },
@@ -52,6 +64,10 @@ export const elementary = [
             {
                 name: "Tiếng anh",
                 url: "/khoa-hoc/tieng-anh-lop-3"
+            },
+            {
+                name: "Tiếng việt",
+                url: "/khoa-hoc/tieng-viet-lop-3"
             }
         ]
     },
@@ -66,6 +82,10 @@ export const elementary = [
             {
                 name: "Tiếng anh",
                 url: "/khoa-hoc/tieng-anh-lop-4"
+            },
+            {
+                name: "Tiếng việt",
+                url: "/khoa-hoc/tieng-viet-lop-4"
             }
         ]
     },
@@ -80,6 +100,10 @@ export const elementary = [
             {
                 name: "Tiếng anh",
                 url: "/khoa-hoc/tieng-anh-lop-5"
+            },
+            {
+                name: "Tiếng việt",
+                url: "/khoa-hoc/tieng-viet-lop-5"
             }
         ]
     },
@@ -94,6 +118,10 @@ export const elementary = [
             {
                 name: "Tiếng anh",
                 url: "/khoa-hoc/tieng-anh-lop-6"
+            },
+            {
+                name: "Ngữ văn",
+                url: "/khoa-hoc/ngu-van-lop-6"
             }
         ]
     },
@@ -108,6 +136,10 @@ export const elementary = [
             {
                 name: "Tiếng anh",
                 url: "/khoa-hoc/tieng-anh-lop-7"
+            },
+            {
+                name: "Ngữ văn",
+                url: "/khoa-hoc/ngu-van-lop-7"
             }
         ]
     },
@@ -122,6 +154,10 @@ export const elementary = [
             {
                 name: "Tiếng anh",
                 url: "/khoa-hoc/tieng-anh-lop-8"
+            },
+            {
+                name: "Ngữ văn",
+                url: "/khoa-hoc/ngu-van-lop-8"
             }
         ]
     },
@@ -136,6 +172,10 @@ export const elementary = [
             {
                 name: "Tiếng anh",
                 url: "/khoa-hoc/tieng-anh-lop-9"
+            },
+            {
+                name: "Ngữ văn",
+                url: "/khoa-hoc/ngu-van-lop-9"
             }
         ]
     },
@@ -150,6 +190,10 @@ export const elementary = [
             {
                 name: "Tiếng anh",
                 url: "/khoa-hoc/tieng-anh-lop-10"
+            },
+            {
+                name: "Ngữ văn",
+                url: "/khoa-hoc/ngu-van-lop-10"
             }
         ]
     },

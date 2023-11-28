@@ -1,8 +1,8 @@
-import { login } from "@/services/user";
+import { login, loginGoogle } from "@/services/user";
 import { Role } from "@/utils/constants";
-import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
 import { StepsForm, ProFormSelect, ProFormInstance } from "@ant-design/pro-components";
-import { Modal, Button, Space, Form, Input, Typography, message, SelectProps } from "antd";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { Modal, Button, Space, Form, Input, message, SelectProps } from "antd";
 import { useRouter } from "next/router";
 import { Fragment, useRef, useState } from "react";
 
@@ -69,31 +69,9 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
     }
 
     return (
-        <Modal open={open} onCancel={() => setOpen(false)} centered width={950} footer={<Fragment />}>
-            <div className="md:flex gap-4">
+        <Modal open={open} onCancel={() => setOpen(false)} centered width={950} footer={<Fragment />} title={<div className="text-xl">Đăng nhập hệ thống</div>}>
+            <div className="md:flex gap-4 items-center justify-center">
                 <div className="md:w-1/2">
-                    <div className="py-4 flex justify-center gap-2 flex-col items-center">
-                        <div className="mb-2 w-64">
-                            <Button size="large" className="w-full">
-                                <Space>
-                                    <GoogleOutlined />
-                                    <div className="font-medium">
-                                        Đăng nhập với Google
-                                    </div>
-                                </Space>
-                            </Button>
-                        </div>
-                        <div className="mb-4 w-64">
-                            <Button size="large" className="w-full">
-                                <Space>
-                                    <FacebookFilled />
-                                    <div className="font-medium">
-                                        Đăng nhập với Facebook
-                                    </div>
-                                </Space>
-                            </Button>
-                        </div>
-                    </div>
                     <StepsForm formRef={formRef}
                         submitter={{
                             render: ({ form, onSubmit, step, onPre }) => {
@@ -158,14 +136,6 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
                             Quên mật khẩu?
                         </button>
                     </div>
-                </div>
-                <div className="md:w-1/2">
-                    <Typography.Title level={3} className="md:block hidden">Xin chào!</Typography.Title>
-                    <div className="p-10 hidden md:block">
-                        <picture>
-                            <img src="https://finder.createx.studio/img/signin-modal/signin.svg" alt="" />
-                        </picture>
-                    </div>
                     <div className="p-4">
                         <Space>
                             <span className="md:text-lg text-sm">Bạn chưa có tài khoản?</span>
@@ -175,8 +145,38 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
                         </Space>
                     </div>
                 </div>
+                <div className="md:w-1/2">
+                    <GoogleOAuthProvider clientId="425919215901-fqhvbdvbikp7cbcoknmvjiirhdib1tse.apps.googleusercontent.com">
+                        <div className="p-10 hidden md:block">
+                            <picture>
+                                <img src="https://finder.createx.studio/img/signin-modal/signin.svg" alt="" />
+                            </picture>
+                        </div>
+                        <div className="text-center mb-4 font-medium md:text-lg">Đăng nhập với</div>
+                        <div className="flex gap-4 mb-4 justify-center">
+                            <GoogleLogin
+                                shape="circle"
+                                theme="outline"
+                                onSuccess={(credentialResponse: any) => {
+                                    loginGoogle(credentialResponse.credential).then(response => {
+                                        if (!response) {
+                                            message.error('Thông tin đăng nhập không hợp lệ!');
+                                            return;
+                                        }
+                                        debugger
+                                        localStorage.setItem('access_token', response.token);
+                                        window.location.reload();
+                                    })
+                                }}
+                                onError={() => {
+                                    console.log('Login Failed');
+                                }}
+                            />
+                        </div>
+                    </GoogleOAuthProvider>
+                </div>
             </div>
-        </Modal>
+        </Modal >
     )
 }
 

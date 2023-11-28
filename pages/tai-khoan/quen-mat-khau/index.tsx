@@ -12,15 +12,25 @@ export default function ForgotPassword() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <PageContainer title="Quên mật khẩu">
-                <ProCard>
-                    <ProForm>
-                        <ProFormText label="Email" name="email" rules={[
-                            {
-                                required: true
-                            }
-                        ]}/>
-                    </ProForm>
-                </ProCard>
+                <div className="md:flex gap-4">
+                    <div className="md:w-1/2">
+                        <ProCard>
+                            <ProForm>
+                                <ProFormText fieldProps={{
+                                    size: "large"
+                                }} label="Email" name="email" rules={[
+                                    {
+                                        required: true,
+                                        message: 'Vui lòng nhập địa chỉ email!'
+                                    }
+                                ]} />
+                            </ProForm>
+                        </ProCard>
+                    </div>
+                    <div className="md:w-1/2">
+
+                    </div>
+                </div>
             </PageContainer>
         </>
     )
