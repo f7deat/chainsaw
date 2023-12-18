@@ -174,13 +174,13 @@ const QuizContent: React.FC<QuizContentProps> = (props) => {
                                                 )
                                             }
 
-                                            <div className="flex gap-2 mb-5 justify-center">
+                                            <div className="flex gap-2 mb-5 justify-center text-center">
                                                 <div className="text-3xl" onMouseOver={()=>bindclick()} dangerouslySetInnerHTML={{
                                                     __html: item.title
                                                 }}></div>
                                                 {/* <Button icon={<SoundOutlined />} type="link" onClick={() => speak(item.title)} /> */}
                                             </div>
-                                            <div className="text-3xl mb-5" dangerouslySetInnerHTML={{
+                                            <div className="text-3xl mb-5 text-center" dangerouslySetInnerHTML={{
                                                 __html: item.content
                                             }}></div>
                                             {renderTab(item, i)}
